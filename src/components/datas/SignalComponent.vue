@@ -1,0 +1,118 @@
+<template>
+  <div>
+    <p style="text-align: center"></p>
+    <el-table
+      :data="fromdatas"
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        min-width="150"
+        prop="time"
+        label="time">
+      </el-table-column>
+      <el-table-column
+        prop="sico"
+        label="SICO">
+      </el-table-column>
+      <el-table-column
+        prop="chpm"
+        label="CHPm">
+      </el-table-column>
+      <el-table-column
+        prop="chps"
+        label="CHPs">
+      </el-table-column>
+      <el-table-column
+        prop="spsm"
+        label="SPSm">
+      </el-table-column>
+      <el-table-column
+        prop="spss"
+        label="SPSs">
+      </el-table-column>
+      <el-table-column
+        prop="colm"
+        label="COLm">
+      </el-table-column>
+      <el-table-column
+        prop="scbm"
+        label="SCBm">
+      </el-table-column>
+      <el-table-column
+        prop="bswm"
+        label="BSWm">
+      </el-table-column>
+      <el-table-column
+        prop="bsws"
+        label="BSWs">
+      </el-table-column>
+      <el-table-column
+        prop="ccam"
+        label="CCAm">
+      </el-table-column>
+      <el-table-column
+        prop="ccsm"
+        label="CCSm">
+      </el-table-column>
+      <el-table-column
+        prop="ccss"
+        label="CCSs">
+      </el-table-column>
+      <el-table-column
+        prop="prsm"
+        label="PRSm">
+      </el-table-column>
+      <el-table-column
+        prop="prss"
+        label="PRSs">
+      </el-table-column>
+      <el-table-column
+        prop="cpsm"
+        label="CPSm">
+      </el-table-column>
+      <el-table-column
+        prop="cpss"
+        label="CPSs">
+      </el-table-column>
+      <el-table-column
+        prop="dpsm"
+        label="DPSm">
+      </el-table-column>
+      <el-table-column
+        prop="dpss"
+        label="DPSs">
+      </el-table-column>
+      <el-table-column
+        prop="cnsm"
+        label="CNSm">
+      </el-table-column>
+      <el-table-column
+        prop="cnss"
+        label="CNSs">
+      </el-table-column>
+      <el-table-column
+        prop="ccdm"
+        label="CCDm">
+      </el-table-column>
+      <el-table-column
+        prop="ccds"
+        label="CCDs">
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+<script>
+export default {
+  props: ['fromdatas'],
+  name: 'SignalComponent',
+  data () {
+    return {
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

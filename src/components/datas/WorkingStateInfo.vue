@@ -1,0 +1,255 @@
+<template>
+  <div>
+    <p style="text-align: center">工作状态信息</p>
+    <el-table
+      :data="fromdatas"
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="MS01taskType"
+        label="MS01taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS01startTime"
+        label="MS01startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS01SatName"
+        label="MS01SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS01endTime"
+        label="MS01endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS01Result"
+        label="MS01Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS02taskType"
+        label="MS02taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS02startTime"
+        label="MS02startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS02SatName"
+        label="MS02SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS02endTime"
+        label="MS02endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS02Result"
+        label="MS02Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS03taskType"
+        label="MS03taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS03startTime"
+        label="MS03startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS03SatName"
+        label="MS03SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS03endTime"
+        label="MS03endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS03Result"
+        label="MS03Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS04taskType"
+        label="MS04taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS04startTime"
+        label="MS04startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS04SatName"
+        label="MS04SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS04endTime"
+        label="MS04endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS04Result"
+        label="MS04Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS05taskType"
+        label="MS05taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS05startTime"
+        label="MS05startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS05SatName"
+        label="MS05SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS05endTime"
+        label="MS05endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS05Result"
+        label="MS05Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS06taskType"
+        label="MS06taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS06startTime"
+        label="MS06startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS06SatName"
+        label="MS06SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS06endTime"
+        label="MS06endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS06Result"
+        label="MS06Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS07taskType"
+        label="MS07taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS07startTime"
+        label="MS07startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS07SatName"
+        label="MS07SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS07endTime"
+        label="MS07endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS07Result"
+        label="MS07Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS08taskType"
+        label="MS08taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS08startTime"
+        label="MS08startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS08SatName"
+        label="MS08SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS08endTime"
+        label="MS08endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS08Result"
+        label="MS08Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS09taskType"
+        label="MS09taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS09startTime"
+        label="MS09startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS09SatName"
+        label="MS09SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS09endTime"
+        label="MS09endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS09Result"
+        label="MS09Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS10taskType"
+        label="MS10taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS10startTime"
+        label="MS10startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS10SatName"
+        label="MS10SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS10endTime"
+        label="MS10endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS10Result"
+        label="MS10Result">
+      </el-table-column>
+
+      <el-table-column
+        prop="MS11taskType"
+        label="MS11taskType">
+      </el-table-column>
+      <el-table-column
+        prop="MS11startTime"
+        label="MS11startTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS11SatName"
+        label="MS11SatName">
+      </el-table-column>
+      <el-table-column
+        prop="MS11endTime"
+        label="MS11endTime">
+      </el-table-column>
+      <el-table-column
+        prop="MS11Result"
+        label="MS11Result">
+      </el-table-column>
+
+    </el-table>
+  </div>
+</template>
+<script>
+export default {
+  props: ['fromdatas'],
+  name: 'WorkingStateInfo',
+  data () {
+    return {
+    }
+  }
+}
+</script>
+<style scoped>
+
+</style>

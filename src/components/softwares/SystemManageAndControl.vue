@@ -3,6 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="导航卫星信号质量监测结果" name="1">
         <NavSatSignalQuality :fromdatas="NavSatSignalQuality"></NavSatSignalQuality>
+        <el-divider content-position="right">此处为分割线</el-divider>
         <SignalComponent :fromdatas="SignalComponent"></SignalComponent>
       </el-tab-pane>
       <el-tab-pane label="工作状态信息" name="2">

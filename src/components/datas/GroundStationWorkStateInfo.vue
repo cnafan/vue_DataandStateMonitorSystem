@@ -2,7 +2,10 @@
   <div>
     <p style="text-align: center">地面站工作状态信息</p>
     <el-table
+      id="table"
       :data="fromdatas"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
       stripe
       border
       style="width: 100%">

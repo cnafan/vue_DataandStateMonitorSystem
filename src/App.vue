@@ -10,15 +10,15 @@
           @select="handleSelect">
           <el-menu-item index="splash">处理中心</el-menu-item>
           <el-submenu index="2">
-            <template slot="title">空间信号质量监测评估</template>
+            <template slot="title">空间信号质量监测</template>
             <el-menu-item index="SystemManageAndControl">系统管理控制软件</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title">北斗/GNSS系统时间监测评估</template>
+            <template slot="title">北斗/GNSS系统时间监测</template>
             <el-menu-item index="bdgnsssystemclock">GNSS（Galileo）时差数据综合处理软件</el-menu-item>
           </el-submenu>
           <el-submenu index="4">
-            <template slot="title">中科院在轨卫星地面数据支持</template>
+            <template slot="title">中科院在轨卫星地面数据</template>
             <el-menu-item index="satintegrated">卫星综合管理软件</el-menu-item>
           </el-submenu>
           <el-submenu index="5">
@@ -33,7 +33,7 @@
         </el-menu>
       </el-col>
       <el-col :span="1">
-        <el-button class="header-button" icon="el-icon-s-tools" circle></el-button>
+        <el-button class="header-button" icon="el-icon-s-tools" circle @click="settingOpen"></el-button>
       </el-col>
     </el-row>
     <el-row id="content">
@@ -72,7 +72,11 @@
       <keep-alive>
         <Logger :datas="datas" v-show="LoggerVisible"></Logger>
       </keep-alive>
+
     </el-row>
+    <el-backtop class="el-icon-top">
+      <div></div>
+    </el-backtop>
   </el-row>
 </template>
 
@@ -660,12 +664,34 @@ export default {
           this.SplanshVisible = false
           break
       }
+    },
+    settingOpen () {
+      this.$notify.error({
+        title: '错误',
+        message: '此功能还未开发',
+        offset: 60
+      })
     }
+
   }
 }
 </script>
 
 <style>
+#table{
+  transition: 0.5s;
+  -webkit-transition:  0.5s;
+}
+#table:hover {
+  box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.1);
+}
+#table2{
+  transition:  0.5s;
+  -webkit-transition:  0.5s;
+}
+#table2:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
 .header-button {
   position: absolute;
   top: 50%;
@@ -682,5 +708,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, .1)
+}
+
+.tableHeaderCell {
+  background: #f3f2f2 !important;
+  color: black;
+  font-weight: bold;
 }
 </style>

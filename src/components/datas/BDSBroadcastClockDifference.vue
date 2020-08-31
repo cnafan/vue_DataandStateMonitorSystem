@@ -2,7 +2,10 @@
   <div>
     <p style="text-align: center">UTC(NTSC)于BDS3每颗卫星广播北斗时间的钟差</p>
     <el-table
+      id="table"
       :data="fromdatas"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
       stripe
       border
       style="width: 100%">

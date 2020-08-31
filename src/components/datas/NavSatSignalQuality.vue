@@ -2,7 +2,10 @@
   <div>
     <p style="text-align: center">导航卫星信号质量监测结果</p>
     <el-table
+      id="table"
       :data="fromdatas"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
       border
       stripe
       style="width:100%">
@@ -60,4 +63,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

@@ -2,7 +2,10 @@
   <div>
     <p style="text-align: center">广播星历告警信息</p>
     <el-table
+      id="table"
       :data="fromdatas"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
       stripe
       border
       style="width: 100%">

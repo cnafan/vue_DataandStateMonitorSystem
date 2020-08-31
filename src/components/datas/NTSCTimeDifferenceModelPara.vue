@@ -2,7 +2,10 @@
   <div>
     <p style="text-align: center">CAPST-UTC（NTSC）溯源时差模型参数</p>
     <el-table
+      id="table"
       :data="fromdatas"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
       stripe
       border
       style="width: 100%">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="工作状态" name="1">
+      <el-tab-pane label="工作状态" name="工作状态">
         <VLBIWorkState  :fromdatas="VLBIWorkState"></VLBIWorkState>
       </el-tab-pane>
     </el-tabs>
@@ -20,7 +20,7 @@ export default {
   name: 'VLBI',
   data () {
     return {
-      activeName: '1'
+      activeName: '工作状态'
     }
   },
   methods: {

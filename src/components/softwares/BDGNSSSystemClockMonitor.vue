@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="GNSS系统时差数据" name="1">
+      <el-tab-pane label="GNSS系统时差数据" name="GNSS系统时差数据">
         <GnssSystemClockDifference :fromdatas="GnssSystemClockDifference"></GnssSystemClockDifference>
       </el-tab-pane>
-      <el-tab-pane label="工作状态" name="2">
+      <el-tab-pane label="工作状态" name="工作状态">
         <WorkingStateInfoBDGNSSSystemClock :fromdatas="WorkingStateInfoBDGNSSSystemClock"></WorkingStateInfoBDGNSSSystemClock>
       </el-tab-pane>
 
@@ -28,7 +28,7 @@ export default {
   },
   data () {
     return {
-      activeName: '1'
+      activeName: 'GNSS系统时差数据'
     }
   },
   methods: {

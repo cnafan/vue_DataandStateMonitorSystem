@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="地面站工作状态信息" name="2">
+      <el-tab-pane label="地面站工作状态信息" name="地面站工作状态信息">
         <GroundStationWorkStateInfo :fromdatas="GroundStationWorkStateInfo"></GroundStationWorkStateInfo>
       </el-tab-pane>
 
@@ -21,7 +21,7 @@ export default {
   name: 'StateMonitorAndWarning',
   data () {
     return {
-      activeName: '1'
+      activeName: '地面站工作状态信息'
     }
   },
   methods: {

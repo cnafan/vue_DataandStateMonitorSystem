@@ -16,14 +16,12 @@
 
 <script>
 
-import loggerUtils from '../../utils/loggerUtils'
-
 export default {
   props: {
     datas: {
       type: Array,
       default: () => {
-        loggerUtils.getLog()
+        return []
       }
     }
   },

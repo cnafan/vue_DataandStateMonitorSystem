@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="CAPST-UTC（NTSC）溯源时差数据" name="1">
+      <el-tab-pane label="CAPST-UTC（NTSC）溯源时差数据" name="CAPST-UTC（NTSC）溯源时差数据">
         <NTSCTimeDifferenceData :fromdatas="NTSCTimeDifferenceData"></NTSCTimeDifferenceData>
       </el-tab-pane>
-      <el-tab-pane label="CAPST-UTC（NTSC）溯源时差模型参数" name="2">
+      <el-tab-pane label="CAPST-UTC（NTSC）溯源时差模型参数" name="CAPST-UTC（NTSC）溯源时差模型参数">
         <NTSCTimeDifferenceModelPara :fromdatas="NTSCTimeDifferenceModelPara"></NTSCTimeDifferenceModelPara>
       </el-tab-pane>
-      <el-tab-pane label="时频工作状态" name="3">
+      <el-tab-pane label="时频工作状态" name="时频工作状态">
         <TimeFrequencyWorkingState :fromdatas="TimeFrequencyWorkingState"></TimeFrequencyWorkingState>
       </el-tab-pane>
     </el-tabs>
@@ -34,7 +34,7 @@ export default {
   },
   data () {
     return {
-      activeName: '1'
+      activeName: 'CAPST-UTC（NTSC）溯源时差数据'
     }
   },
   methods: {

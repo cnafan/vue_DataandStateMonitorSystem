@@ -10,95 +10,117 @@
       border
       style="width: 100%">
       <el-table-column
-        min-width="150"
+        min-width="3"
         prop="time"
         label="time">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="sico"
         label="SICO">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="chpm"
         label="CHPm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="chps"
         label="CHPs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="spsm"
         label="SPSm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="spss"
         label="SPSs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="colm"
         label="COLm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="scbm"
         label="SCBm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="bswm"
         label="BSWm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="bsws"
         label="BSWs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="ccam"
         label="CCAm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="ccsm"
         label="CCSm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="ccss"
         label="CCSs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="prsm"
         label="PRSm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="prss"
         label="PRSs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="cpsm"
         label="CPSm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="cpss"
         label="CPSs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="dpsm"
         label="DPSm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="dpss"
         label="DPSs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="cnsm"
         label="CNSm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="cnss"
         label="CNSs">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="ccdm"
         label="CCDm">
       </el-table-column>
       <el-table-column
+        min-width="1"
         prop="ccds"
         label="CCDs">
       </el-table-column>

@@ -38,17 +38,17 @@
     </el-row>
     <el-row id="content">
       <keep-alive>
-        <Splansh v-show="SplanshVisible"></Splansh>
+        <Splansh v-if="SplanshVisible"></Splansh>
       </keep-alive>
       <keep-alive>
         <SystemManageAndControl :nav-sat-signal-quality="NavSatSignalQuality"
                                 :signal-component="SignalComponent"
-                                v-show="SystemManageAndControlVisible"></SystemManageAndControl>
+                                v-if="SystemManageAndControlVisible"></SystemManageAndControl>
       </keep-alive>
       <keep-alive>
         <BDGNSSSystemClockMonitor :gnss-system-clock-difference="GnssSystemClockDifference"
                                   :working-state-info-b-d-g-n-s-s-system-clock="WorkingStateInfoBDGNSSSystemClock"
-                                  v-show="BDGNSSSystemClockMonitorVisible"></BDGNSSSystemClockMonitor>
+                                  v-if="BDGNSSSystemClockMonitorVisible"></BDGNSSSystemClockMonitor>
       </keep-alive>
       <keep-alive>
         <SatIntegratedDataManagement :b-d-s-broadcast-clock-difference="BDSBroadcastClockDifference"
@@ -58,24 +58,23 @@
                                      :signal-component="SignalComponent"
                                      :b-d-s-sat-time-clock-difference="BDSSatTimeClockDifference"
                                      :broadcast-ephemeris-warning-info="BroadcastEphemerisWarningInfo"
-                                     v-show="SatIntegratedDataManagementVisible"></SatIntegratedDataManagement>
+                                     v-if="SatIntegratedDataManagementVisible"></SatIntegratedDataManagement>
       </keep-alive>
       <keep-alive>
         <AtomicClockSignal :n-t-s-c-time-difference-data="NTSCTimeDifferenceData"
                            :n-t-s-c-time-difference-model-para="NTSCTimeDifferenceModelPara"
                            :time-frequency-working-state="TimeFrequencyWorkingState"
-                           v-show="AtomicClockSignalVisible"></AtomicClockSignal>
+                           v-if="AtomicClockSignalVisible"></AtomicClockSignal>
       </keep-alive>
       <keep-alive>
-        <VLBI :v-l-b-i-work-state="VLBIWorkState" v-show="VLBIVisible"></VLBI>
+        <VLBI :v-l-b-i-work-state="VLBIWorkState" v-if="VLBIVisible"></VLBI>
       </keep-alive>
       <keep-alive>
-        <Logger :datas="datas" v-show="LoggerVisible"></Logger>
+        <Logger :datas="datas" v-if="LoggerVisible"></Logger>
       </keep-alive>
 
     </el-row>
-    <el-backtop class="el-icon-top">
-      <div></div>
+    <el-backtop>
     </el-backtop>
   </el-row>
 </template>
@@ -672,26 +671,29 @@ export default {
         offset: 60
       })
     }
-
   }
 }
 </script>
 
 <style>
-#table{
+#table {
   transition: 0.5s;
-  -webkit-transition:  0.5s;
+  -webkit-transition: 0.5s;
 }
+
 #table:hover {
   box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.1);
 }
-#table2{
-  transition:  0.5s;
-  -webkit-transition:  0.5s;
+
+#table2 {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
 }
+
 #table2:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
+
 .header-button {
   position: absolute;
   top: 50%;
@@ -726,5 +728,9 @@ export default {
   background: #f3f2f2 !important;
   color: black;
   font-weight: bold;
+}
+
+.el-submenu__title {
+  padding: 0 10px;
 }
 </style>

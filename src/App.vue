@@ -1,82 +1,108 @@
 <template>
-  <el-row id="app">
-    <el-row>
-      <el-col :span="23">
+  <div id="app">
+    <el-header>
+      <el-row id="el_row_header">
+        <el-col :span="22">
+          <div>{{ headerName }}</div>
+        </el-col>
+        <el-col :span="1">
+          <i class="el-icon-edit" style="font-size: 25px;" @click="editorClick"></i>
+        </el-col>
+        <el-col :span="1">
+          <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-divider style="margin: 0"></el-divider>
+      </el-row>
+    </el-header>
+    <!--  :style="{height:containHeight}"-->
+    <el-container ref="container">
+      <el-aside width="auto">
         <el-menu
-          class="el-menu-demo" mode="horizontal"
+          :default-openeds="defaultOpen"
+          class="el-menu-index"
+          mode="vertical"
           :default-active="activeIndex"
           text-color="#303133"
           active-text-color="#E6A23C"
           @select="handleSelect">
           <el-menu-item index="splash">处理中心</el-menu-item>
-          <el-submenu index="2">
-            <template slot="title">空间信号质量监测</template>
-            <el-menu-item index="SystemManageAndControl">系统管理控制软件</el-menu-item>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title">北斗/GNSS系统时间监测</template>
-            <el-menu-item index="bdgnsssystemclock">GNSS（Galileo）时差数据综合处理软件</el-menu-item>
-          </el-submenu>
-          <el-submenu index="4">
-            <template slot="title">中科院在轨卫星地面数据</template>
-            <el-menu-item index="satintegrated">卫星综合管理软件</el-menu-item>
-          </el-submenu>
-          <el-submenu index="5">
-            <template slot="title">高精度转发式卫星授时</template>
-            <el-menu-item index="AtomicClockSignal">原子钟信号监测与自主切换软件</el-menu-item>
-          </el-submenu>
-          <el-submenu index="6">
-            <template slot="title">VLBI观测导航卫星及UT1测量</template>
-            <el-menu-item index="VLBI">VLBI站控软件</el-menu-item>
+          <el-submenu v-for="item in items" :index="item.index" :key="item.index">
+            <template slot="title">{{ item.title }}</template>
+            <el-menu-item class="el-menu-item-font" :index="item.subs.index" :key="item.subs.index">
+              {{ item.subs.title }}
+            </el-menu-item>
           </el-submenu>
           <el-menu-item index="log">日志</el-menu-item>
         </el-menu>
-      </el-col>
-      <el-col :span="1">
-        <el-button class="header-button" icon="el-icon-s-tools" circle @click="settingOpen"></el-button>
-      </el-col>
-    </el-row>
-    <el-row id="content">
-      <keep-alive>
-        <Splansh v-if="SplanshVisible"></Splansh>
-      </keep-alive>
-      <keep-alive>
-        <SystemManageAndControl :nav-sat-signal-quality="NavSatSignalQuality"
-                                :signal-component="SignalComponent"
-                                v-if="SystemManageAndControlVisible"></SystemManageAndControl>
-      </keep-alive>
-      <keep-alive>
-        <BDGNSSSystemClockMonitor :gnss-system-clock-difference="GnssSystemClockDifference"
-                                  :working-state-info-b-d-g-n-s-s-system-clock="WorkingStateInfoBDGNSSSystemClock"
-                                  v-if="BDGNSSSystemClockMonitorVisible"></BDGNSSSystemClockMonitor>
-      </keep-alive>
-      <keep-alive>
-        <SatIntegratedDataManagement :b-d-s-broadcast-clock-difference="BDSBroadcastClockDifference"
-                                     :b-d-s-clock-correction="BDSClockCorrection"
-                                     :nav-sat-signal-quality="NavSatSignalQuality"
-                                     :b-d-t-clock-difference="BDTClockDifference"
-                                     :signal-component="SignalComponent"
-                                     :b-d-s-sat-time-clock-difference="BDSSatTimeClockDifference"
-                                     :broadcast-ephemeris-warning-info="BroadcastEphemerisWarningInfo"
-                                     v-if="SatIntegratedDataManagementVisible"></SatIntegratedDataManagement>
-      </keep-alive>
-      <keep-alive>
-        <AtomicClockSignal :n-t-s-c-time-difference-data="NTSCTimeDifferenceData"
-                           :n-t-s-c-time-difference-model-para="NTSCTimeDifferenceModelPara"
-                           :time-frequency-working-state="TimeFrequencyWorkingState"
-                           v-if="AtomicClockSignalVisible"></AtomicClockSignal>
-      </keep-alive>
-      <keep-alive>
-        <VLBI :v-l-b-i-work-state="VLBIWorkState" v-if="VLBIVisible"></VLBI>
-      </keep-alive>
-      <keep-alive>
-        <Logger :datas="datas" v-if="LoggerVisible"></Logger>
-      </keep-alive>
+        <!--        <el-scrollbar>-->
+        <!--        </el-scrollbar>-->
+      </el-aside>
+      <el-main>
+        <!--        <el-scrollbar>-->
+        <!--        </el-scrollbar>-->
+        <el-row id="content">
+          <keep-alive>
+            <Splansh v-if="SplanshVisible"></Splansh>
+          </keep-alive>
+          <keep-alive>
+            <SystemManageAndControl :nav-sat-signal-quality="NavSatSignalQuality"
+                                    :signal-component="SignalComponent"
+                                    v-if="SystemManageAndControlVisible"></SystemManageAndControl>
+          </keep-alive>
+          <keep-alive>
+            <BDGNSSSystemClockMonitor :gnss-system-clock-difference="GnssSystemClockDifference"
+                                      :working-state-info-b-d-g-n-s-s-system-clock="WorkingStateInfoBDGNSSSystemClock"
+                                      v-if="BDGNSSSystemClockMonitorVisible"></BDGNSSSystemClockMonitor>
+          </keep-alive>
+          <keep-alive>
+            <SatIntegratedDataManagement :b-d-s-broadcast-clock-difference="BDSBroadcastClockDifference"
+                                         :b-d-s-clock-correction="BDSClockCorrection"
+                                         :nav-sat-signal-quality="NavSatSignalQuality"
+                                         :b-d-t-clock-difference="BDTClockDifference"
+                                         :signal-component="SignalComponent"
+                                         :b-d-s-sat-time-clock-difference="BDSSatTimeClockDifference"
+                                         :broadcast-ephemeris-warning-info="BroadcastEphemerisWarningInfo"
+                                         v-if="SatIntegratedDataManagementVisible"></SatIntegratedDataManagement>
+          </keep-alive>
+          <keep-alive>
+            <AtomicClockSignal :n-t-s-c-time-difference-data="NTSCTimeDifferenceData"
+                               :n-t-s-c-time-difference-model-para="NTSCTimeDifferenceModelPara"
+                               :time-frequency-working-state="TimeFrequencyWorkingState"
+                               v-if="AtomicClockSignalVisible"></AtomicClockSignal>
+          </keep-alive>
+          <keep-alive>
+            <VLBI :v-l-b-i-work-state="VLBIWorkState" v-if="VLBIVisible"></VLBI>
+          </keep-alive>
+          <keep-alive>
+            <Logger :datas="datas" v-if="LoggerVisible"></Logger>
+          </keep-alive>
 
-    </el-row>
-    <el-backtop>
-    </el-backtop>
-  </el-row>
+        </el-row>
+        <el-backtop></el-backtop>
+      </el-main>
+    </el-container>
+    <el-dialog :title="EditorDialogTitle" :visible.sync="EditorDialogVisible">
+      <el-form :model="settingForm" label-position="top">
+        <el-form-item :key="item.name" v-for="item in settingFormItems" :label="item.name"
+                      :label-width="settingFormLabelWidth">
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-input v-model="item.ip" autocomplete="off" placeholder="ip"></el-input>
+            </el-col>
+            <el-col :span="12">
+              <el-input-number v-model="item.port" controls-position="right" placeholder="port" :min="1" :max="9999"></el-input-number>
+            </el-col>
+          </el-row>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="EditorDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="EditorDialogVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -103,8 +129,103 @@ export default {
     AtomicClockSignal,
     Logger
   },
+  computed: {
+    defaultOpen: function () {
+      let arr = new Set()
+      for (let i = 0; i < this.items.length; i++) {
+        arr.add(this.items[i].index)
+      }
+      return Array.from(arr)
+    },
+    containHeight: function () {
+      return (document.documentElement.clientHeight - 60) + 'px'
+    }
+  },
   data () {
     return {
+      headerName: '数据与状态监控软件',
+      EditorDialogTitle: '修改配置',
+      EditorDialogVisible: false,
+      settingFormItems: [
+        {
+          name: '系统管理控制软件',
+          ip: '',
+          port: ''
+        },
+        {
+          name: 'GNSS时差数据综合处理软件',
+          ip: '',
+          port: ''
+        },
+        {
+          name: '卫星综合管理软件',
+          ip: '',
+          port: ''
+        },
+        {
+          name: '原子钟信号监测与自主切换软件',
+          ip: '',
+          port: ''
+        },
+        {
+          name: 'VLBI站控软件',
+          ip: '',
+          port: ''
+        }
+      ],
+      settingForm: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      settingFormLabelWidth: '120px',
+      items: [
+        {
+          index: '2',
+          title: '空间信号质量监测',
+          subs: {
+            index: 'SystemManageAndControl',
+            title: '系统管理控制软件'
+          }
+        },
+        {
+          index: '3',
+          title: '北斗/GNSS系统时间监测',
+          subs: {
+            index: 'bdgnsssystemclock',
+            title: 'GNSS时差数据综合处理软件'
+          }
+        },
+        {
+          index: '4',
+          title: '中科院在轨卫星地面数据',
+          subs: {
+            index: 'satintegrated',
+            title: '卫星综合管理软件'
+          }
+        },
+        {
+          index: '5',
+          title: '高精度转发式卫星授时',
+          subs: {
+            index: 'AtomicClockSignal',
+            title: '原子钟信号监测与自主切换软件'
+          }
+        },
+        {
+          index: '6',
+          title: 'VLBI观测导航卫星及UT1测量',
+          subs: {
+            index: 'VLBI',
+            title: 'VLBI站控软件'
+          }
+        }
+      ],
       activeIndex: 'splash',
       client: Stomp.client(MQTT_SERVICE),
       AtomicClockSignalVisible: false,
@@ -399,20 +520,9 @@ export default {
           break
         case 'GnssSystemClockDifference':
           insertdata = {}
-          insertdata.MeasTimeUTCGPST = data['measTimeUTCGPST']
-          insertdata.MeasValueUTCGPST = data['measValueUTCGPST']
-          insertdata.MeasTimeUTCGLONASST = data['measTimeUTCGLONASST']
-          insertdata.MeasValueUTCGLONASST = data['measValueUTCGLONASST']
-          insertdata.MeasTimeUTCGST = data['measTimeUTCGST']
-          insertdata.MeasValueUTCGST = data['measValueUTCGST']
-          insertdata.MeasTimeUTCBDT = data['measTimeUTCBDT']
-          insertdata.MeasValueUTCBDT = data['measValueUTCBDT']
-          insertdata.MeasTimeUTCQZSST = data['measTimeUTCQZSST']
-          insertdata.MeasValueUTCQZSST = data['measValueUTCQZSST']
-          insertdata.MeasTimeUTCIRNSST = data['measTimeUTCIRNSST']
-          insertdata.MeasValueUTCIRNSST = data['measValueUTCIRNSST']
-          insertdata.MeasTimeUTCSBAST = data['measTimeUTCSBAST']
-          insertdata.MeasValueUTCSBAST = data['measValueUTCSBAST']
+          insertdata.MeasName = data['measName']
+          insertdata.MeasTime = data['measTime']
+          insertdata.MeasValue = data['measValue']
           if (this.GnssSystemClockDifference === null) {
             this.GnssSystemClockDifference = []
           }
@@ -668,14 +778,31 @@ export default {
       this.$notify.error({
         title: '错误',
         message: '此功能还未开发',
-        offset: 60
+        offset: 30
       })
+    },
+    editorClick () {
+      this.EditorDialogVisible = true
     }
   }
 }
 </script>
 
 <style>
+
+body {
+  /*overflow-y: hidden;*/
+  margin: 0;
+}
+
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+
+/*.el-menu-item-font {*/
+/*  font-size: 11px;*/
+/*}*/
+
 #table {
   transition: 0.5s;
   -webkit-transition: 0.5s;
@@ -685,43 +812,16 @@ export default {
   box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.1);
 }
 
-#table2 {
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
-}
-
-#table2:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-}
-
-.header-button {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-}
-
-#content {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  width: 100%;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 10px;
-  background-color: #fff;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-  background-color: rgba(0, 0, 0, .1)
+html, body, #app {
+  height: 100%;
 }
 
 .tableHeaderCell {
@@ -730,7 +830,37 @@ export default {
   font-weight: bold;
 }
 
-.el-submenu__title {
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+
+.el-scrollbar {
+  height: 100%;
+}
+
+.el-main {
   padding: 0 10px;
+}
+
+#el_row_header {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.table {
+  width: 100%;
+}
+
+.el-divider--horizontal {
+  margin: 0 0 1px 0;
+}
+
+.el-header {
+  background-color: #ffffff;
+}
+
+.el-form-item__label{
+  padding: 0!important;
 }
 </style>

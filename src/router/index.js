@@ -9,6 +9,7 @@ import Main from '../components/Main'
 import SatIntegratedDataManagement from '../components/softwares/SatIntegratedDataManagement'
 import Splansh from '../components/Splansh'
 import Test from '../components/Test'
+import Log from '../components/Log'
 
 Vue.use(Router)
 
@@ -49,6 +50,10 @@ export default new Router({
     {
       path: '/vlbi',
       component: VLBI
+    },
+    {
+      path: '/log',
+      component: Log
     },
     {
       path: '/test',

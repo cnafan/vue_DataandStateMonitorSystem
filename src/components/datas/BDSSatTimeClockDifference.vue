@@ -11,11 +11,11 @@
       style="width: 100%">
       <el-table-column
         prop="station"
-        label="station">
+        label="站编号">
       </el-table-column>
       <el-table-column
         prop="time"
-        label="数据时标（UTC）">
+        label="时标">
       </el-table-column>
       <el-table-column
         prop="packetAmount"

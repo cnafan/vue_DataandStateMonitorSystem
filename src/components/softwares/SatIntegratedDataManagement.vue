@@ -9,14 +9,17 @@
           <SignalComponent></SignalComponent>
         </keep-alive>
       </el-tab-pane>
-      <el-tab-pane label="广播星历告警信息" name="广播星历告警信息">
-        <keep-alive>
-          <BroadcastEphemerisWarningInfo></BroadcastEphemerisWarningInfo>
-        </keep-alive>
-      </el-tab-pane>
+<!--      <el-tab-pane label="广播星历告警信息" name="广播星历告警信息">-->
+<!--        <keep-alive>-->
+<!--          <BroadcastEphemerisWarningInfo></BroadcastEphemerisWarningInfo>-->
+<!--        </keep-alive>-->
+<!--      </el-tab-pane>-->
       <el-tab-pane label="UTC(NTSC)于BDS3每颗卫星时间的钟差" name="UTC(NTSC)于BDS3每颗卫星时间的钟差">
         <keep-alive>
           <BDSSatTimeClockDifference></BDSSatTimeClockDifference>
+        </keep-alive>
+        <keep-alive>
+          <BDSClockDifference></BDSClockDifference>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane label="BDS3每颗卫星的星钟改正数" name="BDS3每颗卫星的星钟改正数">
@@ -46,6 +49,7 @@ import BDTClockDifference from '../datas/BDTClockDifference'
 import SignalComponent from '../datas/NavSat/SignalComponent'
 import BDSSatTimeClockDifference from '../datas/BDSSatTimeClockDifference'
 import BroadcastEphemerisWarningInfo from '../datas/BroadcastEphemerisWarningInfo'
+import BDSClockDifference from '../datas/BDSClockDifference'
 
 export default {
   name: 'SatIntegratedDataManagement',
@@ -60,6 +64,7 @@ export default {
     }
   },
   components: {
+    BDSClockDifference,
     BroadcastEphemerisWarningInfo,
     BDSSatTimeClockDifference,
     SignalComponent,

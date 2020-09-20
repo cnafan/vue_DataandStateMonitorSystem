@@ -30,6 +30,16 @@ export default {
   methods: {
     datas () {
       return this.$store.getters.getData
+    },
+    getStationName (station) {
+      switch (station) {
+        case 0:
+          return '西安站'
+        case 1:
+          return '海外站'
+        default:
+          break
+      }
     }
   }
 }

@@ -52,6 +52,8 @@ const store = new Vuex.Store({
           state.BDSBroadcastClockDifference = payload['data']
           break
         case 'BDSClockCorrection':
+          console.log('payload[\'data\']')
+          console.log(payload['data'])
           state.BDSClockCorrection = payload['data']
           break
         case 'BDSClockDifference':

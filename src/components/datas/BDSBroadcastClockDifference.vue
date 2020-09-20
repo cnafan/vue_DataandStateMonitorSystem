@@ -3,7 +3,7 @@
     <p style="text-align: center">UTC(NTSC)于BDS3每颗卫星广播北斗时间的钟差</p>
     <el-table
       id="table"
-      :data="this.$store.state.BDSBroadcastClockDifference"
+      :data="this.$store.state.BDSBroadcastClockDifference[0]"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe

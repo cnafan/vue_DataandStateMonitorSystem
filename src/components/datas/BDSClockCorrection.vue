@@ -3,7 +3,7 @@
     <p style="text-align: center">BDS3每颗卫星的星钟改正数</p>
     <el-table
       id="table"
-      :data="this.$store.state.BDSClockCorrection"
+      :data="this.$store.state.BDSClockCorrection[0]"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe

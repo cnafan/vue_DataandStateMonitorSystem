@@ -9,137 +9,172 @@
       stripe
       border
       style="width: 100%">
-      <el-table-column
-        min-width="3"
-        prop="time"
-        label="time">
-      </el-table-column>
+<!--      <el-table-column-->
+<!--        min-width="3"-->
+<!--        prop="time"-->
+<!--        label="时标">-->
+<!--      </el-table-column>-->
       <el-table-column
         min-width="1"
         prop="sico"
-        label="sico">
+        label="信号分量">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="chpm"
-        label="chpm">
+        label="地面接收功率均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="chps"
-        label="chps">
+        label="地面接收功率标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="spsm"
-        label="spsm">
+        label="合成功率谱偏差均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="spss"
-        label="spss">
+        label="合成功率谱偏差标准差">
       </el-table-column>
+    </el-table>
+
+    <el-table
+      :data="this.$store.state.SignalComponent[0]"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="colm"
-        label="colm">
+        label="相关损失">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="scb1"
-        label="scb1">
+        label="S曲线过零点偏差1">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="scb2"
-        label="scb2">
+        label="S曲线过零点偏差2">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="scb3"
-        label="scb3">
+        label="S曲线过零点偏差3">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="scb4"
-        label="scb4">
+        label="S曲线过零点偏差4">
       </el-table-column>
+
+    </el-table>
+    <el-table
+      :data="this.$store.state.SignalComponent[0]"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="bswm"
-        label="bswm">
+        label="基带信号波形数字畸变量均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="bsws"
-        label="bsws">
+        label="基带信号波形数字畸变量标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="ccam"
-        label="ccam">
+        label="码与载波一致性均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="ccsm"
-        label="ccsm">
+        label="频内码相位一致性均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="ccss"
-        label="ccss">
+        label="频内码相位一致性标准差">
       </el-table-column>
+    </el-table>
+    <el-table
+      :data="this.$store.state.SignalComponent[0]"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="ccdm"
-        label="ccdm">
+        label="频间码相位一致性均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="ccds"
-        label="ccds">
+        label="频间码相位一致性标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="prsm"
-        label="prsm">
+        label="伪距稳定性均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="prss"
-        label="prss">
+        label="伪距稳定性标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="cpsm"
-        label="cpsm">
+        label="载波相位稳定性均值">
       </el-table-column>
+    </el-table>
+    <el-table
+      :data="this.$store.state.SignalComponent[0]"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="cpss"
-        label="cpss">
+        label="载波相位稳定性标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="dpsm"
-        label="dpsm">
+        label="多普勒稳定性均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="dpss"
-        label="dpss">
+        label="多普勒稳定性标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="cnsm"
-        label="cnsm">
+        label="载噪比稳定性均值">
       </el-table-column>
       <el-table-column
         min-width="1"
         prop="cnss"
-        label="cnss">
+        label="载噪比稳定性标准差">
       </el-table-column>
     </el-table>
+
   </div>
 </template>
 <script>

@@ -15,7 +15,7 @@ export default function connect () {
 }
 
 function onConnected () {
-  let queueName = ['BDSBroadcastClockDifference', 'BDSClockCorrection', 'BDSClockDifference',
+  let queueName = ['BDSBroadcastClockDifference[]', 'BDSClockCorrection[]', 'BDSClockDifference[]',
     'BDSSatTimeClockDifference', 'BDTClockDifference', 'BroadcastEphemerisWarningInfo',
     'GnssSystemClockDifference', 'GroundStationWorkStateInfo', 'NavSatSignalQuality',
     'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara', 'SignalComponent[]',
@@ -56,10 +56,10 @@ function queuePush (software, data) {
   switch (software) {
     case 'SignalComponent[]':
       currentData = store.state.SignalComponent
-      insertdata = {}
       insertList = []
       currentData = []
       for (let i = 0; i < data.length; i++) {
+        insertdata = {}
         insertdata.time = data[i]['time']
         insertdata.sico = data[i]['sico']
         insertdata.chpm = data[i]['chpm']
@@ -86,17 +86,17 @@ function queuePush (software, data) {
         insertdata.cnss = data[i]['cnss']
         insertdata.ccdm = data[i]['ccdm']
         insertdata.ccds = data[i]['ccds']
-        insertList.unshift(insertdata)
+        insertList.push(insertdata)
       }
       currentData.unshift(insertList)
       store.commit('change', {'data': currentData, 'software': 'SignalComponent'})
       break
     case 'SignalComponentAllDirection[]':
       currentData = store.state.SignalComponentAllDirection
-      insertdata = {}
       insertList = []
       currentData = []
       for (let i = 0; i < data.length; i++) {
+        insertdata = {}
         insertdata.time = data[i]['time']
         insertdata.sico = data[i]['sico']
         insertdata.chpm = data[i]['chpm']
@@ -123,27 +123,29 @@ function queuePush (software, data) {
         insertdata.cnss = data[i]['cnss']
         insertdata.ccdm = data[i]['ccdm']
         insertdata.ccds = data[i]['ccds']
-        insertList.unshift(insertdata)
+        insertList.push(insertdata)
       }
       currentData.unshift(insertList)
       store.commit('change', {'data': currentData, 'software': 'SignalComponentAllDirection'})
       break
     case 'NavSatSignalQuality':
-      currentData = store.state.NavSatSignalQuality
+      // currentData = store.state.NavSatSignalQuality
       insertdata = {}
       insertdata.time = data['time']
       insertdata.said = data['said']
       insertdata.stid = data['stid']
       insertdata.sifr = data['sifr']
       insertdata.nuco = data['nuco']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
+      // if (currentData === null || currentData === undefined) {
+      //   currentData = []
+      // }
+      // if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+      //   // 只显示最新一条
+      //   currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      // }
+      // currentData.unshift(insertdata)
+      currentData = []
+      currentData.push(insertdata)
       store.commit('change', {'data': currentData, 'software': 'NavSatSignalQuality'})
       break
     case 'WorkingStateInfo':
@@ -298,71 +300,78 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'GnssSystemClockDifference'})
       break
-    case 'BDSBroadcastClockDifference':
+    case 'BDSBroadcastClockDifference[]':
       currentData = store.state.BDSBroadcastClockDifference
-      insertdata = {}
-      insertdata.station = data['station']
-      insertdata.time = data['time']
-      insertdata.svid = data['svid']
-      insertdata.b3I = data['b3I']
-      insertdata.b1I = data['b1I']
-      insertdata.b2A = data['b2A']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
+      insertList = []
+      currentData = []
+      for (let i = 0; i < data.length; i++) {
+        insertdata = {}
+        insertdata.station = data[i]['station']
+        insertdata.time = data[i]['time']
+        insertdata.svid = data[i]['svid']
+        insertdata.b3I = data[i]['b3I']
+        insertdata.b1I = data[i]['b1I']
+        insertdata.b2A = data[i]['b2A']
+        insertList.push(insertdata)
       }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
+      currentData.unshift(insertList)
       store.commit('change', {'data': currentData, 'software': 'BDSBroadcastClockDifference'})
       break
-    case 'BDSClockCorrection':
+    case 'BDSClockCorrection[]':
       currentData = store.state.BDSClockCorrection
-      insertdata = {}
-      insertdata.station = data['station']
-      insertdata.time = data['time']
-      insertdata.SVID = data['svid']
-      insertdata.SVCLK = data['svclk']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
+      insertList = []
+      currentData = []
+      for (let i = 0; i < data.length; i++) {
+        insertdata = {}
+        insertdata.station = data[i]['station']
+        insertdata.time = data[i]['time']
+        insertdata.SVID = data[i]['svid']
+        insertdata.SVCLK = data[i]['svclk']
+        insertList.push(insertdata)
       }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
+      console.log('insertList')
+      console.log(insertList[0])
+      currentData.unshift(insertList)
       store.commit('change', {'data': currentData, 'software': 'BDSClockCorrection'})
       break
-    case 'BDSClockDifference':
-      currentData = store.state.BDSClockDifference
-      insertdata = {}
-      insertdata.station = data['station']
-      insertdata.time = data['time']
-      insertdata.SVID = data['svid']
-      insertdata.SVCLK = data['svclk']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDSClockDifference'})
-      break
     case 'BDSSatTimeClockDifference':
-      currentData = store.state.BDSSatTimeClockDifference
+      // currentData = store.state.BDSSatTimeClockDifference
       insertdata = {}
       insertdata.station = data['station']
       insertdata.time = data['time']
       insertdata.packetAmount = data['packetAmount']
       insertdata.packetNo = data['packetNo']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
+      currentData = []
+      currentData.push(insertdata)
+      // if (currentData === null || currentData === undefined) {
+      //   currentData = []
+      //   currentData.push(insertdata)
+      // } else {
+      //   currentData[0] = insertdata
+      // }
+      // currentData.pop()
+      // currentData.push(insertdata)
+      // if (currentData.length >= BDS_CLOCK_DIFFERENCE_LIST_COUNT) {
+      //   currentData = currentData.slice(0, BDS_CLOCK_DIFFERENCE_LIST_COUNT - 1)
+      // }
+      // currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'BDSSatTimeClockDifference'})
+      break
+    case 'BDSClockDifference[]':
+      currentData = store.state.BDSClockDifference
+      insertList = []
+      currentData = []
+      for (let i = 0; i < data.length; i++) {
+        insertdata = {}
+        insertdata.time = data[i]['time']
+        insertdata.svid = data[i]['svid']
+        insertdata.b3I = data[i]['b3I']
+        insertdata.b1I = data[i]['b1I']
+        insertdata.b2A = data[i]['b2A']
+        insertList.push(insertdata)
+      }
+      currentData.unshift(insertList)
+      store.commit('change', {'data': currentData, 'software': 'BDSClockDifference'})
       break
     case 'BDTClockDifference':
       currentData = store.state.BDTClockDifference

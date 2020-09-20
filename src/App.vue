@@ -68,7 +68,7 @@ html, body, #app, #main-app {
 }
 
 #el-main.el-main {
-  padding: 0 10px;
+  padding: 2px 15px;
   height: 100%;
 }
 

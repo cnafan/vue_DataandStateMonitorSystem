@@ -2,7 +2,10 @@
   <div id="main-app">
     <el-header id="header">
       <el-row id="el_row_header">
-        <el-col :span="22">
+        <el-col :span="1">
+          <i class="el-icon-bottom-right" style="font-size: 25px;" @click="navModify"></i>
+        </el-col>
+        <el-col :span="21">
           <div>{{ headerName }}</div>
         </el-col>
         <el-col :span="1">
@@ -18,42 +21,44 @@
     </el-header>
     <!--  :style="{height:containHeight}"-->
     <el-container id="el-container-header">
-      <el-aside>
+      <el-aside :width="isCollapse?'65px':'auto'" style="overflow: hidden">
         <el-scrollbar id="el-scrollbar-menu">
+
+          <!--            :default-openeds="defaultOpen"-->
           <el-menu
+            @open="handleOpen" @close="handleClose" :collapse="isCollapse"
             router
+            :collapse-transition="false"
             :default-active="$route.path"
-            :default-openeds="defaultOpen"
             class="el-menu-index"
             mode="vertical"
             text-color="#303133"
             active-text-color="#E6A23C">
             <el-menu-item index="splansh">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-s-home"></i>
               <span>处理中心</span>
             </el-menu-item>
             <el-submenu v-for="item in items" :index="item.index" :key="item.index">
               <template class="el-icon-menu" slot="title">
-                <i class="el-icon-menu"></i>
+                <i :class="item.class"></i>
                 <span>{{ item.title }}</span>
               </template>
-              <el-menu-item class="el-menu-item-font" :index="item.subs.index" :key="item.subs.index">
+              <el-menu-item style="padding-left: 54px" class="el-menu-item-font" :index="item.subs.index"
+                            :key="item.subs.index">
                 {{ item.subs.title }}
               </el-menu-item>
             </el-submenu>
-            <!--            <el-menu-item index="log">-->
-            <!--              <i class="el-icon-menu"></i>-->
-            <!--              <span>日志</span>-->
-            <!--            </el-menu-item>-->
+            <el-menu-item index="log">
+              <i class="el-icon-info"></i>
+              <span>日志</span>
+            </el-menu-item>
           </el-menu>
         </el-scrollbar>
       </el-aside>
       <el-main id="el-main">
         <el-row id="el-row-main">
           <keep-alive>
-            <el-scrollbar>
-              <router-view></router-view>
-            </el-scrollbar>
+            <router-view></router-view>
           </keep-alive>
         </el-row>
         <el-backtop></el-backtop>
@@ -90,6 +95,7 @@ export default {
   data () {
     return {
       headerName: '数据与状态监控软件',
+      isCollapse: true,
       EditorDialogTitle: '修改配置',
       EditorDialogVisible: false,
       settingForm: {
@@ -108,6 +114,7 @@ export default {
         {
           index: '2',
           title: '空间信号质量监测',
+          class: 'el-icon-s-promotion',
           subs: {
             index: 'SystemManageAndControl',
             title: '系统管理控制软件'
@@ -116,6 +123,7 @@ export default {
         {
           index: '3',
           title: '北斗/GNSS系统时间监测',
+          class: 'el-icon-s-marketing',
           subs: {
             index: 'BDGNSSSystemClockMonitor',
             title: 'GNSS时差数据综合处理软件'
@@ -124,6 +132,7 @@ export default {
         {
           index: '4',
           title: '中科院在轨卫星地面数据',
+          class: 'el-icon-s-data',
           subs: {
             index: 'SatIntegratedDataManagement',
             title: '卫星综合管理软件'
@@ -132,6 +141,7 @@ export default {
         {
           index: '5',
           title: '高精度转发式卫星授时',
+          class: 'el-icon-phone',
           subs: {
             index: 'AtomicClockSignal',
             title: '原子钟信号监测与自主切换软件'
@@ -140,6 +150,7 @@ export default {
         {
           index: '6',
           title: 'VLBI观测导航卫星及UT1测量',
+          class: 'el-icon-s-promotion',
           subs: {
             index: 'VLBI',
             title: 'VLBI站控软件'
@@ -167,11 +178,23 @@ export default {
     },
     editorClick () {
       this.EditorDialogVisible = true
+    },
+    handleOpen (key, keyPath) {
+      console.log(key, keyPath)
+    },
+    handleClose (key, keyPath) {
+      console.log(key, keyPath)
+    },
+    navModify () {
+      this.isCollapse = !this.isCollapse
     }
   }
 }
 </script>
 
 <style scoped>
-
+.el-menu-index:not(.el-menu--collapse) {
+  /*width: 200px;*/
+  min-height: 400px;
+}
 </style>

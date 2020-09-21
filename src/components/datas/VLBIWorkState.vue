@@ -2,7 +2,6 @@
   <div>
     <p style="text-align: center">工作状态</p>
     <el-table
-      id="table"
       :data="this.$store.state.VLBIWorkState"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -40,8 +39,7 @@
     </el-table>
 
     <el-table
-      id="table2"
-      :data="datas()['VLBIWorkState']"
+      :data="this.$store.state.VLBIWorkState"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -71,6 +69,19 @@
         prop="kashiMillisecond"
         label="喀什站毫秒">
       </el-table-column>
+      <el-table-column
+        prop=""
+        label="">
+      </el-table-column>
+    </el-table>
+
+    <el-table
+      :data="this.$store.state.VLBIWorkState"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         prop="kashiReverse"
         label="喀什站预留">
@@ -102,8 +113,7 @@
     </el-table>
 
     <el-table
-      id="table3"
-      :data="datas()['VLBIWorkState']"
+      :data="this.$store.state.VLBIWorkState"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -133,6 +143,19 @@
         prop="sanyaiMillisecond"
         label="三亚站毫秒">
       </el-table-column>
+      <el-table-column
+        prop="end"
+        label="">
+      </el-table-column>
+    </el-table>
+
+    <el-table
+      :data="this.$store.state.VLBIWorkState"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         prop="sanyaReverse"
         label="三亚站预留">
@@ -164,8 +187,7 @@
     </el-table>
 
     <el-table
-      id="table4"
-      :data="datas()['VLBIWorkState']"
+      :data="this.$store.state.VLBIWorkState"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -195,6 +217,19 @@
         prop="jilinMillisecond"
         label="吉林站毫秒">
       </el-table-column>
+      <el-table-column
+        prop="end"
+        label="">
+      </el-table-column>
+
+    </el-table>
+    <el-table
+      :data="this.$store.state.VLBIWorkState"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         prop="jilinReverse"
         label="吉林站预留">
@@ -228,12 +263,7 @@
 </template>
 <script>
 export default {
-  name: 'VLBIWorkState',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
-    }
-  }
+  name: 'VLBIWorkState'
 }
 </script>
 <style scoped>

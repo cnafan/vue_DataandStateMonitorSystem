@@ -2,7 +2,6 @@
   <div>
     <p style="text-align: center">工作状态信息</p>
     <el-table
-      id="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -31,7 +30,6 @@
       </el-table-column>
     </el-table>
     <el-table
-      id="table2"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -40,27 +38,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms02taskType"
-        label="MS02taskType">
+        label="信号监测子系统7.3米L天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms02startTime"
-        label="MS02startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms02SatName"
-        label="MS02SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms02endTime"
-        label="MS02endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms02Result"
-        label="MS02Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table3"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -69,27 +66,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms03taskType"
-        label="MS03taskType">
+        label="信号监测子系统7.3米C天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms03startTime"
-        label="MS03startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms03SatName"
-        label="MS03SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms03endTime"
-        label="MS03endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms03Result"
-        label="MS03Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table4"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -98,27 +94,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms04taskType"
-        label="MS04taskType">
+        label="信号监测子系统13米C/L_1天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms04startTime"
-        label="MS04startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms04SatName"
-        label="MS04SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms04endTime"
-        label="MS04endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms04Result"
-        label="MS04Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table5"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -127,27 +122,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms05taskType"
-        label="MS05taskType">
+        label="信号监测子系统13米C/L_2天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms05startTime"
-        label="MS05startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms05SatName"
-        label="MS05SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms05endTime"
-        label="MS05endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms05Result"
-        label="MS05Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table6"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -156,27 +150,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms06taskType"
-        label="MS06taskType">
+        label="信号监测子系统MS06天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms06startTime"
-        label="MS06startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms06SatName"
-        label="MS06SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms06endTime"
-        label="MS06endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms06Result"
-        label="MS06Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table7"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -185,27 +178,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms07taskType"
-        label="MS07taskType">
+        label="信号监测子系统MS07天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms07startTime"
-        label="MS07startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms07SatName"
-        label="MS07SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms07endTime"
-        label="MS07endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms07Result"
-        label="MS07Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table8"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -214,27 +206,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms08taskType"
-        label="MS08taskType">
+        label="信号监测子系统MS08天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms08startTime"
-        label="MS08startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms08SatName"
-        label="MS08SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms08endTime"
-        label="MS08endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms08Result"
-        label="MS08Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table9"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -243,27 +234,26 @@
       style="width: 100%">
       <el-table-column
         prop="ms09taskType"
-        label="MS09taskType">
+        label="信号监测子系统MS09天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms09startTime"
-        label="MS09startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms09SatName"
-        label="MS09SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms09endTime"
-        label="MS09endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms09Result"
-        label="MS09Result">
+        label="执行结果">
       </el-table-column>
     </el-table>
     <el-table
-      id="table10"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -272,28 +262,27 @@
       style="width: 100%">
       <el-table-column
         prop="ms10taskType"
-        label="MS10taskType">
+        label="信号监测子系统MS010天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms10startTime"
-        label="MS10startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms10SatName"
-        label="MS10SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms10endTime"
-        label="MS10endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms10Result"
-        label="MS10Result">
+        label="执行结果">
       </el-table-column>
 
     </el-table>
     <el-table
-      id="table11"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -302,23 +291,23 @@
       style="width: 100%">
       <el-table-column
         prop="ms11taskType"
-        label="MS11taskType">
+        label="信号监测子系统MS011天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms11startTime"
-        label="MS11startTime">
+        label="任务开始时间">
       </el-table-column>
       <el-table-column
         prop="ms11SatName"
-        label="MS11SatName">
+        label="观测卫星">
       </el-table-column>
       <el-table-column
         prop="ms11endTime"
-        label="MS11endTime">
+        label="任务完成时间">
       </el-table-column>
       <el-table-column
         prop="ms11Result"
-        label="MS11Result">
+        label="执行结果">
       </el-table-column>
 
     </el-table>
@@ -326,12 +315,7 @@
 </template>
 <script>
 export default {
-  name: 'WorkingStateInfo',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
-    }
-  }
+  name: 'WorkingStateInfo'
 }
 </script>
 <style scoped>

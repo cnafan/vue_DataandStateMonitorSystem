@@ -2,7 +2,6 @@
   <div>
     <p style="text-align: center"></p>
     <el-table
-      id="table"
       :data="this.$store.state.SignalComponentAllDirection[0]"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -39,6 +38,14 @@
         prop="cpss"
         label="载波相位稳定性标准差">
       </el-table-column>
+    </el-table>
+      <el-table
+        :data="this.$store.state.SignalComponentAllDirection[0]"
+        header-cell-class-name="tableHeaderCell"
+        highlight-current-row
+        stripe
+        border
+        style="width: 100%">
       <el-table-column
         min-width="1"
         prop="dpsm"
@@ -59,6 +66,11 @@
         prop="cnss"
         label="载噪比稳定性标准差">
       </el-table-column>
+        <el-table-column
+          min-width="1"
+          prop=""
+          label="">
+        </el-table-column>
 
     </el-table>
   </div>

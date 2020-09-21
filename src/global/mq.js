@@ -6,7 +6,7 @@ import {
   SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT,
   VIBI_WORKSTATE_LIST_COUNT
 } from '../../config/display'
-import {HEADERS, QUEUE_PUSH} from '../../config/mqtt'
+import {EXCHANGE_PUSH, HEADERS} from '../../config/mqtt'
 
 let client = Stomp.client('ws://localhost:15674/ws')
 
@@ -20,12 +20,20 @@ function onConnected () {
     'GnssSystemClockDifference', 'GroundStationWorkStateInfo', 'NavSatSignalQuality',
     'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara', 'SignalComponent[]',
     'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo', 'satComponent',
-    'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor', 'SystemInfo', 'SendInfo', 'ReceiveInfo']
+    'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor',
+    'connect info', 'sending info', 'receiving info']
   for (let i = 0; i < queueName.length; i++) {
-    // let exchange = EXCHANGE_PUSH + queueName[i]
-    let exchange = QUEUE_PUSH + queueName[i]
-    client.subscribe(exchange, responseCallback)
+    // let exchange = QUEUE_PUSH + queueName[i]
+    // client.subscribe(exchange, responseCallback)
+    let header = {
+      'durable': true,
+      'auto-delete': false
+    }
+    let exchange = EXCHANGE_PUSH + queueName[i]
+    client.subscribe(exchange, responseCallback, header)
   }
+
+  // client.subscribe(EXCHANGE_PUSH, responseCallback,header)
   // client.subscribe(EXCHANGE_PUSH + 'satComponent', responseCallback)
 }
 
@@ -586,15 +594,16 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'FrequencyComponent'})
       break
-    case 'SystemInfo':
+    case 'connect info':
       currentData = store.state.SystemInfo
-      let result = data.match(/(.*):(.*):(.*)/)
+      let result = data.match(/(.*):(.*):(.*):(.*)/)
       console.log('result')
       console.log(result)
       insertdata = {}
       insertdata.time = result[1]
       insertdata.name = result[2]
       insertdata.info = result[3]
+      insertdata.result = result[4]
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -604,13 +613,14 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'SystemInfo'})
       break
-    case 'SendInfo':
+    case 'sending info':
       currentData = store.state.SendInfo
-      let SendResult = data.match(/(.*):(.*):(.*)/)
+      let SendResult = data.match(/(.*):(.*):(.*):(.*)/)
       insertdata = {}
       insertdata.time = SendResult[1]
       insertdata.name = SendResult[2]
       insertdata.info = SendResult[3]
+      insertdata.result = SendResult[4]
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -620,13 +630,14 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'SendInfo'})
       break
-    case 'ReceiveInfo':
+    case 'receiving info':
       currentData = store.state.ReceiveInfo
-      let ReceiveResult = data.match(/(.*):(.*):(.*)/)
+      let ReceiveResult = data.match(/(.*):(.*):(.*):(.*)/)
       insertdata = {}
       insertdata.time = ReceiveResult[1]
       insertdata.name = ReceiveResult[2]
       insertdata.info = ReceiveResult[3]
+      insertdata.result = ReceiveResult[4]
       if (currentData === null || currentData === undefined) {
         currentData = []
       }

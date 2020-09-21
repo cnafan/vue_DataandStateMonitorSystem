@@ -10,20 +10,20 @@
       style="width: 100%">
 
       <el-table-column
-        prop="MeasName"
-        label="信源标识">
+        prop="info"
+        label="数据类型">
       </el-table-column>
       <el-table-column
-        prop="MeasName"
-        label="信宿标识">
-      </el-table-column>
-      <el-table-column
-        prop="MeasTime"
+        prop="time"
         label="时间">
       </el-table-column>
       <el-table-column
-        prop="MeasValue"
-        label="内容">
+        prop="name"
+        label="信宿标识">
+      </el-table-column>
+      <el-table-column
+        prop="result"
+        label="结果">
       </el-table-column>
     </el-table>
   </div>

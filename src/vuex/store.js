@@ -86,6 +86,15 @@ const store = new Vuex.Store({
         case 'NavSatIrregularMonitor':
           state.NavSatIrregularMonitor = payload['data']
           break
+        case 'SystemInfo':
+          state.SystemInfo = payload['data']
+          break
+        case 'SendInfo':
+          state.SendInfo = payload['data']
+          break
+        case 'ReceiveInfo':
+          state.ReceiveInfo = payload['data']
+          break
         default:
           break
       }

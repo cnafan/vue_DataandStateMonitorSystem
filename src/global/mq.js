@@ -6,7 +6,7 @@ import {
   SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT,
   VIBI_WORKSTATE_LIST_COUNT
 } from '../../config/display'
-import {EXCHANGE_PUSH, HEADERS} from '../../config/mqtt'
+import {HEADERS, QUEUE_PUSH} from '../../config/mqtt'
 
 let client = Stomp.client('ws://localhost:15674/ws')
 
@@ -19,13 +19,14 @@ function onConnected () {
     'BDSSatTimeClockDifference', 'BDTClockDifference', 'BroadcastEphemerisWarningInfo',
     'GnssSystemClockDifference', 'GroundStationWorkStateInfo', 'NavSatSignalQuality',
     'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara', 'SignalComponent[]',
-    'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo',
-    'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor']
+    'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo', 'satComponent',
+    'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor', 'SystemInfo', 'SendInfo', 'ReceiveInfo']
   for (let i = 0; i < queueName.length; i++) {
-    let exchange = EXCHANGE_PUSH + queueName[i]
+    // let exchange = EXCHANGE_PUSH + queueName[i]
+    let exchange = QUEUE_PUSH + queueName[i]
     client.subscribe(exchange, responseCallback)
   }
-  client.subscribe(EXCHANGE_PUSH + 'satComponent', responseCallback)
+  // client.subscribe(EXCHANGE_PUSH + 'satComponent', responseCallback)
 }
 
 function responseCallback (frame) {
@@ -584,6 +585,56 @@ function queuePush (software, data) {
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'FrequencyComponent'})
+      break
+    case 'SystemInfo':
+      currentData = store.state.SystemInfo
+      let result = data.match(/(.*):(.*):(.*)/)
+      console.log('result')
+      console.log(result)
+      insertdata = {}
+      insertdata.time = result[1]
+      insertdata.name = result[2]
+      insertdata.info = result[3]
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= LIST_COUNT) {
+        currentData = currentData.slice(0, LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'SystemInfo'})
+      break
+    case 'SendInfo':
+      currentData = store.state.SendInfo
+      let SendResult = data.match(/(.*):(.*):(.*)/)
+      insertdata = {}
+      insertdata.time = SendResult[1]
+      insertdata.name = SendResult[2]
+      insertdata.info = SendResult[3]
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= LIST_COUNT) {
+        currentData = currentData.slice(0, LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'SendInfo'})
+      break
+    case 'ReceiveInfo':
+      currentData = store.state.ReceiveInfo
+      let ReceiveResult = data.match(/(.*):(.*):(.*)/)
+      insertdata = {}
+      insertdata.time = ReceiveResult[1]
+      insertdata.name = ReceiveResult[2]
+      insertdata.info = ReceiveResult[3]
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= LIST_COUNT) {
+        currentData = currentData.slice(0, LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'ReceiveInfo'})
       break
     default:
       break

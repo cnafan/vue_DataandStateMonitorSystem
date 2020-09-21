@@ -118,4 +118,7 @@ body {
 #el-row-main{
   height: 100%;
 }
+.el-divider-table{
+  margin: 15px;
+}
 </style>

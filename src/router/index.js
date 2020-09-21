@@ -48,7 +48,7 @@ export default new Router({
       component: SatIntegratedDataManagement
     },
     {
-      path: '/vlbi',
+      path: '/VLBI',
       component: VLBI
     },
     {

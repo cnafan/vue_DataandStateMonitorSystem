@@ -36,12 +36,7 @@
 
 <script>
 export default {
-  name: 'BDSClockDifference',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
-    }
-  }
+  name: 'BDSClockDifference'
 }
 </script>
 

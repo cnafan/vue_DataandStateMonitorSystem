@@ -47,38 +47,39 @@ export default {
   },
   saveNetConfig (data) {
     window.localStorage.setItem('netConfig', JSON.stringify(data))
-  },
-  readNetConfig () {
-    let netconfig = JSON.parse(window.localStorage.getItem('netConfig'))
-    if (netconfig === null) {
-      netconfig = [
-        {
-          name: '系统管理控制软件',
-          ip: '',
-          port: ''
-        },
-        {
-          name: 'GNSS时差数据综合处理软件',
-          ip: '',
-          port: ''
-        },
-        {
-          name: '卫星综合管理软件',
-          ip: '',
-          port: ''
-        },
-        {
-          name: '原子钟信号监测与自主切换软件',
-          ip: '',
-          port: ''
-        },
-        {
-          name: 'VLBI站控软件',
-          ip: '',
-          port: ''
-        }
-      ]
-    }
-    return netconfig
   }
+  // ,
+  // readNetConfig () {
+  //   let netconfig = JSON.parse(window.localStorage.getItem('netConfig'))
+  //   if (netconfig === null) {
+  //     netconfig = [
+  //       {
+  //         name: '系统管理控制软件',
+  //         ip: '',
+  //         port: ''
+  //       },
+  //       {
+  //         name: 'GNSS时差数据综合处理软件',
+  //         ip: '',
+  //         port: ''
+  //       },
+  //       {
+  //         name: '卫星综合管理软件',
+  //         ip: '',
+  //         port: ''
+  //       },
+  //       {
+  //         name: '原子钟信号监测与自主切换软件',
+  //         ip: '',
+  //         port: ''
+  //       },
+  //       {
+  //         name: 'VLBI站控软件',
+  //         ip: '',
+  //         port: ''
+  //       }
+  //     ]
+  //   }
+  //   return netconfig
+  // }
 }

@@ -32,12 +32,7 @@
 <script>
 
 export default {
-  name: 'BDSSatTimeClockDifference',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
-    }
-  }
+  name: 'BDSSatTimeClockDifference'
 }
 </script>
 

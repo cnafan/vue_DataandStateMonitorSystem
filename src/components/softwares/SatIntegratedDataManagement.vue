@@ -29,7 +29,7 @@
       </el-tab-pane>
       <el-tab-pane label="UTC与BDS3卫星广播北斗钟差" name="UTC(NTSC)与BDS3每颗卫星广播北斗时间的钟差">
         <keep-alive>
-<!--          <BDSBroadcastClockDifference></BDSBroadcastClockDifference>-->
+          <BDSBroadcastClockDifference></BDSBroadcastClockDifference>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane label="UTC与BDT钟差" name="UTC(NTSC)与BDT的钟差">
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     }
   },
   components: {

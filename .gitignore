@@ -14,12 +14,5 @@ selenium-debug.log
 *.njsproj
 *.sln
 
-/config/
 /test/
-/build/
-.eslintignore
-.eslintrc.js
-.postcssrc.js
-.editorconfig
-.babelrc
 

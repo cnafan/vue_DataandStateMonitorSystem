@@ -52,8 +52,8 @@ function getSoftware (destination) {
 }
 
 function queuePush (software, data) {
-  console.log(software)
-  console.log(data)
+  // console.log(software)
+  // console.log(data)
   // console.log(store)
   // console.log(store.getters)
   // console.log(store.getters.getData)

@@ -25,7 +25,26 @@ const store = new Vuex.Store({
     NavSatSignalQualityAllDirection: [],
     FrequencyComponent: [],
     SatComponent: [],
-    SignalComponentAllDirection: []
+    SignalComponentAllDirection: [],
+    NetConfig: {
+      'BDGNSSSystemClockMonitorReceivePort': 60602,
+      'SatIntegratedDataManagementReceivePort': 60603,
+      'AtomicClockSignalReceivePort': 60605,
+      'StateMonitorAndWarningPort': 60604,
+      'SystemManageAndControlReceivePort': 60601,
+      'VLBIReceivePort': 60606,
+      'DataServiceSoftwareSendIp': '127.0.0.1',
+      'DataServiceSoftwareSendPort': 60701,
+      'SystemManageAndControlSendIp': '192.168.206.71',
+      'SystemManageAndControlSendPort': 7801
+      // 'SystemManageAndControlIp': '0.0.0.0',
+      // 'BDGNSSSystemClockMonitorIp': '0.0.0.0',
+      // 'SatIntegratedDataManagementIp': '0.0.0.0',
+      // 'AtomicClockSignalIp': '0.0.0.0',
+      // 'StateMonitorAndWarningIp': '0.0.0.0',
+      // 'VLBIIp': '0.0.0.0',
+    },
+    EditorDialogVisible: false
   },
   mutations: {
     modify (state, data) {
@@ -52,8 +71,6 @@ const store = new Vuex.Store({
           state.BDSBroadcastClockDifference = payload['data']
           break
         case 'BDSClockCorrection':
-          console.log('payload[\'data\']')
-          console.log(payload['data'])
           state.BDSClockCorrection = payload['data']
           break
         case 'BDSClockDifference':
@@ -95,9 +112,15 @@ const store = new Vuex.Store({
         case 'ReceiveInfo':
           state.ReceiveInfo = payload['data']
           break
+        case 'NetConfig':
+          state.NetConfig = payload['data']
+          break
         default:
           break
       }
+    },
+    setDialog (state, data) {
+      state.EditorDialogVisible = data
     }
   },
   getters: {

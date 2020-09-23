@@ -8,9 +8,10 @@ import store from './vuex/store'
 import 'element-ui/lib/theme-chalk/index.css'
 import ECharts from 'vue-echarts'
 import 'echarts-gl'
-
+import axios from 'axios'
 Vue.component('v-chart', ECharts)
 Vue.config.productionTip = false
+Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({

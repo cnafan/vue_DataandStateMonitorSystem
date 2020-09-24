@@ -17,10 +17,10 @@ export default {
     connect()
     // 保存vuex
     if (localStorage.getItem('store')) {
-      // this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(localStorage.getItem('store'))))
+      this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(localStorage.getItem('store'))))
     }
     window.addEventListener('beforeunload', () => {
-      // localStorage.setItem('store', JSON.stringify(this.$store.state))
+      localStorage.setItem('store', JSON.stringify(this.$store.state))
     })
   }
 }
@@ -126,7 +126,7 @@ body {
   width: 70%;
 }
 .el-dialog__body{
-  padding: 0 20px;
+  padding: 0 20px!important;
 }
 
 </style>

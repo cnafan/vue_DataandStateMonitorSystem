@@ -22,7 +22,6 @@
     <el-container id="el-container-header">
       <!--      <el-aside style="overflow: hidden">-->
       <el-scrollbar id="el-scrollbar-menu">
-
         <el-menu
           class="sidebar-el-menu"
           :default-active="$route.path"
@@ -154,7 +153,6 @@
 </template>
 
 <script>
-// import storageUtils from '../utils/storageUtils'
 
 export default {
   name: 'Main',
@@ -169,7 +167,6 @@ export default {
     }
     return {
       headerName: '数据与状态监控软件',
-      openeds: ['2', '3', '4', '5', '6'],
       isCollapse: false,
       items: [
         {

@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">UTC(NTSC)于BDT的钟差</p>
+<!--    <p style="text-align: center">UTC(NTSC)于BDT的钟差</p>-->
     <el-table
-      id="table"
-      :data="this.$store.state.BDTClockDifference"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -27,10 +26,12 @@
 <script>
 export default {
   name: 'BDTClockDifference',
+  props: {
+    'data': {
+      type: Array
+    }
+  },
   methods: {
-    datas () {
-      return this.$store.getters.getData
-    },
     getStationName (station) {
       switch (station) {
         case 0:

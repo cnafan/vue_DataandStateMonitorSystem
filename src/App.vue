@@ -6,7 +6,7 @@
 
 <script>
 import connect from './global/mq'
-import Main from './components/Main'
+import Main from './components/page/Main'
 
 export default {
   name: 'App',
@@ -127,6 +127,13 @@ body {
 }
 .el-dialog__body{
   padding: 0 20px!important;
+}
+.el-select-dropdown .el-scrollbar .el-scrollbar__wrap
+{
+  overflow: scroll!important;
+}
+canvas {
+  outline: none;
 }
 
 </style>

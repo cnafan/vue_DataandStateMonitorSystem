@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import SystemInfo from './datas/Log/SystemInfo'
-import SendInfo from './datas/Log/SendInfo'
-import ReceiveInfo from './datas/Log/ReceiveInfo'
+import SystemInfo from '../datas/Log/SystemInfo'
+import SendInfo from '../datas/Log/SendInfo'
+import ReceiveInfo from '../datas/Log/ReceiveInfo'
 export default {
   name: 'Log',
   components: {ReceiveInfo, SendInfo, SystemInfo},

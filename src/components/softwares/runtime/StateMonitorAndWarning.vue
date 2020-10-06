@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="地面站工作状态信息" name="地面站工作状态信息">
         <keep-alive>
-          <GroundStationWorkStateInfo></GroundStationWorkStateInfo>
+          <GroundStationWorkStateInfo :data="this.$store.state.GroundStationWorkStateInfo"></GroundStationWorkStateInfo>
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import GroundStationWorkStateInfo from '../datas/GroundStationWorkStateInfo'
+import GroundStationWorkStateInfo from '../../datas/GroundStationWorkStateInfo'
 
 export default {
   name: 'StateMonitorAndWarning',

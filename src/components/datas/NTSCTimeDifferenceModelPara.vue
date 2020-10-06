@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">CAPST-UTC（NTSC）溯源时差模型参数</p>
+<!--    <p style="text-align: center">CAPST-UTC（NTSC）溯源时差模型参数</p>-->
     <el-table
-      id="table"
-      :data="this.$store.state.NTSCTimeDifferenceModelPara"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -39,9 +38,9 @@
 <script>
 export default {
   name: 'NTSCTimeDifferenceModelPara',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
+  props: {
+    'data': {
+      type: Array
     }
   }
 }

@@ -6,9 +6,13 @@ import {
   SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT,
   VIBI_WORKSTATE_LIST_COUNT
 } from '../../config/display'
-import {EXCHANGE_PUSH, HEADERS} from '../../config/mqtt'
+import {MQTT_SERVICE, EXCHANGE_PUSH, HEADERS} from '../../config/mqtt'
 
-let client = Stomp.client('ws://localhost:15674/ws')
+let client = Stomp.client(MQTT_SERVICE)
+client.debug = function (str) {
+  // append the debug log to a #debug div somewhere in the page using JQuery:
+  console.log(str)
+}
 
 export default function connect () {
   client.connect(HEADERS, onConnected, onFailed)
@@ -23,22 +27,20 @@ function onConnected () {
     'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor',
     'connect info', 'sending info', 'receiving info']
   for (let i = 0; i < queueName.length; i++) {
-    // let exchange = QUEUE_PUSH + queueName[i]
-    // client.subscribe(exchange, responseCallback)
     let header = {
+      'ack': 'client',
       'durable': true,
       'auto-delete': false
     }
     let exchange = EXCHANGE_PUSH + queueName[i]
     client.subscribe(exchange, responseCallback, header)
   }
-
-  // client.subscribe(EXCHANGE_PUSH, responseCallback,header)
-  // client.subscribe(EXCHANGE_PUSH + 'satComponent', responseCallback)
 }
 
 function responseCallback (frame) {
-  console.log(frame)
+  frame.ack()
+  // console.log(frame)
+  // client.send('/exchange/exchange_pushmsg/recivemsg', {'content-type': 'text/plain'}, frame.body)
   queuePush(getSoftware(frame.headers.destination), JSON.parse(frame.body))
 }
 
@@ -597,8 +599,8 @@ function queuePush (software, data) {
     case 'connect info':
       currentData = store.state.SystemInfo
       let result = data.match(/(.*):(.*):(.*):(.*)/)
-      console.log('result')
-      console.log(result)
+      // console.log('result')
+      // console.log(result)
       insertdata = {}
       insertdata.time = result[1]
       insertdata.name = result[2]

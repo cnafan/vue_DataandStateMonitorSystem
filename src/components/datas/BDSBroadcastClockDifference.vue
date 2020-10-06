@@ -1,8 +1,9 @@
 <template>
   <div>
-    <p style="text-align: center">UTC(NTSC)于BDS3每颗卫星广播北斗时间的钟差</p>
+<!--    <p style="text-align: center">UTC(NTSC)于BDS3每颗卫星广播北斗时间的钟差</p>-->
+<!--    :data="this.$store.state.BDSBroadcastClockDifference[0]"-->
     <el-table
-      :data="this.$store.state.BDSBroadcastClockDifference[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -38,7 +39,12 @@
 
 <script>
 export default {
-  name: 'BDSBroadcastClockDifference'
+  name: 'BDSBroadcastClockDifference',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 

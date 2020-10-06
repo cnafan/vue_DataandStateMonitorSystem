@@ -2,8 +2,7 @@
   <div>
     <p style="text-align: center"></p>
     <el-table
-      id="table"
-      :data="this.$store.state.SignalComponent[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -42,7 +41,7 @@
     </el-table>
 
     <el-table
-      :data="this.$store.state.SignalComponent[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -76,7 +75,7 @@
 
     </el-table>
     <el-table
-      :data="this.$store.state.SignalComponent[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -109,7 +108,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.SignalComponent[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -142,7 +141,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.SignalComponent[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -180,6 +179,11 @@
 <script>
 export default {
   name: 'SignalComponent',
+  props: {
+    'data': {
+      type: Array
+    }
+  },
   methods: {
     getComponent () {
       if (this.$store.getters.getData['SignalComponent'] === undefined) {

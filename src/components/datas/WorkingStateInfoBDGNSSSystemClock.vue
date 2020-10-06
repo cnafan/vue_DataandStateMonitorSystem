@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">工作状态</p>
+<!--    <p style="text-align: center">工作状态</p>-->
     <el-table
-      id="table"
-      :data="this.$store.state.WorkingStateInfoBDGNSSSystemClock"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -24,9 +23,9 @@
 <script>
 export default {
   name: 'WorkingStateInfoBDGNSSSystemClock',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
+  props: {
+    'data': {
+      type: Array
     }
   }
 }

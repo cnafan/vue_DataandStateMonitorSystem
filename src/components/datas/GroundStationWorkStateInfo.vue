@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">地面站工作状态信息</p>
+<!--    <p style="text-align: center">地面站工作状态信息</p>-->
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -21,7 +21,7 @@
     </el-table>
     <el-divider class="el-divider-table" content-position="left">地面站1</el-divider>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -45,7 +45,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -69,7 +69,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -94,7 +94,7 @@
     </el-table>
     <el-divider class="el-divider-table" content-position="left">地面站2</el-divider>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -118,7 +118,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -142,7 +142,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -167,7 +167,7 @@
     </el-table>
     <el-divider class="el-divider-table" content-position="left">地面站3</el-divider>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -191,7 +191,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -215,7 +215,7 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.$store.state.GroundStationWorkStateInfo"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -243,9 +243,9 @@
 <script>
 export default {
   name: 'GroundStationWorkStateInfo',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
+  props: {
+    'data': {
+      type: Array
     }
   }
 }

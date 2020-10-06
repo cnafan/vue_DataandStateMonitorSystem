@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">GNSS系统时差数据</p>
+<!--    <p style="text-align: center">GNSS系统时差数据</p>-->
     <el-table
-      id="table"
-      :data="this.$store.state.GnssSystemClockDifference"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -12,7 +11,7 @@
 
       <el-table-column
         prop="MeasName"
-        label="数据">
+        label="数据类型">
       </el-table-column>
       <el-table-column
         prop="MeasTime"
@@ -27,7 +26,12 @@
 </template>
 <script>
 export default {
-  name: 'GnssSystemClockDifference'
+  name: 'GnssSystemClockDifference',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 

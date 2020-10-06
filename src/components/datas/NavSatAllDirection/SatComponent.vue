@@ -2,8 +2,7 @@
   <div>
     <p style="text-align: center"></p>
     <el-table
-      id="table"
-      :data="this.$store.state.SatComponent"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -26,7 +25,12 @@
 </template>
 <script>
 export default {
-  name: 'SatComponent'
+  name: 'SatComponent',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 

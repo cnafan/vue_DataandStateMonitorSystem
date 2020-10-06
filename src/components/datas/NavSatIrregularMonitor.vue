@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p style="text-align: center">导航卫星异常监测结果</p>
+<!--    <p style="text-align: center">导航卫星异常监测结果</p>-->
     <el-table
       id="table"
-      :data="this.$store.state.NavSatIrregularMonitor"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       border
@@ -44,9 +44,9 @@
 <script>
 export default {
   name: 'NavSatIrregularMonitor',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
+  props: {
+    'data': {
+      type: Array
     }
   }
 }

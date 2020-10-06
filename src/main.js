@@ -8,10 +8,20 @@ import store from './vuex/store'
 import 'element-ui/lib/theme-chalk/index.css'
 import ECharts from 'vue-echarts'
 import 'echarts-gl'
-import axios from 'axios'
+import '../static/css/fontello-embedded.css'
+// import axios from 'axios'
+//
+// axios.defaults.baseURL = 'http://localhost:8082/'
+// axios.defaults.timeout = 10000
+// axios.defaults.headers.post['Content-Type'] = 'application/json'
+// Vue.prototype.$axios = axios
+import {fetch, post} from './utils/axios'
+
+Vue.prototype.$post = post
+Vue.prototype.$get = fetch
 Vue.component('v-chart', ECharts)
 Vue.config.productionTip = false
-Vue.prototype.$axios = axios
+
 Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({

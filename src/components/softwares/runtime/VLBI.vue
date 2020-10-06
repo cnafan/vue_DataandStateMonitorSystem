@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="工作状态" name="工作状态">
         <keep-alive>
-          <VLBIWorkState></VLBIWorkState>
+          <VLBIWorkState :data="this.$store.state.VLBIWorkState"></VLBIWorkState>
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import VLBIWorkState from '../datas/VLBIWorkState'
+import VLBIWorkState from '../../datas/VLBIWorkState'
 
 export default {
   name: 'VLBI',

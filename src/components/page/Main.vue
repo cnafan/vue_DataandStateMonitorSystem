@@ -22,33 +22,7 @@
     <el-container id="el-container-header">
       <!--      <el-aside style="overflow: hidden">-->
       <el-scrollbar id="el-scrollbar-menu">
-        <el-menu
-          class="sidebar-el-menu"
-          :default-active="$route.path"
-          :collapse="isCollapse"
-          text-color="#303133"
-          active-text-color="#E6A23C"
-          router
-        >
-          <el-menu-item index="/splansh">
-            <i class="el-icon-s-home"></i>
-            <span slot="title">处理中心</span>
-          </el-menu-item>
-          <el-submenu v-for="item in items" :index="item.index" :key="item.index">
-            <template slot="title">
-              <i :class="item.class"></i>
-              <span slot="title">{{ item.title }}</span>
-            </template>
-            <el-menu-item v-for="subItem in item.subs" style="padding-left: 54px" :index="subItem.index"
-                          :key="subItem.index">
-              {{ subItem.title }}
-            </el-menu-item>
-          </el-submenu>
-          <el-menu-item index="/log">
-            <i class="el-icon-info"></i>
-            <span slot="title">日志中心</span>
-          </el-menu-item>
-        </el-menu>
+        <Menu :menu-is-collapse="isCollapse"></Menu>
       </el-scrollbar>
       <!--      </el-aside>-->
       <el-main id="el-main">
@@ -154,9 +128,13 @@
 
 <script>
 
+import Menu from '../common/Menu'
+
 export default {
   name: 'Main',
-  components: {},
+  components: {
+    Menu
+  },
   data () {
     let checkIp = (rule, value, callback) => {
       if ((/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(value))) {
@@ -167,57 +145,7 @@ export default {
     }
     return {
       headerName: '数据与状态监控软件',
-      isCollapse: false,
-      items: [
-        {
-          index: '2',
-          title: '空间信号质量监测',
-          class: 'el-icon-s-promotion',
-          subs: [{
-            index: '/SystemManageAndControl',
-            title: '系统管理控制软件'
-          }]
-        },
-        {
-          index: '3',
-          title: '北斗/GNSS系统时间监测',
-          class: 'el-icon-s-marketing',
-          subs: [{
-            index: '/BDGNSSSystemClockMonitor',
-            title: 'GNSS时差数据综合处理软件'
-          }]
-        },
-        {
-          index: '4',
-          title: '中科院在轨卫星地面数据',
-          class: 'el-icon-s-data',
-          subs: [{
-            index: '/SatIntegratedDataManagement',
-            title: '卫星综合管理软件'
-          }]
-        },
-        {
-          index: '5',
-          title: '高精度转发式卫星授时',
-          class: 'el-icon-phone',
-          subs: [{
-            index: '/AtomicClockSignal',
-            title: '原子钟信号监测与自主切换软件'
-          }, {
-            index: '/StateMonitorAndWarning',
-            title: '状态监测及告警软件'
-          }]
-        },
-        {
-          index: '6',
-          title: 'VLBI观测导航卫星',
-          class: 'el-icon-s-promotion',
-          subs: [{
-            index: '/VLBI',
-            title: 'VLBI站控软件'
-          }]
-        }
-      ],
+      isCollapse: this.$store.state.MenuIsCollapse,
       EditorDialogTitle: '修改配置',
       EditorDialogVisible: false,
       settingFormLabelWidth: '120px',
@@ -245,9 +173,15 @@ export default {
   },
   methods: {
     settingOpen () {
+      // this.$store.commit('change', {'software': 'ColorStateMonitorAndWarning', 'data': 'red'})
+      // this.$store.commit('change', {'software': 'ColorSatIntegratedDataManagement', 'data': 'blue'})
+      // this.$store.commit('change', {'software': 'ColorBDGNSSSystemClockMonitor', 'data': 'blue'})
+      // this.$store.commit('change', {'software': 'ColorSystemManageAndControl', 'data': 'blue'})
+      // this.$store.commit('reverse')
       this.$notify.error({
         title: '错误',
-        message: '此功能还未开发',
+        dangerouslyUseHTMLString: true,
+        message: '2020-08-20 20:20:20 <br/> 系统管理与控制软件  导航卫星信号质量 接收错误',
         offset: 30
       })
     },
@@ -259,6 +193,7 @@ export default {
     },
     navModify () {
       this.isCollapse = !this.isCollapse
+      this.$store.commit('change', {'software': 'MenuIsCollapse', 'data': this.isCollapse})
     },
     foldStatus () {
       if (this.isCollapse === true) {
@@ -274,26 +209,21 @@ export default {
       console.log(this.$refs[formName])
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log('into true')
+          // console.log('into true')
           this.EditorDialogVisible = false
           // this.$store.commit('setDialog', false)
           // console.log(JSON.stringify(this.settingFormItems))
-          this.$axios({
-            headers: {'Content-Type': 'application/json'},
-            method: 'post',
-            baseURL: 'http://localhost:8082/api',
-            url: 'netconfig',
-            data: this.$store.state.NetConfig
+          this.$post('api/netconfig', this.$store.state.NetConfig
             // data: JSON.stringify(this.settingFormItems)
-          }).then(response => {
+          ).then(response => {
             this.$store.commit('change', {'data': this.settingForm, 'software': 'NetConfig'})
-            console.log('net config resonse:')
-            console.log(response)
+            // console.log('net config response:')
+            // console.log(response)
             switch (response.status) {
               case 200:
                 this.$notify.success({
                   title: '成功',
-                  message: '配置更新成功!',
+                  message: '配置更新成功! ',
                   offset: 30,
                   duration: 2000
                 })
@@ -301,18 +231,20 @@ export default {
               default:
                 this.$notify.error({
                   title: '错误',
-                  message: '配置更新失败!',
-                  offset: 30
+                  message: '配置更新失败! 错误代码:' + response.status,
+                  offset: 30,
+                  duration: 0
                 })
                 break
             }
             // storageUtils.saveNetConfig(this.settingFormItems)
           }).catch(error => {
-            console.log(error, 'error')
+            console.log(error)
             this.$notify.error({
               title: '异常',
-              message: '配置更新异常!',
-              offset: 30
+              message: '配置更新异常! ' + error,
+              offset: 30,
+              duration: 0
             })
           })
         } else {

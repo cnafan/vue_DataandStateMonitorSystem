@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>
+<!--    <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>-->
     <el-table
-      id="table"
-      :data="this.$store.state.NavSatSignalQualityAllDirection"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       border
@@ -27,7 +26,12 @@
 
 <script>
 export default {
-  name: 'NavSatSignalQualityAllDirection'
+  name: 'NavSatSignalQualityAllDirection',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 

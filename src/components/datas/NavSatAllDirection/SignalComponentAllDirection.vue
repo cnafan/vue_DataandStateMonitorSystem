@@ -2,7 +2,7 @@
   <div>
     <p style="text-align: center"></p>
     <el-table
-      :data="this.$store.state.SignalComponentAllDirection[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -40,7 +40,7 @@
       </el-table-column>
     </el-table>
       <el-table
-        :data="this.$store.state.SignalComponentAllDirection[0]"
+        :data="this.data"
         header-cell-class-name="tableHeaderCell"
         highlight-current-row
         stripe
@@ -78,6 +78,11 @@
 <script>
 export default {
   name: 'SignalComponentAllDirection',
+  props: {
+    'data': {
+      type: Array
+    }
+  },
   methods: {
     getComponent () {
       if (this.$store.getters.getData['SignalComponentAllDirection'] === undefined) {

@@ -2,8 +2,7 @@
   <div>
     <p style="text-align: center"></p>
     <el-table
-      id="table"
-      :data="this.$store.state.FrequencyComponent"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -26,7 +25,12 @@
 </template>
 <script>
 export default {
-  name: 'FrequencyComponent'
+  name: 'FrequencyComponent',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 

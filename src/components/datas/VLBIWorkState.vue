@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">工作状态</p>
+<!--    <p style="text-align: center">工作状态</p>-->
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -39,7 +39,7 @@
     </el-table>
 
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -76,7 +76,7 @@
     </el-table>
 
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -113,7 +113,7 @@
     </el-table>
 
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -150,7 +150,7 @@
     </el-table>
 
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -187,7 +187,7 @@
     </el-table>
 
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -224,7 +224,7 @@
 
     </el-table>
     <el-table
-      :data="this.$store.state.VLBIWorkState"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -263,7 +263,12 @@
 </template>
 <script>
 export default {
-  name: 'VLBIWorkState'
+  name: 'VLBIWorkState',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 <style scoped>

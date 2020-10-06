@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p style="text-align: center">BDS3每颗卫星的星钟改正数</p>
+<!--    <p style="text-align: center">BDS3每颗卫星的星钟改正数</p>-->
     <el-table
-      id="table"
-      :data="this.$store.state.BDSClockCorrection[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -11,7 +10,7 @@
       style="width: 100%">
       <el-table-column
         prop="station"
-        label="station">
+        label="站编号">
       </el-table-column>
       <el-table-column
         prop="time"
@@ -32,9 +31,9 @@
 <script>
 export default {
   name: 'BDSClockCorrection',
-  methods: {
-    datas () {
-      return this.$store.getters.getData
+  props: {
+    'data': {
+      type: Array
     }
   }
 }

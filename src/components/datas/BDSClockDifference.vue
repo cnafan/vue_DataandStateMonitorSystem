@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p style="text-align: center"></p>
+<!--    <p style="text-align: center"></p>-->
+    <!--      :data="this.$store.state.BDSClockDifference[0]"-->
     <el-table
-      id="table"
-      :data="this.$store.state.BDSClockDifference[0]"
+      :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -36,7 +36,12 @@
 
 <script>
 export default {
-  name: 'BDSClockDifference'
+  name: 'BDSClockDifference',
+  props: {
+    'data': {
+      type: Array
+    }
+  }
 }
 </script>
 

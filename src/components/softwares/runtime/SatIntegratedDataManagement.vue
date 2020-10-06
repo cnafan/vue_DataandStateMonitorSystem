@@ -24,17 +24,17 @@
       </el-tab-pane>
       <el-tab-pane label="BDS3卫星星钟改正数" name="BDS3每颗卫星的星钟改正数">
         <keep-alive>
-          <BDSClockCorrection></BDSClockCorrection>
+          <BDSClockCorrection :data="this.$store.state.BDSClockCorrection"></BDSClockCorrection>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane label="UTC与BDS3卫星广播北斗钟差" name="UTC(NTSC)与BDS3每颗卫星广播北斗时间的钟差">
         <keep-alive>
-          <BDSBroadcastClockDifference></BDSBroadcastClockDifference>
+          <BDSBroadcastClockDifference :data="this.$store.state.BDSBroadcastClockDifference"></BDSBroadcastClockDifference>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane label="UTC与BDT钟差" name="UTC(NTSC)与BDT的钟差">
         <keep-alive>
-          <BDTClockDifference></BDTClockDifference>
+          <BDTClockDifference :data="this.$store.state.BDTClockDifference"></BDTClockDifference>
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
@@ -42,14 +42,14 @@
 </template>
 
 <script>
-import BDSBroadcastClockDifference from '../datas/BDSBroadcastClockDifference'
-import BDSClockCorrection from '../datas/BDSClockCorrection'
-import NavSatSignalQuality from '../datas/NavSat/NavSatSignalQuality'
-import BDTClockDifference from '../datas/BDTClockDifference'
-import SignalComponent from '../datas/NavSat/SignalComponent'
-import BDSSatTimeClockDifference from '../datas/BDSSatTimeClockDifference'
-import BroadcastEphemerisWarningInfo from '../datas/BroadcastEphemerisWarningInfo'
-import BDSClockDifference from '../datas/BDSClockDifference'
+import BDSBroadcastClockDifference from '../../datas/BDSBroadcastClockDifference'
+import BDSClockCorrection from '../../datas/BDSClockCorrection'
+import NavSatSignalQuality from '../../datas/NavSat/NavSatSignalQuality'
+import BDTClockDifference from '../../datas/BDTClockDifference'
+import SignalComponent from '../../datas/NavSat/SignalComponent'
+import BDSSatTimeClockDifference from '../../datas/BDSSatTimeClockDifference'
+import BroadcastEphemerisWarningInfo from '../../datas/BroadcastEphemerisWarningInfo'
+import BDSClockDifference from '../../datas/BDSClockDifference'
 
 export default {
   name: 'SatIntegratedDataManagement',

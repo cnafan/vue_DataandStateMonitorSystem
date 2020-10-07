@@ -3,10 +3,10 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="BDS3空间信号质量监测" name="BDS3空间信号质量监测结果数据">
         <keep-alive>
-          <NavSatSignalQuality></NavSatSignalQuality>
+          <NavSatSignalQuality :data="this.$store.state.BDNavSatSignalQuality"></NavSatSignalQuality>
         </keep-alive>
         <keep-alive>
-          <SignalComponent></SignalComponent>
+          <SignalComponent :data="this.$store.state.BDSignalComponent"></SignalComponent>
         </keep-alive>
       </el-tab-pane>
 <!--      <el-tab-pane label="广播星历告警信息" name="广播星历告警信息">-->
@@ -16,10 +16,10 @@
 <!--      </el-tab-pane>-->
       <el-tab-pane label="UTC与BDS3卫星时间钟差" name="UTC(NTSC)与BDS3每颗卫星时间的钟差">
         <keep-alive>
-          <BDSSatTimeClockDifference></BDSSatTimeClockDifference>
+          <BDSSatTimeClockDifference :data="this.$store.state.BDSSatTimeClockDifference"></BDSSatTimeClockDifference>
         </keep-alive>
         <keep-alive>
-          <BDSClockDifference></BDSClockDifference>
+          <BDSClockDifference :data="this.$store.state.BDSClockDifference"></BDSClockDifference>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane label="BDS3卫星星钟改正数" name="BDS3每颗卫星的星钟改正数">
@@ -55,7 +55,12 @@ export default {
   name: 'SatIntegratedDataManagement',
   data () {
     return {
-      activeName: 'BDS3空间信号质量监测结果数据'
+      activeName: 'BDS3空间信号质量监测结果数据',
+      BDSSatTimeClockDifference: [],
+      BDSClockDifference: [],
+      BDSClockCorrection: [],
+      BDSBroadcastClockDifference: [],
+      BDTClockDifference: []
     }
   },
   methods: {

@@ -6,7 +6,7 @@ import {
   SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT,
   VIBI_WORKSTATE_LIST_COUNT
 } from '../../config/display'
-import {MQTT_SERVICE, EXCHANGE_PUSH, HEADERS} from '../../config/mqtt'
+import {EXCHANGE_PUSH, HEADERS, MQTT_SERVICE} from '../../config/mqtt'
 
 let client = Stomp.client(MQTT_SERVICE)
 client.debug = function (str) {
@@ -25,7 +25,7 @@ function onConnected () {
     'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara', 'SignalComponent[]',
     'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo', 'satComponent',
     'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor',
-    'connect info', 'sending info', 'receiving info']
+    'connect info', 'sending info', 'receiving info', 'realTimeViewTest', 'alert test']
   for (let i = 0; i < queueName.length; i++) {
     let header = {
       'ack': 'client',
@@ -65,42 +65,53 @@ function queuePush (software, data) {
   let datas = store.getters.getData
 
   switch (software) {
-    case 'SignalComponent[]':
-      currentData = store.state.SignalComponent
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.time = data[i]['time']
-        insertdata.sico = data[i]['sico']
-        insertdata.chpm = data[i]['chpm']
-        insertdata.chps = data[i]['chps']
-        insertdata.spsm = data[i]['spsm']
-        insertdata.spss = data[i]['spss']
-        insertdata.colm = data[i]['colm']
-        insertdata.scb1 = data[i]['scb1']
-        insertdata.scb2 = data[i]['scb2']
-        insertdata.scb3 = data[i]['scb3']
-        insertdata.scb4 = data[i]['scb4']
-        insertdata.bswm = data[i]['bswm']
-        insertdata.bsws = data[i]['bsws']
-        insertdata.ccam = data[i]['ccam']
-        insertdata.ccsm = data[i]['ccsm']
-        insertdata.ccss = data[i]['ccss']
-        insertdata.prsm = data[i]['prsm']
-        insertdata.prss = data[i]['prss']
-        insertdata.cpsm = data[i]['cpsm']
-        insertdata.cpss = data[i]['cpss']
-        insertdata.dpsm = data[i]['dpsm']
-        insertdata.dpss = data[i]['dpss']
-        insertdata.cnsm = data[i]['cnsm']
-        insertdata.cnss = data[i]['cnss']
-        insertdata.ccdm = data[i]['ccdm']
-        insertdata.ccds = data[i]['ccds']
-        insertList.push(insertdata)
+    case 'NavSatSignalQualityAllDirection':
+      currentData = store.state.NavSatSignalQualityAllDirection
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.stid = data['stid']
+      insertdata.nusa = data['nusa']
+      if (currentData === null || currentData === undefined) {
+        currentData = []
       }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'SignalComponent'})
+      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+        // 只显示最新一条
+        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'NavSatSignalQualityAllDirection'})
+      break
+    case 'SatComponent':
+      currentData = store.state.SatComponent
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.satID = data['satID']
+      insertdata.nufr = data['nufr']
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+        // 只显示最新一条
+        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'SatComponent'})
+      break
+    case 'FrequencyComponent':
+      currentData = store.state.FrequencyComponent
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.sifr = data['sifr']
+      insertdata.nuco = data['nuco']
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+        // 只显示最新一条
+        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'FrequencyComponent'})
       break
     case 'SignalComponentAllDirection[]':
       currentData = store.state.SignalComponentAllDirection
@@ -159,6 +170,187 @@ function queuePush (software, data) {
       currentData.push(insertdata)
       store.commit('change', {'data': currentData, 'software': 'NavSatSignalQuality'})
       break
+    case 'SignalComponent[]':
+      currentData = store.state.SignalComponent
+      insertList = []
+      currentData = []
+      for (let i = 0; i < data.length; i++) {
+        insertdata = {}
+        insertdata.time = data[i]['time']
+        insertdata.sico = data[i]['sico']
+        insertdata.chpm = data[i]['chpm']
+        insertdata.chps = data[i]['chps']
+        insertdata.spsm = data[i]['spsm']
+        insertdata.spss = data[i]['spss']
+        insertdata.colm = data[i]['colm']
+        insertdata.scb1 = data[i]['scb1']
+        insertdata.scb2 = data[i]['scb2']
+        insertdata.scb3 = data[i]['scb3']
+        insertdata.scb4 = data[i]['scb4']
+        insertdata.bswm = data[i]['bswm']
+        insertdata.bsws = data[i]['bsws']
+        insertdata.ccam = data[i]['ccam']
+        insertdata.ccsm = data[i]['ccsm']
+        insertdata.ccss = data[i]['ccss']
+        insertdata.prsm = data[i]['prsm']
+        insertdata.prss = data[i]['prss']
+        insertdata.cpsm = data[i]['cpsm']
+        insertdata.cpss = data[i]['cpss']
+        insertdata.dpsm = data[i]['dpsm']
+        insertdata.dpss = data[i]['dpss']
+        insertdata.cnsm = data[i]['cnsm']
+        insertdata.cnss = data[i]['cnss']
+        insertdata.ccdm = data[i]['ccdm']
+        insertdata.ccds = data[i]['ccds']
+        insertList.push(insertdata)
+      }
+      currentData.unshift(insertList)
+      store.commit('change', {'data': currentData, 'software': 'SignalComponent'})
+      break
+
+    case 'BDNavSatSignalQualityAllDirection':
+      currentData = store.state.BDNavSatSignalQualityAllDirection
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.stid = data['stid']
+      insertdata.nusa = data['nusa']
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+        // 只显示最新一条
+        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'BDNavSatSignalQualityAllDirection'})
+      break
+    case 'BDSatComponent':
+      currentData = store.state.BDSatComponent
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.satID = data['satID']
+      insertdata.nufr = data['nufr']
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+        // 只显示最新一条
+        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'BDSatComponent'})
+      break
+    case 'BDFrequencyComponent':
+      currentData = store.state.BDFrequencyComponent
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.sifr = data['sifr']
+      insertdata.nuco = data['nuco']
+      if (currentData === null || currentData === undefined) {
+        currentData = []
+      }
+      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+        // 只显示最新一条
+        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      }
+      currentData.unshift(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'BDFrequencyComponent'})
+      break
+    case 'BDSignalComponentAllDirection[]':
+      currentData = store.state.BDSignalComponentAllDirection
+      insertList = []
+      currentData = []
+      for (let i = 0; i < data.length; i++) {
+        insertdata = {}
+        insertdata.time = data[i]['time']
+        insertdata.sico = data[i]['sico']
+        insertdata.chpm = data[i]['chpm']
+        insertdata.chps = data[i]['chps']
+        insertdata.spsm = data[i]['spsm']
+        insertdata.spss = data[i]['spss']
+        insertdata.colm = data[i]['colm']
+        insertdata.scb1 = data[i]['scb1']
+        insertdata.scb2 = data[i]['scb2']
+        insertdata.scb3 = data[i]['scb3']
+        insertdata.scb4 = data[i]['scb4']
+        insertdata.bswm = data[i]['bswm']
+        insertdata.bsws = data[i]['bsws']
+        insertdata.ccam = data[i]['ccam']
+        insertdata.ccsm = data[i]['ccsm']
+        insertdata.ccss = data[i]['ccss']
+        insertdata.prsm = data[i]['prsm']
+        insertdata.prss = data[i]['prss']
+        insertdata.cpsm = data[i]['cpsm']
+        insertdata.cpss = data[i]['cpss']
+        insertdata.dpsm = data[i]['dpsm']
+        insertdata.dpss = data[i]['dpss']
+        insertdata.cnsm = data[i]['cnsm']
+        insertdata.cnss = data[i]['cnss']
+        insertdata.ccdm = data[i]['ccdm']
+        insertdata.ccds = data[i]['ccds']
+        insertList.push(insertdata)
+      }
+      currentData.unshift(insertList)
+      store.commit('change', {'data': currentData, 'software': 'BDSignalComponentAllDirection'})
+      break
+    case 'BDNavSatSignalQuality':
+      // currentData = store.state.BDNavSatSignalQuality
+      insertdata = {}
+      insertdata.time = data['time']
+      insertdata.said = data['said']
+      insertdata.stid = data['stid']
+      insertdata.sifr = data['sifr']
+      insertdata.nuco = data['nuco']
+      // if (currentData === null || currentData === undefined) {
+      //   currentData = []
+      // }
+      // if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
+      //   // 只显示最新一条
+      //   currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
+      // }
+      // currentData.unshift(insertdata)
+      currentData = []
+      currentData.push(insertdata)
+      store.commit('change', {'data': currentData, 'software': 'BDNavSatSignalQuality'})
+      break
+    case 'BDSignalComponent[]':
+      currentData = store.state.BDSignalComponent
+      insertList = []
+      currentData = []
+      for (let i = 0; i < data.length; i++) {
+        insertdata = {}
+        insertdata.time = data[i]['time']
+        insertdata.sico = data[i]['sico']
+        insertdata.chpm = data[i]['chpm']
+        insertdata.chps = data[i]['chps']
+        insertdata.spsm = data[i]['spsm']
+        insertdata.spss = data[i]['spss']
+        insertdata.colm = data[i]['colm']
+        insertdata.scb1 = data[i]['scb1']
+        insertdata.scb2 = data[i]['scb2']
+        insertdata.scb3 = data[i]['scb3']
+        insertdata.scb4 = data[i]['scb4']
+        insertdata.bswm = data[i]['bswm']
+        insertdata.bsws = data[i]['bsws']
+        insertdata.ccam = data[i]['ccam']
+        insertdata.ccsm = data[i]['ccsm']
+        insertdata.ccss = data[i]['ccss']
+        insertdata.prsm = data[i]['prsm']
+        insertdata.prss = data[i]['prss']
+        insertdata.cpsm = data[i]['cpsm']
+        insertdata.cpss = data[i]['cpss']
+        insertdata.dpsm = data[i]['dpsm']
+        insertdata.dpss = data[i]['dpss']
+        insertdata.cnsm = data[i]['cnsm']
+        insertdata.cnss = data[i]['cnss']
+        insertdata.ccdm = data[i]['ccdm']
+        insertdata.ccds = data[i]['ccds']
+        insertList.push(insertdata)
+      }
+      currentData.unshift(insertList)
+      store.commit('change', {'data': currentData, 'software': 'BDSignalComponent'})
+      break
+
     case 'WorkingStateInfo':
       currentData = store.state.WorkingStateInfo
       insertdata = {}
@@ -299,9 +491,9 @@ function queuePush (software, data) {
     case 'GnssSystemClockDifference':
       currentData = store.state.GnssSystemClockDifference
       insertdata = {}
-      insertdata.MeasName = data['measName']
-      insertdata.MeasTime = data['measTime']
-      insertdata.MeasValue = data['measValue']
+      insertdata.measName = data['measName']
+      insertdata.measTime = data['measTime']
+      insertdata.measValue = data['measValue']
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -423,38 +615,40 @@ function queuePush (software, data) {
       insertdata.groundID1 = data['groundID1']
       insertdata.baseBandState1 = data['baseBandState1']
       insertdata.baseBandID1 = data['baseBandID1']
-      insertdata.baseBandNo1 = data['baseBandNo1']
       insertdata.baseBandWorkState1 = data['baseBandWorkState1']
-      insertdata.C1UPState1 = data['C1UPState1']
-      insertdata.C1DOWNState1 = data['C1DOWNState1']
-      insertdata.FreConverterID1 = data['FreConverterID1']
-      insertdata.FreConverterWorkState1 = data['FreConverterWorkState1']
-      insertdata.FreConverterBlockState1 = data['FreConverterBlockState1']
-      insertdata.FreConverterOutput1 = data['FreConverterOutput1']
+      insertdata.c1UPBlockState1 = data['c1UPBlockState1']
+      insertdata.c1UPWorkState1 = data['c1UPWorkState1']
+      insertdata.c1DOWNBlockState1 = data['c1DOWNBlockState1']
+      insertdata.c1UPFrequency1 = data['c1UPFrequency1']
+      insertdata.c1DOWNFrequency1 = data['c1DOWNFrequency1']
+      insertdata.c1DOWNWorkState1 = data['c1DOWNWorkState1']
+      insertdata.c1DOWNState1 = data['c1DOWNState1']
+      insertdata.c1UPState1 = data['c1UPState1']
 
-      insertdata.groundID1 = data['groundID']
-      insertdata.baseBandState1 = data['baseBandState2']
-      insertdata.baseBandID1 = data['baseBandID2']
-      insertdata.baseBandNo1 = data['baseBandNo2']
-      insertdata.baseBandWorkState1 = data['baseBandWorkState2']
-      insertdata.C1UPState1 = data['C1UPState2']
-      insertdata.C1DOWNState1 = data['C1DOWNState2']
-      insertdata.FreConverterID1 = data['FreConverterID2']
-      insertdata.FreConverterWorkState1 = data['FreConverterWorkState2']
-      insertdata.FreConverterBlockState1 = data['FreConverterBlockState2']
-      insertdata.FreConverterOutput1 = data['FreConverterOutput2']
+      insertdata.groundID2 = data['groundID2']
+      insertdata.baseBandState2 = data['baseBandState2']
+      insertdata.baseBandID2 = data['baseBandID2']
+      insertdata.baseBandWorkState2 = data['baseBandWorkState2']
+      insertdata.c1DOWNFrequency2 = data['c1DOWNFrequency2']
+      insertdata.c1DOWNBlockState2 = data['c1DOWNBlockState2']
+      insertdata.c1UPFrequency2 = data['c1UPFrequency2']
+      insertdata.c1UPWorkState2 = data['c1UPWorkState2']
+      insertdata.c1UPBlockState2 = data['c1UPBlockState2']
+      insertdata.c1DOWNWorkState2 = data['c1DOWNWorkState2']
+      insertdata.c1UPState2 = data['c1UPState2']
+      insertdata.c1DOWNState2 = data['c1DOWNState2']
 
-      insertdata.groundID1 = data['groundID3']
-      insertdata.baseBandState1 = data['baseBandState3']
-      insertdata.baseBandID1 = data['baseBandID3']
-      insertdata.baseBandNo1 = data['baseBandNo3']
-      insertdata.baseBandWorkState1 = data['baseBandWorkState3']
-      insertdata.C1UPState1 = data['C1UPState3']
-      insertdata.C1DOWNState1 = data['C1DOWNState3']
-      insertdata.FreConverterID1 = data['FreConverterID3']
-      insertdata.FreConverterWorkState1 = data['FreConverterWorkState3']
-      insertdata.FreConverterBlockState1 = data['FreConverterBlockState3']
-      insertdata.FreConverterOutput1 = data['FreConverterOutput3']
+      insertdata.groundID3 = data['groundID3']
+      insertdata.baseBandState3 = data['baseBandState3']
+      insertdata.baseBandID3 = data['baseBandID3']
+      insertdata.baseBandWorkState3 = data['baseBandWorkState3']
+      insertdata.c1UPFrequency3 = data['c1UPFrequency3']
+      insertdata.c1DOWNWorkState3 = data['c1DOWNWorkState3']
+      insertdata.c1UPWorkState3 = data['c1UPWorkState3']
+      insertdata.c1DOWNBlockState3 = data['c1DOWNBlockState3']
+      insertdata.c1DOWNFrequency3 = data['c1DOWNFrequency3']
+      insertdata.c1DOWNState3 = data['c1DOWNState3']
+      insertdata.c1UPState3 = data['c1UPState3']
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -548,54 +742,6 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'NavSatIrregularMonitor'})
       break
-    case 'NavSatSignalQualityAllDirection':
-      currentData = store.state.NavSatSignalQualityAllDirection
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.stid = data['stid']
-      insertdata.nusa = data['nusa']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'NavSatSignalQualityAllDirection'})
-      break
-    case 'SatComponent':
-      currentData = store.state.SatComponent
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.satID = data['satID']
-      insertdata.nufr = data['nufr']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'SatComponent'})
-      break
-    case 'FrequencyComponent':
-      currentData = store.state.FrequencyComponent
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.sifr = data['sifr']
-      insertdata.nuco = data['nuco']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'FrequencyComponent'})
-      break
     case 'connect info':
       currentData = store.state.SystemInfo
       let result = data.match(/(.*):(.*):(.*):(.*)/)
@@ -648,6 +794,25 @@ function queuePush (software, data) {
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'ReceiveInfo'})
+      break
+    case 'realTimeViewTest':
+      console.log('realTimeViewTest')
+      console.log(data)
+      switch (data.software) {
+        case 'SatIntegratedDataManagement':
+          if (data.result) {
+            store.state['Color' + data.software] = 'blue'
+          } else {
+            store.state['Color' + data.software] = 'red'
+          }
+          break
+      }
+      store.state.DiagramChange = !store.state.DiagramChange
+      break
+    case 'alert test':
+      console.log('alert test')
+      console.log(data)
+      store.state.Alert = data
       break
     default:
       break

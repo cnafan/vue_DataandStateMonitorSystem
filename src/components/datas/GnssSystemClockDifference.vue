@@ -10,15 +10,15 @@
       style="width: 100%">
 
       <el-table-column
-        prop="MeasName"
+        prop="measName"
         label="数据类型">
       </el-table-column>
       <el-table-column
-        prop="MeasTime"
+        prop="measTime"
         label="数据产生时间">
       </el-table-column>
       <el-table-column
-        prop="MeasValue"
+        prop="measValue"
         label="数据值">
       </el-table-column>
     </el-table>

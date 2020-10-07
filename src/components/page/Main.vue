@@ -169,6 +169,9 @@ export default {
         arr.add(this.items[i].index)
       }
       return Array.from(arr)
+    },
+    AlertChange: function () {
+      return this.$store.state.Alert
     }
   },
   methods: {
@@ -255,8 +258,23 @@ export default {
     },
     editorDialogCancel () {
       this.EditorDialogVisible = false
+    },
+    Notify (message) {
+      this.$notify.error({
+        title: '错误',
+        dangerouslyUseHTMLString: true,
+        message: message,
+        offset: 30,
+        duration: 0
+      })
+    }
+  },
+  watch: {
+    AlertChange () {
+      this.Notify(this.$store.state.Alert)
     }
   }
+
 }
 </script>
 

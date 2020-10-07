@@ -1,5 +1,9 @@
 <template>
-    <div id="splansh" style="width: 90%">
+  <div id="splansh" style="width: 100%">
+    <el-card shadow="hover" class="box-card" style="width: 660px;height: calc(100% - 20px)">
+      <div slot="header" class="clearfix">
+        <span>实时监控各分系统运行状态</span>
+      </div>
       <div id="myDiagramDiv"
            style="pointer-events: auto;width: 100%; height: 550px; display: inline-block; vertical-align: top; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); cursor: auto;">
         <canvas id="spalash" tabindex="0" width="948" height="822"
@@ -9,18 +13,18 @@
         <div style="position: absolute; overflow: auto; width: 632px; height: 548px; z-index: 1;">
           <div style="position: absolute; width: 1px; height: 1px;"></div>
         </div>
-
       </div>
-      <!--    <div id="infobox"-->
-      <!--         style="display: inline-block; vertical-align: top; width: 256px; background: #757575; color: #FFF; padding: 20px;">-->
-      <!--      <img id="Image" width="216" alt="" src="">-->
-      <!--      <h3 id="Title"></h3>-->
-      <!--      <p id="Description">Select a node to see more information.</p>-->
-      <!--    </div>-->
-      <!--    <div style="margin-top: 300px">-->
-      <!--      <v-chart :options="pie"></v-chart>-->
-      <!--    </div>-->
-    </div>
+    </el-card>
+    <!--    <div id="infobox"-->
+    <!--         style="display: inline-block; vertical-align: top; width: 256px; background: #757575; color: #FFF; padding: 20px;">-->
+    <!--      <img id="Image" width="216" alt="" src="">-->
+    <!--      <h3 id="Title"></h3>-->
+    <!--      <p id="Description">Select a node to see more information.</p>-->
+    <!--    </div>-->
+    <!--    <div style="margin-top: 300px">-->
+    <!--      <v-chart :options="pie"></v-chart>-->
+    <!--    </div>-->
+  </div>
 </template>
 
 <script>
@@ -185,6 +189,7 @@ export default {
   },
   mounted () {
     this.init()
+    // console.log(this.myDiagram.documentBounds.width)
   },
   created () {
   },

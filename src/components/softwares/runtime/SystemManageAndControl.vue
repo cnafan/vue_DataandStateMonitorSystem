@@ -2,6 +2,7 @@
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="导航卫星信号质量监测结果" name="导航卫星信号质量监测结果">
+        <p style="text-align: center">定向天线导航卫星信号质量监测结果</p>
         <keep-alive>
           <NavSatSignalQuality :data="this.$store.state.NavSatSignalQuality"></NavSatSignalQuality>
         </keep-alive>
@@ -10,6 +11,8 @@
           <SignalComponent :data="this.$store.state.SignalComponent[0]"></SignalComponent>
         </keep-alive>
         <br/><br/>
+
+        <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>
         <keep-alive>
           <NavSatSignalQualityAllDirection :data="this.$store.state.NavSatSignalQualityAllDirection"></NavSatSignalQualityAllDirection>
         </keep-alive>

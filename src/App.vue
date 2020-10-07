@@ -14,14 +14,22 @@ export default {
     Main
   },
   created () {
+    this.initFromDatabase()
     connect()
     // 保存vuex
-    if (localStorage.getItem('store')) {
-      this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(localStorage.getItem('store'))))
+    // if (localStorage.getItem('store')) {
+    //   this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(localStorage.getItem('store'))))
+    // }
+    // window.addEventListener('beforeunload', () => {
+    //   localStorage.setItem('store', JSON.stringify(this.$store.state))
+    // })
+  },
+  methods: {
+    initFromDatabase () {
+      this.$post('getRecentData', {}).then(response => {
+        this.$store.commit('initData', response.data)
+      })
     }
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('store', JSON.stringify(this.$store.state))
-    })
   }
 }
 </script>
@@ -115,23 +123,27 @@ body {
   z-index: 1500;
   height: 60px
 }
-#el-row-main{
+
+#el-row-main {
   height: 100%;
 }
-.el-divider-table{
+
+.el-divider-table {
   margin: 15px;
 }
 
-.el-dialog{
+.el-dialog {
   width: 70%;
 }
-.el-dialog__body{
-  padding: 0 20px!important;
+
+.el-dialog__body {
+  padding: 0 20px !important;
 }
-.el-select-dropdown .el-scrollbar .el-scrollbar__wrap
-{
-  overflow: scroll!important;
+
+.el-select-dropdown .el-scrollbar .el-scrollbar__wrap {
+  overflow: scroll !important;
 }
+
 canvas {
   outline: none;
 }

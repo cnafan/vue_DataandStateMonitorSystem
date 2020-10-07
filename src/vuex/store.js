@@ -5,7 +5,19 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     data: {},
+    NavSatSignalQualityAllDirection: [],
+    SatComponent: [],
+    FrequencyComponent: [],
+    SignalComponentAllDirection: [],
+    NavSatSignalQuality: [],
     SignalComponent: [],
+    BDNavSatSignalQualityAllDirection: [],
+    BDSatComponent: [],
+    BDFrequencyComponent: [],
+    BDSignalComponentAllDirection: [],
+    BDNavSatSignalQuality: [],
+    BDSignalComponent: [],
+
     BDSBroadcastClockDifference: [],
     BDSClockCorrection: [],
     BDSClockDifference: [],
@@ -14,7 +26,6 @@ const store = new Vuex.Store({
     BroadcastEphemerisWarningInfo: [],
     GnssSystemClockDifference: [],
     GroundStationWorkStateInfo: [],
-    NavSatSignalQuality: [],
     NTSCTimeDifferenceData: [],
     NTSCTimeDifferenceModelPara: [],
     TimeFrequencyWorkingState: [],
@@ -22,10 +33,6 @@ const store = new Vuex.Store({
     WorkingStateInfo: [],
     WorkingStateInfoBDGNSSSystemClock: [],
     NavSatIrregularMonitor: [],
-    NavSatSignalQualityAllDirection: [],
-    FrequencyComponent: [],
-    SatComponent: [],
-    SignalComponentAllDirection: [],
     LabelSignalComponent: [],
     LabelBDSBroadcastClockDifference: [
       {
@@ -123,15 +130,15 @@ const store = new Vuex.Store({
     LabelBroadcastEphemerisWarningInfo: [],
     LabelGnssSystemClockDifference: [
       {
-        'item': 'MeasName',
+        'item': 'name',
         'label': '数据类型'
       },
       {
-        'item': 'MeasTime',
+        'item': 'time',
         'label': '数据产生时间'
       },
       {
-        'item': 'MeasValue',
+        'item': 'value',
         'label': '数据值'
       }
     ],
@@ -177,7 +184,7 @@ const store = new Vuex.Store({
         'label': '数据时标-周内秒'
       },
       {
-        'item': 'timeDifference',
+        'item': 'data',
         'label': '溯源时差数据'
       }
     ],
@@ -237,11 +244,11 @@ const store = new Vuex.Store({
     LabelWorkingStateInfo: [],
     LabelWorkingStateInfoBDGNSSSystemClock: [
       {
-        'item': 'measTime',
+        'item': 'time',
         'label': '数据产生时间'
       },
       {
-        'item': 'measValue',
+        'item': 'value',
         'label': '数据值'
       }
     ],
@@ -281,25 +288,47 @@ const store = new Vuex.Store({
     ColorAtomicClockSignal: 'blue',
     ColorBDGNSSSystemClockMonitor: 'blue',
     ColorSatIntegratedDataManagement: 'blue',
-    ColorStateMonitorAndWarning: 'blue',
+    ColorStateMonitorAndWarning: 'red',
     ColorDateAndStateMonitorSend: 'orange',
     ColorDateAndStateMonitorReceive: 'blue',
     ColorVLBI: 'blue',
     ColorDataService: 'blue',
-    SplanshColor: {
-      'ColorSystemManageAndControl': 'blue',
-      'ColorAtomicClockSignal': 'blue',
-      'ColorBDGNSSSystemClockMonitor': 'blue',
-      'ColorSatIntegratedDataManagement': 'blue',
-      'ColorStateMonitorAndWarning': 'blue',
-      'ColorDateAndStateMonitorSend': 'blue',
-      'ColorDateAndStateMonitorReceive': 'blue',
-      'ColorVLBI': 'blue',
-      'ColorDataService': 'blue'
-    },
-    DiagramChange: false
+    // SplanshColor: {
+    //   'ColorSystemManageAndControl': 'blue',
+    //   'ColorAtomicClockSignal': 'blue',
+    //   'ColorBDGNSSSystemClockMonitor': 'blue',
+    //   'ColorSatIntegratedDataManagement': 'blue',
+    //   'ColorStateMonitorAndWarning': 'blue',
+    //   'ColorDateAndStateMonitorSend': 'blue',
+    //   'ColorDateAndStateMonitorReceive': 'blue',
+    //   'ColorVLBI': 'red',
+    //   'ColorDataService': 'blue'
+    // },
+    DiagramChange: false,
+    Alert: ''
   },
   mutations: {
+    initData (state, data) {
+      state.VLBIWorkState = data.VLBIWorkState
+      state.GroundStationWorkStateInfo = data.GroundStationWorkStateInfo
+      state.GnssSystemClockDifference = data.GnssSystemClockDifference
+      state.WorkingStateInfoBDGNSSSystemClock = data.WorkingStateInfoBDGNSSSystemClock
+      state.NTSCTimeDifferenceData = data.NTSCTimeDifferenceData
+      state.NTSCTimeDifferenceModelPara = data.NTSCTimeDifferenceModelPara
+      state.TimeFrequencyWorkingState = data.TimeFrequencyWorkingState
+      state.BDNavSatSignalQuality = data.BDNavSatSignalQuality
+      state.BDSignalComponent = data.BDSignalComponent
+      state.BDSSatTimeClockDifference = data.BDSSatTimeClockDifference
+      state.BDSClockDifference = data.BDSClockDifference
+      state.BDSClockCorrection = data.BDSClockCorrection
+      state.BDSBroadcastClockDifference = data.BDSBroadcastClockDifference
+      state.BDTClockDifference = data.BDTClockDifference
+      state.NavSatSignalQuality = data.NavSatSignalQuality
+      state.NavSatSignalQualityAllDirection = data.NavSatSignalQualityAllDirection
+      state.NavSatIrregularMonitor = data.NavSatIrregularMonitor
+      state.WorkingStateInfo = data.WorkingStateInfo
+      state.VLBIWorkState = data.VLBIWorkState
+    },
     modify (state, data) {
       state.data = data
     },

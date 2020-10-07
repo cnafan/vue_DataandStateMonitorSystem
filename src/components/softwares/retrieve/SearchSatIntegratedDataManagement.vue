@@ -4,14 +4,14 @@
       <el-tab-pane label="BDS3空间信号质量监测" name="BDS3空间信号质量监测结果数据">
         <p style="text-align: center">定向天线导航卫星信号质量监测结果</p>
         <keep-alive>
-          <SearchBar target="BDS3NavSatIrregularMonitor" @callSearch="search($event)"
+          <SearchBar target="BDNavSatSignalQuality" @callSearch="search($event)"
                      :option="this.$store.state.LabelCommon"></SearchBar>
         </keep-alive>
         <keep-alive>
-          <NavSatSignalQuality></NavSatSignalQuality>
+          <NavSatSignalQuality :data="this.NavSatSignalQuality"></NavSatSignalQuality>
         </keep-alive>
         <keep-alive>
-          <SignalComponent></SignalComponent>
+          <SignalComponent :data="this.SignalComponent"></SignalComponent>
         </keep-alive>
         <br/><br/>
 
@@ -44,13 +44,13 @@
       <el-tab-pane label="UTC与BDS3卫星时间钟差" name="UTC(NTSC)与BDS3每颗卫星时间的钟差">
         <keep-alive>
           <SearchBar target="BDSClockDifference" @callSearch="search($event)"
-                     :option="this.$store.state.LabelBDSClockDifference"></SearchBar>
+                     :option="this.$store.state.LabelBDSSatTimeClockDifference"></SearchBar>
         </keep-alive>
         <keep-alive>
-          <BDSSatTimeClockDifference></BDSSatTimeClockDifference>
+          <BDSSatTimeClockDifference :data="this.BDSSatTimeClockDifference"></BDSSatTimeClockDifference>
         </keep-alive>
         <keep-alive>
-          <BDSClockDifference></BDSClockDifference>
+          <BDSClockDifference :data="BDSClockDifference"></BDSClockDifference>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane label="BDS3卫星星钟改正数" name="BDS3每颗卫星的星钟改正数">
@@ -106,7 +106,11 @@ export default {
       activeName: 'BDS3空间信号质量监测结果数据',
       BDSClockCorrection: [],
       BDTClockDifference: [],
-      BDSBroadcastClockDifference: []
+      BDSBroadcastClockDifference: [],
+      NavSatSignalQuality: [],
+      SignalComponent: [],
+      BDSSatTimeClockDifference: [],
+      BDSClockDifference: []
     }
   },
   methods: {
@@ -118,21 +122,35 @@ export default {
       formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
       switch (argument) {
         case 'BDTClockDifference':
-          this.$post('findIrregularByTime', formData).then((response) => {
-            console.log(response)
-            this.BDTClockDifference = response
-          })
+          // this.$post('findBDSClockDifferenceByTime', formData).then((response) => {
+          //   console.log(response)
+          //   this.BDTClockDifference = response.data
+          // })
           break
         case 'BDSBroadcastClockDifference':
-          this.$post('findIrregularByTime', formData).then((response) => {
-            console.log(response)
-            this.BDSBroadcastClockDifference = response
-          })
+          // this.$post('findIrregularByTime', formData).then((response) => {
+          //   console.log(response)
+          //   this.BDSBroadcastClockDifference = response.data
+          // })
           break
         case 'BDSClockCorrection':
-          this.$post('findIrregularByTime', formData).then((response) => {
+          // this.$post('findIrregularByTime', formData).then((response) => {
+          //   console.log(response)
+          //   this.BDSClockCorrection = response.data
+          // })
+          break
+        case 'BDNavSatSignalQuality':
+          this.$post('findSpaceQualityResultByTime', formData).then((response) => {
+            console.log(response.data)
+            this.NavSatSignalQuality = response.data['SpaceSignalQuality']
+            this.SignalComponent = response.data['SignalComponent']
+          })
+          break
+        case 'BDSClockDifference':
+          this.$post('findBDSClockDifferenceByTime', formData).then((response) => {
             console.log(response)
-            this.BDSClockCorrection = response
+            this.BDSSatTimeClockDifference = response.data['BDSSatTimeClockDifference']
+            this.BDSClockDifference = response.data['BDSClockDifference']
           })
           break
         default:

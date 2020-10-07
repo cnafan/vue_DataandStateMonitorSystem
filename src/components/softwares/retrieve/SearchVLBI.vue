@@ -44,7 +44,7 @@ export default {
         case 'VLBIWorkState':
           this.$post('findVLBIWorkStateByTime', formData).then((response) => {
             console.log(response)
-            this.VLBIWorkState = response
+            this.VLBIWorkState = response.data
           })
           break
         default:

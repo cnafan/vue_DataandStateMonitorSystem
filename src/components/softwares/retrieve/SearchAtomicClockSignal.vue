@@ -12,9 +12,10 @@
       </el-tab-pane>
       <el-tab-pane label="CAPST-UTC（NTSC）溯源时差模型参数" name="CAPST-UTC（NTSC）溯源时差模型参数">
         <keep-alive>
-          <SearchBar target="NTSCTimeDifferenceModelPara" @callSearch="search($event)"
-                     :option="this.$store.state.LabelNTSCTimeDifferenceModelPara"></SearchBar>
+          <MultipleSearchBar :limit=2 target="NTSCTimeDifferenceModelPara" @callSearch="search($event)"
+                     :option="this.$store.state.LabelNTSCTimeDifferenceModelPara"></MultipleSearchBar>
         </keep-alive>
+
         <keep-alive>
           <NTSCTimeDifferenceModelPara :data="NTSCTimeDifferenceModelPara"></NTSCTimeDifferenceModelPara>
         </keep-alive>
@@ -37,6 +38,7 @@ import TimeFrequencyWorkingState from '../../datas/TimeFrequencyWorkingState'
 import NTSCTimeDifferenceModelPara from '../../datas/NTSCTimeDifferenceModelPara'
 import NTSCTimeDifferenceData from '../../datas/NTSCTimeDifferenceData'
 import SearchBar from '../../common/SearchBar'
+import MultipleSearchBar from '../../common/MultipleSearchBar'
 
 export default {
   name: 'AtomicClockSignal',
@@ -56,24 +58,23 @@ export default {
       let formData
       switch (argument) {
         case 'NTSCTimeDifferenceData':
-          formData = {
-            'data': 0
-          }
-          // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
+          formData = {}
+          formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
           this.$post('findNTSCTimeDifferenceByData', formData).then((response) => {
             console.log(response)
-            this.NTSCTimeDifferenceData = response
+            this.NTSCTimeDifferenceData = response.data
           })
           break
         case 'NTSCTimeDifferenceModelPara':
-          formData = {
-            'week': 0,
-            'sec': 0
+          formData = {}
+          let input = this.$store.state.SearchInput.split(' ')
+          for (let i = 0; i < this.$store.state.SearchItem.length; i++) {
+            formData[this.$store.state.SearchItem[i]] = input[i]
           }
           // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
           this.$post('findNTSCTimeDifferenceParaByTime', formData).then((response) => {
             console.log(response)
-            this.NTSCTimeDifferenceModelPara = response
+            this.NTSCTimeDifferenceModelPara = response.data
           })
           break
         case 'TimeFrequencyWorkingState':
@@ -84,6 +85,7 @@ export default {
     }
   },
   components: {
+    MultipleSearchBar,
     SearchBar,
     NTSCTimeDifferenceData,
     NTSCTimeDifferenceModelPara,

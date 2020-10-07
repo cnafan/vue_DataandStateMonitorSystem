@@ -3,8 +3,8 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="GNSS系统时差数据" name="GNSS系统时差数据">
         <keep-alive>
-          <SearchBar target="GnssSystemClockDifference" @callSearch="search($event)"
-                     :option="this.$store.state.LabelGnssSystemClockDifference"></SearchBar>
+          <MultipleSearchBar :limit="2" target="GnssSystemClockDifference" @callSearch="search($event)"
+                     :option="this.$store.state.LabelGnssSystemClockDifference"></MultipleSearchBar>
         </keep-alive>
         <keep-alive>
           <GnssSystemClockDifference :data="GnssSystemClockDifference"></GnssSystemClockDifference>
@@ -28,6 +28,7 @@
 import GnssSystemClockDifference from '../../datas/GnssSystemClockDifference'
 import WorkingStateInfoBDGNSSSystemClock from '../../datas/WorkingStateInfoBDGNSSSystemClock'
 import SearchBar from '../../common/SearchBar'
+import MultipleSearchBar from '../../common/MultipleSearchBar'
 
 export default {
   name: 'BDGNSSSystemClockMonitor',
@@ -46,14 +47,16 @@ export default {
       let formData
       switch (argument) {
         case 'GnssSystemClockDifference':
-          formData = {
-            'time': '',
-            'name': ''
+          formData = {}
+          let input = this.$store.state.SearchInput.split(' ')
+          // console.log(this.$store.state.SearchItem)
+          for (let i = 0; i < this.$store.state.SearchItem.length; i++) {
+            formData[this.$store.state.SearchItem[i]] = input[i]
           }
           // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
           this.$post('findGNSSSystemClockDifference', formData).then((response) => {
             console.log(response)
-            this.GnssSystemClockDifference = response
+            this.GnssSystemClockDifference = response.data
           })
           break
         case 'WorkingStateInfoBDGNSSSystemClock':
@@ -61,7 +64,7 @@ export default {
           formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
           this.$post('findGNSSSystemWorkState', formData).then((response) => {
             console.log(response)
-            this.WorkingStateInfoBDGNSSSystemClock = response
+            this.WorkingStateInfoBDGNSSSystemClock = response.data
           })
           break
         default:
@@ -70,6 +73,7 @@ export default {
     }
   },
   components: {
+    MultipleSearchBar,
     WorkingStateInfoBDGNSSSystemClock,
     GnssSystemClockDifference,
     SearchBar

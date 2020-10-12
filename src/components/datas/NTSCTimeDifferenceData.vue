@@ -2,6 +2,7 @@
   <div>
     <!--    <p style="text-align: center">CAPST-UTC（NTSC）溯源时差数据</p>-->
     <el-table
+      class="table"
         id="table"
         :data="this.data"
         header-cell-class-name="tableHeaderCell"

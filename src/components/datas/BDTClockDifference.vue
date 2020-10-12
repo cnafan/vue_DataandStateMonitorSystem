@@ -1,8 +1,9 @@
 <template>
   <div>
-<!--    <p style="text-align: center">UTC(NTSC)于BDT的钟差</p>-->
+    <!--    <p style="text-align: center">UTC(NTSC)于BDT的钟差</p>-->
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -10,7 +11,8 @@
       style="width: 100%">
       <el-table-column
         prop="station"
-        label="站编号">
+        :formatter="getStationName"
+        label="站点">
       </el-table-column>
       <el-table-column
         prop="time"
@@ -20,6 +22,7 @@
         prop="clockDifference"
         label="UTC(NTSC)与BDT的钟差">
       </el-table-column>
+
     </el-table>
   </div>
 </template>
@@ -32,12 +35,12 @@ export default {
     }
   },
   methods: {
-    getStationName (station) {
-      switch (station) {
+    getStationName (row, column, cellValue) {
+      switch (cellValue) {
         case 0:
-          return '西安站'
-        case 1:
           return '海外站'
+        case 1:
+          return '西安站'
         default:
           break
       }

@@ -3,7 +3,8 @@
 <!--    <p style="text-align: center">UTC(NTSC)于BDS3每颗卫星广播北斗时间的钟差</p>-->
 <!--    :data="this.$store.state.BDSBroadcastClockDifference[0]"-->
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -11,7 +12,8 @@
       style="width: 100%">
       <el-table-column
         prop="station"
-        label="站编号">
+        :formatter="getStationName"
+        label="站点">
       </el-table-column>
       <el-table-column
         prop="time"
@@ -43,6 +45,18 @@ export default {
   props: {
     'data': {
       type: Array
+    }
+  },
+  methods: {
+    getStationName (row, column, cellValue) {
+      switch (cellValue) {
+        case 0:
+          return '海外站'
+        case 1:
+          return '西安站'
+        default:
+          break
+      }
     }
   }
 }

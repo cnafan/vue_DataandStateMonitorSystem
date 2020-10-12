@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-table
+      class="table"
       :data="this.$store.state.SystemInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

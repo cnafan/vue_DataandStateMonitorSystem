@@ -162,6 +162,9 @@ export default {
       settingForm: this.$store.state.NetConfig
     }
   },
+  created () {
+    this.$store.commit('resetNotify')
+  },
   computed: {
     defaultOpens: function () {
       let arr = new Set()
@@ -170,22 +173,131 @@ export default {
       }
       return Array.from(arr)
     },
-    AlertChange: function () {
-      return this.$store.state.Alert
+    NotifyDataSystemManageAndControlChange: function () {
+      return this.$store.state.NotifyDataSystemManageAndControl.result
+    },
+    NotifyDataAtomicClockSignalChange: function () {
+      return this.$store.state.NotifyDataAtomicClockSignal.result
+    },
+    NotifyDataBDGNSSSystemClockMonitorChange: function () {
+      return this.$store.state.NotifyDataBDGNSSSystemClockMonitor.result
+    },
+    NotifyDataSatIntegratedDataManagementChange: function () {
+      return this.$store.state.NotifyDataSatIntegratedDataManagement.result
+    },
+    NotifyDataStateMonitorAndWarningChange: function () {
+      return this.$store.state.NotifyDataStateMonitorAndWarning.result
+    },
+    NotifyDataVLBIChange: function () {
+      return this.$store.state.NotifyDataVLBI.result
+    }
+  },
+  watch: {
+    NotifyDataSystemManageAndControlChange () {
+      if (this.$store.state.NotifyComponentSystemManageAndControl.length === 0) {
+        if (this.$store.state.NotifyDataSystemManageAndControl.result === 0) {
+          let notifyError = this.$notify({
+            title: '警告',
+            message: this.$store.state.NotifyDataSystemManageAndControl.software + ' 出现故障！',
+            offset: 30,
+            type: 'error',
+            duration: 0
+          })
+          this.$store.state.NotifyComponentSystemManageAndControl.push(notifyError)
+        }
+      } else {
+        this.$store.state.NotifyComponentSystemManageAndControl.pop().close()
+      }
+    },
+    NotifyDataAtomicClockSignalChange () {
+      if (this.$store.state.NotifyComponentAtomicClockSignal.length === 0) {
+        if (this.$store.state.NotifyDataAtomicClockSignal.result === 0) {
+          let notifyError = this.$notify({
+            title: '警告',
+            message: this.$store.state.NotifyDataAtomicClockSignal.software + ' 出现故障！',
+            offset: 30,
+            type: 'error',
+            duration: 0
+          })
+          this.$store.state.NotifyComponentAtomicClockSignal.push(notifyError)
+        }
+      } else {
+        this.$store.state.NotifyComponentAtomicClockSignal.pop().close()
+      }
+    },
+    NotifyDataBDGNSSSystemClockMonitorChange () {
+      if (this.$store.state.NotifyComponentBDGNSSSystemClockMonitor.length === 0) {
+        if (this.$store.state.NotifyDataBDGNSSSystemClockMonitor.result === 0) {
+          let notifyError = this.$notify({
+            title: '警告',
+            message: this.$store.state.NotifyDataBDGNSSSystemClockMonitor.software + ' 出现故障！',
+            offset: 30,
+            type: 'error',
+            duration: 0
+          })
+          this.$store.state.NotifyComponentBDGNSSSystemClockMonitor.push(notifyError)
+        }
+      } else {
+        this.$store.state.NotifyComponentBDGNSSSystemClockMonitor.pop().close()
+      }
+    },
+
+    NotifyDataSatIntegratedDataManagementChange () {
+      if (this.$store.state.NotifyComponentSatIntegratedDataManagement.length === 0) {
+        if (this.$store.state.NotifyDataSatIntegratedDataManagement.result === 0) {
+          let notifyError = this.$notify({
+            title: '警告',
+            message: this.$store.state.NotifyDataSatIntegratedDataManagement.software + ' 出现故障！',
+            offset: 30,
+            type: 'error',
+            duration: 0
+          })
+          this.$store.state.NotifyComponentSatIntegratedDataManagement.push(notifyError)
+        }
+      } else {
+        this.$store.state.NotifyComponentSatIntegratedDataManagement.pop().close()
+      }
+    },
+    NotifyDataStateMonitorAndWarningChange () {
+      if (this.$store.state.NotifyComponentStateMonitorAndWarning.length === 0) {
+        if (this.$store.state.NotifyDataStateMonitorAndWarning.result === 0) {
+          let notifyError = this.$notify({
+            title: '警告',
+            message: this.$store.state.NotifyDataStateMonitorAndWarning.software + ' 出现故障！',
+            offset: 30,
+            type: 'error',
+            duration: 0
+          })
+          this.$store.state.NotifyComponentStateMonitorAndWarning.push(notifyError)
+        }
+      } else {
+        this.$store.state.NotifyComponentStateMonitorAndWarning.pop().close()
+      }
+    },
+    NotifyDataVLBIChange () {
+      if (this.$store.state.NotifyComponentVLBI.length === 0) {
+        if (this.$store.state.NotifyDataVLBI.result === 0) {
+          let notifyError = this.$notify({
+            title: '警告',
+            message: this.$store.state.NotifyDataVLBI.software + ' 出现故障！',
+            offset: 30,
+            type: 'error',
+            duration: 0
+          })
+          this.$store.state.NotifyComponentVLBI.push(notifyError)
+        }
+      } else {
+        this.$store.state.NotifyComponentVLBI.pop().close()
+      }
     }
   },
   methods: {
     settingOpen () {
-      // this.$store.commit('change', {'software': 'ColorStateMonitorAndWarning', 'data': 'red'})
-      // this.$store.commit('change', {'software': 'ColorSatIntegratedDataManagement', 'data': 'blue'})
-      // this.$store.commit('change', {'software': 'ColorBDGNSSSystemClockMonitor', 'data': 'blue'})
-      // this.$store.commit('change', {'software': 'ColorSystemManageAndControl', 'data': 'blue'})
-      // this.$store.commit('reverse')
-      this.$notify.error({
-        title: '错误',
-        dangerouslyUseHTMLString: true,
-        message: '2020-08-20 20:20:20 <br/> 系统管理与控制软件  导航卫星信号质量 接收错误',
-        offset: 30
+      this.$notify({
+        title: '成功',
+        message: '这是一条成功的提示消息',
+        offset: 30,
+        type: 'success'
       })
     },
     handleOpen (key, keyPath) {
@@ -260,18 +372,16 @@ export default {
       this.EditorDialogVisible = false
     },
     Notify (message) {
-      this.$notify.error({
+      let notify = this.$notify.error({
         title: '错误',
         dangerouslyUseHTMLString: true,
         message: message,
         offset: 30,
         duration: 0
       })
-    }
-  },
-  watch: {
-    AlertChange () {
-      this.Notify(this.$store.state.Alert)
+      // this.$store.commit('addNotify', notify)
+      // console.log(notify, 'hi')
+      return notify
     }
   }
 

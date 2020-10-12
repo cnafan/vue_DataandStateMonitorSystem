@@ -14,7 +14,7 @@ export default {
     Main
   },
   created () {
-    this.initFromDatabase()
+    // this.initFromDatabase()
     connect()
     // 保存vuex
     // if (localStorage.getItem('store')) {
@@ -40,12 +40,12 @@ body {
   margin: 0;
 }
 
-#table {
+.table {
   transition: 0.5s;
   -webkit-transition: 0.5s;
 }
 
-#table:hover {
+.table:hover {
   box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.1);
 }
 
@@ -148,4 +148,8 @@ canvas {
   outline: none;
 }
 
+.componentSelect {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 </style>

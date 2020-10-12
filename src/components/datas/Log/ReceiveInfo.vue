@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table
-      id="table"
+      class="table"
       :data="this.$store.state.ReceiveInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

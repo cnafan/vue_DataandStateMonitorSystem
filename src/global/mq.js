@@ -1,11 +1,6 @@
 import Stomp from 'stompjs'
 import store from '../vuex/store'
-import {
-  LIST_COUNT,
-  NAV_SAT_SIGNAL_QUALITY_LIST_COUNT,
-  SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT,
-  VIBI_WORKSTATE_LIST_COUNT
-} from '../../config/display'
+import {LIST_COUNT} from '../../config/display'
 import {EXCHANGE_PUSH, HEADERS, MQTT_SERVICE} from '../../config/mqtt'
 
 let client = Stomp.client(MQTT_SERVICE)
@@ -19,18 +14,25 @@ export default function connect () {
 }
 
 function onConnected () {
-  let queueName = ['BDSBroadcastClockDifference[]', 'BDSClockCorrection[]', 'BDSClockDifference[]',
+  let queueName = ['BDSBroadcastClockDifference', 'BDSClockCorrection', 'BDSClockDifference',
     'BDSSatTimeClockDifference', 'BDTClockDifference', 'BroadcastEphemerisWarningInfo',
-    'GnssSystemClockDifference', 'GroundStationWorkStateInfo', 'NavSatSignalQuality',
-    'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara', 'SignalComponent[]',
-    'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo', 'satComponent',
+    'GnssSystemClockDifference', 'GroundStationWorkStateInfo',
+    'NavSatSignalQuality', 'SignalComponent',
+    'BDNavSatSignalQuality', 'BDSignalComponent',
+    'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara',
+    'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo',
+    'NavSatSignalQualityAllDirection', 'SatComponent', 'FrequencyComponent', 'SignalComponentAllDirection',
+    'BDNavSatSignalQualityAllDirection', 'BDSatComponent', 'BDFrequencyComponent', 'BDSignalComponentAllDirection',
     'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor',
-    'connect info', 'sending info', 'receiving info', 'realTimeViewTest', 'alert test']
+    'connect info', 'sending info', 'receiving info',
+    'realTimeView',
+    'alert notify'
+  ]
   for (let i = 0; i < queueName.length; i++) {
     let header = {
-      'ack': 'client',
-      'durable': true,
-      'auto-delete': false
+      'ack': 'client'
+      // 'durable': false
+      // 'auto-delete': false
     }
     let exchange = EXCHANGE_PUSH + queueName[i]
     client.subscribe(exchange, responseCallback, header)
@@ -39,7 +41,6 @@ function onConnected () {
 
 function responseCallback (frame) {
   frame.ack()
-  // console.log(frame)
   // client.send('/exchange/exchange_pushmsg/recivemsg', {'content-type': 'text/plain'}, frame.body)
   queuePush(getSoftware(frame.headers.destination), JSON.parse(frame.body))
 }
@@ -49,311 +50,60 @@ function onFailed (frame) {
 }
 
 function getSoftware (destination) {
-  // console.log(destination.substring(27))
-  return destination.substring(27)
+  return destination.substring(21)
+  // /exchange/amq.direct/connect info
+  // /exchange/exchange_pushmsg/
 }
 
 function queuePush (software, data) {
-  // console.log(software)
+  // console.log(software + ':')
   // console.log(data)
-  // console.log(store)
-  // console.log(store.getters)
-  // console.log(store.getters.getData)
   let insertdata
   let currentData
-  let insertList
-  let datas = store.getters.getData
+  // let insertList
 
   switch (software) {
+    // 只显示一条
     case 'NavSatSignalQualityAllDirection':
-      currentData = store.state.NavSatSignalQualityAllDirection
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.stid = data['stid']
-      insertdata.nusa = data['nusa']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'NavSatSignalQualityAllDirection'})
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'SatComponent':
-      currentData = store.state.SatComponent
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.satID = data['satID']
-      insertdata.nufr = data['nufr']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'SatComponent'})
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'FrequencyComponent':
-      currentData = store.state.FrequencyComponent
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.sifr = data['sifr']
-      insertdata.nuco = data['nuco']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'FrequencyComponent'})
+      store.commit('change', {'data': data, 'software': software})
       break
-    case 'SignalComponentAllDirection[]':
-      currentData = store.state.SignalComponentAllDirection
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.time = data[i]['time']
-        insertdata.sico = data[i]['sico']
-        insertdata.chpm = data[i]['chpm']
-        insertdata.chps = data[i]['chps']
-        insertdata.spsm = data[i]['spsm']
-        insertdata.spss = data[i]['spss']
-        insertdata.colm = data[i]['colm']
-        insertdata.scb1 = data[i]['scb1']
-        insertdata.scb2 = data[i]['scb2']
-        insertdata.scb3 = data[i]['scb3']
-        insertdata.scb4 = data[i]['scb4']
-        insertdata.bswm = data[i]['bswm']
-        insertdata.bsws = data[i]['bsws']
-        insertdata.ccam = data[i]['ccam']
-        insertdata.ccsm = data[i]['ccsm']
-        insertdata.ccss = data[i]['ccss']
-        insertdata.prsm = data[i]['prsm']
-        insertdata.prss = data[i]['prss']
-        insertdata.cpsm = data[i]['cpsm']
-        insertdata.cpss = data[i]['cpss']
-        insertdata.dpsm = data[i]['dpsm']
-        insertdata.dpss = data[i]['dpss']
-        insertdata.cnsm = data[i]['cnsm']
-        insertdata.cnss = data[i]['cnss']
-        insertdata.ccdm = data[i]['ccdm']
-        insertdata.ccds = data[i]['ccds']
-        insertList.push(insertdata)
-      }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'SignalComponentAllDirection'})
+    case 'SignalComponentAllDirection':
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'NavSatSignalQuality':
-      // currentData = store.state.NavSatSignalQuality
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.said = data['said']
-      insertdata.stid = data['stid']
-      insertdata.sifr = data['sifr']
-      insertdata.nuco = data['nuco']
-      // if (currentData === null || currentData === undefined) {
-      //   currentData = []
-      // }
-      // if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-      //   // 只显示最新一条
-      //   currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      // }
-      // currentData.unshift(insertdata)
-      currentData = []
-      currentData.push(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'NavSatSignalQuality'})
+      store.commit('change', {'data': data, 'software': software})
       break
-    case 'SignalComponent[]':
-      currentData = store.state.SignalComponent
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.time = data[i]['time']
-        insertdata.sico = data[i]['sico']
-        insertdata.chpm = data[i]['chpm']
-        insertdata.chps = data[i]['chps']
-        insertdata.spsm = data[i]['spsm']
-        insertdata.spss = data[i]['spss']
-        insertdata.colm = data[i]['colm']
-        insertdata.scb1 = data[i]['scb1']
-        insertdata.scb2 = data[i]['scb2']
-        insertdata.scb3 = data[i]['scb3']
-        insertdata.scb4 = data[i]['scb4']
-        insertdata.bswm = data[i]['bswm']
-        insertdata.bsws = data[i]['bsws']
-        insertdata.ccam = data[i]['ccam']
-        insertdata.ccsm = data[i]['ccsm']
-        insertdata.ccss = data[i]['ccss']
-        insertdata.prsm = data[i]['prsm']
-        insertdata.prss = data[i]['prss']
-        insertdata.cpsm = data[i]['cpsm']
-        insertdata.cpss = data[i]['cpss']
-        insertdata.dpsm = data[i]['dpsm']
-        insertdata.dpss = data[i]['dpss']
-        insertdata.cnsm = data[i]['cnsm']
-        insertdata.cnss = data[i]['cnss']
-        insertdata.ccdm = data[i]['ccdm']
-        insertdata.ccds = data[i]['ccds']
-        insertList.push(insertdata)
-      }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'SignalComponent'})
+    case 'SignalComponent':
+      store.commit('change', {'data': data, 'software': software})
       break
-
     case 'BDNavSatSignalQualityAllDirection':
-      currentData = store.state.BDNavSatSignalQualityAllDirection
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.stid = data['stid']
-      insertdata.nusa = data['nusa']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDNavSatSignalQualityAllDirection'})
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'BDSatComponent':
-      currentData = store.state.BDSatComponent
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.satID = data['satID']
-      insertdata.nufr = data['nufr']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDSatComponent'})
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'BDFrequencyComponent':
-      currentData = store.state.BDFrequencyComponent
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.sifr = data['sifr']
-      insertdata.nuco = data['nuco']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-        // 只显示最新一条
-        currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDFrequencyComponent'})
+      store.commit('change', {'data': data, 'software': software})
       break
-    case 'BDSignalComponentAllDirection[]':
-      currentData = store.state.BDSignalComponentAllDirection
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.time = data[i]['time']
-        insertdata.sico = data[i]['sico']
-        insertdata.chpm = data[i]['chpm']
-        insertdata.chps = data[i]['chps']
-        insertdata.spsm = data[i]['spsm']
-        insertdata.spss = data[i]['spss']
-        insertdata.colm = data[i]['colm']
-        insertdata.scb1 = data[i]['scb1']
-        insertdata.scb2 = data[i]['scb2']
-        insertdata.scb3 = data[i]['scb3']
-        insertdata.scb4 = data[i]['scb4']
-        insertdata.bswm = data[i]['bswm']
-        insertdata.bsws = data[i]['bsws']
-        insertdata.ccam = data[i]['ccam']
-        insertdata.ccsm = data[i]['ccsm']
-        insertdata.ccss = data[i]['ccss']
-        insertdata.prsm = data[i]['prsm']
-        insertdata.prss = data[i]['prss']
-        insertdata.cpsm = data[i]['cpsm']
-        insertdata.cpss = data[i]['cpss']
-        insertdata.dpsm = data[i]['dpsm']
-        insertdata.dpss = data[i]['dpss']
-        insertdata.cnsm = data[i]['cnsm']
-        insertdata.cnss = data[i]['cnss']
-        insertdata.ccdm = data[i]['ccdm']
-        insertdata.ccds = data[i]['ccds']
-        insertList.push(insertdata)
-      }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'BDSignalComponentAllDirection'})
+    case 'BDSignalComponentAllDirection':
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'BDNavSatSignalQuality':
-      // currentData = store.state.BDNavSatSignalQuality
-      insertdata = {}
-      insertdata.time = data['time']
-      insertdata.said = data['said']
-      insertdata.stid = data['stid']
-      insertdata.sifr = data['sifr']
-      insertdata.nuco = data['nuco']
-      // if (currentData === null || currentData === undefined) {
-      //   currentData = []
-      // }
-      // if (currentData.length >= NAV_SAT_SIGNAL_QUALITY_LIST_COUNT) {
-      //   // 只显示最新一条
-      //   currentData = currentData.slice(0, NAV_SAT_SIGNAL_QUALITY_LIST_COUNT - 1)
-      // }
-      // currentData.unshift(insertdata)
-      currentData = []
-      currentData.push(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDNavSatSignalQuality'})
+      store.commit('change', {'data': data, 'software': software})
       break
-    case 'BDSignalComponent[]':
-      currentData = store.state.BDSignalComponent
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.time = data[i]['time']
-        insertdata.sico = data[i]['sico']
-        insertdata.chpm = data[i]['chpm']
-        insertdata.chps = data[i]['chps']
-        insertdata.spsm = data[i]['spsm']
-        insertdata.spss = data[i]['spss']
-        insertdata.colm = data[i]['colm']
-        insertdata.scb1 = data[i]['scb1']
-        insertdata.scb2 = data[i]['scb2']
-        insertdata.scb3 = data[i]['scb3']
-        insertdata.scb4 = data[i]['scb4']
-        insertdata.bswm = data[i]['bswm']
-        insertdata.bsws = data[i]['bsws']
-        insertdata.ccam = data[i]['ccam']
-        insertdata.ccsm = data[i]['ccsm']
-        insertdata.ccss = data[i]['ccss']
-        insertdata.prsm = data[i]['prsm']
-        insertdata.prss = data[i]['prss']
-        insertdata.cpsm = data[i]['cpsm']
-        insertdata.cpss = data[i]['cpss']
-        insertdata.dpsm = data[i]['dpsm']
-        insertdata.dpss = data[i]['dpss']
-        insertdata.cnsm = data[i]['cnsm']
-        insertdata.cnss = data[i]['cnss']
-        insertdata.ccdm = data[i]['ccdm']
-        insertdata.ccds = data[i]['ccds']
-        insertList.push(insertdata)
-      }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'BDSignalComponent'})
+    case 'BDSignalComponent':
+      store.commit('change', {'data': data, 'software': software})
       break
 
     case 'WorkingStateInfo':
-      currentData = store.state.WorkingStateInfo
       insertdata = {}
+      currentData = []
       insertdata.ms01taskType = data['ms01taskType']
       insertdata.ms01startTime = data['ms01startTime']
       insertdata.ms01SatName = data['ms01SatName']
@@ -419,18 +169,12 @@ function queuePush (software, data) {
       insertdata.ms11SatName = data['ms11SatName']
       insertdata.ms11endTime = data['ms11endTime']
       insertdata.ms11Result = data['ms11Result']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT) {
-        currentData = currentData.slice(0, SPACE_SIGNAL_QUALITY_MONITOR_WORKSTATE_LIST_COUNT - 1)
-      }
       currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'WorkingStateInfo'})
+      store.commit('change', {'data': currentData, 'software': software})
       break
     case 'VLBIWorkState':
-      currentData = datas['VLBIWorkState']
       insertdata = {}
+      currentData = []
       insertdata.start = data['start']
       insertdata.counter = data['counter']
       insertdata.hour = data['hour']
@@ -479,15 +223,34 @@ function queuePush (software, data) {
       insertdata.jilinReverse2 = data['jilinReverse2']
       insertdata.jilinEnd = data['jilinEnd']
       insertdata.end = data['end']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= VIBI_WORKSTATE_LIST_COUNT) {
-        currentData = currentData.slice(0, VIBI_WORKSTATE_LIST_COUNT - 1)
-      }
       currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'VLBIWorkState'})
+      store.commit('change', {'data': currentData, 'software': software})
       break
+    case 'BDSClockCorrection':
+      // currentData = store.state.BDSClockCorrection
+      // insertList = []
+      // currentData = []
+      // for (let i = 0; i < data.length; i++) {
+      //   insertdata = {}
+      //   insertdata.station = data[i]['station']
+      //   insertdata.time = data[i]['time']
+      //   insertdata.SVID = data[i]['svid']
+      //   insertdata.SVCLK = data[i]['svclk']
+      //   insertList.push(insertdata)
+      // }
+      // currentData.unshift(insertList)
+      store.commit('change', {'data': data, 'software': software})
+      break
+
+    // 有多少显示多少
+    case 'BDSSatTimeClockDifference':
+      store.commit('change', {'data': data, 'software': 'BDSSatTimeClockDifference'})
+      break
+    case 'BDSClockDifference':
+      store.commit('change', {'data': data, 'software': software})
+      break
+
+    // 数量限制
     case 'GnssSystemClockDifference':
       currentData = store.state.GnssSystemClockDifference
       insertdata = {}
@@ -503,78 +266,22 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'GnssSystemClockDifference'})
       break
-    case 'BDSBroadcastClockDifference[]':
-      currentData = store.state.BDSBroadcastClockDifference
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.station = data[i]['station']
-        insertdata.time = data[i]['time']
-        insertdata.svid = data[i]['svid']
-        insertdata.b3I = data[i]['b3I']
-        insertdata.b1I = data[i]['b1I']
-        insertdata.b2A = data[i]['b2A']
-        insertList.push(insertdata)
-      }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'BDSBroadcastClockDifference'})
-      break
-    case 'BDSClockCorrection[]':
-      currentData = store.state.BDSClockCorrection
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.station = data[i]['station']
-        insertdata.time = data[i]['time']
-        insertdata.SVID = data[i]['svid']
-        insertdata.SVCLK = data[i]['svclk']
-        insertList.push(insertdata)
-      }
-      console.log('insertList')
-      console.log(insertList[0])
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'BDSClockCorrection'})
-      break
-    case 'BDSSatTimeClockDifference':
-      // currentData = store.state.BDSSatTimeClockDifference
-      insertdata = {}
-      insertdata.station = data['station']
-      insertdata.time = data['time']
-      insertdata.packetAmount = data['packetAmount']
-      insertdata.packetNo = data['packetNo']
-      currentData = []
-      currentData.push(insertdata)
-      // if (currentData === null || currentData === undefined) {
-      //   currentData = []
-      //   currentData.push(insertdata)
-      // } else {
-      //   currentData[0] = insertdata
+    case 'BDSBroadcastClockDifference':
+      // currentData = store.state.BDSBroadcastClockDifference
+      // insertList = []
+      // currentData = []
+      // for (let i = 0; i < data.length; i++) {
+      //   insertdata = {}
+      //   insertdata.station = data[i]['station']
+      //   insertdata.time = data[i]['time']
+      //   insertdata.svid = data[i]['svid']
+      //   insertdata.b3I = data[i]['b3I']
+      //   insertdata.b1I = data[i]['b1I']
+      //   insertdata.b2A = data[i]['b2A']
+      //   insertList.push(insertdata)
       // }
-      // currentData.pop()
-      // currentData.push(insertdata)
-      // if (currentData.length >= BDS_CLOCK_DIFFERENCE_LIST_COUNT) {
-      //   currentData = currentData.slice(0, BDS_CLOCK_DIFFERENCE_LIST_COUNT - 1)
-      // }
-      // currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDSSatTimeClockDifference'})
-      break
-    case 'BDSClockDifference[]':
-      currentData = store.state.BDSClockDifference
-      insertList = []
-      currentData = []
-      for (let i = 0; i < data.length; i++) {
-        insertdata = {}
-        insertdata.time = data[i]['time']
-        insertdata.svid = data[i]['svid']
-        insertdata.b3I = data[i]['b3I']
-        insertdata.b1I = data[i]['b1I']
-        insertdata.b2A = data[i]['b2A']
-        insertList.push(insertdata)
-      }
-      currentData.unshift(insertList)
-      store.commit('change', {'data': currentData, 'software': 'BDSClockDifference'})
+      // currentData.unshift(insertList)
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'BDTClockDifference':
       currentData = store.state.BDTClockDifference
@@ -589,7 +296,7 @@ function queuePush (software, data) {
         currentData = currentData.slice(0, LIST_COUNT - 1)
       }
       currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'BDTClockDifference'})
+      store.commit('change', {'data': currentData, 'software': software})
       break
     case 'BroadcastEphemerisWarningInfo':
       currentData = store.state.BroadcastEphemerisWarningInfo
@@ -744,14 +451,12 @@ function queuePush (software, data) {
       break
     case 'connect info':
       currentData = store.state.SystemInfo
-      let result = data.match(/(.*):(.*):(.*):(.*)/)
-      // console.log('result')
-      // console.log(result)
       insertdata = {}
-      insertdata.time = result[1]
-      insertdata.name = result[2]
-      insertdata.info = result[3]
-      insertdata.result = result[4]
+      insertdata.time = data.timestamp
+      insertdata.name = data.software
+      insertdata.info = data.dataType
+      insertdata.result = data.info
+      console.log('insertData:----------------------------------', insertdata)
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -763,12 +468,12 @@ function queuePush (software, data) {
       break
     case 'sending info':
       currentData = store.state.SendInfo
-      let SendResult = data.match(/(.*):(.*):(.*):(.*)/)
+      // let SendResult = data.match(/(.*):(.*):(.*):(.*)/)
       insertdata = {}
-      insertdata.time = SendResult[1]
-      insertdata.name = SendResult[2]
-      insertdata.info = SendResult[3]
-      insertdata.result = SendResult[4]
+      insertdata.time = data.timestamp
+      insertdata.name = data.software
+      insertdata.info = data.dataType
+      insertdata.result = data.info
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -780,12 +485,12 @@ function queuePush (software, data) {
       break
     case 'receiving info':
       currentData = store.state.ReceiveInfo
-      let ReceiveResult = data.match(/(.*):(.*):(.*):(.*)/)
+      // let ReceiveResult = data.match(/(.*):(.*):(.*):(.*)/)
       insertdata = {}
-      insertdata.time = ReceiveResult[1]
-      insertdata.name = ReceiveResult[2]
-      insertdata.info = ReceiveResult[3]
-      insertdata.result = ReceiveResult[4]
+      insertdata.time = data.timestamp
+      insertdata.name = data.software
+      insertdata.info = data.dataType
+      insertdata.result = data.info
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -795,24 +500,45 @@ function queuePush (software, data) {
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'ReceiveInfo'})
       break
-    case 'realTimeViewTest':
-      console.log('realTimeViewTest')
-      console.log(data)
-      switch (data.software) {
-        case 'SatIntegratedDataManagement':
-          if (data.result) {
-            store.state['Color' + data.software] = 'blue'
-          } else {
-            store.state['Color' + data.software] = 'red'
-          }
-          break
+    case 'realTimeView':
+      if (data.result) {
+        store.state['Color' + data.software] = 'blue'
+      } else {
+        store.state['Color' + data.software] = 'red'
       }
       store.state.DiagramChange = !store.state.DiagramChange
       break
-    case 'alert test':
-      console.log('alert test')
-      console.log(data)
-      store.state.Alert = data
+    case 'alert notify':
+      switch (data.software) {
+        case '卫星综合数据管理软件':
+          store.commit('notifyDataChange', {
+            'software': 'NotifyDataSatIntegratedDataManagement',
+            'notifyData': data
+          })
+          break
+        case '原子钟信号监测与自主切换控制软件':
+          store.commit('notifyDataChange', {
+            'software': 'NotifyDataAtomicClockSignal', 'notifyData': data
+          })
+          break
+        case 'GNSS时差数据综合处理软件':
+          store.commit('notifyDataChange', {
+            'software': 'NotifyDataBDGNSSSystemClockMonitor', 'notifyData': data
+          })
+          break
+        case '状态监测与告警软件':
+          store.commit('notifyDataChange', {
+            'software': 'NotifyDataStateMonitorAndWarning', 'notifyData': data
+          })
+          break
+        case 'VLBI站控软件':
+          store.commit('notifyDataChange', {
+            'software': 'NotifyDataVLBI', 'notifyData': data
+          })
+          break
+        default:
+          break
+      }
       break
     default:
       break

@@ -2,6 +2,7 @@
   <div>
 <!--    <p style="text-align: center">GNSS系统时差数据</p>-->
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

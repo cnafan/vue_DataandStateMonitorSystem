@@ -2,6 +2,7 @@
   <div>
 <!--    <p style="text-align: center">广播星历告警信息</p>-->
     <el-table
+      class="table"
       id="table"
       :data="this.$store.state.BroadcastEphemerisWarningInfo"
       header-cell-class-name="tableHeaderCell"

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p style="text-align: center"></p>
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -41,6 +41,7 @@
     </el-table>
 
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -75,6 +76,7 @@
 
     </el-table>
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -108,6 +110,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -141,6 +144,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

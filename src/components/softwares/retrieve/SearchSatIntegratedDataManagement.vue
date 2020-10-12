@@ -8,32 +8,32 @@
                      :option="this.$store.state.LabelCommon"></SearchBar>
         </keep-alive>
         <keep-alive>
-          <NavSatSignalQuality :data="this.NavSatSignalQuality"></NavSatSignalQuality>
+          <NavSatSignalQuality :data="this.BDNavSatSignalQuality"></NavSatSignalQuality>
         </keep-alive>
         <keep-alive>
-          <SignalComponent :data="this.SignalComponent"></SignalComponent>
+          <SignalComponent :data="this.BDSignalComponent"></SignalComponent>
         </keep-alive>
         <br/><br/>
 
         <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>
         <keep-alive>
-          <SearchBar target="NavSatSignalQualityAllDirection" @callSearch="search($event)"
+          <SearchBar target="BDNavSatSignalQualityAllDirection" @callSearch="search($event)"
                      :option="this.$store.state.LabelCommon"></SearchBar>
         </keep-alive>
         <keep-alive>
-          <NavSatSignalQualityAllDirection></NavSatSignalQualityAllDirection>
+          <NavSatSignalQualityAllDirection :data="BDNavSatSignalQualityAllDirection"></NavSatSignalQualityAllDirection>
         </keep-alive>
         <!--        <el-divider content-position="right">此处为分割线</el-divider>-->
         <keep-alive>
-          <SatComponent></SatComponent>
+          <SatComponent :data="BDSatComponent"></SatComponent>
         </keep-alive>
         <!--        <el-divider content-position="right">此处为分割线</el-divider>-->
         <keep-alive>
-          <FrequencyComponent></FrequencyComponent>
+          <FrequencyComponent :data="BDFrequencyComponent"></FrequencyComponent>
         </keep-alive>
         <!--        <el-divider content-position="right">此处为分割线</el-divider>-->
         <keep-alive>
-          <SignalComponentAllDirection></SignalComponentAllDirection>
+          <SignalComponentAllDirection :data="BDSignalComponentAllDirection"></SignalComponentAllDirection>
         </keep-alive>
       </el-tab-pane>
       <!--      <el-tab-pane label="广播星历告警信息" name="广播星历告警信息">-->
@@ -107,10 +107,14 @@ export default {
       BDSClockCorrection: [],
       BDTClockDifference: [],
       BDSBroadcastClockDifference: [],
-      NavSatSignalQuality: [],
-      SignalComponent: [],
+      BDNavSatSignalQuality: [],
+      BDSignalComponent: [],
       BDSSatTimeClockDifference: [],
-      BDSClockDifference: []
+      BDSClockDifference: [],
+      BDNavSatSignalQualityAllDirection: [],
+      BDSatComponent: [],
+      BDFrequencyComponent: [],
+      BDSignalComponentAllDirection: []
     }
   },
   methods: {
@@ -122,28 +126,21 @@ export default {
       formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
       switch (argument) {
         case 'BDTClockDifference':
-          // this.$post('findBDSClockDifferenceByTime', formData).then((response) => {
-          //   console.log(response)
-          //   this.BDTClockDifference = response.data
-          // })
+          this.$post('findBDTClockCorrectionByTime', formData).then((response) => {
+            console.log(response)
+            this.BDTClockDifference = response.data.BDTClockDifference
+          })
           break
         case 'BDSBroadcastClockDifference':
-          // this.$post('findIrregularByTime', formData).then((response) => {
-          //   console.log(response)
-          //   this.BDSBroadcastClockDifference = response.data
-          // })
+          this.$post('findBDSBroadcastClockCorrectionByTime', formData).then((response) => {
+            console.log(response)
+            this.BDSBroadcastClockDifference = response.data.BDSBroadcastClockDifference
+          })
           break
         case 'BDSClockCorrection':
-          // this.$post('findIrregularByTime', formData).then((response) => {
-          //   console.log(response)
-          //   this.BDSClockCorrection = response.data
-          // })
-          break
-        case 'BDNavSatSignalQuality':
-          this.$post('findSpaceQualityResultByTime', formData).then((response) => {
-            console.log(response.data)
-            this.NavSatSignalQuality = response.data['SpaceSignalQuality']
-            this.SignalComponent = response.data['SignalComponent']
+          this.$post('findBDSClockCorrectionByTime', formData).then((response) => {
+            console.log(response)
+            this.BDSClockCorrection = response.data.BDSClockCorrection
           })
           break
         case 'BDSClockDifference':
@@ -151,6 +148,22 @@ export default {
             console.log(response)
             this.BDSSatTimeClockDifference = response.data['BDSSatTimeClockDifference']
             this.BDSClockDifference = response.data['BDSClockDifference']
+          })
+          break
+        case 'BDNavSatSignalQuality':
+          this.$post('findSpaceQualityResultByTime', formData).then((response) => {
+            console.log(response.data)
+            this.BDNavSatSignalQuality = response.data['BDNavSatSignalQuality']
+            this.BDSignalComponent = response.data['BDSignalComponent']
+          })
+          break
+        case 'BDNavSatSignalQualityAllDirection':
+          this.$post('findSpaceQualityResultAllDirectionByTime', formData).then((response) => {
+            console.log(response.data)
+            this.BDNavSatSignalQualityAllDirection = response.data['BDNavSatSignalQualityAllDirection']
+            this.BDSignalComponentAllDirection = response.data['BDSignalComponentAllDirection']
+            this.BDSatComponent = response.data['BDSatComponent']
+            this.BDFrequencyComponent = response.data['BDFrequencyComponent']
           })
           break
         default:

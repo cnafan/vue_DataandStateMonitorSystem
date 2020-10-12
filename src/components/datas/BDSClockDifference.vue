@@ -3,6 +3,7 @@
 <!--    <p style="text-align: center"></p>-->
     <!--      :data="this.$store.state.BDSClockDifference[0]"-->
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

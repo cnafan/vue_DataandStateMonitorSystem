@@ -9,12 +9,15 @@ const store = new Vuex.Store({
     SatComponent: [],
     FrequencyComponent: [],
     SignalComponentAllDirection: [],
+
     NavSatSignalQuality: [],
     SignalComponent: [],
+
     BDNavSatSignalQualityAllDirection: [],
     BDSatComponent: [],
     BDFrequencyComponent: [],
     BDSignalComponentAllDirection: [],
+
     BDNavSatSignalQuality: [],
     BDSignalComponent: [],
 
@@ -293,21 +296,46 @@ const store = new Vuex.Store({
     ColorDateAndStateMonitorReceive: 'blue',
     ColorVLBI: 'blue',
     ColorDataService: 'blue',
-    // SplanshColor: {
-    //   'ColorSystemManageAndControl': 'blue',
-    //   'ColorAtomicClockSignal': 'blue',
-    //   'ColorBDGNSSSystemClockMonitor': 'blue',
-    //   'ColorSatIntegratedDataManagement': 'blue',
-    //   'ColorStateMonitorAndWarning': 'blue',
-    //   'ColorDateAndStateMonitorSend': 'blue',
-    //   'ColorDateAndStateMonitorReceive': 'blue',
-    //   'ColorVLBI': 'red',
-    //   'ColorDataService': 'blue'
-    // },
+    SystemInfo: [],
+    SendInfo: [],
+    ReceiveInfo: [],
     DiagramChange: false,
-    Alert: ''
+
+    NotifyDataSystemManageAndControl: '',
+    NotifyDataAtomicClockSignal: '',
+    NotifyDataBDGNSSSystemClockMonitor: '',
+    NotifyDataSatIntegratedDataManagement: '',
+    NotifyDataStateMonitorAndWarning: '',
+    NotifyDataVLBI: '',
+
+    NotifyComponentSystemManageAndControl: [],
+    NotifyComponentAtomicClockSignal: [],
+    NotifyComponentBDGNSSSystemClockMonitor: [],
+    NotifyComponentSatIntegratedDataManagement: [],
+    NotifyComponentStateMonitorAndWarning: [],
+    NotifyComponentVLBI: []
   },
   mutations: {
+    resetNotify (state) {
+      state.NotifyDataAtomicClockSignal = ''
+      state.NotifyDataAtomicClockSignal = ''
+      state.NotifyDataBDGNSSSystemClockMonitor = ''
+      state.NotifyDataSatIntegratedDataManagement = ''
+      state.NotifyDataStateMonitorAndWarning = ''
+      state.NotifyDataVLBI = ''
+      state.NotifyComponentSystemManageAndControl = []
+      state.NotifyComponentAtomicClockSignal = []
+      state.NotifyComponentBDGNSSSystemClockMonitor = []
+      state.NotifyComponentSatIntegratedDataManagement = []
+      state.NotifyComponentStateMonitorAndWarning = []
+      state.NotifyComponentVLBI = []
+    },
+    notifyDataChange (state, payload) {
+      state[payload['software']] = payload['notifyData']
+    },
+    notifyComponentChange (state, payload) {
+      state[payload['software']] = payload['notifyComponent']
+    },
     initData (state, data) {
       state.VLBIWorkState = data.VLBIWorkState
       state.GroundStationWorkStateInfo = data.GroundStationWorkStateInfo
@@ -316,18 +344,23 @@ const store = new Vuex.Store({
       state.NTSCTimeDifferenceData = data.NTSCTimeDifferenceData
       state.NTSCTimeDifferenceModelPara = data.NTSCTimeDifferenceModelPara
       state.TimeFrequencyWorkingState = data.TimeFrequencyWorkingState
-      state.BDNavSatSignalQuality = data.BDNavSatSignalQuality
-      state.BDSignalComponent = data.BDSignalComponent
       state.BDSSatTimeClockDifference = data.BDSSatTimeClockDifference
       state.BDSClockDifference = data.BDSClockDifference
       state.BDSClockCorrection = data.BDSClockCorrection
       state.BDSBroadcastClockDifference = data.BDSBroadcastClockDifference
       state.BDTClockDifference = data.BDTClockDifference
-      state.NavSatSignalQuality = data.NavSatSignalQuality
-      state.NavSatSignalQualityAllDirection = data.NavSatSignalQualityAllDirection
       state.NavSatIrregularMonitor = data.NavSatIrregularMonitor
       state.WorkingStateInfo = data.WorkingStateInfo
-      state.VLBIWorkState = data.VLBIWorkState
+
+      state.NavSatSignalQuality = data.NavSatSignalQuality
+      state.SignalComponent = data.SignalComponent
+      state.BDNavSatSignalQuality = data.BDNavSatSignalQuality
+      state.BDSignalComponent = data.BDSignalComponent
+
+      state.NavSatSignalQualityAllDirection = data.NavSatSignalQualityAllDirection
+      state.SatComponent = data.SatComponent
+      state.FrequencyComponent = data.FrequencyComponent
+      state.SignalComponentAllDirection = data.SignalComponentAllDirection
     },
     modify (state, data) {
       state.data = data
@@ -340,13 +373,49 @@ const store = new Vuex.Store({
     reverse (state) {
       state.DiagramChange = !state.DiagramChange
     },
+    addNotify (state, notify) {
+      state.Notify.push(notify)
+    },
+    changeAlert (state, alert) {
+      state.Alert = alert
+    },
     change (state, payload) {
       switch (payload['software']) {
+        case 'NavSatSignalQualityAllDirection':
+          state.NavSatSignalQualityAllDirection = payload['data']
+          break
+        case 'SatComponent':
+          state.SatComponent = payload['data']
+          break
+        case 'FrequencyComponent':
+          state.FrequencyComponent = payload['data']
+          break
+        case 'SignalComponentAllDirection':
+          state.SignalComponentAllDirection = payload['data']
+          break
         case 'NavSatSignalQuality':
           state.NavSatSignalQuality = payload['data']
           break
         case 'SignalComponent':
           state.SignalComponent = payload['data']
+          break
+        case 'BDNavSatSignalQualityAllDirection':
+          state.BDNavSatSignalQualityAllDirection = payload['data']
+          break
+        case 'BDSatComponent':
+          state.BDSatComponent = payload['data']
+          break
+        case 'BDFrequencyComponent':
+          state.BDFrequencyComponent = payload['data']
+          break
+        case 'BDSignalComponentAllDirection':
+          state.BDSignalComponentAllDirection = payload['data']
+          break
+        case 'BDNavSatSignalQuality':
+          state.BDNavSatSignalQuality = payload['data']
+          break
+        case 'BDSignalComponent':
+          state.BDSignalComponent = payload['data']
           break
         case 'WorkingStateInfo':
           state.WorkingStateInfo = payload['data']

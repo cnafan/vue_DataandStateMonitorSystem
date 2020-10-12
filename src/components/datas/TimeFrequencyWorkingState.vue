@@ -2,6 +2,7 @@
   <div>
 <!--    <p style="text-align: center">时频工作状态</p>-->
     <el-table
+      class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

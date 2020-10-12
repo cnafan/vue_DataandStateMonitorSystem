@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p style="text-align: center"></p>
     <el-table
+        class="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -15,7 +15,7 @@
 <!--      </el-table-column>-->
       <el-table-column
         min-width="1"
-        property="data['sico']"
+        property="sico"
         label="信号分量">
       </el-table-column>
       <el-table-column
@@ -40,6 +40,7 @@
       </el-table-column>
     </el-table>
       <el-table
+          class="table"
         :data="this.data"
         header-cell-class-name="tableHeaderCell"
         highlight-current-row

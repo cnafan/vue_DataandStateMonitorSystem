@@ -1,8 +1,9 @@
 <template>
   <div>
-<!--    <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>-->
+<!--        <p style="text-align: center"></p>-->
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       border
@@ -13,11 +14,11 @@
         label="时标">
       </el-table-column>
       <el-table-column
-        prop="stid"
+        prop="stationID"
         label="站编号">
       </el-table-column>
       <el-table-column
-        prop="nusa"
+        prop="numOfSat"
         label="卫星数">
       </el-table-column>
     </el-table>

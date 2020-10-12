@@ -2,7 +2,8 @@
   <div>
 <!--    <p style="text-align: center">地面站工作状态信息</p>-->
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -21,7 +22,8 @@
     </el-table>
     <el-divider class="el-divider-table" content-position="left">地面站1</el-divider>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -45,56 +47,59 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
       border
       style="width: 100%">
       <el-table-column
-        prop="C1UPState1"
+        prop="c1UPState1"
         label="C1UP变频器设备主备状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPWorkState1"
+        prop="c1UPWorkState1"
         label="C1UP变频器设备运行状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPBlockState1"
+        prop="c1UPBlockState1"
         label="C1UP变频模块锁定状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPFrequency1"
+        prop="c1UPFrequency1"
         label="C1UP变频模块输出频率">
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
       border
       style="width: 100%">
       <el-table-column
-        prop="C1DOWNState1"
+        prop="c1DOWNState1"
         label="C1Down变频器设备主备状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNWorkState1"
+        prop="c1DOWNWorkState1"
         label="C1Down变频器设备运行状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNBlockState1"
+        prop="c1DOWNBlockState1"
         label="C1Down变频模块锁定状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNFrequency1"
+        prop="c1DOWNFrequency1"
         label="C1Down变频模块输出频率">
       </el-table-column>
     </el-table>
     <el-divider class="el-divider-table" content-position="left">地面站2</el-divider>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -118,56 +123,59 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
       border
       style="width: 100%">
       <el-table-column
-        prop="C1UPState2"
+        prop="c1UPState2"
         label="C1UP变频器设备主备状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPWorkState2"
+        prop="c1UPWorkState2"
         label="C1UP变频器设备运行状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPBlockState2"
+        prop="c1UPBlockState2"
         label="C1UP变频模块锁定状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPFrequency2"
+        prop="c1UPFrequency2"
         label="C1UP变频模块输出频率">
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
       border
       style="width: 100%">
       <el-table-column
-        prop="C1DOWNState2"
+        prop="c1DOWNState2"
         label="C1Down变频器设备主备状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNWorkState2"
+        prop="c1DOWNWorkState2"
         label="C1Down变频器设备运行状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNBlockState2"
+        prop="c1DOWNBlockState2"
         label="C1Down变频模块锁定状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNFrequency2"
+        prop="c1DOWNFrequency2"
         label="C1Down变频模块输出频率">
       </el-table-column>
     </el-table>
     <el-divider class="el-divider-table" content-position="left">地面站3</el-divider>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
@@ -191,50 +199,52 @@
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
       border
       style="width: 100%">
       <el-table-column
-        prop="C1UPState3"
+        prop="c1UPState3"
         label="C1UP变频器设备主备状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPWorkState3"
+        prop="c1UPWorkState3"
         label="C1UP变频器设备运行状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPBlockState3"
+        prop="c1UPBlockState3"
         label="C1UP变频模块锁定状态">
       </el-table-column>
       <el-table-column
-        prop="C1UPFrequency3"
+        prop="c1UPFrequency3"
         label="C1UP变频模块输出频率">
       </el-table-column>
     </el-table>
     <el-table
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       stripe
       border
       style="width: 100%">
       <el-table-column
-        prop="C1DOWNState3"
+        prop="c1DOWNState3"
         label="C1Down变频器设备主备状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNWorkState3"
+        prop="c1DOWNWorkState3"
         label="C1Down变频器设备运行状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNBlockState3"
+        prop="c1DOWNBlockState3"
         label="C1Down变频模块锁定状态">
       </el-table-column>
       <el-table-column
-        prop="C1DOWNFrequency3"
+        prop="c1DOWNFrequency3"
         label="C1Down变频模块输出频率">
       </el-table-column>
     </el-table>

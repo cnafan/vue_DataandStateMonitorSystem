@@ -2,8 +2,8 @@
   <div>
 <!--    <p style="text-align: center">定向天线导航卫星信号质量监测结果</p>-->
     <el-table
-      id="table"
-      :data="this.data"
+      class="table"
+      :data="data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
       border
@@ -19,6 +19,7 @@
       </el-table-column>
       <el-table-column
         prop="stid"
+        :formatter="getStationName"
         label="站编号">
       </el-table-column>
       <el-table-column
@@ -39,6 +40,32 @@ export default {
   props: {
     'data': {
       type: Array
+    }
+  },
+  methods: {
+    getStationName (row, column, cellValue) {
+      switch (cellValue) {
+        case 2:
+          return '7.3米L天线'
+        case 8:
+          return '13米C/L_1天线'
+        case 15:
+          return '盱眙5米天线'
+        case 16:
+          return '三亚5米天线'
+        case 26:
+          return '明思克5米天线'
+        case 30:
+          return '接收机1'
+        case 31:
+          return '接收机2'
+        case 32:
+          return '接收机3'
+        case 33:
+          return '接收机4'
+        default:
+          return cellValue
+      }
     }
   }
 }

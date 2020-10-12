@@ -2,6 +2,7 @@
   <div>
 <!--    <p style="text-align: center">工作状态信息</p>-->
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

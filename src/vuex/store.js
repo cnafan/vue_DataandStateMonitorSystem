@@ -199,23 +199,24 @@ const store = new Vuex.Store({
       {
         'item': 'sec',
         'label': '数据时标-周内秒'
-      },
-      {
-        'item': 'runningState',
-        'label': '单元运行状态'
-      },
-      {
-        'item': 'constantTerm',
-        'label': '模型常数项'
-      },
-      {
-        'item': 'oneTimeTerm',
-        'label': '模型一次项'
-      },
-      {
-        'item': 'quadraticTerm',
-        'label': '模型二次项'
       }
+      // ,
+      // {
+      //   'item': 'runningState',
+      //   'label': '单元运行状态'
+      // },
+      // {
+      //   'item': 'constantTerm',
+      //   'label': '模型常数项'
+      // },
+      // {
+      //   'item': 'oneTimeTerm',
+      //   'label': '模型一次项'
+      // },
+      // {
+      //   'item': 'quadraticTerm',
+      //   'label': '模型二次项'
+      // }
     ],
     LabelTimeFrequencyWorkingState: [
       {
@@ -394,7 +395,7 @@ const store = new Vuex.Store({
           state.SignalComponentAllDirection = payload['data']
           break
         case 'NavSatSignalQuality':
-          state.NavSatSignalQuality = payload['data']
+          state.NavSatSignalQuality = Object.assign([], state.NavSatSignalQuality, payload['data'])
           break
         case 'SignalComponent':
           state.SignalComponent = payload['data']

@@ -1,5 +1,10 @@
 <template>
   <div>
+    <!--    <img src="chrome-extension://kphkondodeojfcodfegfglmdeondhlbc/test1/charts.jpg"/>-->
+    <!--    <el-image-->
+    <!--      style="width: 300px;height: 250px"-->
+    <!--      src=""-->
+    <!--      fit="scale-down"></el-image>-->
     <el-table
       class="table"
       :data="this.data"
@@ -8,15 +13,34 @@
       stripe
       border
       style="width: 100%">
-<!--      <el-table-column-->
-<!--        min-width="3"-->
-<!--        prop="time"-->
-<!--        label="时标">-->
-<!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        min-width="3"-->
+      <!--        prop="time"-->
+      <!--        label="时标">-->
+      <!--      </el-table-column>-->
       <el-table-column
         min-width="1"
         prop="sico"
         label="信号分量">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="psdd"
+        label="功率谱数值图">
+        <template slot-scope="scope">
+          <el-popover trigger="hover" placement="left">
+            <div style="width: 100%">
+              <!--chrome-extension://kphkondodeojfcodfegfglmdeondhlbc/test1/charts.jpg-->
+              <el-image
+                style="width: 300px;height: 250px"
+                src="http://localhost:8082/getImage"
+                fit="scale-down"></el-image>
+            </div>
+            <div slot="reference" class="name-wrapper">
+              <el-tag size="medium">功率谱数值图</el-tag>
+            </div>
+          </el-popover>
+        </template>
       </el-table-column>
       <el-table-column
         min-width="1"
@@ -33,11 +57,6 @@
         prop="spsm"
         label="合成功率谱偏差均值">
       </el-table-column>
-      <el-table-column
-        min-width="1"
-        prop="spss"
-        label="合成功率谱偏差标准差">
-      </el-table-column>
     </el-table>
 
     <el-table
@@ -48,6 +67,11 @@
       stripe
       border
       style="width: 100%">
+      <el-table-column
+        min-width="1"
+        prop="spss"
+        label="合成功率谱偏差标准差">
+      </el-table-column>
       <el-table-column
         min-width="1"
         prop="colm"
@@ -68,11 +92,6 @@
         prop="scb3"
         label="S曲线过零点偏差3">
       </el-table-column>
-      <el-table-column
-        min-width="1"
-        prop="scb4"
-        label="S曲线过零点偏差4">
-      </el-table-column>
 
     </el-table>
     <el-table
@@ -83,6 +102,11 @@
       stripe
       border
       style="width: 100%">
+      <el-table-column
+        min-width="1"
+        prop="scb4"
+        label="S曲线过零点偏差4">
+      </el-table-column>
       <el-table-column
         min-width="1"
         prop="bswm"
@@ -103,11 +127,6 @@
         prop="ccsm"
         label="频内码相位一致性均值">
       </el-table-column>
-      <el-table-column
-        min-width="1"
-        prop="ccss"
-        label="频内码相位一致性标准差">
-      </el-table-column>
     </el-table>
     <el-table
       class="table"
@@ -117,6 +136,11 @@
       stripe
       border
       style="width: 100%">
+      <el-table-column
+        min-width="1"
+        prop="ccss"
+        label="频内码相位一致性标准差">
+      </el-table-column>
       <el-table-column
         min-width="1"
         prop="ccdm"
@@ -137,11 +161,6 @@
         prop="prss"
         label="伪距稳定性标准差">
       </el-table-column>
-      <el-table-column
-        min-width="1"
-        prop="cpsm"
-        label="载波相位稳定性均值">
-      </el-table-column>
     </el-table>
     <el-table
       class="table"
@@ -151,6 +170,11 @@
       stripe
       border
       style="width: 100%">
+      <el-table-column
+        min-width="1"
+        prop="cpsm"
+        label="载波相位稳定性均值">
+      </el-table-column>
       <el-table-column
         min-width="1"
         prop="cpss"
@@ -171,13 +195,21 @@
         prop="cnsm"
         label="载噪比稳定性均值">
       </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="this.data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="cnss"
         label="载噪比稳定性标准差">
       </el-table-column>
     </el-table>
-
   </div>
 </template>
 <script>
@@ -187,6 +219,17 @@ export default {
     'data': {
       type: Array
     }
+  },
+  data () {
+    return {
+      srcdata: null
+    }
+  },
+  created () {
+    this.$post('getImage', {}).then(response => {
+      this.srcdata = response.data
+      // console.log(response.data)
+    })
   },
   methods: {
     getComponent () {

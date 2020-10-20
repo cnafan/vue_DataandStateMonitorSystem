@@ -12,9 +12,18 @@
       </el-select>
     </el-form-item>
     <el-form-item prop="inputValue" label="">
-      <el-input v-model="formInline.inputValue" @input="saveInput()" placeholder="(查询多项时以空格为间隔)"></el-input>
+      <el-input v-model="formInline.inputValue" @input="saveInput()" placeholder="查询多项时以空格间隔"></el-input>
     </el-form-item>
     <el-form-item>
+      <el-popover
+        placement="bottom"
+        title="查询规则"
+        width="200"
+        :content="searchRules"
+        trigger="hover">
+<!--        <div slot="title">123</div>-->
+        <el-button circle slot="reference" icon="el-icon-key"></el-button>
+      </el-popover>
       <el-button @click="search" circle icon="el-icon-search"></el-button>
       <!--      查询-->
     </el-form-item>
@@ -58,6 +67,9 @@ export default {
     },
     'limit': {
       type: Number
+    },
+    'searchRules': {
+      type: String
     }
   },
   methods: {

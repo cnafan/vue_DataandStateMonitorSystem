@@ -1,20 +1,25 @@
 <template>
   <div id="main-app">
+
     <el-header id="header">
       <el-row id="el_row_header">
-        <el-col :span="1">
-          <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>
-        </el-col>
-        <el-col :span="21">
-          <div>{{ headerName }}</div>
-        </el-col>
-        <el-col :span="1">
-          <i class="el-icon-edit" style="font-size: 25px;" @click="editorClick"></i>
-        </el-col>
-        <el-col :span="1">
-          <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>
-        </el-col>
+        <el-page-header @back="navModify" title="" :content="this.$route.name">
+        </el-page-header>
       </el-row>
+      <!--      <el-row id="el_row_header">-->
+      <!--        <el-col :span="1">-->
+      <!--          <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>-->
+      <!--        </el-col>-->
+      <!--        <el-col :span="21">-->
+      <!--          <div>{{ headerName }}</div>-->
+      <!--        </el-col>-->
+      <!--        <el-col :span="1">-->
+      <!--          <i class="el-icon-edit" style="font-size: 25px;" @click="editorClick"></i>-->
+      <!--        </el-col>-->
+      <!--        <el-col :span="1">-->
+      <!--          <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>-->
+      <!--        </el-col>-->
+      <!--      </el-row>-->
       <el-row>
         <el-divider id="header-divider"></el-divider>
       </el-row>
@@ -241,7 +246,6 @@ export default {
         this.$store.state.NotifyComponentBDGNSSSystemClockMonitor.pop().close()
       }
     },
-
     NotifyDataSatIntegratedDataManagementChange () {
       if (this.$store.state.NotifyComponentSatIntegratedDataManagement.length === 0) {
         if (this.$store.state.NotifyDataSatIntegratedDataManagement.result === 0) {

@@ -3,7 +3,6 @@
 <!--    <p style="text-align: center">导航卫星异常监测结果</p>-->
     <el-table
       class="table"
-      id="table"
       :data="this.data"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row

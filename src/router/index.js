@@ -5,7 +5,7 @@ import BDGNSSSystemClockMonitor from '../components/softwares/runtime/BDGNSSSyst
 import StateMonitorAndWarning from '../components/softwares/runtime/StateMonitorAndWarning'
 import SystemManageAndControl from '../components/softwares/runtime/SystemManageAndControl'
 import VLBI from '../components/softwares/runtime/VLBI'
-import Main from '../components/page/Main'
+// import Main from '../components/page/Main'
 import SatIntegratedDataManagement from '../components/softwares/runtime/SatIntegratedDataManagement'
 import Splansh from '../components/page/Splansh'
 import Test from '../components/Test'
@@ -23,66 +23,82 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: '数据与状态监控软件',
       redirect: '/splansh'
     },
     {
       path: '/splansh',
+      name: '数据与状态监控软件',
       component: Splansh
     },
-    {
-      path: '/index',
-      component: Main
-    },
+    // {
+    //   path: '/index',
+    //   name: '首页',
+    //   component: Main
+    // },
     {
       path: '/AtomicClockSignal',
+      name: '原子钟信号监测与自主切换软件',
       component: AtomicClockSignal
     },
     {
       path: '/BDGNSSSystemClockMonitor',
+      name: 'GNSS时差数据综合处理软件',
       component: BDGNSSSystemClockMonitor
     },
     {
       path: '/StateMonitorAndWarning',
+      name: '状态检测及告警软件',
       component: StateMonitorAndWarning
     },
     {
       path: '/SystemManageAndControl',
+      name: '系统管理控制软件',
       component: SystemManageAndControl
     },
     {
       path: '/SatIntegratedDataManagement',
+      name: '卫星综合管理软件',
       component: SatIntegratedDataManagement
     },
     {
       path: '/VLBI',
+      name: 'VLBI站控软件',
       component: VLBI
     },
     {
       path: '/log',
+      name: '日志',
       component: Log
     },
     {
       path: '/SearchAtomicClockSignal',
+      name: '查询 - 原子钟信号监测与自主切换软件',
       component: SearchAtomicClockSignal
     },
     {
       path: '/SearchBDGNSSSystemClockMonitor',
+      name: '查询 - GNSS时差数据综合处理软件',
       component: SearchBDGNSSSystemClockMonitor
     },
     {
       path: '/SearchStateMonitorAndWarning',
+      name: '查询 - 状态检测及告警软件',
       component: SearchStateMonitorAndWarning
     },
     {
       path: '/SearchSystemManageAndControl',
+      name: '查询 - 系统管理控制软件',
       component: SearchSystemManageAndControl
     },
     {
       path: '/SearchSatIntegratedDataManagement',
+      name: '查询 - 卫星综合管理软件',
       component: SearchSatIntegratedDataManagement
     },
     {
       path: '/SearchVLBI',
+      name: '查询 - VLBI站控软件',
       component: SearchVLBI
     },
     {

@@ -403,22 +403,22 @@ export default {
       if ((node instanceof go.Node)) {
         switch (node.key) {
           case 1:
-            this.$router.push({path: '/SearchSystemManageAndControl'})
+            this.$router.push({path: '/SystemManageAndControl'})
             break
           case 2:
-            this.$router.push({path: '/SearchSatIntegratedDataManagement'})
+            this.$router.push({path: '/SatIntegratedDataManagement'})
             break
           case 3:
-            this.$router.push({path: '/SearchBDGNSSSystemClockMonitor'})
+            this.$router.push({path: '/BDGNSSSystemClockMonitor'})
             break
           case 9:
-            this.$router.push({path: '/SearchVLBI'})
+            this.$router.push({path: '/VLBI'})
             break
           case 10:
-            this.$router.push({path: '/SearchAtomicClockSignal'})
+            this.$router.push({path: '/AtomicClockSignal'})
             break
           case 11:
-            this.$router.push({path: '/SearchStateMonitorAndWarning'})
+            this.$router.push({path: '/StateMonitorAndWarning'})
             break
           default:
             break

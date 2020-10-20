@@ -36,7 +36,7 @@ export default {
       switch (argument) {
         case 'GroundStationWorkStateInfo':
           this.$post('findGroundStationByTime', formData).then((response) => {
-            console.log(response)
+            // console.log(response)
             this.GroundStationWorkStateInfo = response.data
           })
           break

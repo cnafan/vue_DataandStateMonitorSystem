@@ -7,10 +7,10 @@
             <keep-alive>
               <NavSatSignalQuality :data="this.$store.state.BDNavSatSignalQuality"></NavSatSignalQuality>
             </keep-alive>
-            <el-select class="componentSelect"  @visible-change="visibleChangeValue(false)"
-                       v-model="SignalComponentSelect" placeholder="请选择">
+            <el-select class="componentSelect"
+                       v-model="BDSignalComponentSelect" placeholder="请选择">
               <el-option
-                v-for="item in SignalComponentOptions"
+                v-for="item in BDSignalComponentOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -26,10 +26,10 @@
               <NavSatSignalQualityAllDirection
                 :data="this.$store.state.BDNavSatSignalQualityAllDirection"></NavSatSignalQualityAllDirection>
             </keep-alive>
-            <el-select class="componentSelect" @visible-change="visibleChangeValue(false)"
-                       v-model="SatComponentSelect" placeholder="请选择">
+            <el-select class="componentSelect"
+                       v-model="BDSatComponentSelect" placeholder="请选择">
               <el-option
-                v-for="item in SatComponentOptions"
+                v-for="item in BDSatComponentOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -38,10 +38,10 @@
             <keep-alive>
               <SatComponent :data="this.getSatComponent"></SatComponent>
             </keep-alive>
-            <el-select class="componentSelect" @visible-change="visibleChangeValue(false)"
-                       v-model="FrequencyComponentSelect" placeholder="请选择">
+            <el-select class="componentSelect"
+                       v-model="BDFrequencyComponentSelect" placeholder="请选择">
               <el-option
-                v-for="item in FrequencyComponentOptions"
+                v-for="item in BDFrequencyComponentOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -50,28 +50,22 @@
             <keep-alive>
               <FrequencyComponent :data="this.getFrequencyComponent"></FrequencyComponent>
             </keep-alive>
-            <!--              @visible-change="visibleChangeValue(false)" -->
-            <el-select class="componentSelect" @visible-change="visibleChangeValue(false)"
-                       v-model="SignalComponentAllDirectionSelect" placeholder="请选择">
+
+            <el-select class="componentSelect"
+                       v-model="BDSignalComponentAllDirectionSelect" placeholder="请选择">
               <el-option
-                v-for="item in SignalComponentAllDirectionOptions"
+                v-for="item in BDSignalComponentAllDirectionOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
               </el-option>
             </el-select>
             <keep-alive>
-              <SignalComponentAllDirection
-                :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
+              <SignalComponentAllDirection :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
             </keep-alive>
           </el-tab-pane>
         </el-tabs>
       </el-tab-pane>
-      <!--      <el-tab-pane label="广播星历告警信息" name="广播星历告警信息">-->
-      <!--        <keep-alive>-->
-      <!--          <BroadcastEphemerisWarningInfo></BroadcastEphemerisWarningInfo>-->
-      <!--        </keep-alive>-->
-      <!--      </el-tab-pane>-->
       <el-tab-pane label="UTC与BDS3卫星时间钟差" name="UTC(NTSC)与BDS3每颗卫星时间的钟差">
         <keep-alive>
           <BDSSatTimeClockDifference
@@ -127,121 +121,119 @@ export default {
       BDSBroadcastClockDifference: [],
       BDTClockDifference: [],
 
-      SignalComponentOptions: [],
-      SignalComponentSelect: null,
-      SatComponentOptions: [],
-      SatComponentSelect: null,
-      FrequencyComponentOptions: [],
-      FrequencyComponentSelect: null,
-      SignalComponentAllDirectionOptions: [],
-      SignalComponentAllDirectionSelect: null
+      BDSignalComponentOptions: [],
+      BDSignalComponentSelect: null,
+      BDSatComponentOptions: [],
+      BDSatComponentSelect: null,
+      BDFrequencyComponentOptions: [],
+      BDFrequencyComponentSelect: null,
+      BDSignalComponentAllDirectionOptions: [],
+      BDSignalComponentAllDirectionSelect: null
     }
   },
   computed: {
     getSignalComponent: function () {
-      if (this.SignalComponentSelect != null) {
-        return this.$store.state.BDSignalComponent.slice(this.SignalComponentSelect, this.SignalComponentSelect + 1)
+      if (this.BDSignalComponentSelect != null) {
+        return this.$store.state.BDSignalComponent.slice(Number(this.BDSignalComponentSelect), Number(this.BDSignalComponentSelect) + 1)
       } else {
         return []
       }
     },
     getSatComponent: function () {
-      if (this.SatComponentSelect != null) {
-        return this.$store.state.BDSatComponent.slice(this.SatComponentSelect, this.SatComponentSelect + 1)
+      if (this.BDSatComponentSelect != null) {
+        return this.$store.state.BDSatComponent.slice(Number(this.BDSatComponentSelect), Number(this.BDSatComponentSelect) + 1)
       } else {
         return []
       }
     },
     getFrequencyComponent: function () {
-      if (this.SatComponentSelect != null && this.FrequencyComponentSelect != null) {
-        return this.$store.state.BDFrequencyComponent[this.SatComponentSelect].slice(this.FrequencyComponentSelect, this.FrequencyComponentSelect + 1)
+      if (this.BDSatComponentSelect != null && this.BDFrequencyComponentSelect != null) {
+        return this.$store.state.BDFrequencyComponent[Number(this.BDSatComponentSelect)].slice(Number(this.BDFrequencyComponentSelect), Number(this.BDFrequencyComponentSelect) + 1)
       } else {
         return []
       }
     },
     getSignalComponentAllDirection: function () {
-      if (this.SatComponentSelect != null && this.FrequencyComponentSelect != null && this.SignalComponentAllDirectionSelect != null) {
-        return this.$store.state.BDSignalComponentAllDirection[this.SatComponentSelect][this.FrequencyComponentSelect].slice(this.SignalComponentAllDirectionSelect, this.SignalComponentAllDirectionSelect + 1)
+      if (this.BDSatComponentSelect != null && this.BDFrequencyComponentSelect != null && this.BDSignalComponentAllDirectionSelect != null) {
+        return this.$store.state.BDSignalComponentAllDirection[Number(this.BDSatComponentSelect)][Number(this.BDFrequencyComponentSelect)].slice(Number(this.BDSignalComponentAllDirectionSelect), Number(this.BDSignalComponentAllDirectionSelect) + 1)
       } else {
         return []
       }
+    },
+    navSignalComponentChange () {
+      return this.$store.state.BDSignalComponent
+    },
+    navSatComponentChange () {
+      return this.$store.state.BDSatComponent
+    },
+    navFrequencyComponentChange () {
+      return this.$store.state.BDFrequencyComponent
+    },
+    navSignalComponentAllDirectionChange () {
+      return this.$store.state.BDSignalComponentAllDirection
+    }
+  },
+  watch: {
+    navSignalComponentChange () {
+      this.initSignalComponentSelect()
+    },
+    navSatComponentChange () {
+      this.initSatComponentSelect()
+    },
+    navFrequencyComponentChange () {
+      this.initFrequencyComponentSelect()
+    },
+    navSignalComponentAllDirectionChange () {
+      this.initSignalAllDirectionComponentSelect()
     }
   },
   methods: {
     handleClick (tab, event) {
       // console.log(tab, event)
     },
-    initSignalComponent () {
-      this.SignalComponentOptions = []
+    initSignalComponentSelect () {
+      this.BDSignalComponentOptions = []
       for (let i = 0; i < this.$store.state.BDSignalComponent.length; i++) {
-        this.SignalComponentOptions[i] = {value: i, label: '信号分量 ' + (i + 1)}
+        this.BDSignalComponentOptions[i] = {value: String(i), label: '信号分量 ' + (i + 1)}
+      }
+      if (this.BDSignalComponentOptions.length > 0) {
+        this.BDSignalComponentSelect = String(0)
       }
     },
-    initSatComponent () {
-      this.SatComponentOptions = []
+    initSatComponentSelect () {
+      this.BDSatComponentOptions = []
       for (let i = 0; i < this.$store.state.BDSatComponent.length; i++) {
-        this.SatComponentOptions[i] = {value: i, label: '卫星 ' + (i + 1)}
+        this.BDSatComponentOptions[i] = {value: String(i), label: '卫星 ' + (i + 1)}
+      }
+      if (this.BDSatComponentOptions.length > 0) {
+        this.BDSatComponentSelect = String(0)
       }
     },
-    initFrequencyComponent () {
-      this.FrequencyComponentOptions = []
-      if (this.SatComponentSelect === null) {
+    initFrequencyComponentSelect () {
+      this.BDFrequencyComponentOptions = []
+      if (this.BDSatComponentSelect === null) {
         return
       }
-      for (let i = 0; i < this.$store.state.BDFrequencyComponent[this.SatComponentSelect].length; i++) {
-        this.FrequencyComponentOptions[i] = {value: i, label: '频点 ' + (i + 1)}
+      for (let i = 0; i < this.$store.state.BDFrequencyComponent[this.BDSatComponentSelect].length; i++) {
+        this.BDFrequencyComponentOptions[i] = {value: String(i), label: '频点 ' + (i + 1)}
+      }
+      if (this.BDFrequencyComponentOptions.length > 0) {
+        this.BDFrequencyComponentSelect = String(0)
       }
     },
-    initSignalComponentAllDirection () {
-      this.SignalComponentAllDirectionOptions = []
-      if (this.SatComponentSelect === null || this.FrequencyComponentSelect === null) {
+    initSignalAllDirectionComponentSelect () {
+      this.BDSignalComponentAllDirectionOptions = []
+      if (this.BDSatComponentSelect === null || this.BDFrequencyComponentSelect === null) {
         return
       }
-      for (let i = 0; i < this.$store.state.BDSignalComponentAllDirection[this.SatComponentSelect][this.FrequencyComponentSelect].length; i++) {
-        this.SignalComponentAllDirectionOptions[i] = {value: i, label: '分量 ' + (i + 1)}
+      for (let i = 0; i < this.$store.state.BDSignalComponentAllDirection[Number(this.BDSatComponentSelect)][Number(this.BDFrequencyComponentSelect)].length; i++) {
+        this.BDSignalComponentAllDirectionOptions[i] = {value: String(i), label: '分量 ' + (i + 1)}
       }
-    },
-    visibleChangeValue () {
-      this.initSignalComponent()
-      this.initSatComponent()
-      this.initFrequencyComponent()
-      this.initSignalComponentAllDirection()
+      if (this.BDSignalComponentAllDirectionOptions.length > 0) {
+        this.BDSignalComponentAllDirectionSelect = String(0)
+      }
     }
   },
-  watch: {
-    FrequencyComponentOptions () {
-    }
-  },
-  // watch: {
-  //   NavSatSignalQualityChange () {
-  //     this.initSignalComponent()
-  //     if (this.SignalComponentOptions.length > 0) {
-  //       this.SignalComponentSelect = this.SignalComponentOptions[0].value
-  //     } else {
-  //       this.SignalComponentSelect = null
-  //     }
-  //   },
-  //   NavSatSignalQualityAllDirectionChange () {
-  //     this.initSatComponent()
-  //     if (this.SatComponentOptions.length > 0) {
-  //       this.SatComponentSelect = this.SatComponentOptions[0].value
-  //     } else {
-  //       this.SatComponentSelect = null
-  //     }
-  //     this.initFrequencyComponent()
-  //     if (this.FrequencyComponentOptions.length > 0) {
-  //       this.FrequencyComponentSelect = this.FrequencyComponentOptions[0].value
-  //     } else {
-  //       this.FrequencyComponentSelect = null
-  //     }
-  //     this.initSignalComponentAllDirection()
-  //     if (this.SignalComponentAllDirectionOptions.length > 0) {
-  //       this.SignalComponentAllDirectionSelect = this.SignalComponentAllDirectionOptions[0].value
-  //     } else {
-  //       this.SignalComponentAllDirectionSelect = null
-  //     }
-  //   }
-  // },
   components: {
     BDSClockDifference,
     BroadcastEphemerisWarningInfo,

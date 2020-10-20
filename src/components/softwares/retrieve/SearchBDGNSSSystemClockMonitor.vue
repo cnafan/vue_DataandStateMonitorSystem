@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="GNSS系统时差数据" name="GNSS系统时差数据">
         <keep-alive>
-          <MultipleSearchBar :limit="2" target="GnssSystemClockDifference" @callSearch="search($event)"
+          <MultipleSearchBar :search-rules="searchRulesGnssSystemClockDifference" :limit="2" target="GnssSystemClockDifference" @callSearch="search($event)"
                      :option="this.$store.state.LabelGnssSystemClockDifference"></MultipleSearchBar>
         </keep-alive>
         <keep-alive>
@@ -36,7 +36,8 @@ export default {
     return {
       activeName: 'GNSS系统时差数据',
       WorkingStateInfoBDGNSSSystemClock: [],
-      GnssSystemClockDifference: []
+      GnssSystemClockDifference: [],
+      searchRulesGnssSystemClockDifference: '1.数据值  2.数据类型+数据产生时间'
     }
   },
   methods: {
@@ -55,7 +56,7 @@ export default {
           }
           // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
           this.$post('findGNSSSystemClockDifference', formData).then((response) => {
-            console.log(response)
+            // console.log(response)
             this.GnssSystemClockDifference = response.data
           })
           break
@@ -63,7 +64,7 @@ export default {
           formData = {}
           formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
           this.$post('findGNSSSystemWorkState', formData).then((response) => {
-            console.log(response)
+            // console.log(response)
             this.WorkingStateInfoBDGNSSSystemClock = response.data
           })
           break

@@ -43,7 +43,7 @@ export default {
       switch (argument) {
         case 'VLBIWorkState':
           this.$post('findVLBIWorkStateByTime', formData).then((response) => {
-            console.log(response)
+            // console.log(response)
             this.VLBIWorkState = response.data
           })
           break

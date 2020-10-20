@@ -1,6 +1,6 @@
 import Stomp from 'stompjs'
 import store from '../vuex/store'
-import {LIST_COUNT} from '../../config/display'
+import {GNSS_SYSTEM_CLOCK_DIFFERENCE_LIST_COUNT, LIST_COUNT} from '../../config/display'
 import {EXCHANGE_PUSH, HEADERS, MQTT_SERVICE} from '../../config/mqtt'
 
 let client = Stomp.client(MQTT_SERVICE)
@@ -21,9 +21,8 @@ function onConnected () {
     'BDNavSatSignalQuality', 'BDSignalComponent',
     'NTSCTimeDifferenceData', 'NTSCTimeDifferenceModelPara',
     'TimeFrequencyWorkingState', 'VLBIWorkState', 'WorkingStateInfo',
-    'NavSatSignalQualityAllDirection', 'SatComponent', 'FrequencyComponent', 'SignalComponentAllDirection',
-    'BDNavSatSignalQualityAllDirection', 'BDSatComponent', 'BDFrequencyComponent', 'BDSignalComponentAllDirection',
     'WorkingStateInfoBDGNSSSystemClock', 'NavSatIrregularMonitor',
+    'BDNavAll', 'NavAll',
     'connect info', 'sending info', 'receiving info',
     'realTimeView',
     'alert notify'
@@ -56,42 +55,16 @@ function getSoftware (destination) {
 }
 
 function queuePush (software, data) {
-  // console.log(software + ':')
-  // console.log(data)
   let insertdata
   let currentData
   // let insertList
 
   switch (software) {
     // 只显示一条
-    case 'NavSatSignalQualityAllDirection':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'SatComponent':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'FrequencyComponent':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'SignalComponentAllDirection':
-      store.commit('change', {'data': data, 'software': software})
-      break
     case 'NavSatSignalQuality':
       store.commit('change', {'data': data, 'software': software})
       break
     case 'SignalComponent':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'BDNavSatSignalQualityAllDirection':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'BDSatComponent':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'BDFrequencyComponent':
-      store.commit('change', {'data': data, 'software': software})
-      break
-    case 'BDSignalComponentAllDirection':
       store.commit('change', {'data': data, 'software': software})
       break
     case 'BDNavSatSignalQuality':
@@ -100,131 +73,151 @@ function queuePush (software, data) {
     case 'BDSignalComponent':
       store.commit('change', {'data': data, 'software': software})
       break
-
+    case 'BDNavAll':
+      store.commit('change', {
+        'data': data['BDNavSatSignalQualityAllDirection'],
+        'software': 'BDNavSatSignalQualityAllDirection'
+      })
+      store.commit('change', {'data': data['BDSatComponent'], 'software': 'BDSatComponent'})
+      store.commit('change', {'data': data['BDFrequencyComponent'], 'software': 'BDFrequencyComponent'})
+      store.commit('change', {
+        'data': data['BDSignalComponentAllDirection'],
+        'software': 'BDSignalComponentAllDirection'
+      })
+      break
+    case 'NavAll':
+      store.commit('change', {
+        'data': data['NavSatSignalQualityAllDirection'],
+        'software': 'NavSatSignalQualityAllDirection'
+      })
+      store.commit('change', {'data': data['SatComponent'], 'software': 'SatComponent'})
+      store.commit('change', {'data': data['FrequencyComponent'], 'software': 'FrequencyComponent'})
+      store.commit('change', {'data': data['SignalComponentAllDirection'], 'software': 'SignalComponentAllDirection'})
+      break
     case 'WorkingStateInfo':
-      insertdata = {}
-      currentData = []
-      insertdata.ms01taskType = data['ms01taskType']
-      insertdata.ms01startTime = data['ms01startTime']
-      insertdata.ms01SatName = data['ms01SatName']
-      insertdata.ms01endTime = data['ms01endTime']
-      insertdata.ms01Result = data['ms01Result']
-
-      insertdata.ms02taskType = data['ms02taskType']
-      insertdata.ms02startTime = data['ms02startTime']
-      insertdata.ms02SatName = data['ms02SatName']
-      insertdata.ms02endTime = data['ms02endTime']
-      insertdata.ms02Result = data['ms02Result']
-
-      insertdata.ms03taskType = data['ms03taskType']
-      insertdata.ms03startTime = data['ms03startTime']
-      insertdata.ms03SatName = data['ms03SatName']
-      insertdata.ms03endTime = data['ms03endTime']
-      insertdata.ms03Result = data['ms03Result']
-
-      insertdata.ms04taskType = data['ms04taskType']
-      insertdata.ms04startTime = data['ms04startTime']
-      insertdata.ms04SatName = data['ms04SatName']
-      insertdata.ms04endTime = data['ms04endTime']
-      insertdata.ms04Result = data['ms04Result']
-
-      insertdata.ms05taskType = data['ms05taskType']
-      insertdata.ms05startTime = data['ms05startTime']
-      insertdata.ms05SatName = data['ms05SatName']
-      insertdata.ms05endTime = data['ms05endTime']
-      insertdata.ms05Result = data['ms05Result']
-
-      insertdata.ms06taskType = data['ms06taskType']
-      insertdata.ms06startTime = data['ms06startTime']
-      insertdata.ms06SatName = data['ms06SatName']
-      insertdata.ms06endTime = data['ms06endTime']
-      insertdata.ms06Result = data['ms06Result']
-
-      insertdata.ms07taskType = data['ms07taskType']
-      insertdata.ms07startTime = data['ms07startTime']
-      insertdata.ms07SatName = data['ms07SatName']
-      insertdata.ms07endTime = data['ms07endTime']
-      insertdata.ms07Result = data['ms07Result']
-
-      insertdata.ms08taskType = data['ms08taskType']
-      insertdata.ms08startTime = data['ms08startTime']
-      insertdata.ms08SatName = data['ms08SatName']
-      insertdata.ms08endTime = data['ms08endTime']
-      insertdata.ms08Result = data['ms08Result']
-
-      insertdata.ms09taskType = data['ms09taskType']
-      insertdata.ms09startTime = data['ms09startTime']
-      insertdata.ms09SatName = data['ms09SatName']
-      insertdata.ms09endTime = data['ms09endTime']
-      insertdata.ms09Result = data['ms09Result']
-
-      insertdata.ms10taskType = data['ms10taskType']
-      insertdata.ms10startTime = data['ms10startTime']
-      insertdata.ms10SatName = data['ms10SatName']
-      insertdata.ms10endTime = data['ms10endTime']
-      insertdata.ms10Result = data['ms10Result']
-
-      insertdata.ms11taskType = data['ms11taskType']
-      insertdata.ms11startTime = data['ms11startTime']
-      insertdata.ms11SatName = data['ms11SatName']
-      insertdata.ms11endTime = data['ms11endTime']
-      insertdata.ms11Result = data['ms11Result']
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': software})
+      // insertdata = {}
+      // currentData = []
+      // insertdata.ms01taskType = data['ms01taskType']
+      // insertdata.ms01startTime = data['ms01startTime']
+      // insertdata.ms01SatName = data['ms01SatName']
+      // insertdata.ms01endTime = data['ms01endTime']
+      // insertdata.ms01Result = data['ms01Result']
+      //
+      // insertdata.ms02taskType = data['ms02taskType']
+      // insertdata.ms02startTime = data['ms02startTime']
+      // insertdata.ms02SatName = data['ms02SatName']
+      // insertdata.ms02endTime = data['ms02endTime']
+      // insertdata.ms02Result = data['ms02Result']
+      //
+      // insertdata.ms03taskType = data['ms03taskType']
+      // insertdata.ms03startTime = data['ms03startTime']
+      // insertdata.ms03SatName = data['ms03SatName']
+      // insertdata.ms03endTime = data['ms03endTime']
+      // insertdata.ms03Result = data['ms03Result']
+      //
+      // insertdata.ms04taskType = data['ms04taskType']
+      // insertdata.ms04startTime = data['ms04startTime']
+      // insertdata.ms04SatName = data['ms04SatName']
+      // insertdata.ms04endTime = data['ms04endTime']
+      // insertdata.ms04Result = data['ms04Result']
+      //
+      // insertdata.ms05taskType = data['ms05taskType']
+      // insertdata.ms05startTime = data['ms05startTime']
+      // insertdata.ms05SatName = data['ms05SatName']
+      // insertdata.ms05endTime = data['ms05endTime']
+      // insertdata.ms05Result = data['ms05Result']
+      //
+      // insertdata.ms06taskType = data['ms06taskType']
+      // insertdata.ms06startTime = data['ms06startTime']
+      // insertdata.ms06SatName = data['ms06SatName']
+      // insertdata.ms06endTime = data['ms06endTime']
+      // insertdata.ms06Result = data['ms06Result']
+      //
+      // insertdata.ms07taskType = data['ms07taskType']
+      // insertdata.ms07startTime = data['ms07startTime']
+      // insertdata.ms07SatName = data['ms07SatName']
+      // insertdata.ms07endTime = data['ms07endTime']
+      // insertdata.ms07Result = data['ms07Result']
+      //
+      // insertdata.ms08taskType = data['ms08taskType']
+      // insertdata.ms08startTime = data['ms08startTime']
+      // insertdata.ms08SatName = data['ms08SatName']
+      // insertdata.ms08endTime = data['ms08endTime']
+      // insertdata.ms08Result = data['ms08Result']
+      //
+      // insertdata.ms09taskType = data['ms09taskType']
+      // insertdata.ms09startTime = data['ms09startTime']
+      // insertdata.ms09SatName = data['ms09SatName']
+      // insertdata.ms09endTime = data['ms09endTime']
+      // insertdata.ms09Result = data['ms09Result']
+      //
+      // insertdata.ms10taskType = data['ms10taskType']
+      // insertdata.ms10startTime = data['ms10startTime']
+      // insertdata.ms10SatName = data['ms10SatName']
+      // insertdata.ms10endTime = data['ms10endTime']
+      // insertdata.ms10Result = data['ms10Result']
+      //
+      // insertdata.ms11taskType = data['ms11taskType']
+      // insertdata.ms11startTime = data['ms11startTime']
+      // insertdata.ms11SatName = data['ms11SatName']
+      // insertdata.ms11endTime = data['ms11endTime']
+      // insertdata.ms11Result = data['ms11Result']
+      // currentData.unshift(insertdata)
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'VLBIWorkState':
-      insertdata = {}
-      currentData = []
-      insertdata.start = data['start']
-      insertdata.counter = data['counter']
-      insertdata.hour = data['hour']
-      insertdata.minute = data['minute']
-      insertdata.second = data['second']
-      insertdata.millisecond = data['millisecond']
-      insertdata.kashiStart = data['kashiStart']
-      insertdata.kashiCounter = data['kashiCounter']
-      insertdata.kashiHour = data['kashiHour']
-      insertdata.kashiMinute = data['kashiMinute']
-      insertdata.kashiSecond = data['kashiSecond']
-      insertdata.kashiMillisecond = data['kashiMillisecond']
-      insertdata.kashiReverse = data['kashiReverse']
-      insertdata.kashiAzimuth = data['kashiAzimuth']
-      insertdata.kashiPitchAngle = data['kashiPitchAngle']
-      insertdata.kashiReverse1 = data['kashiReverse1']
-      insertdata.kashiTemperature = data['kashiTemperature']
-      insertdata.kashiReverse2 = data['kashiReverse2']
-      insertdata.kashiEnd = data['kashiEnd']
-
-      insertdata.sanyaStart = data['sanyaStart']
-      insertdata.sanyaCounter = data['sanyaCounter']
-      insertdata.sanyaHour = data['sanyaHour']
-      insertdata.sanyaMinute = data['sanyaMinute']
-      insertdata.sanyaSecond = data['sanyaSecond']
-      insertdata.sanyaiMillisecond = data['sanyaiMillisecond']
-      insertdata.sanyaReverse = data['sanyaReverse']
-      insertdata.sanyaAzimuth = data['sanyaAzimuth']
-      insertdata.sanyaPitchAngle = data['sanyaPitchAngle']
-      insertdata.sanyaReverse1 = data['sanyaReverse1']
-      insertdata.sanyaTemperature = data['sanyaTemperature']
-      insertdata.sanyaReverse2 = data['sanyaReverse2']
-      insertdata.sanyaEnd = data['sanyaEnd']
-
-      insertdata.jilinStart = data['jilinStart']
-      insertdata.jilinCounter = data['jilinCounter']
-      insertdata.jilinHour = data['jilinHour']
-      insertdata.jilinMinute = data['jilinMinute']
-      insertdata.jilinSecond = data['jilinSecond']
-      insertdata.jilinMillisecond = data['jilinMillisecond']
-      insertdata.jilinReverse = data['jilinReverse']
-      insertdata.jilinAzimuth = data['jilinAzimuth']
-      insertdata.jilinPitchAngle = data['jilinPitchAngle']
-      insertdata.jilinReverse1 = data['jilinReverse1']
-      insertdata.jilinTemperature = data['jilinTemperature']
-      insertdata.jilinReverse2 = data['jilinReverse2']
-      insertdata.jilinEnd = data['jilinEnd']
-      insertdata.end = data['end']
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': software})
+      // insertdata = {}
+      // currentData = []
+      // insertdata.start = data['start']
+      // insertdata.counter = data['counter']
+      // insertdata.hour = data['hour']
+      // insertdata.minute = data['minute']
+      // insertdata.second = data['second']
+      // insertdata.millisecond = data['millisecond']
+      // insertdata.kashiStart = data['kashiStart']
+      // insertdata.kashiCounter = data['kashiCounter']
+      // insertdata.kashiHour = data['kashiHour']
+      // insertdata.kashiMinute = data['kashiMinute']
+      // insertdata.kashiSecond = data['kashiSecond']
+      // insertdata.kashiMillisecond = data['kashiMillisecond']
+      // insertdata.kashiReverse = data['kashiReverse']
+      // insertdata.kashiAzimuth = data['kashiAzimuth']
+      // insertdata.kashiPitchAngle = data['kashiPitchAngle']
+      // insertdata.kashiReverse1 = data['kashiReverse1']
+      // insertdata.kashiTemperature = data['kashiTemperature']
+      // insertdata.kashiReverse2 = data['kashiReverse2']
+      // insertdata.kashiEnd = data['kashiEnd']
+      //
+      // insertdata.sanyaStart = data['sanyaStart']
+      // insertdata.sanyaCounter = data['sanyaCounter']
+      // insertdata.sanyaHour = data['sanyaHour']
+      // insertdata.sanyaMinute = data['sanyaMinute']
+      // insertdata.sanyaSecond = data['sanyaSecond']
+      // insertdata.sanyaiMillisecond = data['sanyaiMillisecond']
+      // insertdata.sanyaReverse = data['sanyaReverse']
+      // insertdata.sanyaAzimuth = data['sanyaAzimuth']
+      // insertdata.sanyaPitchAngle = data['sanyaPitchAngle']
+      // insertdata.sanyaReverse1 = data['sanyaReverse1']
+      // insertdata.sanyaTemperature = data['sanyaTemperature']
+      // insertdata.sanyaReverse2 = data['sanyaReverse2']
+      // insertdata.sanyaEnd = data['sanyaEnd']
+      //
+      // insertdata.jilinStart = data['jilinStart']
+      // insertdata.jilinCounter = data['jilinCounter']
+      // insertdata.jilinHour = data['jilinHour']
+      // insertdata.jilinMinute = data['jilinMinute']
+      // insertdata.jilinSecond = data['jilinSecond']
+      // insertdata.jilinMillisecond = data['jilinMillisecond']
+      // insertdata.jilinReverse = data['jilinReverse']
+      // insertdata.jilinAzimuth = data['jilinAzimuth']
+      // insertdata.jilinPitchAngle = data['jilinPitchAngle']
+      // insertdata.jilinReverse1 = data['jilinReverse1']
+      // insertdata.jilinTemperature = data['jilinTemperature']
+      // insertdata.jilinReverse2 = data['jilinReverse2']
+      // insertdata.jilinEnd = data['jilinEnd']
+      // insertdata.end = data['end']
+      // currentData.unshift(insertdata)
+      store.commit('change', {'data': data, 'software': software})
       break
     case 'BDSClockCorrection':
       // currentData = store.state.BDSClockCorrection
@@ -241,7 +234,74 @@ function queuePush (software, data) {
       // currentData.unshift(insertList)
       store.commit('change', {'data': data, 'software': software})
       break
-
+    case 'GroundStationWorkStateInfo':
+      // currentData = store.state.GroundStationWorkStateInfo
+      // insertdata = {}
+      // insertdata.week = data['week']
+      // insertdata.sec = data['sec']
+      // insertdata.groundID1 = data['groundID1']
+      // insertdata.baseBandState1 = data['baseBandState1']
+      // insertdata.baseBandID1 = data['baseBandID1']
+      // insertdata.baseBandWorkState1 = data['baseBandWorkState1']
+      // insertdata.c1UPBlockState1 = data['c1UPBlockState1']
+      // insertdata.c1UPWorkState1 = data['c1UPWorkState1']
+      // insertdata.c1DOWNBlockState1 = data['c1DOWNBlockState1']
+      // insertdata.c1UPFrequency1 = data['c1UPFrequency1']
+      // insertdata.c1DOWNFrequency1 = data['c1DOWNFrequency1']
+      // insertdata.c1DOWNWorkState1 = data['c1DOWNWorkState1']
+      // insertdata.c1DOWNState1 = data['c1DOWNState1']
+      // insertdata.c1UPState1 = data['c1UPState1']
+      //
+      // insertdata.groundID2 = data['groundID2']
+      // insertdata.baseBandState2 = data['baseBandState2']
+      // insertdata.baseBandID2 = data['baseBandID2']
+      // insertdata.baseBandWorkState2 = data['baseBandWorkState2']
+      // insertdata.c1DOWNFrequency2 = data['c1DOWNFrequency2']
+      // insertdata.c1DOWNBlockState2 = data['c1DOWNBlockState2']
+      // insertdata.c1UPFrequency2 = data['c1UPFrequency2']
+      // insertdata.c1UPWorkState2 = data['c1UPWorkState2']
+      // insertdata.c1UPBlockState2 = data['c1UPBlockState2']
+      // insertdata.c1DOWNWorkState2 = data['c1DOWNWorkState2']
+      // insertdata.c1UPState2 = data['c1UPState2']
+      // insertdata.c1DOWNState2 = data['c1DOWNState2']
+      //
+      // insertdata.groundID3 = data['groundID3']
+      // insertdata.baseBandState3 = data['baseBandState3']
+      // insertdata.baseBandID3 = data['baseBandID3']
+      // insertdata.baseBandWorkState3 = data['baseBandWorkState3']
+      // insertdata.c1UPFrequency3 = data['c1UPFrequency3']
+      // insertdata.c1DOWNWorkState3 = data['c1DOWNWorkState3']
+      // insertdata.c1UPWorkState3 = data['c1UPWorkState3']
+      // insertdata.c1DOWNBlockState3 = data['c1DOWNBlockState3']
+      // insertdata.c1DOWNFrequency3 = data['c1DOWNFrequency3']
+      // insertdata.c1DOWNState3 = data['c1DOWNState3']
+      // insertdata.c1UPState3 = data['c1UPState3']
+      // if (currentData === null || currentData === undefined) {
+      //   currentData = []
+      // }
+      // if (currentData.length >= LIST_COUNT) {
+      //   currentData = currentData.slice(0, LIST_COUNT - 1)
+      // }
+      // currentData.unshift(insertdata)
+      store.commit('change', {'data': data, 'software': software})
+      break
+    case 'BDSBroadcastClockDifference':
+      // currentData = store.state.BDSBroadcastClockDifference
+      // insertList = []
+      // currentData = []
+      // for (let i = 0; i < data.length; i++) {
+      //   insertdata = {}
+      //   insertdata.station = data[i]['station']
+      //   insertdata.time = data[i]['time']
+      //   insertdata.svid = data[i]['svid']
+      //   insertdata.b3I = data[i]['b3I']
+      //   insertdata.b1I = data[i]['b1I']
+      //   insertdata.b2A = data[i]['b2A']
+      //   insertList.push(insertdata)
+      // }
+      // currentData.unshift(insertList)
+      store.commit('change', {'data': data, 'software': software})
+      break
     // 有多少显示多少
     case 'BDSSatTimeClockDifference':
       store.commit('change', {'data': data, 'software': 'BDSSatTimeClockDifference'})
@@ -265,23 +325,6 @@ function queuePush (software, data) {
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'GnssSystemClockDifference'})
-      break
-    case 'BDSBroadcastClockDifference':
-      // currentData = store.state.BDSBroadcastClockDifference
-      // insertList = []
-      // currentData = []
-      // for (let i = 0; i < data.length; i++) {
-      //   insertdata = {}
-      //   insertdata.station = data[i]['station']
-      //   insertdata.time = data[i]['time']
-      //   insertdata.svid = data[i]['svid']
-      //   insertdata.b3I = data[i]['b3I']
-      //   insertdata.b1I = data[i]['b1I']
-      //   insertdata.b2A = data[i]['b2A']
-      //   insertList.push(insertdata)
-      // }
-      // currentData.unshift(insertList)
-      store.commit('change', {'data': data, 'software': software})
       break
     case 'BDTClockDifference':
       currentData = store.state.BDTClockDifference
@@ -313,57 +356,6 @@ function queuePush (software, data) {
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'BroadcastEphemerisWarningInfo'})
-      break
-    case 'GroundStationWorkStateInfo':
-      currentData = store.state.GroundStationWorkStateInfo
-      insertdata = {}
-      insertdata.week = data['week']
-      insertdata.sec = data['sec']
-      insertdata.groundID1 = data['groundID1']
-      insertdata.baseBandState1 = data['baseBandState1']
-      insertdata.baseBandID1 = data['baseBandID1']
-      insertdata.baseBandWorkState1 = data['baseBandWorkState1']
-      insertdata.c1UPBlockState1 = data['c1UPBlockState1']
-      insertdata.c1UPWorkState1 = data['c1UPWorkState1']
-      insertdata.c1DOWNBlockState1 = data['c1DOWNBlockState1']
-      insertdata.c1UPFrequency1 = data['c1UPFrequency1']
-      insertdata.c1DOWNFrequency1 = data['c1DOWNFrequency1']
-      insertdata.c1DOWNWorkState1 = data['c1DOWNWorkState1']
-      insertdata.c1DOWNState1 = data['c1DOWNState1']
-      insertdata.c1UPState1 = data['c1UPState1']
-
-      insertdata.groundID2 = data['groundID2']
-      insertdata.baseBandState2 = data['baseBandState2']
-      insertdata.baseBandID2 = data['baseBandID2']
-      insertdata.baseBandWorkState2 = data['baseBandWorkState2']
-      insertdata.c1DOWNFrequency2 = data['c1DOWNFrequency2']
-      insertdata.c1DOWNBlockState2 = data['c1DOWNBlockState2']
-      insertdata.c1UPFrequency2 = data['c1UPFrequency2']
-      insertdata.c1UPWorkState2 = data['c1UPWorkState2']
-      insertdata.c1UPBlockState2 = data['c1UPBlockState2']
-      insertdata.c1DOWNWorkState2 = data['c1DOWNWorkState2']
-      insertdata.c1UPState2 = data['c1UPState2']
-      insertdata.c1DOWNState2 = data['c1DOWNState2']
-
-      insertdata.groundID3 = data['groundID3']
-      insertdata.baseBandState3 = data['baseBandState3']
-      insertdata.baseBandID3 = data['baseBandID3']
-      insertdata.baseBandWorkState3 = data['baseBandWorkState3']
-      insertdata.c1UPFrequency3 = data['c1UPFrequency3']
-      insertdata.c1DOWNWorkState3 = data['c1DOWNWorkState3']
-      insertdata.c1UPWorkState3 = data['c1UPWorkState3']
-      insertdata.c1DOWNBlockState3 = data['c1DOWNBlockState3']
-      insertdata.c1DOWNFrequency3 = data['c1DOWNFrequency3']
-      insertdata.c1DOWNState3 = data['c1DOWNState3']
-      insertdata.c1UPState3 = data['c1UPState3']
-      if (currentData === null || currentData === undefined) {
-        currentData = []
-      }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'GroundStationWorkStateInfo'})
       break
     case 'NTSCTimeDifferenceData':
       currentData = store.state.NTSCTimeDifferenceData
@@ -424,8 +416,8 @@ function queuePush (software, data) {
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
+      if (currentData.length >= GNSS_SYSTEM_CLOCK_DIFFERENCE_LIST_COUNT) {
+        currentData = currentData.slice(0, GNSS_SYSTEM_CLOCK_DIFFERENCE_LIST_COUNT - 1)
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'WorkingStateInfoBDGNSSSystemClock'})
@@ -437,6 +429,9 @@ function queuePush (software, data) {
       insertdata.said = data['said']
       insertdata.stid = data['stid']
       insertdata.daty = data['daty']
+      // let ercd = new Uint8Array(6)
+      // ercd.toString()
+      console.log(typeof data['ercd'])
       insertdata.ercd = data['ercd']
       insertdata.emln = data['emln']
       insertdata.ermg = data['ermg']
@@ -456,7 +451,7 @@ function queuePush (software, data) {
       insertdata.name = data.software
       insertdata.info = data.dataType
       insertdata.result = data.info
-      console.log('insertData:----------------------------------', insertdata)
+      // console.log('insertData:----------------------------------', insertdata)
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -502,11 +497,16 @@ function queuePush (software, data) {
       break
     case 'realTimeView':
       if (data.result) {
-        store.state['Color' + data.software] = 'blue'
+        if (store.state['Color' + data.software] === 'red') {
+          store.state['Color' + data.software] = 'blue'
+          store.state.DiagramChange = !store.state.DiagramChange
+        }
       } else {
-        store.state['Color' + data.software] = 'red'
+        if (store.state['Color' + data.software] === 'blue') {
+          store.state['Color' + data.software] = 'red'
+          store.state.DiagramChange = !store.state.DiagramChange
+        }
       }
-      store.state.DiagramChange = !store.state.DiagramChange
       break
     case 'alert notify':
       switch (data.software) {

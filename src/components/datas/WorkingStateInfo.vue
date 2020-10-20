@@ -31,6 +31,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -39,7 +40,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms02taskType"
-        label="信号监测子系统7.3米L天线任务类型">
+        label="7.3米L天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms02startTime"
@@ -59,6 +60,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -67,7 +69,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms03taskType"
-        label="信号监测子系统7.3米C天线任务类型">
+        label="7.3米C天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms03startTime"
@@ -87,6 +89,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -95,7 +98,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms04taskType"
-        label="信号监测子系统13米C/L_1天线任务类型">
+        label="13米C/L_1天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms04startTime"
@@ -115,6 +118,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -123,7 +127,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms05taskType"
-        label="信号监测子系统13米C/L_2天线任务类型">
+        label="13米C/L_2天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms05startTime"
@@ -143,6 +147,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -151,7 +156,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms06taskType"
-        label="信号监测子系统MS06天线任务类型">
+        label="MS06天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms06startTime"
@@ -171,6 +176,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -179,7 +185,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms07taskType"
-        label="信号监测子系统MS07天线任务类型">
+        label="MS07天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms07startTime"
@@ -199,6 +205,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -207,7 +214,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms08taskType"
-        label="信号监测子系统MS08天线任务类型">
+        label="MS08天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms08startTime"
@@ -227,6 +234,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -235,7 +243,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms09taskType"
-        label="信号监测子系统MS09天线任务类型">
+        label="MS09天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms09startTime"
@@ -255,6 +263,7 @@
       </el-table-column>
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -263,7 +272,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms10taskType"
-        label="信号监测子系统MS010天线任务类型">
+        label="MS010天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms10startTime"
@@ -284,6 +293,7 @@
 
     </el-table>
     <el-table
+      class="table"
       :data="this.$store.state.WorkingStateInfo"
       header-cell-class-name="tableHeaderCell"
       highlight-current-row
@@ -292,7 +302,7 @@
       style="width: 100%">
       <el-table-column
         prop="ms11taskType"
-        label="信号监测子系统MS011天线任务类型">
+        label="MS011天线任务类型">
       </el-table-column>
       <el-table-column
         prop="ms11startTime"

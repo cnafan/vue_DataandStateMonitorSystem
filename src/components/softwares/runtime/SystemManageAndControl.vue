@@ -7,8 +7,8 @@
             <keep-alive>
               <NavSatSignalQuality :data="this.$store.state.NavSatSignalQuality"></NavSatSignalQuality>
             </keep-alive>
-            <el-select @visible-change="visibleChangeValue(false)" class="componentSelect"
-                       v-model="SignalComponentSelect" placeholder="请选择">
+            <el-select class="componentSelect"
+                       v-model="SignalComponentSelect" placeholder="请选择" default-first-option>
               <el-option
                 v-for="item in SignalComponentOptions"
                 :key="item.value"
@@ -20,14 +20,13 @@
               <SignalComponent :data="this.getSignalComponent"></SignalComponent>
             </keep-alive>
           </el-tab-pane>
-
           <el-tab-pane label="全向天线导航卫星信号质量监测结果" name="全向天线导航卫星信号质量监测结果">
             <!--            <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>-->
             <keep-alive>
               <NavSatSignalQualityAllDirection
                 :data="this.$store.state.NavSatSignalQualityAllDirection"></NavSatSignalQualityAllDirection>
             </keep-alive>
-            <el-select @visible-change="visibleChangeValue(false)" class="componentSelect"
+            <el-select  class="componentSelect"
                        v-model="SatComponentSelect" placeholder="请选择">
               <el-option
                 v-for="item in SatComponentOptions"
@@ -39,7 +38,7 @@
             <keep-alive>
               <SatComponent :data="this.getSatComponent"></SatComponent>
             </keep-alive>
-            <el-select @visible-change="visibleChangeValue(false)" class="componentSelect"
+            <el-select  class="componentSelect"
                        v-model="FrequencyComponentSelect" placeholder="请选择">
               <el-option
                 v-for="item in FrequencyComponentOptions"
@@ -51,7 +50,7 @@
             <keep-alive>
               <FrequencyComponent :data="this.getFrequencyComponent"></FrequencyComponent>
             </keep-alive>
-            <el-select @visible-change="visibleChangeValue(false)" class="componentSelect"
+            <el-select class="componentSelect"
                        v-model="SignalComponentAllDirectionSelect" placeholder="请选择">
               <el-option
                 v-for="item in SignalComponentAllDirectionOptions"
@@ -76,7 +75,6 @@
     </el-tabs>
   </div>
 </template>
-
 <script>
 import NavSatSignalQuality from '../../datas/NavSat/NavSatSignalQuality'
 import SignalComponent from '../../datas/NavSat/SignalComponent'
@@ -106,75 +104,104 @@ export default {
   computed: {
     getSignalComponent: function () {
       if (this.SignalComponentSelect != null) {
-        return this.$store.state.SignalComponent.slice(this.SignalComponentSelect, this.SignalComponentSelect + 1)
+        return this.$store.state.SignalComponent.slice(Number(this.SignalComponentSelect), Number(this.SignalComponentSelect) + 1)
       } else {
         return []
       }
     },
     getSatComponent: function () {
       if (this.SatComponentSelect != null) {
-        return this.$store.state.SatComponent.slice(this.SatComponentSelect, this.SatComponentSelect + 1)
+        return this.$store.state.SatComponent.slice(Number(this.SatComponentSelect), Number(this.SatComponentSelect) + 1)
       } else {
         return []
       }
     },
     getFrequencyComponent: function () {
-      // console.log('this.SatComponentSelect', this.SatComponentSelect)
-      // console.log('FrequencyComponent', this.$store.state.FrequencyComponent)
-      // [this.SatComponentSelect]
       if (this.SatComponentSelect != null && this.FrequencyComponentSelect != null) {
-        return this.$store.state.FrequencyComponent[this.SatComponentSelect].slice(this.FrequencyComponentSelect, this.FrequencyComponentSelect + 1)
+        return this.$store.state.FrequencyComponent[Number(this.SatComponentSelect)].slice(Number(this.FrequencyComponentSelect), Number(this.FrequencyComponentSelect) + 1)
       } else {
         return []
       }
     },
     getSignalComponentAllDirection: function () {
       if (this.SatComponentSelect != null && this.FrequencyComponentSelect != null && this.SignalComponentAllDirectionSelect != null) {
-        return this.$store.state.SignalComponentAllDirection[this.SatComponentSelect][this.FrequencyComponentSelect].slice(this.SignalComponentAllDirectionSelect, this.SignalComponentAllDirectionSelect + 1)
+        return this.$store.state.SignalComponentAllDirection[Number(this.SatComponentSelect)][Number(this.FrequencyComponentSelect)].slice(Number(this.SignalComponentAllDirectionSelect), Number(this.SignalComponentAllDirectionSelect) + 1)
       } else {
         return []
       }
+    },
+    navSignalComponentChange () {
+      return this.$store.state.SignalComponent
+    },
+    navSatComponentChange () {
+      return this.$store.state.SatComponent
+    },
+    navFrequencyComponentChange () {
+      return this.$store.state.FrequencyComponent
+    },
+    navSignalComponentAllDirectionChange () {
+      return this.$store.state.SignalComponentAllDirection
+    }
+  },
+  watch: {
+    navSignalComponentChange () {
+      this.initSignalComponentSelect()
+    },
+    navSatComponentChange () {
+      this.initSatComponentSelect()
+    },
+    navFrequencyComponentChange () {
+      this.initFrequencyComponentSelect()
+    },
+    navSignalComponentAllDirectionChange () {
+      this.initSignalAllDirectionComponentSelect()
     }
   },
   methods: {
     handleClick (tab, event) {
       // console.log(tab, event)
     },
-    initSignalComponent () {
+    initSignalComponentSelect () {
       this.SignalComponentOptions = []
       for (let i = 0; i < this.$store.state.SignalComponent.length; i++) {
-        this.SignalComponentOptions[i] = {value: i, label: '信号分量 ' + (i + 1)}
+        this.SignalComponentOptions[i] = {value: String(i), label: '信号分量 ' + (i + 1)}
+      }
+      if (this.SignalComponentOptions.length > 0) {
+        this.SignalComponentSelect = String(0)
       }
     },
-    initSatComponent () {
+    initSatComponentSelect () {
       this.SatComponentOptions = []
       for (let i = 0; i < this.$store.state.SatComponent.length; i++) {
-        this.SatComponentOptions[i] = {value: i, label: '卫星 ' + (i + 1)}
+        this.SatComponentOptions[i] = {value: String(i), label: '卫星 ' + (i + 1)}
+      }
+      if (this.SatComponentOptions.length > 0) {
+        this.SatComponentSelect = String(0)
       }
     },
-    initFrequencyComponent () {
+    initFrequencyComponentSelect () {
       this.FrequencyComponentOptions = []
       if (this.SatComponentSelect === null) {
         return
       }
       for (let i = 0; i < this.$store.state.FrequencyComponent[this.SatComponentSelect].length; i++) {
-        this.FrequencyComponentOptions[i] = {value: i, label: '频点 ' + (i + 1)}
+        this.FrequencyComponentOptions[i] = {value: String(i), label: '频点 ' + (i + 1)}
+      }
+      if (this.FrequencyComponentOptions.length > 0) {
+        this.FrequencyComponentSelect = String(0)
       }
     },
-    initSignalComponentAllDirection () {
+    initSignalAllDirectionComponentSelect () {
       this.SignalComponentAllDirectionOptions = []
       if (this.SatComponentSelect === null || this.FrequencyComponentSelect === null) {
         return
       }
       for (let i = 0; i < this.$store.state.SignalComponentAllDirection[this.SatComponentSelect][this.FrequencyComponentSelect].length; i++) {
-        this.SignalComponentAllDirectionOptions[i] = {value: i, label: '分量 ' + (i + 1)}
+        this.SignalComponentAllDirectionOptions[i] = {value: String(i), label: '分量 ' + (i + 1)}
       }
-    },
-    visibleChangeValue () {
-      this.initSignalComponent()
-      this.initSatComponent()
-      this.initFrequencyComponent()
-      this.initSignalComponentAllDirection()
+      if (this.SignalComponentAllDirectionOptions.length > 0) {
+        this.SignalComponentAllDirectionSelect = String(0)
+      }
     }
   },
   components: {
@@ -189,5 +216,6 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 </style>

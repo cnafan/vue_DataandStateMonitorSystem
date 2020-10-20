@@ -1,6 +1,7 @@
 <template>
   <div id="splansh" style="width: 100%">
-    <el-card shadow="hover" class="box-card" style="width: 660px;height: calc(100% - 20px)">
+    <el-card shadow="hover" class="box-card" style="width: 100%;height: calc(100% - 20px)">
+
       <div slot="header" class="clearfix">
         <span>实时监控各分系统运行状态</span>
       </div>
@@ -62,120 +63,125 @@ export default {
         'nodeDataArray': [
           {
             'key': 1,
-            'pos': '-170 -48',
+            'pos': '-200 -50',
             'icon': 'natgas',
             'color': this.$store.state.ColorSystemManageAndControl,
             'text': '系统管理控制软件',
-            'description': ''
+            'description': '',
+            'img': 'static/images/logo.png'
           },
           {
             'key': 2,
-            'pos': '-170 300',
+            'pos': '-200 300',
             'icon': 'oil',
             'color': this.$store.state.ColorSatIntegratedDataManagement,
             'text': '卫星综合管理',
-            'description': ''
-          },
-          {
-            'key': 3,
-            'pos': '-170 90',
-            'icon': 'gasprocessing',
-            'color': this.$store.state.ColorBDGNSSSystemClockMonitor,
-            'text': 'GNSS时差数据综合处理',
-            'description': ''
-          },
-          {
-            'key': 4,
-            'pos': '40 -50',
-            'icon': 'fractionation',
-            'color': this.$store.state.ColorDateAndStateMonitorReceive,
-            'text': '数据与状态监控\n接受端',
-            'description': ''
-          },
-          {
-            'key': 5,
-            'pos': '140 -50',
-            'icon': 'pyrolysis',
-            'color': this.$store.state.ColorDateAndStateMonitorSend,
-            'text': '数据与状态监控\n发送端',
-            'description': ''
-          },
-          {
-            'key': 7,
-            'pos': '333 -50',
-            'icon': 'polymerization',
-            'color': this.$store.state.ColorDataService,
-            'text': '数据服务软件',
-            'description': ''
+            'description': '',
+            'img': 'static/images/logo.png'
           },
           {
             'key': 9,
-            'pos': '340 120',
+            'pos': '200 300',
+            'icon': 'pyrolysis',
             'color': this.$store.state.ColorVLBI,
             'text': 'VLBI站控软件',
-            'description': ''
+            'description': '',
+            'img': 'static/images/logo.png'
+          },
+          {
+            'key': 3,
+            'pos': '0 -50',
+            'icon': 'gasprocessing',
+            'color': this.$store.state.ColorBDGNSSSystemClockMonitor,
+            'text': 'GNSS时差数据综合处理',
+            'description': '',
+            'img': 'static/images/logo.png'
+          },
+          {
+            'key': 4,
+            'pos': '0 130',
+            'icon': 'fractionation',
+            'color': this.$store.state.ColorDateAndStateMonitor,
+            'text': '数据与状态监控',
+            'description': '',
+            'img': 'static/images/logo.png'
+          },
+          {
+            'key': 7,
+            'pos': '200 -50',
+            'icon': 'polymerization',
+            'color': this.$store.state.ColorDataService,
+            'text': '数据服务软件',
+            'description': '',
+            'img': 'static/images/logo.png'
           },
           {
             'key': 10,
-            'pos': '340 210',
+            'pos': '-50 300',
             'icon': 'finishedgas',
             'color': this.$store.state.ColorAtomicClockSignal,
             'text': '原子钟信号监测',
-            'description': ''
+            'description': '',
+            'img': 'static/images/logo.png'
           },
           {
             'key': 11,
-            'pos': '340 300',
+            'pos': '50 300',
             'icon': 'finishedgas',
             'color': this.$store.state.ColorStateMonitorAndWarning,
             'text': '状态告警软件',
-            'description': ''
+            'description': '',
+            'img': 'static/images/logo.png'
           }
         ],
         'linkDataArray': [
           {
+            // 系统管理控制软件(-200 -50) - 数据与状态监控(0 130)
             'from': 1,
             'to': 4,
-            'points': [-150, -41, 20, -41]
+            'points': [-200, -50, -200, 40, -20, 40, -20, 110]
           },
           {
+            // 数据与状态监控(0 130) - 数据服务软件(200 -50)
+            'from': 4,
+            'to': 7,
+            'fromSpot': 'Right',
+            'points': [20, 110, 20, 40, 200, 40, 200, -50]
+          },
+          {
+            // 卫星综合管理(-250 300) - 数据与状态监控(0 130)
             'from': 2,
             'to': 4,
-            'points': [-150, 310, -35, 310, -35, -22, 25, -22]
+            // 'points': [-200, 300, -200, 200, -50, 200, -50, 130] // 方案2
+            'points': [-200, 300, -200, 130, -50, 130] // 方案3
           },
           {
-            'from': 3,
-            'to': 4,
-            'points': [-150, 98, -45, 98, -45, -32, 25, -32]
-          },
-          {
-            'from': 4,
-            'to': 5,
-            'points': [60, -37, 120, -37]
-          },
-          {
-            'from': 11,
-            'to': 4,
-            'toSpot': 'BottomSide',
-            'points': [324, 307, 170, 307, 30, 307, 30, -12]
-          },
-          {
-            'from': 10,
-            'to': 4,
-            'toSpot': 'BottomSide',
-            'points': [320, 217, 40, 217, 40, -2, 40, -12]
-          },
-          {
+            // VLBI站控软件(250 300) - 数据与状态监控(0 130)
             'from': 9,
             'to': 4,
             'fromSpot': 'TopSide',
-            'points': [340, 127, 340, 97, 50, 97, 50, -12]
+            // 'points': [200, 300, 200, 200, 50, 200, 50, 130] // 方案2
+            'points': [200, 300, 200, 130, 50, 130] // 方案2
           },
           {
-            'from': 5,
-            'to': 7,
-            'fromSpot': 'Right',
-            'points': [160, -37, 320, -37]
+            // GNSS时差数据综合处理(0 -50) - 数据与状态监控(0 130)
+            'from': 3,
+            'to': 4,
+            'points': [0, -50, 0, 130]
+          },
+          {
+            // 状态告警软件(50 300) - 数据与状态监控(0 130)
+            'from': 11,
+            'to': 4,
+            'toSpot': 'BottomSide',
+            'points': [50, 300, 10, 300, 10, 130]
+          },
+          {
+            // 原子钟信号监测(-50 300) - 数据与状态监控(0 130)
+            'from': 10,
+            'to': 4,
+            'toSpot': 'BottomSide',
+            'points': [-50, 300, -10, 300, -10, 130]
           }
         ]
       }
@@ -280,27 +286,35 @@ export default {
             //     $(go.Shape, 'Rectangle', {fill: 'white', stroke: null})
             //   )
           })
-
+      this.myDiagram.grid.visible = true
       this.myDiagram.nodeTemplate =
         $(go.Node, 'Spot',
           {
+            // isShadowed: true,
             locationObjectName: 'PORT',
-            locationSpot: go.Spot.Top, // location point is the middle top of the PORT
+            locationSpot: go.Spot.Center, // location point is the middle top of the PORT
             // linkConnected: this.updatePortHeight,
             // linkDisconnected: this.updatePortHeight,
+
             toolTip:
               $('ToolTip',
                 $(go.TextBlock, {margin: 4, width: 140},
                   new go.Binding('text', '', function (data) {
-                    return data.text + ':\n\n' + data.description
+                    return data.text + ':\n' + data.description
                   }))
                 // new go.Binding('text', '', null))
               )
           },
+          // 边框
+          // $(go.Shape, 'Border', {minSize: new go.Size(180, 100), fill: 'transparent'}, new go.Binding('stroke')),
+          // $(go.Shape, { geometryString: 'F M0 0 L80 0 B-90 90 80 20 20 20 L100 100 20 100 B90 90 20 80 20 20z', fill: 'transparent' }, new go.Binding('stroke')),
           new go.Binding('location', 'pos', go.Point.parse).makeTwoWay(go.Point.stringify),
           // The main element of the Spot panel is a vertical panel housing an optional icon,
           // plus a rectangle that acts as the port
           $(go.Panel, 'Vertical',
+            // $(go.Picture,
+            //   { maxSize: new go.Size(50, 50) },
+            //   new go.Binding('source', 'img')),
             $(go.Shape,
               {
                 width: 40,
@@ -314,20 +328,20 @@ export default {
               }),
               new go.Binding('fill', 'color', this.colorFunc),
               new go.Binding('geometry', 'icon', this.geoFunc)),
-            $(go.Shape,
-              {
-                name: 'PORT',
-                width: 40,
-                height: 24,
-                margin: new go.Margin(-1, 0, 0, 0),
-                stroke: null,
-                strokeWidth: 0,
-                fill: 'gray',
-                portId: '',
-                fromLinkable: true,
-                toLinkable: true
-              },
-              new go.Binding('fill', 'color', this.colorFunc)),
+            // $(go.Shape,
+            //   {
+            //     name: 'PORT',
+            //     width: 40,
+            //     height: 24,
+            //     margin: new go.Margin(-1, 0, 0, 0),
+            //     stroke: null,
+            //     strokeWidth: 0,
+            //     fill: 'gray',
+            //     portId: '',
+            //     fromLinkable: true,
+            //     toLinkable: true
+            //   },
+            //   new go.Binding('fill', 'color', this.colorFunc)),
             $(go.TextBlock,
               {
                 font: 'Bold 14px Lato, sans-serif',
@@ -368,20 +382,6 @@ export default {
         )
       this.myDiagram.animationManager.initialAnimationStyle = go.AnimationManager.AnimateLocations
       this.updateDiagram()
-
-      // this.myDiagram.model = go.Model.fromJson(this.models)
-      // this.myDiagram.links.each(function (link) {
-      //   let animation = new go.Animation()
-      //   animation.easing = go.Animation.EaseLinear
-      //   let shape = link.findObject('PIPE')
-      //   shape.opacity = 1
-      //   animation.add(shape, 'strokeDashOffset', 200, 20)
-      //   // animation.duration = 1000 + (Math.random() * 2000)
-      //   animation.duration = 8000
-      //   animation.reversible = false // Re-run backwards
-      //   animation.runCount = Infinity // Animate forever
-      //   animation.start()
-      // })
     },
     updateDiagram () {
       this.myDiagram.model = go.Model.fromJson(this.models)

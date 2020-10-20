@@ -111,6 +111,12 @@ import SignalComponentAllDirection from '../../datas/NavSatAllDirection/SignalCo
 
 export default {
   name: 'SatIntegratedDataManagement',
+  created () {
+    this.initSignalComponentSelect()
+    this.initSatComponentSelect()
+    this.initFrequencyComponentSelect()
+    this.initSignalAllDirectionComponentSelect()
+  },
   data () {
     return {
       activeName: 'BDS3空间信号质量监测结果数据',

@@ -87,6 +87,12 @@ import SignalComponentAllDirection from '../../datas/NavSatAllDirection/SignalCo
 
 export default {
   name: 'SystemManageAndControl',
+  created () {
+    this.initSignalComponentSelect()
+    this.initSatComponentSelect()
+    this.initFrequencyComponentSelect()
+    this.initSignalAllDirectionComponentSelect()
+  },
   data () {
     return {
       activeName: '导航卫星信号质量监测结果',

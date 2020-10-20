@@ -267,16 +267,16 @@ const store = new Vuex.Store({
       }
     ],
     NetConfig: {
-      'BDGNSSSystemClockMonitorReceivePort': 60602,
-      'SatIntegratedDataManagementReceivePort': 60603,
-      'AtomicClockSignalReceivePort': 60605,
-      'StateMonitorAndWarningPort': 60604,
-      'SystemManageAndControlReceivePort': 60601,
-      'VLBIReceivePort': 60606,
-      'DataServiceSoftwareSendIp': '127.0.0.1',
-      'DataServiceSoftwareSendPort': 60701,
-      'SystemManageAndControlSendIp': '192.168.206.71',
-      'SystemManageAndControlSendPort': 7801
+      'BDGNSSSystemClockMonitorReceivePort': 0,
+      'SatIntegratedDataManagementReceivePort': 0,
+      'AtomicClockSignalReceivePort': 0,
+      'StateMonitorAndWarningPort': 0,
+      'SystemManageAndControlReceivePort': 0,
+      'VLBIReceivePort': 0,
+      'DataServiceSoftwareSendIp': '',
+      'DataServiceSoftwareSendPort': 0,
+      'SystemManageAndControlSendIp': '',
+      'SystemManageAndControlSendPort': 0
       // 'SystemManageAndControlIp': '0.0.0.0',
       // 'BDGNSSSystemClockMonitorIp': '0.0.0.0',
       // 'SatIntegratedDataManagementIp': '0.0.0.0',
@@ -293,8 +293,8 @@ const store = new Vuex.Store({
     ColorBDGNSSSystemClockMonitor: 'blue',
     ColorSatIntegratedDataManagement: 'blue',
     ColorStateMonitorAndWarning: 'red',
-    ColorDateAndStateMonitorSend: 'orange',
-    ColorDateAndStateMonitorReceive: 'blue',
+    ColorDateAndStateMonitor: 'orange',
+    // ColorDateAndStateMonitorReceive: 'blue',
     ColorVLBI: 'blue',
     ColorDataService: 'blue',
     SystemInfo: [],
@@ -337,6 +337,18 @@ const store = new Vuex.Store({
     notifyComponentChange (state, payload) {
       state[payload['software']] = payload['notifyComponent']
     },
+    initNetConfig (state, payload) {
+      state.NetConfig.SystemManageAndControlReceivePort = payload.SystemManageAndControlReceivePort
+      state.NetConfig.VLBIReceivePort = payload.VLBIReceivePort
+      state.NetConfig.DataServiceSoftwareSendIp = payload.DataServiceSoftwareSendIp
+      state.NetConfig.SystemManageAndControlSendPort = payload.SystemManageAndControlSendPort
+      state.NetConfig.BDGNSSSystemClockMonitorReceivePort = payload.BDGNSSSystemClockMonitorReceivePort
+      state.NetConfig.SatIntegratedDataManagementReceivePort = payload.SatIntegratedDataManagementReceivePort
+      state.NetConfig.DataServiceSoftwareSendPort = payload.DataServiceSoftwareSendPort
+      state.NetConfig.AtomicClockSignalReceivePort = payload.AtomicClockSignalReceivePort
+      state.NetConfig.StateMonitorAndWarningPort = payload.StateMonitorAndWarningPort
+      state.NetConfig.SystemManageAndControlSendIp = payload.SystemManageAndControlSendIp
+    },
     initData (state, data) {
       state.VLBIWorkState = data.VLBIWorkState
       state.GroundStationWorkStateInfo = data.GroundStationWorkStateInfo
@@ -355,6 +367,7 @@ const store = new Vuex.Store({
 
       state.NavSatSignalQuality = data.NavSatSignalQuality
       state.SignalComponent = data.SignalComponent
+
       state.BDNavSatSignalQuality = data.BDNavSatSignalQuality
       state.BDSignalComponent = data.BDSignalComponent
 
@@ -362,6 +375,11 @@ const store = new Vuex.Store({
       state.SatComponent = data.SatComponent
       state.FrequencyComponent = data.FrequencyComponent
       state.SignalComponentAllDirection = data.SignalComponentAllDirection
+
+      state.BDNavSatSignalQualityAllDirection = data.BDNavSatSignalQualityAllDirection
+      state.BDSatComponent = data.BDSatComponent
+      state.BDFrequencyComponent = data.BDFrequencyComponent
+      state.BDSignalComponentAllDirection = data.BDSignalComponentAllDirection
     },
     modify (state, data) {
       state.data = data
@@ -499,12 +517,12 @@ const store = new Vuex.Store({
         case 'ColorStateMonitorAndWarning':
           state.ColorStateMonitorAndWarning = payload['data']
           break
-        case 'ColorDateAndStateMonitorSend':
-          state.ColorDateAndStateMonitorSend = payload['data']
+        case 'ColorDateAndStateMonitor':
+          state.ColorDateAndStateMonitor = payload['data']
           break
-        case 'ColorDateAndStateMonitorReceive':
-          state.ColorDateAndStateMonitorReceive = payload['data']
-          break
+        // case 'ColorDateAndStateMonitorReceive':
+        //   state.ColorDateAndStateMonitorReceive = payload['data']
+        //   break
         case 'ColorVLBI':
           state.ColorVLBI = payload['data']
           break

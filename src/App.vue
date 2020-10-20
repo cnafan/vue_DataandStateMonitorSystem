@@ -14,7 +14,8 @@ export default {
     Main
   },
   created () {
-    // this.initFromDatabase()
+    this.initFromDatabase()
+    this.initFormNetConfig()
     connect()
     // 保存vuex
     // if (localStorage.getItem('store')) {
@@ -28,6 +29,11 @@ export default {
     initFromDatabase () {
       this.$post('getRecentData', {}).then(response => {
         this.$store.commit('initData', response.data)
+      })
+    },
+    initFormNetConfig () {
+      this.$post('api/getNetConfig').then(response => {
+        this.$store.commit('initNetConfig', response.data)
       })
     }
   }

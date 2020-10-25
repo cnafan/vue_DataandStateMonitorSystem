@@ -42,7 +42,7 @@ export default {
       // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
       switch (argument) {
         case 'VLBIWorkState':
-          this.$post('findVLBIWorkStateByTime', formData).then((response) => {
+          this.$post('findVLBIWorkStateByTime', formData, 'VLBI工作状态').then((response) => {
             // console.log(response)
             this.VLBIWorkState = response.data
           })

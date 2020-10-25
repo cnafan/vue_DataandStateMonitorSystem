@@ -27,12 +27,12 @@ export default {
   },
   methods: {
     initFromDatabase () {
-      this.$post('getRecentData', {}).then(response => {
+      this.$post('getRecentData', {}, '历史数据').then(response => {
         this.$store.commit('initData', response.data)
       })
     },
     initFormNetConfig () {
-      this.$post('api/getNetConfig').then(response => {
+      this.$post('api/getNetConfig', {}, '网络配置').then(response => {
         this.$store.commit('initNetConfig', response.data)
       })
     }

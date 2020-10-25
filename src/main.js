@@ -11,7 +11,7 @@ import 'default-passive-events'
 // import 'echarts-gl'
 // Vue.component('v-chart', ECharts)
 import '../static/css/fontello-embedded.css'
-import {fetch, post} from './utils/axios'
+import {fetch, post, postStandard} from './utils/axios'
 import {
   Alert,
   Aside, Backtop,
@@ -85,6 +85,7 @@ Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 Vue.prototype.$post = post
+Vue.prototype.$postStandard = postStandard
 Vue.prototype.$get = fetch
 Vue.config.productionTip = false
 

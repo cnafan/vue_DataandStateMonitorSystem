@@ -33,7 +33,7 @@
               <!--chrome-extension://kphkondodeojfcodfegfglmdeondhlbc/test1/charts.jpg-->
               <el-image
                 style="width: 300px;height: 250px"
-                src="http://localhost:8082/getImage"
+                :src="srcPath"
                 fit="scale-down"></el-image>
             </div>
             <div slot="reference" class="name-wrapper">
@@ -222,16 +222,22 @@ export default {
   },
   data () {
     return {
-      srcdata: null
+      srcData: null
     }
   },
-  created () {
-    this.$post('getImage', {}).then(response => {
-      this.srcdata = response.data
-      // console.log(response.data)
-    })
+  computed: {
+    srcPath: function () {
+      console.log('imgPath', this.data[0].path)
+      return 'http://localhost:8082/getImage?path=' + this.data[0].path
+    }
   },
   methods: {
+    getImage () {
+      this.$post('getImage', {}).then(response => {
+        this.srcData = response.data
+        // console.log(response.data)
+      })
+    },
     getComponent () {
       if (this.$store.getters.getData['SignalComponent'] === undefined) {
         return []

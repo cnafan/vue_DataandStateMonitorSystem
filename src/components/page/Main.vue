@@ -2,24 +2,24 @@
   <div id="main-app">
 
     <el-header id="header">
-<!--      <el-row id="el_row_header">-->
-<!--        <el-page-header @back="navModify" title="" :content="this.$route.name">-->
-<!--        </el-page-header>-->
-<!--      </el-row>-->
-            <el-row id="el_row_header">
-              <el-col :span="1">
-                <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>
-              </el-col>
-              <el-col :span="21">
-                <div>{{ this.$route.name }}</div>
-              </el-col>
-              <el-col :span="1">
-                <i class="el-icon-edit" style="font-size: 25px;" @click="editorClick"></i>
-              </el-col>
-              <el-col :span="1">
-                <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>
-              </el-col>
-            </el-row>
+      <!--      <el-row id="el_row_header">-->
+      <!--        <el-page-header @back="navModify" title="" :content="this.$route.name">-->
+      <!--        </el-page-header>-->
+      <!--      </el-row>-->
+      <el-row id="el_row_header">
+        <el-col :span="1">
+          <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>
+        </el-col>
+        <el-col :span="21">
+          <div>{{ this.$route.name }}</div>
+        </el-col>
+        <el-col :span="1">
+          <i class="el-icon-edit" style="font-size: 25px;" @click="editorClick"></i>
+        </el-col>
+        <el-col :span="1">
+          <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>
+        </el-col>
+      </el-row>
       <el-row>
         <el-divider id="header-divider"></el-divider>
       </el-row>
@@ -94,13 +94,13 @@
         <el-divider></el-divider>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item prop="DataServiceSoftwareSendIp" label="数据服务软件IP" :label-width="settingFormLabelWidth">
+            <el-form-item prop="DataServiceSoftwareSendIp" label="数据服务软件 IP" :label-width="settingFormLabelWidth">
               <el-input v-model="settingForm.DataServiceSoftwareSendIp" autocomplete="off"
                         placeholder="ip"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="数据服务软件Port" :label-width="settingFormLabelWidth">
+            <el-form-item label="数据服务软件 Port" :label-width="settingFormLabelWidth">
               <el-input-number v-model="settingForm.DataServiceSoftwareSendPort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
@@ -109,16 +109,32 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item prop="SystemManageAndControlSendIp" label="系统管理控制软件IP" :label-width="settingFormLabelWidth">
+            <el-form-item prop="SystemManageAndControlSendIp" label="系统管理控制软件 IP" :label-width="settingFormLabelWidth">
               <el-input v-model="settingForm.SystemManageAndControlSendIp" autocomplete="off"
                         placeholder="ip"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="系统管理控制软件Port" :label-width="settingFormLabelWidth">
+            <el-form-item label="系统管理控制软件 Port" :label-width="settingFormLabelWidth">
               <el-input-number v-model="settingForm.SystemManageAndControlSendPort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <p style="text-align: center">监控配置</p>
+        <el-divider></el-divider>
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item prop="MonitorServerIp" label="监控服务器 IP" :label-width="settingFormLabelWidth">
+              <el-input v-model="settingForm.MonitorServerIp" autocomplete="off"
+                        placeholder="ip"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item prop="MonitorClientIp" label="监控客户端 IP" :label-width="settingFormLabelWidth">
+              <el-input v-model="settingForm.MonitorClientIp" autocomplete="off"
+                        placeholder="ip"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -134,6 +150,7 @@
 <script>
 
 import Menu from '../common/Menu'
+import storageUtils from '../../utils/storageUtils'
 
 export default {
   name: 'Main',
@@ -150,7 +167,8 @@ export default {
     }
     return {
       headerName: '数据与状态监控软件',
-      isCollapse: this.$store.state.MenuIsCollapse,
+      isCollapse: storageUtils.readData('MenuIsCollapse'),
+      // isCollapse: this.$store.state.MenuIsCollapse,
       EditorDialogTitle: '修改配置',
       EditorDialogVisible: false,
       settingFormLabelWidth: '120px',
@@ -160,6 +178,14 @@ export default {
           trigger: 'blur'
         }],
         SystemManageAndControlSendIp: [{
+          validator: checkIp,
+          trigger: 'blur'
+        }],
+        MonitorServerIp: [{
+          validator: checkIp,
+          trigger: 'blur'
+        }],
+        MonitorClientIp: [{
           validator: checkIp,
           trigger: 'blur'
         }]
@@ -312,6 +338,7 @@ export default {
     },
     navModify () {
       this.isCollapse = !this.isCollapse
+      storageUtils.saveData('MenuIsCollapse', this.isCollapse)
       this.$store.commit('change', {'software': 'MenuIsCollapse', 'data': this.isCollapse})
     },
     foldStatus () {
@@ -332,7 +359,7 @@ export default {
           this.EditorDialogVisible = false
           // this.$store.commit('setDialog', false)
           // console.log(JSON.stringify(this.settingFormItems))
-          this.$post('api/netconfig', this.$store.state.NetConfig
+          this.$postStandard('api/netconfig', this.$store.state.NetConfig
             // data: JSON.stringify(this.settingFormItems)
           ).then(response => {
             this.$store.commit('change', {'data': this.settingForm, 'software': 'NetConfig'})
@@ -357,15 +384,16 @@ export default {
                 break
             }
             // storageUtils.saveNetConfig(this.settingFormItems)
-          }).catch(error => {
-            console.log(error)
-            this.$notify.error({
-              title: '异常',
-              message: '配置更新异常! ' + error,
-              offset: 30,
-              duration: 0
-            })
           })
+            .catch(error => {
+              // console.log(error)
+              this.$notify.error({
+                title: '异常',
+                message: '配置更新异常! ' + error,
+                offset: 30,
+                duration: 0
+              })
+            })
         } else {
           console.log('未通过验证！')
           return false
@@ -374,18 +402,6 @@ export default {
     },
     editorDialogCancel () {
       this.EditorDialogVisible = false
-    },
-    Notify (message) {
-      let notify = this.$notify.error({
-        title: '错误',
-        dangerouslyUseHTMLString: true,
-        message: message,
-        offset: 30,
-        duration: 0
-      })
-      // this.$store.commit('addNotify', notify)
-      // console.log(notify, 'hi')
-      return notify
     }
   }
 

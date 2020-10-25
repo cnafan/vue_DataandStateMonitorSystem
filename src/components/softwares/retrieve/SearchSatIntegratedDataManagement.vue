@@ -258,32 +258,32 @@ export default {
       formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
       switch (argument) {
         case 'BDTClockDifference':
-          this.$post('findBDTClockCorrectionByTime', formData).then((response) => {
+          this.$post('findBDTClockCorrectionByTime', formData, 'UTC与BDT的钟差').then((response) => {
             // console.log(response)
             this.BDTClockDifference = response.data.BDTClockDifference
           })
           break
         case 'BDSBroadcastClockDifference':
-          this.$post('findBDSBroadcastClockCorrectionByTime', formData).then((response) => {
+          this.$post('findBDSBroadcastClockCorrectionByTime', formData, 'UTC与BDS3广播北斗钟差').then((response) => {
             // console.log(response)
             this.BDSBroadcastClockDifference = response.data.BDSBroadcastClockDifference
           })
           break
         case 'BDSClockCorrection':
-          this.$post('findBDSClockCorrectionByTime', formData).then((response) => {
+          this.$post('findBDSClockCorrectionByTime', formData, 'BDS3星钟改正数').then((response) => {
             // console.log(response)
             this.BDSClockCorrection = response.data.BDSClockCorrection
           })
           break
         case 'BDSClockDifference':
-          this.$post('findBDSClockDifferenceByTime', formData).then((response) => {
+          this.$post('findBDSClockDifferenceByTime', formData, 'UTC与BDS3卫星钟差').then((response) => {
             // console.log(response)
             this.BDSSatTimeClockDifference = response.data['BDSSatTimeClockDifference']
             this.BDSClockDifference = response.data['BDSClockDifference']
           })
           break
         case 'BDNavSatSignalQuality':
-          this.$post('findSpaceQualityResultByTime', formData).then((response) => {
+          this.$post('findSpaceQualityResultByTime', formData, '定向BDS-3信号质量').then((response) => {
             // console.log(response.data)
             this.NavSatSignalQuality = response.data['BDNavSatSignalQuality']
             this.SignalComponent = response.data['BDSignalComponent']
@@ -291,7 +291,7 @@ export default {
           })
           break
         case 'BDNavSatSignalQualityAllDirection':
-          this.$post('findSpaceQualityResultAllDirectionByTime', formData).then((response) => {
+          this.$post('findSpaceQualityResultAllDirectionByTime', formData, '全向BDS-3信号质量').then((response) => {
             // console.log(response.data)
             this.NavSatSignalQualityAllDirection = response.data['BDNavSatSignalQualityAllDirection']
             this.SatComponent = response.data['BDSatComponent']

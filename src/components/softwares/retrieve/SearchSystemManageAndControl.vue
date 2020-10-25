@@ -245,16 +245,28 @@ export default {
           this.$post('findIrregularByTime', formData).then((response) => {
             // console.log(response)
             this.NavSatIrregularMonitor = response.data
+          }).catch(error => {
+            this.$notify.error({
+              title: '异常',
+              message: '查询异常! ' + error,
+              offset: 30
+            })
           })
           break
         case 'WorkingStateInfo':
           this.$post('findWorkStateByTime', formData).then((response) => {
             // console.log(response)
             this.WorkingStateInfo = response.data
+          }).catch(error => {
+            this.$notify.error({
+              title: '异常',
+              message: '查询异常! ' + error,
+              offset: 30
+            })
           })
           break
         case 'NavSatSignalQuality':
-          this.$post('findNavSatSignalQualityByTime', formData).then((response) => {
+          this.$post('findNavSatSignalQualityByTime', formData, '定向天线查询').then((response) => {
             // console.log(response)
             this.NavSatSignalQuality = response.data['NavSatSignalQuality']
             this.SignalComponent = response.data['SignalComponent']
@@ -262,7 +274,7 @@ export default {
           })
           break
         case 'NavSatSignalQualityAllDirection':
-          this.$post('findNavSatSignalQualityAllDirectionByTime', formData).then((response) => {
+          this.$post('findNavSatSignalQualityAllDirectionByTime', formData, '全向天线查询').then((response) => {
             // console.log(response)
             this.NavSatSignalQualityAllDirection = response.data['NavSatSignalQualityAllDirection']
             this.SatComponent = response.data['SatComponent']

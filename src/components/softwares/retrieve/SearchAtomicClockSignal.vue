@@ -12,8 +12,9 @@
       </el-tab-pane>
       <el-tab-pane label="CAPST-UTC（NTSC）溯源时差模型参数" name="CAPST-UTC（NTSC）溯源时差模型参数">
         <keep-alive>
-          <MultipleSearchBar :search-rules="searchRulesNTSCTimeDifferenceModelPara"  :limit=2 target="NTSCTimeDifferenceModelPara" @callSearch="search($event)"
-                     :option="this.$store.state.LabelNTSCTimeDifferenceModelPara"></MultipleSearchBar>
+          <MultipleSearchBar :search-rules="searchRulesNTSCTimeDifferenceModelPara" :limit=2
+                             target="NTSCTimeDifferenceModelPara" @callSearch="search($event)"
+                             :option="this.$store.state.LabelNTSCTimeDifferenceModelPara"></MultipleSearchBar>
         </keep-alive>
 
         <keep-alive>
@@ -61,7 +62,7 @@ export default {
         case 'NTSCTimeDifferenceData':
           formData = {}
           formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
-          this.$post('findNTSCTimeDifferenceByData', formData).then((response) => {
+          this.$post('findNTSCTimeDifferenceByData', formData, 'NTSC溯源时差数据').then((response) => {
             // console.log(response)
             this.NTSCTimeDifferenceData = response.data
           })
@@ -73,7 +74,7 @@ export default {
             formData[this.$store.state.SearchItem[i]] = input[i]
           }
           // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
-          this.$post('findNTSCTimeDifferenceParaByTime', formData).then((response) => {
+          this.$post('findNTSCTimeDifferenceParaByTime', formData, 'NTSC溯源时差模型').then((response) => {
             // console.log(response)
             this.NTSCTimeDifferenceModelPara = response.data
           })

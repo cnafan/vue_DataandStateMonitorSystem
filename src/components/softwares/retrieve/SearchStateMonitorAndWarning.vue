@@ -35,7 +35,7 @@ export default {
       formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
       switch (argument) {
         case 'GroundStationWorkStateInfo':
-          this.$post('findGroundStationByTime', formData).then((response) => {
+          this.$post('findGroundStationByTime', formData, '地面站工作状态').then((response) => {
             // console.log(response)
             this.GroundStationWorkStateInfo = response.data
           })

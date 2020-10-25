@@ -55,7 +55,7 @@ export default {
             formData[this.$store.state.SearchItem[i]] = input[i]
           }
           // formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
-          this.$post('findGNSSSystemClockDifference', formData).then((response) => {
+          this.$post('findGNSSSystemClockDifference', formData, 'GNSS系统时差数据').then((response) => {
             // console.log(response)
             this.GnssSystemClockDifference = response.data
           })
@@ -63,7 +63,7 @@ export default {
         case 'WorkingStateInfoBDGNSSSystemClock':
           formData = {}
           formData[this.$store.state.SearchItem] = this.$store.state.SearchInput
-          this.$post('findGNSSSystemWorkState', formData).then((response) => {
+          this.$post('findGNSSSystemWorkState', formData, 'GNSS工作状态').then((response) => {
             // console.log(response)
             this.WorkingStateInfoBDGNSSSystemClock = response.data
           })

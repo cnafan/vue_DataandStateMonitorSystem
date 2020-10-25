@@ -276,7 +276,9 @@ const store = new Vuex.Store({
       'DataServiceSoftwareSendIp': '',
       'DataServiceSoftwareSendPort': 0,
       'SystemManageAndControlSendIp': '',
-      'SystemManageAndControlSendPort': 0
+      'SystemManageAndControlSendPort': 0,
+      'MonitorServerIp': '',
+      'MonitorClientIp': ''
       // 'SystemManageAndControlIp': '0.0.0.0',
       // 'BDGNSSSystemClockMonitorIp': '0.0.0.0',
       // 'SatIntegratedDataManagementIp': '0.0.0.0',

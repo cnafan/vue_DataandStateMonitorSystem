@@ -27,6 +27,11 @@
       <!--            el-icon-info-->
       <span slot="title">日志中心</span>
     </el-menu-item>
+    <el-menu-item index="/monitor">
+      <i class="icon-chart-bar"></i>
+      <!--            el-icon-info-->
+      <span slot="title">监控中心</span>
+    </el-menu-item>
     <el-submenu v-for="item in SearchItems" :index="item.index" :key="item.index">
       <template slot="title">
         <i :class="item.class"></i>
@@ -43,6 +48,7 @@
         </el-menu-item>
       </el-submenu>
     </el-submenu>
+
   </el-menu>
 </template>
 <script>

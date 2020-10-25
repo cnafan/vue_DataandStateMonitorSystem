@@ -16,6 +16,7 @@ import SearchVLBI from '../components/softwares/retrieve/SearchVLBI'
 import SearchStateMonitorAndWarning from '../components/softwares/retrieve/SearchStateMonitorAndWarning'
 import SearchBDGNSSSystemClockMonitor from '../components/softwares/retrieve/SearchBDGNSSSystemClockMonitor'
 import SearchAtomicClockSignal from '../components/softwares/retrieve/SearchAtomicClockSignal'
+import Monitor from '../components/page/Monitor'
 
 Vue.use(Router)
 
@@ -100,6 +101,11 @@ export default new Router({
       path: '/SearchVLBI',
       name: '查询 - VLBI站控软件',
       component: SearchVLBI
+    },
+    {
+      path: '/monitor',
+      name: '监控中心',
+      component: Monitor
     },
     {
       path: '/test',

@@ -13,7 +13,7 @@
 //   console.log(error, 'error')
 // })
 import axios from 'axios'
-
+import {NOTIFICATION_OFFSET} from '../../config/display'
 axios.defaults.timeout = 8000
 axios.defaults.baseURL = 'http://localhost:8082/'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -101,7 +101,7 @@ export function post (url, data, title) {
           this.$notify.error({
             title: '异常',
             message: error.response.data,
-            offset: 30
+            offset: NOTIFICATION_OFFSET
           })
         // console.log(error.response.data)
         // console.log(error.response.status)
@@ -111,14 +111,14 @@ export function post (url, data, title) {
           this.$notify.error({
             title: title + '请求异常',
             message: error.request,
-            offset: 30
+            offset: NOTIFICATION_OFFSET
           })
         // console.log(error.request)
         } else {
           this.$notify.error({
             title: title + '异常',
             message: error.message,
-            offset: 30
+            offset: NOTIFICATION_OFFSET
           })
         // console.log('Error', error.message)
         }

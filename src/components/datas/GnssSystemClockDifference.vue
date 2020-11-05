@@ -9,7 +9,10 @@
       stripe
       border
       style="width: 100%">
-
+      <el-table-column
+        prop="currentTime"
+        label="时标">
+      </el-table-column>
       <el-table-column
         prop="measName"
         label="数据类型">

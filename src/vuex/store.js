@@ -290,6 +290,7 @@ const store = new Vuex.Store({
     SearchInput: '',
     SearchItem: '',
     MenuIsCollapse: false,
+    menuWidth: 0,
     ColorSystemManageAndControl: 'blue',
     ColorAtomicClockSignal: 'blue',
     ColorBDGNSSSystemClockMonitor: 'blue',
@@ -350,6 +351,8 @@ const store = new Vuex.Store({
       state.NetConfig.AtomicClockSignalReceivePort = payload.AtomicClockSignalReceivePort
       state.NetConfig.StateMonitorAndWarningPort = payload.StateMonitorAndWarningPort
       state.NetConfig.SystemManageAndControlSendIp = payload.SystemManageAndControlSendIp
+      state.NetConfig.MonitorServerIp = payload.MonitorServerIp
+      state.NetConfig.MonitorClientIp = payload.MonitorClientIp
     },
     initData (state, data) {
       state.VLBIWorkState = data.VLBIWorkState
@@ -493,7 +496,7 @@ const store = new Vuex.Store({
           state.ReceiveInfo = payload['data']
           break
         case 'NetConfig':
-          state.NetConfig = payload['data']
+          state.NetConfig = Object.assign({}, state.NetConfig, payload['data'])
           break
         case 'SearchInput':
           state.SearchInput = payload['data']
@@ -530,6 +533,9 @@ const store = new Vuex.Store({
           break
         case 'ColorDataService':
           state.ColorDataService = payload['data']
+          break
+        case 'menuWidth':
+          state.menuWidth = payload['data'] - 30
           break
         default:
           break

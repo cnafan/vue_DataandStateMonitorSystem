@@ -17,7 +17,8 @@
               </el-option>
             </el-select>
             <keep-alive>
-              <SignalComponent :data="this.getSignalComponent"></SignalComponent>
+              <SignalComponent :father-data="getSignalComponentFatherData"
+                               :data="this.getSignalComponent"></SignalComponent>
             </keep-alive>
           </el-tab-pane>
           <el-tab-pane label="全向天线导航卫星信号质量监测结果" name="全向天线导航卫星信号质量监测结果">
@@ -26,7 +27,7 @@
               <NavSatSignalQualityAllDirection
                 :data="this.$store.state.NavSatSignalQualityAllDirection"></NavSatSignalQualityAllDirection>
             </keep-alive>
-            <el-select  class="componentSelect"
+            <el-select class="componentSelect"
                        v-model="SatComponentSelect" placeholder="请选择">
               <el-option
                 v-for="item in SatComponentOptions"
@@ -38,7 +39,7 @@
             <keep-alive>
               <SatComponent :data="this.getSatComponent"></SatComponent>
             </keep-alive>
-            <el-select  class="componentSelect"
+            <el-select class="componentSelect"
                        v-model="FrequencyComponentSelect" placeholder="请选择">
               <el-option
                 v-for="item in FrequencyComponentOptions"
@@ -48,7 +49,8 @@
               </el-option>
             </el-select>
             <keep-alive>
-              <FrequencyComponent :data="this.getFrequencyComponent"></FrequencyComponent>
+              <FrequencyComponent :father-data="getFrequencyComponentFatherData"
+                                  :data="this.getFrequencyComponent"></FrequencyComponent>
             </keep-alive>
             <el-select class="componentSelect"
                        v-model="SignalComponentAllDirectionSelect" placeholder="请选择">
@@ -60,8 +62,8 @@
               </el-option>
             </el-select>
             <keep-alive>
-              <SignalComponentAllDirection
-                :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
+              <SignalComponentAllDirection :father-data="getSignalComponentAllDirectionFatherData"
+                                           :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
             </keep-alive>
           </el-tab-pane>
         </el-tabs>
@@ -108,6 +110,36 @@ export default {
     }
   },
   computed: {
+    getSignalComponentFatherData: function () {
+      console.log('said', this.$store.state.NavSatSignalQuality)
+      if (this.$store.state.NavSatSignalQuality.length > 0) {
+        return {
+          'said': this.$store.state.NavSatSignalQuality[0].said,
+          'sifr': this.$store.state.NavSatSignalQuality[0].sifr
+        }
+      } else {
+        return {}
+      }
+    },
+    getFrequencyComponentFatherData: function () {
+      if (this.$store.state.SatComponent.length > 0) {
+        return {
+          'satid': this.$store.state.SatComponent[Number(this.SatComponentSelect)].satID
+        }
+      } else {
+        return {}
+      }
+    },
+    getSignalComponentAllDirectionFatherData: function () {
+      if (this.$store.state.SatComponent.length > 0 && this.$store.state.NavSatSignalQuality.length > 0) {
+        return {
+          'satid': this.$store.state.SatComponent[Number(this.SatComponentSelect)].satID,
+          'sifr': this.$store.state.NavSatSignalQuality[0].sifr
+        }
+      } else {
+        return {}
+      }
+    },
     getSignalComponent: function () {
       if (this.SignalComponentSelect != null) {
         return this.$store.state.SignalComponent.slice(Number(this.SignalComponentSelect), Number(this.SignalComponentSelect) + 1)

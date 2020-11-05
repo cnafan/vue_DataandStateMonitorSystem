@@ -1,17 +1,17 @@
 <template>
   <div id="splansh" style="width: 100%">
-    <el-card shadow="hover" class="box-card" style="width: 100%;height: calc(100% - 20px)">
+    <el-card shadow="hover" class="box-card" style="width: 550px;height: calc(100% - 20px)">
 
       <div slot="header" class="clearfix">
         <span>实时监控各分系统运行状态</span>
       </div>
       <div id="myDiagramDiv"
            style="pointer-events: auto;width: 100%; height: 550px; display: inline-block; vertical-align: top; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); cursor: auto;">
-        <canvas id="spalash" tabindex="0" width="948" height="822"
-                style="position: absolute; top: 0; left: 0; z-index: 2; user-select: none; width: 632px; height: 548px; cursor: auto;">
+        <canvas tabindex="0"  height="822"
+                style="position: absolute; top: 0; left: 0; z-index: 2; user-select: none;  height: 548px; cursor: auto;">
           This text is displayed if your browser does not support the Canvas HTML element.
         </canvas>
-        <div style="position: absolute; overflow: auto; width: 632px; height: 548px; z-index: 1;">
+        <div style="position: absolute; overflow: auto; width: 100%; height: 100%; z-index: 1;">
           <div style="position: absolute; width: 1px; height: 1px;"></div>
         </div>
       </div>
@@ -286,7 +286,8 @@ export default {
             //     $(go.Shape, 'Rectangle', {fill: 'white', stroke: null})
             //   )
           })
-      this.myDiagram.grid.visible = true
+      // 表格背景
+      // this.myDiagram.grid.visible = true
       this.myDiagram.nodeTemplate =
         $(go.Node, 'Spot',
           {
@@ -469,7 +470,7 @@ export default {
 </script>
 
 <style scoped>
-#splansh {
+#myDiagramDiv {
+  /*background-image: url("../../../static/images/back.jpg");*/
 }
-
 </style>

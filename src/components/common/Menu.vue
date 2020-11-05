@@ -1,10 +1,19 @@
 <template>
+  <!--  text-color="#303133"-->
+  <!--  active-text-color="#E6A23C"-->
+
+  <!--  深色-->
+  <!--  background-color="#545c64"-->
+  <!--  text-color="#fff"-->
+  <!--  active-text-color="#ffd04b"-->
+
   <el-menu
+    id="navMenu"
     class="sidebar-el-menu"
     :default-active="$route.path"
     :collapse="menuIsCollapse"
     text-color="#303133"
-    active-text-color="#E6A23C"
+    active-text-color="#fafafa"
     router
   >
     <el-menu-item index="/splansh">
@@ -22,16 +31,6 @@
         {{ subItem.title }}
       </el-menu-item>
     </el-submenu>
-    <el-menu-item index="/log">
-      <i class="icon-info-circled"></i>
-      <!--            el-icon-info-->
-      <span slot="title">日志中心</span>
-    </el-menu-item>
-    <el-menu-item index="/monitor">
-      <i class="icon-chart-bar"></i>
-      <!--            el-icon-info-->
-      <span slot="title">监控中心</span>
-    </el-menu-item>
     <el-submenu v-for="item in SearchItems" :index="item.index" :key="item.index">
       <template slot="title">
         <i :class="item.class"></i>
@@ -49,6 +48,16 @@
       </el-submenu>
     </el-submenu>
 
+    <el-menu-item index="/log">
+      <i class="icon-info-circled"></i>
+      <!--            el-icon-info-->
+      <span slot="title">日志中心</span>
+    </el-menu-item>
+    <el-menu-item index="/monitor">
+      <i class="icon-chart-bar"></i>
+      <!--            el-icon-info-->
+      <span slot="title">监控中心</span>
+    </el-menu-item>
   </el-menu>
 </template>
 <script>
@@ -61,6 +70,7 @@ export default {
   name: 'Menu',
   data () {
     return {
+      // isCollapse: false,
       items: [
         {
           index: '2',
@@ -171,7 +181,23 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    // console.log('initmenu:', document.getElementById('navMenu').offsetWidth)
+    this.$store.commit('change', {software: 'menuWidth', 'data': document.getElementById('navMenu').offsetWidth})
   }
+  // methods: {
+  //   navModify () {
+  //     this.isCollapse = !this.isCollapse
+  //   },
+  //   foldStatus () {
+  //     if (this.isCollapse === true) {
+  //       return 'el-icon-right'
+  //     } else {
+  //       return 'el-icon-back'
+  //     }
+  //   }
+  // }
 }
 </script>
 

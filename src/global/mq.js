@@ -312,8 +312,10 @@ function queuePush (software, data) {
 
     // 数量限制
     case 'GnssSystemClockDifference':
+      console.log('gnss', data)
       currentData = store.state.GnssSystemClockDifference
       insertdata = {}
+      insertdata.currentTime = data.currentTime
       insertdata.measName = data['measName']
       insertdata.measTime = data['measTime']
       insertdata.measValue = data['measValue']
@@ -360,6 +362,7 @@ function queuePush (software, data) {
     case 'NTSCTimeDifferenceData':
       currentData = store.state.NTSCTimeDifferenceData
       insertdata = {}
+      insertdata.currentTime = data.currentTime
       insertdata.week = data['week']
       insertdata.sec = data['sec']
       insertdata.timeDifference = data['timeDifference']
@@ -375,6 +378,7 @@ function queuePush (software, data) {
     case 'NTSCTimeDifferenceModelPara':
       currentData = store.state.NTSCTimeDifferenceModelPara
       insertdata = {}
+      insertdata.currentTime = data.currentTime
       insertdata.week = data['week']
       insertdata.sec = data['sec']
       insertdata.runningState = data['runningState']
@@ -393,6 +397,7 @@ function queuePush (software, data) {
     case 'TimeFrequencyWorkingState':
       currentData = store.state.TimeFrequencyWorkingState
       insertdata = {}
+      insertdata.currentTime = data.currentTime
       insertdata.timeFrequencySystem = data['timeFrequencySystem']
       insertdata.produceSystem = data['produceSystem']
       insertdata.timeServiceSystem = data['timeServiceSystem']
@@ -411,6 +416,7 @@ function queuePush (software, data) {
     case 'WorkingStateInfoBDGNSSSystemClock':
       currentData = store.state.WorkingStateInfoBDGNSSSystemClock
       insertdata = {}
+      insertdata.currentTime = data.currentTime
       insertdata.measTime = data['measTime']
       insertdata.measValue = data['measValue']
       if (currentData === null || currentData === undefined) {
@@ -462,13 +468,18 @@ function queuePush (software, data) {
       store.commit('change', {'data': currentData, 'software': 'SystemInfo'})
       break
     case 'sending info':
+      console.log('sending info', data)
       currentData = store.state.SendInfo
-      // let SendResult = data.match(/(.*):(.*):(.*):(.*)/)
+      let SendResult = data.match(/(.*):(.*):(.*):(.*)/)
       insertdata = {}
-      insertdata.time = data.timestamp
-      insertdata.name = data.software
-      insertdata.info = data.dataType
-      insertdata.result = data.info
+      // insertdata.time = data.timestamp
+      // insertdata.name = data.software
+      // insertdata.info = data.dataType
+      // insertdata.result = data.info
+      insertdata.time = SendResult[1]
+      insertdata.name = SendResult[2]
+      insertdata.info = SendResult[3]
+      insertdata.result = SendResult[4]
       if (currentData === null || currentData === undefined) {
         currentData = []
       }
@@ -479,13 +490,19 @@ function queuePush (software, data) {
       store.commit('change', {'data': currentData, 'software': 'SendInfo'})
       break
     case 'receiving info':
+      console.log('receiving info', data)
       currentData = store.state.ReceiveInfo
-      // let ReceiveResult = data.match(/(.*):(.*):(.*):(.*)/)
+      let ReceiveResult = data.match(/(.*):(.*):(.*):(.*)/)
+      console.log('receiving info', ReceiveResult)
       insertdata = {}
-      insertdata.time = data.timestamp
-      insertdata.name = data.software
-      insertdata.info = data.dataType
-      insertdata.result = data.info
+      // insertdata.time = data.timestamp
+      // insertdata.name = data.software
+      // insertdata.info = data.dataType
+      // insertdata.result = data.info
+      insertdata.time = ReceiveResult[1]
+      insertdata.name = ReceiveResult[2]
+      insertdata.info = ReceiveResult[3]
+      insertdata.result = ReceiveResult[4]
       if (currentData === null || currentData === undefined) {
         currentData = []
       }

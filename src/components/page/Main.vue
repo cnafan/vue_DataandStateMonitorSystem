@@ -1,149 +1,22 @@
 <template>
   <div id="main-app">
-
-    <el-header id="header">
-      <!--      <el-row id="el_row_header">-->
-      <!--        <el-page-header @back="navModify" title="" :content="this.$route.name">-->
-      <!--        </el-page-header>-->
-      <!--      </el-row>-->
-      <el-row id="el_row_header">
-        <el-col :span="1">
-          <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>
-        </el-col>
-        <el-col :span="21">
-          <div>{{ this.$route.name }}</div>
-        </el-col>
-        <el-col :span="1">
-          <i class="el-icon-edit" style="font-size: 25px;" @click="editorClick"></i>
-        </el-col>
-        <el-col :span="1">
-          <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-divider id="header-divider"></el-divider>
-      </el-row>
+    <el-header id="header" style="box-shadow:rgba(52, 56, 85, 0.25) 0 2px 3px 0;">
+      <Header @menuCollapse="menuCollapseFunc"></Header>
     </el-header>
     <el-container id="el-container-header">
-      <!--      <el-aside style="overflow: hidden">-->
-      <el-scrollbar id="el-scrollbar-menu">
-        <Menu :menu-is-collapse="isCollapse"></Menu>
+      <el-scrollbar id="el-scrollbar-menu" style="height: 100%">
+        <Menu class="nav-menu" :menu-is-collapse="isCollapse"></Menu>
       </el-scrollbar>
-      <!--      </el-aside>-->
       <el-main id="el-main">
-        <el-row id="el-row-main">
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
-        </el-row>
-        <el-backtop></el-backtop>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+        <!--        <el-row id="el-row-main">-->
+        <!--        </el-row>-->
+        <!--        <el-backtop></el-backtop>-->
       </el-main>
-    </el-container>
 
-    <el-dialog :title="EditorDialogTitle" :visible.sync="EditorDialogVisible">
-      <el-form :model="settingForm" :rules="rules" ref="NetConfigForm" label-position="top">
-        <p style="text-align: center">接收端配置</p>
-        <el-divider></el-divider>
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="系统管理控制软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.SystemManageAndControlReceivePort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="GNSS时差数据综合处理软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.BDGNSSSystemClockMonitorReceivePort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="原子钟信号监测与自主切换软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.AtomicClockSignalReceivePort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="卫星综合管理软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.SatIntegratedDataManagementReceivePort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="状态监测及告警软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.StateMonitorAndWarningPort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="VLBI站控软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.VLBIReceivePort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <p style="text-align: center">发送端配置</p>
-        <el-divider></el-divider>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item prop="DataServiceSoftwareSendIp" label="数据服务软件 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.DataServiceSoftwareSendIp" autocomplete="off"
-                        placeholder="ip"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="数据服务软件 Port" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.DataServiceSoftwareSendPort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item prop="SystemManageAndControlSendIp" label="系统管理控制软件 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.SystemManageAndControlSendIp" autocomplete="off"
-                        placeholder="ip"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="系统管理控制软件 Port" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.SystemManageAndControlSendPort" controls-position="right"
-                               placeholder="port" :min="1"
-                               :max="99999"></el-input-number>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <p style="text-align: center">监控配置</p>
-        <el-divider></el-divider>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item prop="MonitorServerIp" label="监控服务器 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.MonitorServerIp" autocomplete="off"
-                        placeholder="ip"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item prop="MonitorClientIp" label="监控客户端 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.MonitorClientIp" autocomplete="off"
-                        placeholder="ip"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="editorDialogCancel">取 消</el-button>
-        <el-button @click="editorDialogSubmit('NetConfigForm')" type="primary">确 定</el-button>
-      </div>
-    </el-dialog>
+    </el-container>
   </div>
 </template>
 
@@ -151,10 +24,13 @@
 
 import Menu from '../common/Menu'
 import storageUtils from '../../utils/storageUtils'
+import {NOTIFICATION_OFFSET} from '../../../config/display'
+import Header from '../common/Header'
 
 export default {
   name: 'Main',
   components: {
+    Header,
     Menu
   },
   data () {
@@ -230,7 +106,7 @@ export default {
           let notifyError = this.$notify({
             title: '警告',
             message: this.$store.state.NotifyDataSystemManageAndControl.software + ' 出现故障！',
-            offset: 30,
+            offset: NOTIFICATION_OFFSET,
             type: 'error',
             duration: 0
           })
@@ -246,7 +122,7 @@ export default {
           let notifyError = this.$notify({
             title: '警告',
             message: this.$store.state.NotifyDataAtomicClockSignal.software + ' 出现故障！',
-            offset: 30,
+            offset: NOTIFICATION_OFFSET,
             type: 'error',
             duration: 0
           })
@@ -262,7 +138,7 @@ export default {
           let notifyError = this.$notify({
             title: '警告',
             message: this.$store.state.NotifyDataBDGNSSSystemClockMonitor.software + ' 出现故障！',
-            offset: 30,
+            offset: NOTIFICATION_OFFSET,
             type: 'error',
             duration: 0
           })
@@ -278,7 +154,7 @@ export default {
           let notifyError = this.$notify({
             title: '警告',
             message: this.$store.state.NotifyDataSatIntegratedDataManagement.software + ' 出现故障！',
-            offset: 30,
+            offset: NOTIFICATION_OFFSET,
             type: 'error',
             duration: 0
           })
@@ -294,7 +170,7 @@ export default {
           let notifyError = this.$notify({
             title: '警告',
             message: this.$store.state.NotifyDataStateMonitorAndWarning.software + ' 出现故障！',
-            offset: 30,
+            offset: NOTIFICATION_OFFSET,
             type: 'error',
             duration: 0
           })
@@ -310,7 +186,7 @@ export default {
           let notifyError = this.$notify({
             title: '警告',
             message: this.$store.state.NotifyDataVLBI.software + ' 出现故障！',
-            offset: 30,
+            offset: NOTIFICATION_OFFSET,
             type: 'error',
             duration: 0
           })
@@ -322,86 +198,15 @@ export default {
     }
   },
   methods: {
-    settingOpen () {
-      this.$notify({
-        title: '成功',
-        message: '这是一条成功的提示消息',
-        offset: 30,
-        type: 'success'
-      })
+    menuCollapseFunc (isCollapse) {
+      this.isCollapse = isCollapse
+      // this.$store.commit('change', {software: 'menuWidth', 'data': document.getElementById('navMenu').offsetWidth})
     },
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
-    },
-    navModify () {
-      this.isCollapse = !this.isCollapse
-      storageUtils.saveData('MenuIsCollapse', this.isCollapse)
-      this.$store.commit('change', {'software': 'MenuIsCollapse', 'data': this.isCollapse})
-    },
-    foldStatus () {
-      if (this.isCollapse === true) {
-        return 'el-icon-right'
-      } else {
-        return 'el-icon-back'
-      }
-    },
-    editorClick () {
-      this.EditorDialogVisible = true
-    },
-    editorDialogSubmit (formName) {
-      console.log(this.$refs[formName])
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          // console.log('into true')
-          this.EditorDialogVisible = false
-          // this.$store.commit('setDialog', false)
-          // console.log(JSON.stringify(this.settingFormItems))
-          this.$postStandard('api/netconfig', this.$store.state.NetConfig
-            // data: JSON.stringify(this.settingFormItems)
-          ).then(response => {
-            this.$store.commit('change', {'data': this.settingForm, 'software': 'NetConfig'})
-            // console.log('net config response:')
-            // console.log(response)
-            switch (response.status) {
-              case 200:
-                this.$notify.success({
-                  title: '成功',
-                  message: '配置更新成功! ',
-                  offset: 30,
-                  duration: 2000
-                })
-                break
-              default:
-                this.$notify.error({
-                  title: '错误',
-                  message: '配置更新失败! 错误代码:' + response.status,
-                  offset: 30,
-                  duration: 0
-                })
-                break
-            }
-            // storageUtils.saveNetConfig(this.settingFormItems)
-          })
-            .catch(error => {
-              // console.log(error)
-              this.$notify.error({
-                title: '异常',
-                message: '配置更新异常! ' + error,
-                offset: 30,
-                duration: 0
-              })
-            })
-        } else {
-          console.log('未通过验证！')
-          return false
-        }
-      })
-    },
-    editorDialogCancel () {
-      this.EditorDialogVisible = false
     }
   }
 
@@ -409,8 +214,4 @@ export default {
 </script>
 
 <style scoped>
-.sidebar-el-menu:not(.el-menu--collapse) {
-  width: 300px;
-  min-height: 400px;
-}
 </style>

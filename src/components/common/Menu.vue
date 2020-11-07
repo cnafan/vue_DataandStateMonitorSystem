@@ -51,7 +51,7 @@
     <el-menu-item index="/log">
       <i class="icon-info-circled"></i>
       <!--            el-icon-info-->
-      <span slot="title">日志中心</span>
+      <span slot="title">运行状态</span>
     </el-menu-item>
     <el-menu-item index="/monitor">
       <i class="icon-chart-bar"></i>

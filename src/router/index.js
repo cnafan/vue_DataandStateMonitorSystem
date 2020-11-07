@@ -18,7 +18,7 @@ import SearchBDGNSSSystemClockMonitor from '../components/softwares/retrieve/Sea
 import SearchAtomicClockSignal from '../components/softwares/retrieve/SearchAtomicClockSignal'
 import Monitor from '../components/page/Monitor'
 import Setting from '../components/page/Setting'
-
+// import Splansh2 from '../components/page/Splansh2'
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +33,11 @@ export default new Router({
       name: '数据与状态监控软件',
       component: Splansh
     },
+    // {
+    //   path: '/splansh',
+    //   name: '数据与状态监控软件',
+    //   component: Splansh2
+    // },
     // {
     //   path: '/index',
     //   name: '首页',

@@ -109,8 +109,19 @@
       </el-card>
     </el-form>
     <div style="float: right">
-<!--      <el-button @click="editorDialogSubmit('NetConfigForm')" type="primary">提 交</el-button>-->
-      <vs-button class="submit-button" icon="done" color="primary" type="filled" @click="editorDialogSubmit('NetConfigForm')">提 交</vs-button>
+      <!--      <el-button @click="editorDialogSubmit('NetConfigForm')" type="primary">提 交</el-button>-->
+      <!--      <vs-button class="submit-button" icon="done" color="primary" type="filled" @click="editorDialogSubmit('NetConfigForm')">提 交</vs-button>-->
+      <el-popover
+          placement="top"
+          width="160"
+          v-model="editorConfirmvisible">
+        <p>是否提交 ?</p>
+        <div style="text-align: right; margin: 5px 0 0 0">
+          <el-button size="mini" type="text" @click="editorDialogCancel">取消</el-button>
+          <el-button type="primary" size="mini" @click="editorDialogSubmit('NetConfigForm')">确定</el-button>
+        </div>
+        <el-button slot="reference">提交</el-button>
+      </el-popover>
     </div>
   </div>
 </template>
@@ -128,6 +139,7 @@ export default {
       }
     }
     return {
+      editorConfirmvisible: false,
       settingFormLabelWidth: '120px',
       rules: {
         DataServiceSoftwareSendIp: [{
@@ -151,8 +163,12 @@ export default {
     }
   },
   methods: {
+    editorDialogCancel () {
+      this.editorConfirmvisible = false
+    },
     editorDialogSubmit (formName) {
-      console.log(this.$refs[formName])
+      console.log('formName', this.$refs[formName])
+      this.editorConfirmvisible = false
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$vs.loading()
@@ -211,7 +227,8 @@ export default {
 .el-card-netconfig {
   margin-bottom: 20px;
 }
-.submit-button{
+
+.submit-button {
   margin-bottom: 20px;
 }
 </style>

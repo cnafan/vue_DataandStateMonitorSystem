@@ -100,7 +100,8 @@ export function post (url, data, title) {
         if (error.response) {
           this.$notify.error({
             title: '异常',
-            message: error.response.data,
+            message: '服务器后台出现异常！',
+            // message: error.response.data,
             offset: NOTIFICATION_OFFSET
           })
         // console.log(error.response.data)
@@ -109,15 +110,17 @@ export function post (url, data, title) {
         } else if (error.request) {
           console.log(error.request)
           this.$notify.error({
-            title: title + '请求异常',
-            message: error.request,
+            title: '异常',
+            message: title + '请求错误',
+            // message: error.request,
             offset: NOTIFICATION_OFFSET
           })
         // console.log(error.request)
         } else {
           this.$notify.error({
-            title: title + '异常',
-            message: error.message,
+            title: '异常',
+            message: title + '请求错误',
+            // message: error.message,
             offset: NOTIFICATION_OFFSET
           })
         // console.log('Error', error.message)

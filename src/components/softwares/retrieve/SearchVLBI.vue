@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-page">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="工作状态" name="工作状态">
         <keep-alive>

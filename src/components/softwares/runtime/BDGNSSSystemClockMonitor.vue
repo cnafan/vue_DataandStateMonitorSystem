@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-page">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="GNSS系统时差数据" name="GNSS系统时差数据">
         <GnssSystemClockDifference :data="this.$store.state.GnssSystemClockDifference"></GnssSystemClockDifference>

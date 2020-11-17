@@ -1,13 +1,15 @@
 <template>
-  <div id="monitor-div">
-    <iframe
-      id="iframe-monitor"
-      :src=getMonitorServerAddress
-      scrolling="no"
-      frameborder="0"
-      style="position:absolute;height: calc(100% - 60px)">
-      IE：你们都看我干吗，我现在也是支持的
-    </iframe>
+  <div class="main-page">
+    <div id="monitor-div">
+      <iframe
+        id="iframe-monitor"
+        :src=getMonitorServerAddress
+        scrolling="no"
+        frameborder="0"
+        style="position:absolute;height: calc(100% - 60px)">
+        IE：你们都看我干吗，我现在也是支持的
+      </iframe>
+    </div>
   </div>
 </template>
 

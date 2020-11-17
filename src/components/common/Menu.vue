@@ -10,10 +10,11 @@
   <el-menu
     id="navMenu"
     class="sidebar-el-menu"
+    :background-color="getBackgroundColor"
     :default-active="$route.path"
     :collapse="menuIsCollapse"
-    text-color="#303133"
-    active-text-color="#fafafa"
+    :text-color="getTextColor"
+    :active-text-color="getActiveTextColor"
     router
   >
     <el-menu-item index="/splansh">
@@ -47,7 +48,6 @@
         </el-menu-item>
       </el-submenu>
     </el-submenu>
-
     <el-menu-item index="/log">
       <i class="icon-info-circled"></i>
       <!--            el-icon-info-->
@@ -185,19 +185,33 @@ export default {
   mounted () {
     // console.log('initmenu:', document.getElementById('navMenu').offsetWidth)
     this.$store.commit('change', {software: 'menuWidth', 'data': document.getElementById('navMenu').offsetWidth})
+  },
+  computed: {
+    getTextColor: function () {
+      // console.log('route.name1', this.$route.path)
+      if (this.$route.path === '/splansh') {
+        return '#fafafa'
+      } else {
+        return '#303133'
+      }
+    },
+    getActiveTextColor: function () {
+      // console.log('route.name2', this.$route.name)
+      // if (this.$route.path === '/splansh') {
+      //   return '#303133'
+      // } else {
+      //   return '#fafafa'
+      // }
+      return '#fafafa'
+    },
+    getBackgroundColor: function () {
+      if (this.$route.path === '/splansh') {
+        return '#303133'
+      } else {
+        return '#fafafa'
+      }
+    }
   }
-  // methods: {
-  //   navModify () {
-  //     this.isCollapse = !this.isCollapse
-  //   },
-  //   foldStatus () {
-  //     if (this.isCollapse === true) {
-  //       return 'el-icon-right'
-  //     } else {
-  //       return 'el-icon-back'
-  //     }
-  //   }
-  // }
 }
 </script>
 

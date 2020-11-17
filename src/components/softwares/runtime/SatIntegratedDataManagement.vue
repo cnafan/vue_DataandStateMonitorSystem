@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-page">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="BDS3空间信号质量监测" name="BDS3空间信号质量监测结果数据">
         <el-tabs v-model="activeNameDirection" @tab-click="handleClick">

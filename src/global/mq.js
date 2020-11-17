@@ -54,21 +54,70 @@ function getSoftware (destination) {
   // /exchange/exchange_pushmsg/
 }
 
+function getSoftwareChineseName (name) {
+  switch (name) {
+    case 'NavSatSignalQuality':
+      return '定向天线导航卫星信号质量'
+    case 'BDNavSatSignalQuality':
+      return '定向天线BDS-3空间信号质量'
+    case 'BDNavAll':
+      return '全向天线BDS-3空间信号质量'
+    case 'NavAll':
+      return '全向天线导航卫星信号质量'
+    case 'WorkingStateInfo':
+      return '空间信号质量监测系统工作状态'
+    case 'VLBIWorkState':
+      return 'VLBI工作状态'
+    case 'BDSClockCorrection':
+      return 'BDS3每颗卫星的星钟改正数'
+    case 'GroundStationWorkStateInfo':
+      return '地面站工作状态信息'
+    case 'BDSBroadcastClockDifference':
+      return 'UTC与BDS3每颗卫星广播钟差'
+    case 'BDSSatTimeClockDifference':
+      return 'UTC与BDS3每颗卫星时间的钟差'
+    case 'GnssSystemClockDifference':
+      return 'GNSS系统时差数据'
+    case 'BDTClockDifference':
+      return 'UTC与BDT的钟差'
+    case 'BroadcastEphemerisWarningInfo':
+      return ''
+    case 'NTSCTimeDifferenceData':
+      return 'NTSC溯源时差数据'
+    case 'NTSCTimeDifferenceModelPara':
+      return 'NTSC溯源时差模型参数'
+    case 'TimeFrequencyWorkingState':
+      return '时频工作状态'
+    case 'WorkingStateInfoBDGNSSSystemClock':
+      return 'GNSS系统工作状态'
+    case 'NavSatIrregularMonitor':
+      return '导航卫星异常监测结果'
+    default:
+      return name
+  }
+}
+
+function getCurrentTime () {
+  let now = new Date()
+  return now.getMonth() + '/' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
+}
+
 function queuePush (software, data) {
   let insertdata
   let currentData
   // let insertList
-
   switch (software) {
     // 只显示一条
     case 'NavSatSignalQuality':
       store.commit('change', {'data': data, 'software': software})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'SignalComponent':
       store.commit('change', {'data': data, 'software': software})
       break
     case 'BDNavSatSignalQuality':
       store.commit('change', {'data': data, 'software': software})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'BDSignalComponent':
       store.commit('change', {'data': data, 'software': software})
@@ -84,6 +133,7 @@ function queuePush (software, data) {
         'data': data['BDSignalComponentAllDirection'],
         'software': 'BDSignalComponentAllDirection'
       })
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'NavAll':
       store.commit('change', {
@@ -93,6 +143,7 @@ function queuePush (software, data) {
       store.commit('change', {'data': data['SatComponent'], 'software': 'SatComponent'})
       store.commit('change', {'data': data['FrequencyComponent'], 'software': 'FrequencyComponent'})
       store.commit('change', {'data': data['SignalComponentAllDirection'], 'software': 'SignalComponentAllDirection'})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'WorkingStateInfo':
       // insertdata = {}
@@ -164,6 +215,7 @@ function queuePush (software, data) {
       // insertdata.ms11Result = data['ms11Result']
       // currentData.unshift(insertdata)
       store.commit('change', {'data': data, 'software': software})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'VLBIWorkState':
       // insertdata = {}
@@ -218,6 +270,7 @@ function queuePush (software, data) {
       // insertdata.end = data['end']
       // currentData.unshift(insertdata)
       store.commit('change', {'data': data, 'software': software})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'BDSClockCorrection':
       // currentData = store.state.BDSClockCorrection
@@ -327,6 +380,7 @@ function queuePush (software, data) {
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'GnssSystemClockDifference'})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'BDTClockDifference':
       currentData = store.state.BDTClockDifference
@@ -427,6 +481,7 @@ function queuePush (software, data) {
       }
       currentData.unshift(insertdata)
       store.commit('change', {'data': currentData, 'software': 'WorkingStateInfoBDGNSSSystemClock'})
+      store.commit('addRuntimeScrollBoard', {'name': getSoftwareChineseName(software), 'time': getCurrentTime()})
       break
     case 'NavSatIrregularMonitor':
       currentData = store.state.NavSatIrregularMonitor
@@ -472,22 +527,25 @@ function queuePush (software, data) {
       currentData = store.state.SendInfo
       let SendResult = data.match(/(.*):(.*):(.*):(.*)/)
       insertdata = {}
-      // insertdata.time = data.timestamp
-      // insertdata.name = data.software
-      // insertdata.info = data.dataType
-      // insertdata.result = data.info
-      insertdata.time = SendResult[1]
-      insertdata.name = SendResult[2]
-      insertdata.info = SendResult[3]
-      insertdata.result = SendResult[4]
-      if (currentData === null || currentData === undefined) {
-        currentData = []
+      if ((SendResult !== null && SendResult !== undefined) || SendResult.length() === 5) {
+        // insertdata.time = data.timestamp
+        // insertdata.name = data.software
+        // insertdata.info = data.dataType
+        // insertdata.result = data.info
+        insertdata.time = SendResult[1]
+        insertdata.name = SendResult[2]
+        insertdata.info = SendResult[3]
+        insertdata.result = SendResult[4]
+
+        if (currentData === null || currentData === undefined) {
+          currentData = []
+        }
+        if (currentData.length >= LIST_COUNT) {
+          currentData = currentData.slice(0, LIST_COUNT - 1)
+        }
+        currentData.unshift(insertdata)
+        store.commit('change', {'data': currentData, 'software': 'SendInfo'})
       }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'SendInfo'})
       break
     case 'receiving info':
       console.log('receiving info', data)
@@ -495,22 +553,24 @@ function queuePush (software, data) {
       let ReceiveResult = data.match(/(.*):(.*):(.*):(.*)/)
       console.log('receiving info', ReceiveResult)
       insertdata = {}
-      // insertdata.time = data.timestamp
-      // insertdata.name = data.software
-      // insertdata.info = data.dataType
-      // insertdata.result = data.info
-      insertdata.time = ReceiveResult[1]
-      insertdata.name = ReceiveResult[2]
-      insertdata.info = ReceiveResult[3]
-      insertdata.result = ReceiveResult[4]
-      if (currentData === null || currentData === undefined) {
-        currentData = []
+      if ((ReceiveResult !== null && ReceiveResult !== undefined) || ReceiveResult.length() === 5) {
+        // insertdata.time = data.timestamp
+        // insertdata.name = data.software
+        // insertdata.info = data.dataType
+        // insertdata.result = data.info
+        insertdata.time = ReceiveResult[1]
+        insertdata.name = ReceiveResult[2]
+        insertdata.info = ReceiveResult[3]
+        insertdata.result = ReceiveResult[4]
+        if (currentData === null || currentData === undefined) {
+          currentData = []
+        }
+        if (currentData.length >= LIST_COUNT) {
+          currentData = currentData.slice(0, LIST_COUNT - 1)
+        }
+        currentData.unshift(insertdata)
+        store.commit('change', {'data': currentData, 'software': 'ReceiveInfo'})
       }
-      if (currentData.length >= LIST_COUNT) {
-        currentData = currentData.slice(0, LIST_COUNT - 1)
-      }
-      currentData.unshift(insertdata)
-      store.commit('change', {'data': currentData, 'software': 'ReceiveInfo'})
       break
     case 'realTimeView':
       if (data.result) {

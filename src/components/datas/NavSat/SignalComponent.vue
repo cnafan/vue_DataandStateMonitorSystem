@@ -125,7 +125,7 @@
       </el-table-column>
       <el-table-column
         min-width="1"
-        prop="ccsm"
+        prop="ccsm1"
         label="频内码相位一致性均值">
       </el-table-column>
     </el-table>
@@ -139,28 +139,29 @@
       style="width: 100%">
       <el-table-column
         min-width="1"
-        prop="ccss"
+        prop="ccsm2"
+        label="频内码相位一致性均值">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="ccsm3"
+        label="频内码相位一致性均值">
+      </el-table-column>
+
+      <el-table-column
+        min-width="1"
+        prop="ccss1"
         label="频内码相位一致性标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
-        prop="ccdm"
-        label="频间码相位一致性均值">
+        prop="ccss2"
+        label="频内码相位一致性标准差">
       </el-table-column>
       <el-table-column
         min-width="1"
-        prop="ccds"
-        label="频间码相位一致性标准差">
-      </el-table-column>
-      <el-table-column
-        min-width="1"
-        prop="prsm"
-        label="伪距稳定性均值">
-      </el-table-column>
-      <el-table-column
-        min-width="1"
-        prop="prss"
-        label="伪距稳定性标准差">
+        prop="ccss3"
+        label="频内码相位一致性标准差">
       </el-table-column>
     </el-table>
     <el-table
@@ -173,6 +174,56 @@
       style="width: 100%">
       <el-table-column
         min-width="1"
+        prop="ccdm1"
+        label="频间码相位一致性均值">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="ccdm2"
+        label="频间码相位一致性均值">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="ccdm3"
+        label="频间码相位一致性均值">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="ccds1"
+        label="频间码相位一致性标准差">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="ccds2"
+        label="频间码相位一致性标准差">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="this.data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        min-width="1"
+        prop="ccds3"
+        label="频间码相位一致性标准差">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="prsm"
+        label="伪距稳定性均值">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop="prss"
+        label="伪距稳定性标准差">
+      </el-table-column>
+
+      <el-table-column
+        min-width="1"
         prop="cpsm"
         label="载波相位稳定性均值">
       </el-table-column>
@@ -181,6 +232,15 @@
         prop="cpss"
         label="载波相位稳定性标准差">
       </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="this.data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="dpsm"
@@ -196,19 +256,15 @@
         prop="cnsm"
         label="载噪比稳定性均值">
       </el-table-column>
-    </el-table>
-    <el-table
-      class="table"
-      :data="this.data"
-      header-cell-class-name="tableHeaderCell"
-      highlight-current-row
-      stripe
-      border
-      style="width: 100%">
       <el-table-column
         min-width="1"
         prop="cnss"
         label="载噪比稳定性标准差">
+      </el-table-column>
+      <el-table-column
+        min-width="1"
+        prop=""
+        label="">
       </el-table-column>
     </el-table>
   </div>

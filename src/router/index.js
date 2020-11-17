@@ -25,12 +25,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: '数据与状态监控软件',
+      // 数据与状态监控软件
       redirect: '/splansh'
     },
     {
       path: '/splansh',
-      name: '数据与状态监控软件',
+      name: '.',
       component: Splansh
     },
     // {

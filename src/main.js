@@ -53,9 +53,12 @@ import {fetch, post, postStandard} from './utils/axios'
 //   Tag,
 //   Tooltip
 // } from 'element-ui'
+import fullscreen from 'vue-fullscreen'
+import dataV from '@jiaminghi/data-view'
 import Vuesax from 'vuesax'
+Vue.use(fullscreen)
 Vue.use(Vuesax)
-
+Vue.use(dataV)
 Vue.use(ElementUI)
 // Vue.use(Button)
 // Vue.use(Select)

@@ -68,6 +68,11 @@ body {
 html, body, #app, #main-app {
   height: 100%;
 }
+.main-page{
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
 
 /*.el-table th, .el-table tr{*/
 /*  background-color: transparent!important;*/
@@ -92,7 +97,9 @@ html, body, #app, #main-app {
 }
 
 #el-main.el-main {
-  padding: 20px 15px;
+  /*padding: 20px 15px;*/
+  width: 100%;
+  padding: 0;
   height: 100%;
   /*background-color: #eeeeee;*/
 }
@@ -138,7 +145,8 @@ body {
 
 .nav-menu {
   height: 100%;
-  padding-top: 20px
+  padding-top: 20px;
+  overflow-y: auto;
 }
 
 /*折叠最小宽度*/
@@ -147,7 +155,9 @@ body {
   min-height: 400px;
   height: 100%;
 }
-
+.el-menu{
+  border-right: 0 solid #e6e6e6;
+}
 #header {
   position: fixed;
   z-index: 1500;
@@ -182,7 +192,9 @@ canvas {
   margin-bottom: 10px;
   margin-top: 10px;
 }
-
+.el-menu {
+border: hidden;
+}
 /*.el-menu-item.el-submenu__title {*/
 /*  border-left: #fff solid 6px;*/
 /*}*/
@@ -283,5 +295,16 @@ canvas {
 /*}*/
 .el-link.el-link--default{
   color: #ffffff;
+}
+
+.vs-list--title{
+  color: white;
+}
+
+#detail-info::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+#el-main.el-main::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }
 </style>

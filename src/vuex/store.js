@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {RUNTIME_SCROLL_BOARD_LIST_COUNT} from '../../config/display'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -317,9 +318,32 @@ const store = new Vuex.Store({
     NotifyComponentBDGNSSSystemClockMonitor: [],
     NotifyComponentSatIntegratedDataManagement: [],
     NotifyComponentStateMonitorAndWarning: [],
-    NotifyComponentVLBI: []
+    NotifyComponentVLBI: [],
+
+    runtimeScrollBoard: [
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' '],
+      [' ', ' ']
+    ]
   },
   mutations: {
+    addRuntimeScrollBoard (state, payload) {
+      // state.runtimeScrollBoard = [payload.time, payload.name]
+      // console.log('before ', state.runtimeScrollBoard)
+      if (state.runtimeScrollBoard.length >= RUNTIME_SCROLL_BOARD_LIST_COUNT + 2) {
+        state.runtimeScrollBoard = state.runtimeScrollBoard.slice(1, RUNTIME_SCROLL_BOARD_LIST_COUNT + 2)
+      }
+      state.runtimeScrollBoard.push([payload.time, payload.name])
+      // state.runtimeScrollBoard.push({'time': payload.time, 'name': payload.name, 'timestamp': new Date().valueOf()})
+      // console.log('after ', state.runtimeScrollBoard)
+    },
     resetNotify (state) {
       state.NotifyDataAtomicClockSignal = ''
       state.NotifyDataAtomicClockSignal = ''

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-page">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="导航卫星信号质量监测结果" name="导航卫星信号质量监测结果">
         <keep-alive>

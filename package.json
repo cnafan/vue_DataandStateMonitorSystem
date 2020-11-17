@@ -14,15 +14,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@jiaminghi/charts": "^0.2.18",
+    "@jiaminghi/data-view": "^2.10.0",
     "axios": "^0.20.0",
-    "chart.js": "^2.9.4",
     "default-passive-events": "^2.0.0",
     "element-ui": "^2.13.2",
     "gojs": "^2.1.26",
     "material-icons": "^0.3.1",
-    "popmotion": "^9.0.0",
+    "screenfull": "^5.0.2",
     "stompjs": "^2.3.3",
     "vue": "^2.5.2",
+    "vue-fullscreen": "^2.1.6",
     "vue-router": "^3.0.1",
     "vuesax": "^3.12.2",
     "vuex": "^3.5.1"

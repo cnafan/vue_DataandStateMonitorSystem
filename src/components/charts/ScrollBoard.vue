@@ -1,0 +1,69 @@
+<template>
+  <dv-border-box-7>
+    <!--    <el-button  @click="doUpdate">hi</el-button >-->
+    <dv-scroll-board id="runtimeScrollBoard" :config="getScrollBoardConfig" ref="scrollBoard"/>
+  </dv-border-box-7>
+</template>
+<script>
+import store from '../../vuex/store'
+import {RUNTIME_SCROLL_BOARD_LIST_COUNT} from '../../../config/display'
+
+export default {
+  name: 'ScrollBoard',
+  props: {
+    scrollData: {
+      type: Array
+    }
+  },
+  watch: {
+    changeScrollBoardData: function () {
+      console.log('runtimeScrollBoard:', store.state.runtimeScrollBoard)
+      // this.doUpdate()
+    }
+  },
+  computed: {
+    changeScrollBoardData: function () {
+      return store.state.runtimeScrollBoard
+    },
+    getScrollBoardConfig: function () {
+      let config = this.config
+      config.data = store.state.runtimeScrollBoard
+      config = {...config}
+      return config
+    }
+  },
+  data () {
+    return {
+      config: {
+        rowNum: RUNTIME_SCROLL_BOARD_LIST_COUNT,
+        oddRowBGC: 'rgba(255, 255, 255, 0.1)',
+        evenRowBGC: 'rgba(0, 0, 0, 0.3)',
+        hoverPause: false,
+        // align: ['center', 'center'],
+        data: [
+
+        ]
+      }
+    }
+  },
+  methods: {
+    doUpdate () {
+      // console.log('runtimeScrollBoard', store.state.runtimeScrollBoard)
+      if (store.state.runtimeScrollBoard.length > 0) {
+        // this.$refs['scrollBoard'].updateRows(store.state.runtimeScrollBoard)
+      }
+    }
+  }
+}
+</script>
+<style scoped>
+#runtimeScrollBoard {
+  /*padding: 20px;*/
+  /*width: 300px;*/
+  /*height: 550px;*/
+}
+
+#runtimeScrollBoard.rows {
+  /*height: 500px !important;*/
+}
+</style>

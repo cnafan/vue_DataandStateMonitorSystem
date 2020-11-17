@@ -4,9 +4,9 @@
       <Header @menuCollapse="menuCollapseFunc"></Header>
     </el-header>
     <el-container id="el-container-header">
-      <el-scrollbar id="el-scrollbar-menu" style="height: 100%">
-        <Menu class="nav-menu" :menu-is-collapse="isCollapse"></Menu>
-      </el-scrollbar>
+      <!--      <el-scrollbar id="el-scrollbar-menu" style="height: 100%">-->
+      <Menu class="nav-menu" :menu-is-collapse="isCollapse"></Menu>
+      <!--      </el-scrollbar>-->
       <el-main id="el-main">
         <keep-alive>
           <router-view></router-view>

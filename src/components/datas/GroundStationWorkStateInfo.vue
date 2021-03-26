@@ -1,0 +1,276 @@
+<template>
+  <div>
+<!--    <p style="text-align: center">地面站工作状态信息</p>-->
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+
+      <el-table-column
+        prop="receiveTime"
+        :label=receiveTimeTitle>
+      </el-table-column>
+      <el-table-column
+        prop="week"
+        label="周">
+      </el-table-column>
+      <el-table-column
+        prop="sec"
+        label="周内秒">
+      </el-table-column>
+      <el-table-column
+        prop=""
+        label="">
+      </el-table-column>
+
+    </el-table>
+    <el-divider class="el-divider-table" content-position="left">地面站1</el-divider>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="groundID1"
+        label="地面站标识">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandState1"
+        label="基带主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandID1"
+        label="基带编号">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandWorkState1"
+        label="基带运行状态">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="c1UPState1"
+        label="C1UP变频器设备主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPWorkState1"
+        label="C1UP变频器设备运行状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPBlockState1"
+        label="C1UP变频模块锁定状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPFrequency1"
+        label="C1UP变频模块输出频率">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="c1DOWNState1"
+        label="C1Down变频器设备主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNWorkState1"
+        label="C1Down变频器设备运行状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNBlockState1"
+        label="C1Down变频模块锁定状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNFrequency1"
+        label="C1Down变频模块输出频率">
+      </el-table-column>
+    </el-table>
+    <el-divider class="el-divider-table" content-position="left">地面站2</el-divider>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="groundID2"
+        label="地面站标识">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandState2"
+        label="基带主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandID2"
+        label="基带编号">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandWorkState2"
+        label="基带运行状态">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="c1UPState2"
+        label="C1UP变频器设备主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPWorkState2"
+        label="C1UP变频器设备运行状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPBlockState2"
+        label="C1UP变频模块锁定状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPFrequency2"
+        label="C1UP变频模块输出频率">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="c1DOWNState2"
+        label="C1Down变频器设备主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNWorkState2"
+        label="C1Down变频器设备运行状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNBlockState2"
+        label="C1Down变频模块锁定状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNFrequency2"
+        label="C1Down变频模块输出频率">
+      </el-table-column>
+    </el-table>
+    <el-divider class="el-divider-table" content-position="left">地面站3</el-divider>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="groundID3"
+        label="地面站标识">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandState3"
+        label="基带主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandID3"
+        label="基带编号">
+      </el-table-column>
+      <el-table-column
+        prop="baseBandWorkState3"
+        label="基带运行状态">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="c1UPState3"
+        label="C1UP变频器设备主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPWorkState3"
+        label="C1UP变频器设备运行状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPBlockState3"
+        label="C1UP变频模块锁定状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1UPFrequency3"
+        label="C1UP变频模块输出频率">
+      </el-table-column>
+    </el-table>
+    <el-table
+      class="table"
+      :data="data"
+      header-cell-class-name="tableHeaderCell"
+      highlight-current-row
+      stripe
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="c1DOWNState3"
+        label="C1Down变频器设备主备状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNWorkState3"
+        label="C1Down变频器设备运行状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNBlockState3"
+        label="C1Down变频模块锁定状态">
+      </el-table-column>
+      <el-table-column
+        prop="c1DOWNFrequency3"
+        label="C1Down变频模块输出频率">
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+<script>
+import SatMixin from '../../mixins/satMixin'
+export default {
+  name: 'GroundStationWorkStateInfo',
+  props: {
+    'data': {
+      type: Array
+    }
+  },
+  mixins: [SatMixin]
+}
+</script>
+
+<style scoped>
+
+</style>

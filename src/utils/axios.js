@@ -69,7 +69,7 @@ export function fetch (url, params = {}) {
       params: params
     })
       .then(response => {
-        resolve(response.data)
+        resolve(response)
       })
       .catch(err => {
         reject(err)

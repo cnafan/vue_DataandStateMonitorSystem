@@ -7,6 +7,9 @@
       <vs-tab label="通用设置" icon="settings">
         <General></General>
       </vs-tab>
+      <vs-tab label="阈值设置" icon="settings">
+        <Limit></Limit>
+      </vs-tab>
     </vs-tabs>
   </div>
 </template>
@@ -14,10 +17,11 @@
 <script>
 import NetConfig from '../function/NetConfig'
 import General from '../function/General'
+import Limit from "@/components/function/LimitConfig";
 
 export default {
   name: 'Setting',
-  components: {General, NetConfig}
+  components: {Limit, General, NetConfig}
 }
 </script>
 

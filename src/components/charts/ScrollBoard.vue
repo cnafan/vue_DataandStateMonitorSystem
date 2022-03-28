@@ -3,7 +3,7 @@
   <div style="height:100%;display: flex;flex-direction: column;">
     <ChartHeader :title="'实时接收数据'" :icon="'el-icon-s-flag'"></ChartHeader>
     <!--    <el-button  @click="doUpdate">hi</el-button >-->
-    <dv-scroll-board id="runtimeScrollBoard" :config="config" ref="scrollBoard"/>
+    <dv-scroll-board id="runtimeScrollBoard" :config="getScrollBoardConfig" ref="scrollBoard"/>
   </div>
   <!--  </dv-border-box-7>-->
 </template>
@@ -23,7 +23,7 @@ export default {
   watch: {
     changeScrollBoardData: function () {
       // console.log('runtimeScrollBoard:', store.state.runtimeScrollBoard)
-      this.doUpdate()
+      // this.doUpdate()
     }
   },
   computed: {
@@ -31,11 +31,16 @@ export default {
       return store.state.runtimeScrollBoard
     },
     getScrollBoardConfig: function () {
-      let config = this.config
-      config.data = store.state.runtimeScrollBoard
-      config = {...config}
+      // let config = this.config
+      // config.data = store.state.runtimeScrollBoard
+      // config = {...config}
+      // return config
       // console.log('getScrollBoardConfig', config)
-      return config
+      return {data:store.state.runtimeScrollBoard,
+        rowNum: RUNTIME_SCROLL_BOARD_LIST_COUNT,
+        oddRowBGC: 'rgba(255, 255, 255, 0.1)',
+        evenRowBGC: 'rgba(0, 0, 0, 0.3)',
+        hoverPause: false}
     }
   },
   data () {
@@ -74,7 +79,7 @@ export default {
       // console.log('runtimeScrollBoard', store.state.runtimeScrollBoard)
       if (store.state.runtimeScrollBoard.length > 0) {
         // console.log('更新scrollBoard', store.state.runtimeScrollBoard)
-        this.$refs['scrollBoard'].updateRows(store.state.runtimeScrollBoard)
+        this.$refs['scrollBoard'].updateRows(store.state.runtimeScrollBoard,-1)
       }
     }
   }

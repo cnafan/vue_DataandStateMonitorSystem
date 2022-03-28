@@ -9,7 +9,9 @@
 </template>
 
 <script>
-// deperated
+/**
+ * deperated
+ */
 export default {
   name: 'ScrollPanel',
   data () {

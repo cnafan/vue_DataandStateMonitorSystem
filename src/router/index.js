@@ -18,9 +18,10 @@ import SearchAtomicClockSignal from '../components/softwares/retrieve/SearchAtom
 import Monitor from '../components/page/Monitor'
 import Setting from '../components/page/Setting'
 // import Splansh from '../components/page/Splansh'
-import Splansh2 from '../components/page/Splansh2'
+import Splansh2 from '../components/page/SplanshMain'
 // import WorkingStateInfoDirection from '../components/datas/WorkingStateInfoSat/WorkingStateInfoDirection'
 import Test from '../components/datas/WorkingStateInfoSat/WorkingStateInfos'
+import Login from "@/components/page/Login";
 
 Vue.use(Router)
 export default new Router({
@@ -124,6 +125,11 @@ export default new Router({
       path: '/test',
       name: '测试',
       component: Test
+    },
+    {
+      path:'/login',
+      name:'登录',
+      component:Login
     }
   ]
 })

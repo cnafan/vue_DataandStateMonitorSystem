@@ -1,0 +1,233 @@
+{
+  "workingStateAllDirection": [
+    {
+      "satChildren": [],
+      "stid": 30,
+      "time": "00000000000",
+      "busa": 0
+    },
+    {
+      "satChildren": [
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 32
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 8448
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 12,
+          "freChildren": [
+            {
+              "nuco": 4,
+              "sico": 8
+            },
+            {
+              "nuco": 44,
+              "sico": 30
+            },
+            {
+              "nuco": 1,
+              "sico": 2
+            },
+            {
+              "nuco": 1,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            },
+            {
+              "nuco": 0,
+              "sico": 0
+            }
+          ],
+          "said": 2020
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        },
+        {
+          "nufr": 0,
+          "freChildren": [],
+          "said": 0
+        }
+      ],
+      "stid": 0,
+      "time": "00000000000",
+      "busa": 31
+    },
+    {
+      "satChildren": [],
+      "stid": 0,
+      "time": "00000000000",
+      "busa": 0
+    },
+    {
+      "satChildren": [],
+      "stid": 0,
+      "time": "00000000000",
+      "busa": 0
+    }
+  ]
+}

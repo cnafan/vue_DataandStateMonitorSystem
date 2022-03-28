@@ -33,11 +33,9 @@
       <div style="flex: 4">
         <SystemInfoPanel :prop-cpu-data="cpuPropData" :prop-memory-data="MemoryUsage"></SystemInfoPanel>
       </div>
-      <dv-decoration-4 style="width:5px;height:80%;"/>
       <div style="flex: 2">
         <DataBasePanel :prop-data="propMysqlServerInfo"></DataBasePanel>
       </div>
-      <dv-decoration-4 style="width:5px;height:80%;"/>
       <div style="flex: 1">
         <FtpPanel :prop-data="FtpPropData"></FtpPanel>
       </div>
@@ -104,10 +102,13 @@ export default {
   mounted() {
     this.queryTimer = setInterval(this.updateCharts, 15000)
     this.cpuQueryTimer = setInterval(this.updateCpu, 2000)
+    this.mysqlQueryTimer = setInterval(this.updateMysql, 12000)
+
   },
   beforeDestroy() {
     clearInterval(this.queryTimer)
     clearInterval(this.cpuQueryTimer)
+    clearInterval(this.mysqlQueryTimer)
   },
   created() {
     // this.updateCharts()
@@ -132,6 +133,8 @@ export default {
         let CPUUsage = response.data
         this.cpuPropData = this.changeArray(CPUUsage)
       })
+    },
+    updateMysql(){
       this.$post('dailyReceivedTimes', null, '', false).then(response => {
         this.dailyReceivedTimes = response.data
       })
@@ -153,7 +156,7 @@ export default {
       this.$post('getMemoryUsage', null, '', false).then(response => {
         this.MemoryUsage = response.data
       })
-      this.$post('getMysqlServerInfo', null, '', false).then(response => {
+      this.$get('getMysqlServerInfo').then(response => {
         this.propMysqlServerInfo = response.data
       })
       this.$post('getSystemManageAndControlSystemInfo', null, '', false).then(response => {
@@ -197,7 +200,8 @@ export default {
 <style lang="scss" scoped>
 
 #splansh {
-  padding: 20px 20px 20px 20px;
+  overflow: hidden;
+  padding: 20px 20px 0 20px;
   /*width: 100%;*/
   height: calc(100vh - 60px);
   /*overflow: hidden;*/

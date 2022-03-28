@@ -5,7 +5,9 @@
     <div style="display: flex;flex: 1">
         <dv-charts style="flex: 3;height: 100%" :option="option1"/>
       <dv-charts style="flex: 1;height: 100%" :option="option2"/>
+      <dv-decoration-4 style="width:5px;height:80%;"/>
     </div>
+
   </div>
   <!--  </dv-border-box-7>-->
 </template>

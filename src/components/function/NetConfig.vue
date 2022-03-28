@@ -9,21 +9,21 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="系统管理控制软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.SystemManageAndControlReceivePort" controls-position="right"
+              <el-input-number v-model="settingForm.systemManageAndControlReceivePort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="GNSS时差数据综合处理软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.BDGNSSSystemClockMonitorReceivePort" controls-position="right"
+              <el-input-number v-model="settingForm.bdgnssSystemClockMonitorReceivePort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="原子钟信号监测与自主切换软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.AtomicClockSignalReceivePort" controls-position="right"
+              <el-input-number v-model="settingForm.atomicClockSignalReceivePort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
@@ -32,21 +32,21 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="卫星综合管理软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.SatIntegratedDataManagementReceivePort" controls-position="right"
+              <el-input-number v-model="settingForm.satIntegratedDataManagementReceivePort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="状态监测及告警软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.StateMonitorAndWarningPort" controls-position="right"
+              <el-input-number v-model="settingForm.stateMonitorAndWarningPort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="VLBI站控软件" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.VLBIReceivePort" controls-position="right"
+              <el-input-number v-model="settingForm.vlbiReceivePort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
@@ -60,13 +60,13 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item prop="DataServiceSoftwareSendIp" label="数据服务软件 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.DataServiceSoftwareSendIp" autocomplete="off"
+              <el-input v-model="settingForm.dataServiceSoftwareSendIp" autocomplete="off"
                         placeholder="ip"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="数据服务软件 Port" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.DataServiceSoftwareSendPort" controls-position="right"
+              <el-input-number v-model="settingForm.dataServiceSoftwareSendPort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
@@ -75,13 +75,13 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item prop="SystemManageAndControlSendIp" label="系统管理控制软件 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.SystemManageAndControlSendIp" autocomplete="off"
+              <el-input v-model="settingForm.systemManageAndControlSendIp" autocomplete="off"
                         placeholder="ip"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="系统管理控制软件 Port" :label-width="settingFormLabelWidth">
-              <el-input-number v-model="settingForm.SystemManageAndControlSendPort" controls-position="right"
+              <el-input-number v-model="settingForm.systemManageAndControlSendPort" controls-position="right"
                                placeholder="port" :min="1"
                                :max="99999"></el-input-number>
             </el-form-item>
@@ -95,7 +95,7 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item prop="MonitorServerIp" label="监控服务器 IP" :label-width="settingFormLabelWidth">
-              <el-input v-model="settingForm.MonitorServerIp" autocomplete="off"
+              <el-input v-model="settingForm.monitorServerIp" autocomplete="off"
                         placeholder="ip"></el-input>
             </el-form-item>
           </el-col>
@@ -128,6 +128,7 @@
 
 <script>
 import {NOTIFICATION_OFFSET} from '@/config/display'
+import {SET_NET_CONFIG} from "@/api/api";
 export default {
   name: 'NetConfig',
   data () {
@@ -142,19 +143,19 @@ export default {
       editorConfirmvisible: false,
       settingFormLabelWidth: '120px',
       rules: {
-        DataServiceSoftwareSendIp: [{
+        dataServiceSoftwareSendIp: [{
           validator: checkIp,
           trigger: 'blur'
         }],
-        SystemManageAndControlSendIp: [{
+        systemManageAndControlSendIp: [{
           validator: checkIp,
           trigger: 'blur'
         }],
-        MonitorServerIp: [{
+        monitorServerIp: [{
           validator: checkIp,
           trigger: 'blur'
         }],
-        MonitorClientIp: [{
+        monitorClientIp: [{
           validator: checkIp,
           trigger: 'blur'
         }]
@@ -176,7 +177,7 @@ export default {
           this.EditorDialogVisible = false
           // this.$store.commit('setDialog', false)
           // console.log(JSON.stringify(this.settingFormItems))
-          this.$postStandard('api/netconfig', this.$store.state.NetConfig
+          this.$postStandard(SET_NET_CONFIG, this.$store.state.NetConfig
             // data: JSON.stringify(this.settingFormItems)
           ).then(response => {
             this.$vs.loading.close()

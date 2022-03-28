@@ -7,19 +7,20 @@
 <script>
 import connect from './global/mq'
 import Main from './components/page/Main'
+import {GET_NET_CONFIG,GET_RECENT_DATA} from "@/api/api";
 
 export default {
   name: 'App',
   components: {
     Main
   },
-  mounted () {
+  mounted() {
     // window.onresize = function () {
     //   document.body.style.height = screen.availHeight + 'px'
     //   console.log('窗口大小变化')
     // }
   },
-  created () {
+  created() {
     // setTimeout(this.initFromDatabase, 3000) // 甲方否定了项目刚开始提出的需求，说不需要旧数据了
     this.initFormNetConfig()
     connect()
@@ -32,13 +33,13 @@ export default {
     // })
   },
   methods: {
-    initFromDatabase () {
-      this.$post('getRecentData', {}, '历史数据').then(response => {
+    initFromDatabase() {
+      this.$post(GET_RECENT_DATA, {}, '历史数据').then(response => {
         this.$store.commit('initData', response.data)
       })
     },
-    initFormNetConfig () {
-      this.$post('api/getNetConfig', {}, '网络配置').then(response => {
+    initFormNetConfig() {
+      this.$get(GET_NET_CONFIG).then(response => {
         this.$store.commit('initNetConfig', response.data)
       })
     }
@@ -52,7 +53,8 @@ html, body, #app, #main-app {
   height: 100vh;
   min-height: 100vh;
 }
-#app{
+
+#app {
   /*position: fixed;*/
 }
 
@@ -107,15 +109,9 @@ body {
 .el-scrollbar {
   height: 100%;
 }
-
-#el-main.el-main {
-  /*padding: 20px 15px;*/
-  width: 100%;
+#el-main{
   padding: 0;
-  height: 100%;
-  /*background-color: #eeeeee;*/
 }
-
 #el_row_header {
   padding: 18px 0;
 }

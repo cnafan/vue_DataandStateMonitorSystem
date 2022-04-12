@@ -94,16 +94,38 @@ function queuePush(software, data) {
     switch (software) {
         // 只显示一条
         case 'NavSatSignalQuality':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'SignalComponent':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'BDNavSatSignalQuality':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'BDSignalComponent':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'WorkingStateInfo':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'VLBIWorkState':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'BDSClockCorrection':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'GroundStationWorkStateInfo':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'BDSBroadcastClockDifference':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'BDSClockDifference':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'WorkingStateOrientationAntenna':
+            store.commit('change', {'data': data, 'software': software})
+            break
         case 'BDSSatTimeClockDifference':
             store.commit('change', {'data': data, 'software': software})
             break

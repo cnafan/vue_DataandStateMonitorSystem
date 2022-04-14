@@ -34,14 +34,14 @@
 export default {
   name: 'MultipleSearchBar',
   data () {
-    var validateLengthEqual = (rule, value, callback) => {
+    let validateLengthEqual = (rule, value, callback) => {
       let inputSplit = value.split(' ')
       if (inputSplit.length !== this.formInline.selectValue.length) {
         callback(new Error('查询项和值个数不匹配!'))
       } else {
         callback()
       }
-    }
+    };
     return {
       formInline: {
         selectValue: '',

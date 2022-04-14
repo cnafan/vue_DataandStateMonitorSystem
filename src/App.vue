@@ -7,7 +7,7 @@
 <script>
 import connect from './global/mq'
 import Main from './components/page/Main'
-import {GET_NET_CONFIG,GET_RECENT_DATA} from "@/api/api";
+import {GET_NET_CONFIG} from "@/api/api";
 
 export default {
   name: 'App',
@@ -33,11 +33,11 @@ export default {
     // })
   },
   methods: {
-    initFromDatabase() {
-      this.$post(GET_RECENT_DATA, {}, '历史数据').then(response => {
-        this.$store.commit('initData', response.data)
-      })
-    },
+    // initFromDatabase() {
+    //   this.$post(GET_RECENT_DATA, {}, '历史数据').then(response => {
+    //     this.$store.commit('initData', response.data)
+    //   })
+    // },
     initFormNetConfig() {
       this.$get(GET_NET_CONFIG).then(response => {
         this.$store.commit('initNetConfig', response.data)

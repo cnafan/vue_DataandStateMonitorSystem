@@ -59,7 +59,7 @@
 //   'orange': '#f08c00'
 // }
 import {EACH_SYSTEM_INFO_PIE_FONT_SIZE} from '@/config/display'
-import ChartHeader from './ChartHeader'
+import ChartHeader from './PanelHeader'
 
 export default {
   name: 'SplitSystemBoard',

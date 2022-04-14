@@ -1,6 +1,6 @@
 <template>
   <dv-border-box-5>
-    <div id="splansh-card-title" slot="header" class="clearfix">
+    <div id="splash-card-title" slot="header" class="clearfix">
       <span>实时监控各分系统运行状态</span>
     </div>
     <div id="myDiagramDiv"

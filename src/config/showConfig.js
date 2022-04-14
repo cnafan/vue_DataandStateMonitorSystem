@@ -1,1 +1,1 @@
-export const SplanshPanelHeaderDecorate = false
+export const SplashPanelHeaderDecorate = false

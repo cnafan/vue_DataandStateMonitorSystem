@@ -2,13 +2,13 @@
   <div style="padding:10px;display: flex;align-items: center">
     <i style="color: cornflowerblue" :class="icon"></i>
     <span style="color: #bbb8b8">{{ title }}</span>
-    <dv-decoration-3 v-if="SplanshPanelHeaderDecorate" style="margin-left:10px;width:100px;height:25px;"/>
+    <dv-decoration-3 v-if="SplashPanelHeaderDecorate" style="margin-left:10px;width:100px;height:25px;"/>
   </div>
 
 </template>
 
 <script>
-import {SplanshPanelHeaderDecorate} from '/src/config/showConfig'
+import {SplashPanelHeaderDecorate} from '/src/config/showConfig'
 
 export default {
   name: 'ChartHeader',
@@ -22,7 +22,7 @@ export default {
   },
   data () {
     return {
-      SplanshPanelHeaderDecorate: SplanshPanelHeaderDecorate
+      SplashPanelHeaderDecorate: SplashPanelHeaderDecorate
     }
   }
 }

@@ -4,7 +4,7 @@
     <el-header style="box-shadow:rgba(52, 56, 85, 0.25) 0 2px 3px 0;">
       <Header @menuCollapse="menuCollapseFunc"></Header>
     </el-header>
-    <el-container id="splansh-head-container">
+    <el-container id="splash-head-container">
       <!--      <el-scrollbar id="el-scrollbar-menu" style="height: 100%">-->
       <Menu class="nav-menu" :menu-is-collapse="isCollapse"></Menu>
       <!--      </el-scrollbar>-->
@@ -205,26 +205,26 @@ export default {
       this.isCollapse = isCollapse
       // this.$store.commit('change', {software: 'menuWidth', 'data': document.getElementById('navMenu').offsetWidth})
     },
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
+    // handleOpen (key, keyPath) {
+    //   console.log(key, keyPath)
+    // },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
     }
   },
   mounted () {
-    window.onresize = () => {
+    // window.onresize = () => {
       // console.log('窗口发生编号')
       // console.log('窗口发生编号', this.$refs.elMain.key)
       // this.$refs.elMain.key = new Date().getUTCMilliseconds()
       // this.$forceUpdate()
     }
-  }
+  // }
 }
 </script>
 
 <style scoped>
-#splansh-head-container {
+#splash-head-container {
   height: calc(100% - 60px);
 }
 </style>

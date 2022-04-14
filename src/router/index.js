@@ -1,27 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AtomicClockSignal from '../components/softwares/runtime/AtomicClockSignal'
-import BDGNSSSystemClockMonitor from '../components/softwares/runtime/BDGNSSSystemClockMonitor'
-import StateMonitorAndWarning from '../components/softwares/runtime/StateMonitorAndWarning'
-import SystemManageAndControl from '../components/softwares/runtime/SystemManageAndControl'
-import VLBI from '../components/softwares/runtime/VLBI'
-// import Main from '../components/page/Main'
-import SatIntegratedDataManagement from '../components/softwares/runtime/SatIntegratedDataManagement'
-// import Test from '../components/Test'
-import Log from '../components/page/Log'
-import SearchSystemManageAndControl from '../components/softwares/retrieve/SearchSystemManageAndControl'
-import SearchSatIntegratedDataManagement from '../components/softwares/retrieve/SearchSatIntegratedDataManagement'
-import SearchVLBI from '../components/softwares/retrieve/SearchVLBI'
-import SearchStateMonitorAndWarning from '../components/softwares/retrieve/SearchStateMonitorAndWarning'
-import SearchBDGNSSSystemClockMonitor from '../components/softwares/retrieve/SearchBDGNSSSystemClockMonitor'
-import SearchAtomicClockSignal from '../components/softwares/retrieve/SearchAtomicClockSignal'
-import Monitor from '../components/page/Monitor'
-import Setting from '../components/page/Setting'
-// import Splansh from '../components/page/Splansh'
-import Splansh2 from '../components/page/SplanshMain'
-// import WorkingStateInfoDirection from '../components/datas/WorkingStateInfoSat/WorkingStateInfoDirection'
-import Test from '../components/datas/WorkingStateInfoSat/WorkingStateInfos'
-import Login from "@/components/page/Login";
+const AtomicClockSignal = () => import('../components/softwares/runtime/AtomicClockSignal')
+const BDGNSSSystemClockMonitor = () => import('../components/softwares/runtime/BDGNSSSystemClockMonitor')
+const SystemManageAndControl = () => import('../components/softwares/runtime/SystemManageAndControl')
+const VLBI = () => import('../components/softwares/runtime/VLBI')
+const SatIntegratedDataManagement = () => import('../components/softwares/runtime/SatIntegratedDataManagement')
+const Log = () => import('../components/page/Log')
+const SearchSystemManageAndControl = () => import('../components/softwares/retrieve/SearchSystemManageAndControl')
+const SearchSatIntegratedDataManagement = () => import('../components/softwares/retrieve/SearchSatIntegratedDataManagement')
+const SearchVLBI = () => import('../components/softwares/retrieve/SearchVLBI')
+const SearchStateMonitorAndWarning = () => import('../components/softwares/retrieve/SearchStateMonitorAndWarning')
+const SearchBDGNSSSystemClockMonitor = () => import('../components/softwares/retrieve/SearchBDGNSSSystemClockMonitor')
+const SearchAtomicClockSignal = () => import('../components/softwares/retrieve/SearchAtomicClockSignal')
+// const Monitor = () => import('../components/page/Monitor')
+const Setting = () => import('../components/page/Setting')
+const Splash2 = () => import('../components/page/SplashMain')
+// const Test = () => import('../components/datas/WorkingStateInfoSat/WorkingStateInfos')
+const Login = () => import("@/components/page/Login")
 
 Vue.use(Router)
 export default new Router({
@@ -29,23 +24,13 @@ export default new Router({
     {
       path: '/',
       // 数据与状态监控软件
-      redirect: '/splansh'
+      redirect: '/splash'
     },
     {
-      path: '/splansh',
+      path: '/splash',
       name: '总控与管理分系统',
-      component: Splansh2
+      component: Splash2
     },
-    // {
-    //   path: '/splansh',
-    //   name: '数据与状态监控软件',
-    //   component: Splansh2
-    // },
-    // {
-    //   path: '/index',
-    //   name: '首页',
-    //   component: Main
-    // },
     {
       path: '/AtomicClockSignal',
       name: '原子钟信号监测与自主切换软件',
@@ -56,11 +41,11 @@ export default new Router({
       name: 'GNSS时差数据综合处理软件',
       component: BDGNSSSystemClockMonitor
     },
-    {
-      path: '/StateMonitorAndWarning',
-      name: '状态检测及告警软件',
-      component: StateMonitorAndWarning
-    },
+    // {
+    //   path: '/StateMonitorAndWarning',
+    //   name: '状态检测及告警软件',
+    //   component: StateMonitorAndWarning
+    // },
     {
       path: '/SystemManageAndControl',
       name: '系统管理控制软件',
@@ -112,19 +97,9 @@ export default new Router({
       component: SearchVLBI
     },
     {
-      path: '/monitor',
-      name: '监控中心',
-      component: Monitor
-    },
-    {
       path: '/setting',
       name: '设置',
       component: Setting
-    },
-    {
-      path: '/test',
-      name: '测试',
-      component: Test
     },
     {
       path:'/login',

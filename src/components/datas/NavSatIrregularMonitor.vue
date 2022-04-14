@@ -68,9 +68,9 @@ export default {
   },
   mixins: [SatMixin],
   methods: {
-    getCode: function (row, column, cellValue) {
-      return new FileReader().readAsText(new Blob(cellValue))
-    },
+    // getCode: function (row, column, cellValue) {
+    //   return new FileReader().readAsText(new Blob(cellValue))
+    // },
     modifyColor (row, column, cellValue) {
       if (cellValue === '溢出的长度') {
         this.$notify.error({

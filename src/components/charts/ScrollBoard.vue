@@ -1,16 +1,16 @@
 <template>
-  <!--  <dv-border-box-7>-->
+    <dv-border-box-7>
   <div style="height:100%;display: flex;flex-direction: column;">
     <ChartHeader :title="'实时接收数据'" :icon="'el-icon-s-flag'"></ChartHeader>
     <!--    <el-button  @click="doUpdate">hi</el-button >-->
     <dv-scroll-board id="runtimeScrollBoard" :config="getScrollBoardConfig" ref="scrollBoard"/>
   </div>
-  <!--  </dv-border-box-7>-->
+    </dv-border-box-7>
 </template>
 <script>
 import store from '/src/vuex/store'
 import {RUNTIME_SCROLL_BOARD_LIST_COUNT} from '/src/config/display'
-import ChartHeader from './ChartHeader'
+import ChartHeader from './PanelHeader'
 
 export default {
   name: 'ScrollBoard',

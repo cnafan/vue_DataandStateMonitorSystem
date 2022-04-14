@@ -35,8 +35,8 @@ export default {
         alert(response.data)
       })
     },
-    register: function () {
-    },
+    // register: function () {
+    // },
   },
 }
 </script>

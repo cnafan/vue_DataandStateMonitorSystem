@@ -1,8 +1,8 @@
 <template>
-  <div id="splansh" ref="splansh">
-    <Header id="splansh-header"></Header>
-    <SystemPanel id="splansh-system-panel"></SystemPanel>
-    <div id="splansh-software-info">
+  <div id="splash" ref="splash">
+    <Header id="splash-header"></Header>
+    <SystemPanel id="splash-system-panel"></SystemPanel>
+    <div id="splash-software-info">
       <!--      <el-row>-->
       <div id="system-info">
         <!--        <el-col :span="2">-->
@@ -29,7 +29,7 @@
       <!--        </el-col>-->
       <!--      </el-row>-->
     </div>
-    <div id="splansh-handware-info">
+    <div id="splash-handware-info">
       <div style="flex: 4">
         <SystemInfoPanel :prop-cpu-data="cpuPropData" :prop-memory-data="MemoryUsage"></SystemInfoPanel>
       </div>
@@ -48,24 +48,29 @@
 <script>
 import ScrollBoard from '../charts/ScrollBoard'
 import SplitSystemBoard from '../charts/SplitSystemBoard'
-import Header from '../charts/Header'
-import SystemPanel from '../charts/SystemIconPanel'
+import Header from '../charts/SplashHeader'
+import SystemPanel from '../charts/SplitSystemIconBar'
 import DataBasePanel from '../charts/DataBasePanel'
 import FtpPanel from '../charts/FtpPanel'
-import SystemInfoPanel from '../charts/SystemInfoPanel'
-import {SPLANSH_CPU_QUERY_PRIOID, SPLANSH_QUERY_PRIOID} from '../../../config/display'
+import SystemInfoPanel from '../charts/ServerInfoPanel'
+import {SPLANSH_CPU_QUERY_PRIOID, SPLANSH_QUERY_PRIOID} from '@/config/display'
 import DailyInfoPanel from '../charts/DailyInfoPanel'
 import {
   DAILY_RECEIVED_TIMES,
-  DAILY_WARNING_TIMES, GET_ALL_SYSTEM_INFO, GET_ATOMIC_CLOCK_SYSTEM_INFO, GET_BDGNSS_SYSTEM_INFO, GET_CPU_USAGE,
+  DAILY_WARNING_TIMES,
+  GET_ALL_SYSTEM_INFO,
+  GET_ATOMIC_CLOCK_SYSTEM_INFO,
+  GET_BDGNSS_SYSTEM_INFO,
+  GET_CPU_USAGE,
   GET_FILE_SYSTEM,
   GET_MEMORY_USAGE,
   GET_MYSQL_SERVER_INFO,
   GET_SAT_INTEGRATED_DATA_SYSTEM_INFO,
   GET_STATE_MONITOR_SYSTEM_INFO,
-  GET_SYSTEM_MANAGE_AND_CONTROL_SYSTEM_INFO, GET_VLBI_SYSTEM_INFO
+  GET_SYSTEM_MANAGE_AND_CONTROL_SYSTEM_INFO,
+  GET_VLBI_SYSTEM_INFO
 } from "@/api/api";
-// import ECharts from 'vue-echarts'
+
 export default {
   components: {
     DailyInfoPanel,
@@ -78,7 +83,7 @@ export default {
     ScrollBoard
     // chart: ECharts
   },
-  name: 'Splansh',
+  name: 'Splash',
   data() {
     return {
       FtpPropData: 0,
@@ -132,8 +137,7 @@ export default {
         this.dailyWarningTimes = response.data
       })
       this.$post(GET_FILE_SYSTEM, null, '服务器信息', false).then(response => {
-        let fileSystem = response.data[0]['usableSpace'] * 100 / response.data[0]['totalSpace']
-        this.FtpPropData = fileSystem
+        this.FtpPropData = response.data[0]['usableSpace'] * 100 / response.data[0]['totalSpace']
       })
       this.$post(GET_MEMORY_USAGE, null, '服务器内存使用信息', false).then(response => {
         this.MemoryUsage = response.data
@@ -180,7 +184,7 @@ export default {
 }
 </script>
 <style>
-#splansh {
+#splash {
   padding: 20px 20px 20px 20px;
   width: 100%;
   height: 100%;
@@ -191,22 +195,22 @@ export default {
   background-repeat: repeat;
 }
 
-#splansh-header {
+#splash-header {
   /*flex: 1;*/
 }
 
-#splansh-system-panel {
+#splash-system-panel {
   /*flex: 1;*/
 }
 
-#splansh-software-info {
+#splash-software-info {
   padding-bottom: 10px;
   display: flex;
   flex: 3;
   /*align-items: stretch;*/
 }
 
-#splansh-handware-info {
+#splash-handware-info {
   display: flex;
   flex: 2;
   /*align-items: stretch;*/
@@ -224,7 +228,7 @@ export default {
   /*margin-left: 20px;*/
 }
 
-#splansh-card-title span {
+#splash-card-title span {
   color: white;
 }
 

@@ -17,7 +17,7 @@
     :active-text-color="getActiveTextColor"
     router
   >
-    <el-menu-item index="/splansh">
+    <el-menu-item index="/splash">
       <i class="icon-home"></i>
       <!--            el-icon-s-home-->
       <span slot="title">监控中心</span>
@@ -189,7 +189,7 @@ export default {
   computed: {
     getTextColor: function () {
       // console.log('route.name1', this.$route.path)
-      if (this.$route.path === '/splansh') {
+      if (this.$route.path === '/splash') {
         return '#fafafa'
       } else {
         return '#303133'
@@ -197,7 +197,7 @@ export default {
     },
     getActiveTextColor: function () {
       // console.log('route.name2', this.$route.name)
-      // if (this.$route.path === '/splansh') {
+      // if (this.$route.path === '/splash') {
       //   return '#303133'
       // } else {
       //   return '#fafafa'
@@ -205,7 +205,7 @@ export default {
       return '#fafafa'
     },
     getBackgroundColor: function () {
-      if (this.$route.path === '/splansh') {
+      if (this.$route.path === '/splash') {
         return '#303133'
       } else {
         return '#fafafa'

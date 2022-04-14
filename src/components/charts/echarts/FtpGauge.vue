@@ -8,16 +8,14 @@ export default {
   name: "echart-Gauge-Ftp",
   data() {
     return {
-      DataType: 'FTP剩余空间',
       option: {
+        tooltip: {
+          show: true,
+          formatter: '{b}<br/> {c}%'
+        },
         series: [
           {
-
             type: 'gauge',
-            tooltip: {
-              show: true,
-              formatter: '{a} <br/>{b} : {c}%'
-            },
             radius: '80%',
             center: ['50%', '50%'],
             progress: {

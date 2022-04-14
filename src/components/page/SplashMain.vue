@@ -3,12 +3,12 @@
     <Header id="splash-header"></Header>
     <SystemPanel id="splash-system-panel"></SystemPanel>
     <div id="splash-software-info">
-        <DailyInfoPanel  id="system-info"
+        <DailyInfoPanel style="flex: 1;"  id="system-info"
                          :daily-received-times="dailyReceivedTimes"
                         :daily-warning-times="dailyWarningTimes"
                         :all-system-info="AllSystemInfo"></DailyInfoPanel>
-        <ScrollBoard  id="runtime-info"></ScrollBoard>
-        <SplitSystemBoard id="detail-info"
+        <ScrollBoard style="flex: 2;" id="runtime-info"></ScrollBoard>
+        <SplitSystemBoard style="flex: 2;" id="detail-info"
             :prop-system-manage-and-control-system-info-data="propSystemManageAndControlSystemInfoData"
             :prop-sat-integrated-data-system-info-data="propSatIntegratedDataSystemInfoData"
             :prop-atomic-clock-system-info-data="propAtomicClockSystemInfoData"
@@ -213,26 +213,13 @@ export default {
 }
 
 #splash-software-info {
+  width: 100%;
   display: flex;
   height: 40%;
   flex: 3;
   /*align-items: stretch;*/
 }
 
-#system-info {
-  flex: 1;
-  width: fit-content;
-}
-
-#detail-info {
-  flex: 1;
-  width: fit-content;
-}
-
-#runtime-info {
-  flex: 1;
-  width: fit-content;
-}
 
 #splash-handware-info {
   display: flex;

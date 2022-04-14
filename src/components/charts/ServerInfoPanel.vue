@@ -2,9 +2,11 @@
   <!--  <dv-border-box-7>-->
   <div style="display:flex;flex-direction:column;height: 100%;width: 100%">
     <ChartHeader :icon="'el-icon-s-platform'" :title="'服务器运行状态'"></ChartHeader>
-    <div style="display: flex;flex: 1">
-        <dv-charts style="flex: 3;height: 100%" :option="option1"/>
-      <dv-charts style="flex: 1;height: 100%" :option="option2"/>
+    <div style="display: flex;flex: 1;height: 100%">
+      <!--        <dv-charts style="flex: 3;height: 100%" :option="option1"/>-->
+      <!--      <dv-charts style="flex: 1;height: 100%" :option="option2"/>-->
+      <cpu-category :usage-data="propCpuData" style="flex: 3;height: 100%"></cpu-category>
+      <echart-gauge-memory style="flex: 1;height: 100%" :usage-data="this.memoryUsage"></echart-gauge-memory>
       <dv-decoration-4 style="width:5px;height:80%;"/>
     </div>
 
@@ -13,17 +15,21 @@
 </template>
 
 <script>
-import ChartHeader from './ChartHeader'
+import ChartHeader from './PanelHeader'
+import EchartGaugeMemory from "@/components/charts/echarts/MemoryGauge";
+import CpuCategory from "@/components/charts/echarts/CpuCategory";
 
 export default {
   name: 'SystemInfoPanel',
-  components: {ChartHeader},
+  components: {CpuCategory, EchartGaugeMemory, ChartHeader},
   props: {
     propCpuData: {
-      type: Array
+      type: Array,
+      default: () => [[81.5, 82.8, 89.1, 92.2], [49.3, 43.1, 56.9, 70.8], [21.9, 40.6, 51.6, 46.8], [70.4, 59.4, 82.8, 92.2], [67.6, 64.6, 69.2, 89.2], [45.3, 43.7, 68.8, 71.9], [20.4, 34.4, 43.7, 54.7], [27.7, 58.5, 41.6, 52.3], [21.9, 28.0, 59.3, 67.2], [36.9, 41.6, 41.6, 58.5]]
     },
     propMemoryData: {
-      type: Array
+      type: Array,
+      default: () => [0, 1]
     }
   },
   watch: {
@@ -56,15 +62,18 @@ export default {
     propMemoryData: function () {
       if (this.propMemoryData === undefined) {
         // console.log('this.propData', 'undefined')
-        return this.option2
+        // return this.option2
+        return this.memoryUsage;
       }
+      this.memoryUsage = Math.round(this.propMemoryData[0] * 100 / this.propMemoryData[1])
       this.option2.series[0].data[0].value = this.propMemoryData[0] * 100 / this.propMemoryData[1]
       this.option2 = {...this.option2}
       // console.log('this.option1', this.option1)
     }
   },
-  data () {
+  data() {
     return {
+      memoryUsage: 0,
       option1: {
         title: {
           text: '系统cpu使用率',

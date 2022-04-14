@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import ChartHeader from './ChartHeader'
+import ChartHeader from './PanelHeader'
 
 export default {
   name: 'DataBasePanel',

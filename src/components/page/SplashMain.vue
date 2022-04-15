@@ -1,42 +1,47 @@
 <template>
-  <div id="splash" ref="splash" :key=screenWidth>
-    <Header id="splash-header"></Header>
-    <SystemPanel id="splash-system-panel"></SystemPanel>
-    <div id="splash-software-info">
-        <DailyInfoPanel style="flex: 1;"  id="system-info"
-                         :daily-received-times="dailyReceivedTimes"
-                        :daily-warning-times="dailyWarningTimes"
-                        :all-system-info="AllSystemInfo"></DailyInfoPanel>
-        <ScrollBoard style="flex: 2;" id="runtime-info"></ScrollBoard>
-        <SplitSystemBoard style="flex: 2;" id="detail-info"
-            :prop-system-manage-and-control-system-info-data="propSystemManageAndControlSystemInfoData"
-            :prop-sat-integrated-data-system-info-data="propSatIntegratedDataSystemInfoData"
-            :prop-atomic-clock-system-info-data="propAtomicClockSystemInfoData"
-            :prop-b-d-g-n-s-s-system-info-data="propBDGNSSSystemInfoData"
-            :prop-state-monitor-system-info-data="propStateMonitorSystemInfoData"
-            :prop-v-l-b-i-system-info-data="propVLBISystemInfoData"></SplitSystemBoard>
+  <div id="splash" ref="splash">
+    <Header style="height: fit-content"></Header>
+    <SystemPanel style="height: fit-content"></SystemPanel>
+    <div id="splash-main-content">
+      <!--      <div id="splash-software-info">-->
+      <DailyInfoPanel id="system-info"
+                      :daily-received-times="dailyReceivedTimes"
+                      :daily-warning-times="dailyWarningTimes"
+                      :all-system-info="AllSystemInfo"></DailyInfoPanel>
+      <ScrollBoard style="height:100%;width:30%;flex: 20%" id="runtime-info"></ScrollBoard>
+      <SplitSystemBoard id="detail-info"
+                        :prop-system-manage-and-control-system-info-data="propSystemManageAndControlSystemInfoData"
+                        :prop-sat-integrated-data-system-info-data="propSatIntegratedDataSystemInfoData"
+                        :prop-atomic-clock-system-info-data="propAtomicClockSystemInfoData"
+                        :prop-b-d-g-n-s-s-system-info-data="propBDGNSSSystemInfoData"
+                        :prop-state-monitor-system-info-data="propStateMonitorSystemInfoData"
+                        :prop-v-l-b-i-system-info-data="propVLBISystemInfoData"></SplitSystemBoard>
+      <!--      </div>-->
+      <!--      <div id="splash-hardware-info" ref="splash-hardware-info">-->
+      <SystemInfoPanel id="server-info" :prop-cpu-data="cpuPropData"></SystemInfoPanel>
+      <MemoryPanel id="memory-info" :prop-memory-data="MemoryUsage"></MemoryPanel>
+      <DataBasePanel id="database-info" :prop-data="propMysqlServerInfo"></DataBasePanel>
+      <FtpPanel id="ftp-info" :prop-data="FtpPropData"></FtpPanel>
     </div>
-    <div id="splash-handware-info" ref="splash-handware-info">
-        <SystemInfoPanel  style="flex: 4" :prop-cpu-data="cpuPropData" :prop-memory-data="MemoryUsage"></SystemInfoPanel>
-        <DataBasePanel style="flex: 2" :prop-data="propMysqlServerInfo"></DataBasePanel>
-        <FtpPanel style="flex: 1" :prop-data="FtpPropData"></FtpPanel>
-    </div>
+    <!--    </div>-->
   </div>
 </template>
 
 <script>
-import ScrollBoard from '../charts/ScrollBoard'
-import SplitSystemBoard from '../charts/SplitSystemBoard'
-import Header from '../charts/SplashHeader'
-import SystemPanel from '../charts/SplitSystemIconBar'
-import DataBasePanel from '../charts/DataBasePanel'
-import FtpPanel from '../charts/FtpPanel'
-import SystemInfoPanel from '../charts/ServerInfoPanel'
+import ScrollBoard from '../charts/mid/ScrollBoard'
+import SplitSystemBoard from '../charts/mid/SplitSystemPanel'
+import Header from '../charts/top/SplashHeader'
+import SystemPanel from '../charts/top/SplitSystemIconBar'
+import DataBasePanel from '../charts/bottom/DataBasePanel'
+import FtpPanel from '../charts/bottom/FtpPanel'
+import SystemInfoPanel from '../charts/bottom/ServerInfoPanel'
 import {SPLANSH_CPU_QUERY_PRIOID, SPLANSH_QUERY_PRIOID} from '@/config/display'
-import DailyInfoPanel from '../charts/DailyInfoPanel'
+import DailyInfoPanel from '../charts/mid/DailyInfoPanel'
+import MemoryPanel from "@/components/charts/bottom/MemoryPanel";
 // import ECharts from 'vue-echarts'
 export default {
   components: {
+    MemoryPanel,
     DailyInfoPanel,
     SystemInfoPanel,
     FtpPanel,
@@ -49,10 +54,9 @@ export default {
   name: 'SplashMain',
   data() {
     return {
-      screenWidth: document.body.clientWidth,
-      FtpPropData: 0,
+      FtpPropData: 20,
       cpuPropData: [],
-      MemoryUsage: [0,1],
+      MemoryUsage: [0.5, 1],
       propSystemManageAndControlSystemInfoData: null,
       propSatIntegratedDataSystemInfoData: null,
       propStateMonitorSystemInfoData: null,
@@ -74,20 +78,7 @@ export default {
       cpuQueryTimer: null
     }
   },
-  watch: {
-    mainElementHeight: function () {
-      // console.log('mainElementHeight 发生改变')
-      // this.$refs['splash-handware-info'].key = new Date().getUTCMilliseconds()
-    },
-  },
   mounted() {
-    // const that = this
-    // window.onresize = () => {
-    //   return (() => {
-    //     window.screenWidth = document.body.clientWidth
-    //     that.screenWidth = window.screenWidth
-    //   })()
-    // }
     // 轮询定时器
     this.queryTimer = setInterval(this.updateCharts, 5000)
     this.cpuQueryTimer = setInterval(this.updateCpu, 2000)
@@ -103,21 +94,8 @@ export default {
     this.updateCharts()
     this.updateCpu()
     this.updateMysql()
-    // window.setInterval(() => {
-    //   setTimeout(this.updateCharts, 0)
-    // }, this.splashQueryPrioid)
-    //
-    // window.setInterval(() => {
-    //   setTimeout(this.updateCpu, 0)
-    // }, this.splashCpuQueryPrioid)
   },
   methods: {
-    toggle() {
-      this.$refs['fullscreen'].toggle() // recommended
-    },
-    fullscreenChange(fullscreen) {
-      this.fullscreen = fullscreen
-    },
     updateCpu() {
       this.$post('getMemoryUsage', null, '', false).then(response => {
         this.MemoryUsage = response.data
@@ -190,58 +168,108 @@ export default {
 
 #splash {
   height: 100%;
-  //overflow: hidden;
-  padding: 20px 20px 0 20px;
-  /*width: 100%;*/
+  //min-height: 100%;
+  //height: 100%;
+  overflow: hidden;
+  padding: 20px 20px 20px 20px;
+  width: 100%;
   //height: calc(100vh - 60px);
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   background-image: url("../../../static/images/pageBgTiny.png");
-  background-size: contain;
-  background-repeat: repeat;
-  background-attachment: scroll;
+  background-size: cover;
+
+  #splash-main-content {
+    overflow: scroll;
+    height: 30%;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    #system-info {
+      width: 8%;
+      height: 30%;
+      min-width: 420px;
+      max-width: 30%;
+      //max-height: 400px;
+      min-height: 400px;
+      flex: 13%;
+    }
+
+    #runtime-info {
+      flex: 43%;
+      max-height: 400px;
+      overflow: hidden;
+    }
+
+    #detail-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 620px;
+      width: 40%;
+      flex: 25%;
+      //max-height: 60%;
+      /*width: 400px;*/
+    }
+
+    #server-info {
+      flex: 50%;;
+      max-height: 40%;
+      min-height: 200px;
+      //min-width: 600px
+    }
+
+    #memory-info {
+      min-height: 200px;
+      min-width: 200px;
+      max-height: 40%;
+      max-width: 10%;
+      flex: 10%;
+    }
+
+    #database-info {
+      min-width: 400px;
+      max-width: 20%;
+      max-height: 40%;
+      flex: 20%;
+    }
+
+    #ftp-info {
+      min-height: 200px;
+      min-width: 200px;
+      max-height: 40%;
+      max-width: 10%;
+      flex: 10%;
+    }
+  }
+
+  #splash-main-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  #splash-software-info {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 3;
+    align-items: baseline;
+
+    /*align-items: stretch;*/
+
+  }
+
+  #splash-hardware-info {
+    display: flex;
+    height: 30%;
+    flex-wrap: wrap;
+    /*align-items: stretch;*/
+  }
+
+
 }
-
-#splash-header {
-  //flex: 1;
-  height: auto;
-}
-
-#splash-system-panel {
-  /*flex: 1;*/
-  height: auto;
-}
-
-#splash-software-info {
-  width: 100%;
-  display: flex;
-  height: 40%;
-  flex: 3;
-  /*align-items: stretch;*/
-}
-
-
-#splash-handware-info {
-  display: flex;
-  height: 30%;
-  flex: 2;
-  /*align-items: stretch;*/
-
-}
-
-#runtime-info {
-  flex: 3;
-}
-
-#detail-info {
-  /*flex: 3;*/
-  overflow-y: hidden;
-  /*width: 400px;*/
-  /*margin-left: 20px;*/
-}
-
-#splash-card-title span {
-  color: white;
-}
-
 </style>

@@ -4,7 +4,7 @@
       <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>
     </el-col>
     <el-col :span="20">
-      <div>{{ this.$route.name }}</div>
+      <span>{{ this.$route.name }}</span>
     </el-col>
     <el-col :span="1">
       <el-link id="zabbix-link" href='' target="_blank"

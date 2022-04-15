@@ -18,6 +18,7 @@ import * as echarts from 'echarts/core';
 import { PieChart, GaugeChart,LineChart} from 'echarts/charts';
 // 引入提示框，标题，直角坐标系，数据集，内置数据转换器组件，组件后缀都为 Component
 import {
+  GraphicComponent,
   ToolboxComponent,
   LegendComponent,
   TitleComponent,
@@ -31,6 +32,7 @@ import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 // 注册必须的组件
 echarts.use([
+  GraphicComponent,
   ToolboxComponent,
   LegendComponent,
   TitleComponent,

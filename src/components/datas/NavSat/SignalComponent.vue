@@ -31,10 +31,11 @@
           <el-popover trigger="hover" placement="left">
             <div style="width: 100%">
               <!--chrome-extension://kphkondodeojfcodfegfglmdeondhlbc/test1/charts.jpg-->
-              <el-image
-                style="width: 300px;height: 250px"
-                :src="srcPath"
-                fit="scale-down"></el-image>
+
+<!--              <el-image-->
+<!--                style="width: 300px;height: 250px"-->
+<!--                :src="srcPath"-->
+<!--                fit="scale-down"></el-image>-->
             </div>
             <div slot="reference" class="name-wrapper">
               <el-tag size="medium">功率谱数值图</el-tag>

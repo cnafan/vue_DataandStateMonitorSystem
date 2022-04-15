@@ -107,9 +107,7 @@ export default {
   },
   methods: {
     buildOption() {
-      // console.log(this.UsageData)
       for (let i = 0; i < this.UsageData.length; i++) {
-        // console.log(this.UsageData[i])
         this.option.series[i] = {
           showSymbol: false,
           smooth: true,
@@ -118,7 +116,6 @@ export default {
           data: this.UsageData[i]
         }
       }
-      // console.log(this.option.series)
       myChart.setOption(this.option)
     },
     myEcharts() {
@@ -129,16 +126,15 @@ export default {
           myChart.resize();
         }, 500);
       })
-    },
-    beforeDestroy() {
-      window.removeEventListener("resize", () => {
-        myChart.resize();
-      });
     }
   },
   mounted() {
     this.myEcharts();
-    this.beforeDestroy();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      myChart.resize();
+    });
   }
 }
 </script>

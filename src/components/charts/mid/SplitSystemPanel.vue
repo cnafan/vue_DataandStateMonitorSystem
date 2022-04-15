@@ -1,65 +1,42 @@
 <template>
   <!--  <dv-border-box-5>-->
-<!--  :key="new Date().getUTCMilliseconds()"-->
-  <dv-border-box-7>
-    <div>
-      <ChartHeader :title="'各分系统软件数据占比'" :icon="'el-icon-s-flag'"></ChartHeader>
-      <div class="split-system-board" style="display: flex;overflow-x: hidden">
-        <!--      <div style="writing-mode: vertical-lr">-->
-        <!--        <span class="span-white">分系统处理数据统计</span>-->
-        <!--      </div>-->
-        <!--      <div style="width:100px;height: 100px">-->
-        <!--        <canvas id="chartjs-demo"></canvas>-->
-        <!--      </div>-->
-        <!--      <div style="width:100px;height: 100px">-->
-        <!--        <canvas id="chartjs-demo2"></canvas>-->
-        <!--      </div>-->
-        <div>
-          <dv-active-ring-chart :config="option1" class="ring-chart"/>
-          <div class="each-system-info"> 系统管理控制软件</div>
-        </div>
-        <div>
-          <dv-active-ring-chart :config="option2" class="ring-chart"/>
-          <div class="each-system-info"> 卫星综合管理软件</div>
-        </div>
-        <div>
-          <dv-active-ring-chart :config="option3" class="ring-chart"/>
-          <div class="each-system-info"> 状态监测及告警软件</div>
-        </div>
+  <!--  :key="new Date().getUTCMilliseconds()"-->
+  <div id="SplitSystemPanel" :key="SplitSystemPanelKey" ref="SplitSystemPanel">
+    <!--    <div>-->
+    <ChartHeader :title="'各分系统软件数据占比'" :icon="'el-icon-s-flag'"></ChartHeader>
+    <div class="split-system-board">
+      <div class="each-system-graph">
+        <dv-active-ring-chart :config="option1" class="ring-chart"/>
+        <div class="each-system-info"> 系统管理控制</div>
       </div>
-      <div class="split-system-board" style="display: flex;">
-        <div>
-          <dv-active-ring-chart :config="option4" class="ring-chart"/>
-          <div class="each-system-info"> VLBI站控软件</div>
-        </div>
-        <div>
-          <dv-active-ring-chart :config="option5" class="ring-chart"/>
-          <div class="each-system-info"> 原子钟信号监测软件</div>
-        </div>
-        <div>
-          <dv-active-ring-chart :config="option6" class="ring-chart"/>
-          <div class="each-system-info"> GNSS时差数据处理软件</div>
-        </div>
+      <div class="each-system-graph">
+        <dv-active-ring-chart :config="option2" class="ring-chart"/>
+        <div class="each-system-info"> 卫星综合管理</div>
+      </div>
+      <div class="each-system-graph">
+        <dv-active-ring-chart :config="option3" class="ring-chart"/>
+        <div class="each-system-info"> 状态监测及告警</div>
+      </div>
+      <div class="each-system-graph">
+        <dv-active-ring-chart :config="option4" class="ring-chart"/>
+        <div class="each-system-info"> VLBI站控</div>
+      </div>
+      <div class="each-system-graph">
+        <dv-active-ring-chart :config="option5" class="ring-chart"/>
+        <div class="each-system-info"> 原子钟信号监测</div>
+      </div>
+      <div class="each-system-graph">
+        <dv-active-ring-chart :config="option6" class="ring-chart"/>
+        <div class="each-system-info"> GNSS时差数据处理</div>
       </div>
     </div>
-  </dv-border-box-7>
+    <!--    </div>-->
+  </div>
 </template>
 
 <script>
-// import Chart from 'chart.js'
-// var Colors = {
-//   'red': '#F56C6C',
-//   'green': '#67C23A',
-//   'blue': '#6ea5f8',
-//   'lightred': '#fd8852',
-//   'lightblue': '#afd4fe',
-//   'lightgreen': '#b9e986',
-//   'pink': '#faadc1',
-//   'purple': '#d689ff',
-//   'orange': '#f08c00'
-// }
 import {EACH_SYSTEM_INFO_PIE_FONT_SIZE} from '@/config/display'
-import ChartHeader from './PanelHeader'
+import ChartHeader from '../top/PanelHeader'
 
 export default {
   name: 'SplitSystemBoard',
@@ -94,8 +71,8 @@ export default {
       this.option1.data[2].value = this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows']
       // 避免分母为0
       if (this.propSystemManageAndControlSystemInfoData['workingStateInfoRows'] === 0 &&
-        this.propSystemManageAndControlSystemInfoData['navSatSignalRows'] === 0 &&
-        this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows'] === 0) {
+          this.propSystemManageAndControlSystemInfoData['navSatSignalRows'] === 0 &&
+          this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows'] === 0) {
         this.option1.data[0].value = 1
       }
       this.option1 = {...this.option1}
@@ -113,11 +90,11 @@ export default {
       this.option2.data[5].value = this.propSatIntegratedDataSystemInfoData['bdtClockDifference']
       // 避免分母为0
       if (this.propSatIntegratedDataSystemInfoData['spaceSatSignalRows'] === 0 &&
-        this.propSatIntegratedDataSystemInfoData['spaceSatSignalAllDirectionRows'] === 0 &&
-        this.propSatIntegratedDataSystemInfoData['bdsClockDifference'] === 0 &&
-        this.propSatIntegratedDataSystemInfoData['bdsClockCorrection'] === 0 &&
-        this.propSatIntegratedDataSystemInfoData['bdsBroadcastClockDifference'] === 0 &&
-        this.propSatIntegratedDataSystemInfoData['bdtClockDifference'] === 0) {
+          this.propSatIntegratedDataSystemInfoData['spaceSatSignalAllDirectionRows'] === 0 &&
+          this.propSatIntegratedDataSystemInfoData['bdsClockDifference'] === 0 &&
+          this.propSatIntegratedDataSystemInfoData['bdsClockCorrection'] === 0 &&
+          this.propSatIntegratedDataSystemInfoData['bdsBroadcastClockDifference'] === 0 &&
+          this.propSatIntegratedDataSystemInfoData['bdtClockDifference'] === 0) {
         this.option2.data[0].value = 1
       }
       this.option2 = {...this.option2}
@@ -154,8 +131,8 @@ export default {
       this.option5.data[2].value = this.propAtomicClockSystemInfoData['timeFrequencyWorkingState']
       // 避免分母为0
       if (this.propAtomicClockSystemInfoData['ntscTimeDifferenceData'] === 0 &&
-        this.propAtomicClockSystemInfoData['ntscTimeDifferenceModelPara'] === 0 &&
-        this.propAtomicClockSystemInfoData['timeFrequencyWorkingState'] === 0) {
+          this.propAtomicClockSystemInfoData['ntscTimeDifferenceModelPara'] === 0 &&
+          this.propAtomicClockSystemInfoData['timeFrequencyWorkingState'] === 0) {
         this.option5.data[0].value = 1
       }
       this.option5 = {...this.option5}
@@ -174,21 +151,23 @@ export default {
       this.option6.data[7].value = this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock']
       // 避免分母为0
       if (this.propBDGNSSSystemInfoData['GPST'] === 0 &&
-        this.propBDGNSSSystemInfoData['GLONASST'] === 0 &&
-        this.propBDGNSSSystemInfoData['GST'] === 0 &&
-        this.propBDGNSSSystemInfoData['BDT'] === 0 &&
-        this.propBDGNSSSystemInfoData['QZSST'] === 0 &&
-        this.propBDGNSSSystemInfoData['IRNSST'] === 0 &&
-        this.propBDGNSSSystemInfoData['SBAST'] === 0 &&
-        this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock'] === 0) {
+          this.propBDGNSSSystemInfoData['GLONASST'] === 0 &&
+          this.propBDGNSSSystemInfoData['GST'] === 0 &&
+          this.propBDGNSSSystemInfoData['BDT'] === 0 &&
+          this.propBDGNSSSystemInfoData['QZSST'] === 0 &&
+          this.propBDGNSSSystemInfoData['IRNSST'] === 0 &&
+          this.propBDGNSSSystemInfoData['SBAST'] === 0 &&
+          this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock'] === 0) {
         this.option6.data[0].value = 1
       }
       this.option6 = {...this.option6}
     }
   },
-  data () {
+  data() {
     return {
+      SplitSystemPanelKey:document.body.clientWidth,
       option1: {
+        // radius: '80%',
         digitalFlopStyle: {
           fontSize: EACH_SYSTEM_INFO_PIE_FONT_SIZE,
           fill: '#fff'
@@ -337,34 +316,54 @@ export default {
       }
     }
   },
-  mounted () {
-  }
+  mounted() {
+    window.addEventListener("resize", () => {
+      setTimeout(() => {
+        this.SplitSystemPanelKey = this.SplitSystemPanelKey + 1;
+      }, 500);
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+    });
+  },
 }
 </script>
 
-<style scoped>
-.ring-chart{
-  /*min-width: 150px;*/
-  /*min-height: 150px;*/
-  width:10vw;
-  height:15vh;
-}
-.span-white {
-  color: white;
+<style lang="scss" scoped>
+
+#SplitSystemPanel {
+  .border-box-content {
+    height: 100%
+  }
 }
 
 .split-system-board {
-  padding: 20px;
+  //height: 100%;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
 
-  /*height: 100%;*/
+  .each-system-graph {
+    flex: 33%;
+
+    .each-system-info {
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 0.8rem;
+      /*style=""*/
+    }
+
+    .ring-chart {
+      justify-content: center;
+      /*min-width: 150px;*/
+      /*min-height: 150px;*/
+      //width: 10vw;
+      height: 15vh;
+    }
+  }
 }
 
-/*.each-system-info {*/
-/*  height: 30%;*/
-/*}*/
-.each-system-info {
-  width: 100%;
-  text-align: center;
-  color: white;
-}
 </style>

@@ -1,29 +1,29 @@
 <template>
-  <dv-border-box-7>
-    <!--    :key="new Date().getUTCMilliseconds()"-->
-    <div style="height:100%;display: flex;flex-direction: column;">
-      <ChartHeader :title="'今日实时数据'" :icon="'el-icon-s-flag'"></ChartHeader>
-      <div style="flex:1;display: flex;padding:20px;">
-        <div style="flex: 1">
+  <div id="DailyInfoPanelContent">
+    <ChartHeader :title="'今日实时数据'" :icon="'el-icon-s-flag'"></ChartHeader>
+    <div style="
+    height: 100%;
+    display: flex;
+    flex-direction: column;">
+      <div class="dailyInfoBoard">
+        <div>
           <span style="color: whitesmoke;font-size: 20px">今日接收数据</span>
           <dv-digital-flop :config="configDailyReceivedTimes" style="width:200px;height:50px;"/>
         </div>
-        <div style="flex: 1">
+        <div>
           <span style="color: whitesmoke;font-size: 20px">今日告警数据</span>
           <dv-digital-flop :config="configDailyWarningTimes" style="width:200px;height:50px;"/>
         </div>
       </div>
-      <div style="flex: 4">
-        <!--        <dv-charts style="height: 100%;width: 100%;" :option="configAllSystemInfo"/>-->
-        <nightingale-chart :usage-data="splitSystemSummaryInfo" style="height: 100%;width: 100%;" ></nightingale-chart>
-      </div>
+      <!--        <dv-charts style="height: 100%;width: 100%;" :option="configAllSystemInfo"/>-->
+      <nightingale-chart class="nightingale-chart" :usage-data="splitSystemSummaryInfo"></nightingale-chart>
     </div>
-  </dv-border-box-7>
+  </div>
 </template>
 
 <script>
-import ChartHeader from './PanelHeader'
-import NightingaleChart from "@/components/charts/echarts/NightingaleChart";
+import ChartHeader from '../top/PanelHeader'
+import NightingaleChart from "@/components/charts/mid/NightingaleChart";
 
 export default {
   name: 'DailyInfoPanel',
@@ -143,6 +143,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+#DailyInfoPanelContent {
+  .border-box-content {
+    height: 100%;
+  }
+}
+
+.nightingale-chart {
+  height: 10%;
+  width: 100%;
+  flex: 3;
+}
+
+.dailyInfoBoard {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0 20px 20px;
+}
 
 </style>

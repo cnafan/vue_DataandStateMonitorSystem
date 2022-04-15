@@ -1,16 +1,17 @@
 <template>
-  <div id="echart-Gauge-memory"></div>
+  <div id="echart-Gauge-Ftp"></div>
 </template>
 
 <script>
 let myChart;
 export default {
-  name: "echart-Gauge-memory",
-  data(){
+  name: "echart-Gauge-Ftp",
+  data() {
     return {
       option: {
         tooltip: {
-          formatter: '{b} <br/> {c}%'
+          show: true,
+          formatter: '{b}<br/> {c}%'
         },
         series: [
           {
@@ -19,7 +20,18 @@ export default {
             center: ['50%', '50%'],
             progress: {
               show: true,
-              width: 17
+              width: 17,
+              itemStyle: {//渐变颜色
+                // gradient: ['#e7bcf3', '#e690d1', '#fb7293'],
+                color: new this.$echarts.graphic.LinearGradient(1, 1, 0, 1, [{
+                  offset: 1,
+                  color: '#e7bcf3'
+                },
+                  {
+                    offset: 0,
+                    color: '#fb7293'
+                  }])
+              }
             },
             axisTick: {
               show: false
@@ -38,17 +50,20 @@ export default {
             axisLine: {
               show: true,
               lineStyle: {
-                width: 15
-              }
+                width: 15,
+              },
+              gradient: ['#e7bcf3', '#e690d1', '#fb7293'],
+              localGradient: true
             },
             title: {
               color: '#ffffff',
-              offsetCenter: [0, '35%'],
+              offsetCenter: [0, '40%'],
               fontSize: 13,
             },
             detail: {
               formatter: "{value}%",
               textStyle: {
+                // color: '#5bdbff',
                 fontSize: 20,
               },
               color: '#e08a5b',
@@ -57,56 +72,54 @@ export default {
             },
             data: [
               {
-                value: 0,
-                name:'内存使用率'
+                value: Math.round(this.UsageData),
+                name: 'FTP剩余空间',
               }
             ],
-            animationDuration: 5000,
-            animationEasing: 'cubicInOut',
+            // animationDuration: 2000,
+            // animationCurve: 'easeOutBack',
+            // animationEasing: 'cubicInOut'
           }
         ]
       }
     }
   },
-  props:{
+  props: {
     UsageData: {
       type: Number,
       default: 70
     }
   },
-  watch:{
-    UsageData:function (){
-      this.option.series[0].data[0].value=100-this.UsageData;
-      // myChart.clear();
-      myChart.setOption(this.option,true);
+  watch: {
+    UsageData: function () {
+      this.option.series[0].data[0].value = Math.round(this.UsageData);
+      myChart.setOption(this.option, true);
     }
   },
   methods: {
     myEcharts() {
-      myChart = this.$echarts.init(document.getElementById('echart-Gauge-memory'));
-      myChart.setOption(this.option,true);
-      myChart.resize();
+      myChart = this.$echarts.init(document.getElementById('echart-Gauge-Ftp'));
+      myChart.setOption(this.option);
       window.addEventListener("resize", () => {
         setTimeout(() => {
           myChart.resize();
         }, 500);
       })
-    },
-    beforeDestroy() {
-      window.removeEventListener("resize", () => {
-        myChart.resize();
-      });
     }
   },
   mounted() {
     this.myEcharts();
-    this.beforeDestroy();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      myChart.resize();
+    });
   }
 }
 </script>
 
 <style scoped>
-#echart-Gauge-memory {
+#echart-Gauge-Ftp {
   width: 100%;
   height: 100%;
 }

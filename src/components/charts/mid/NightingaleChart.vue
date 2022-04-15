@@ -1,5 +1,5 @@
 <template>
-  <div id="NightingaleChart"></div>
+  <div id="Nightingale"></div>
 </template>
 <script>
 let myChart;
@@ -19,12 +19,13 @@ export default {
   data(){
     return{
       option: {
-        radius: '80%',
-        animationDuration: 8000,
-        animationEasing: 'cubicInOut',
         legend: {
-          show: false,
-          top: 'bottom'
+          show:false,
+          bottom: '5%',
+          left: 'center',
+          textStyle: {
+            color: '#fcfcfc'
+          }
         },
         tooltip: {
           trigger: 'item',
@@ -43,13 +44,28 @@ export default {
           {
             name: '各个分系统数据占比饼图',
             type: 'pie',
-            radius: [70, 100],
-            center: ['50%', '50%'],
-            // radius: [20, 100],
-            // roseType: 'area',
+            center: ['50%', '40%'],
+            // radius: [70, 100],
+            radius: [0, 100],
+            roseType: 'area',
             itemStyle: {
               borderRadius: 8
             },
+            // label: {
+            //   show: false,
+            //   position: 'center'
+            // },
+            // labelLine: {
+            //   show: true
+            // },
+            // avoidLabelOverlap: true,
+            // emphasis: {
+            //   label: {
+            //     show: true,
+            //     fontSize: '15',
+            //     fontWeight: 'bold'
+            //   }
+            // },
             data: [
               {value: 40, name: '系统管理控制软件'},
               {value: 38, name: '卫星综合管理软件'},
@@ -65,7 +81,7 @@ export default {
   },
   methods: {
     myEcharts() {
-      myChart = this.$echarts.init(document.getElementById('NightingaleChart'));
+      myChart = this.$echarts.init(document.getElementById('Nightingale'));
       //配置图表
       myChart.setOption(this.option);
       window.addEventListener("resize", () => {
@@ -74,22 +90,17 @@ export default {
         }, 500);
       })
     },
-    beforeDestroy() {
-      window.removeEventListener("resize", () => {
-        myChart.resize();
-      });
-    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      myChart.resize();
+    });
   },
   mounted() {
     this.myEcharts();
-    this.beforeDestroy();
   }
 }
 </script>
 <style scoped>
-#NightingaleChart {
-  width: 100%;
-  height: 100%;
-}
 </style>
 

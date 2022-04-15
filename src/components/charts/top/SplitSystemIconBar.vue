@@ -1,43 +1,49 @@
 <template>
 
-  <div style="display: flex;justify-content: space-between">
-    <div class="image-parent">
-      <el-image @click="$router.push({path: '/SystemManageAndControl'})" fit="fill" class="panel-image"
+  <div style="display: flex;justify-content: space-between;">
+    <div class="image-parent" @click="$router.push({path: '/SystemManageAndControl'})">
+      <el-image fit="contain" class="panel-image"
                 :src="require('/static/images/panel/12.png')"></el-image>
-      <div style="display: flex">
+      <div class="image-parent-span">
         <span>{{ systemName[0] }}</span>
         <!--        <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
       </div>
     </div>
-    <div class="image-parent">
-      <el-image @click="$router.push({path: '/BDGNSSSystemClockMonitor'})" fit="fill" class="panel-image"
+    <div class="image-parent" @click="$router.push({path: '/BDGNSSSystemClockMonitor'})">
+      <el-image fit="fill" class="panel-image"
                 :src="require('/static/images/panel/14.png')"></el-image>
+      <div class="image-parent-span">
       <span>{{ systemName[1] }}</span>
+      </div>
       <!--      <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
     </div>
-    <div class="image-parent">
-      <el-image @click="$router.push({path: '/SatIntegratedDataManagement'})" fit="fill" class="panel-image"
+    <div class="image-parent" @click="$router.push({path: '/SatIntegratedDataManagement'})">
+      <el-image fit="fill" class="panel-image"
                 :src="require('/static/images/panel/15.png')"></el-image>
+      <div class="image-parent-span">
       <span>{{ systemName[2] }}</span>
-      <!--      <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
+      </div>
     </div>
-    <div class="image-parent">
-      <el-image @click="$router.push({path: '/AtomicClockSignal'})" fit="fill" class="panel-image"
+    <div class="image-parent" @click="$router.push({path: '/AtomicClockSignal'})">
+      <el-image fit="fill" class="panel-image"
                 :src="require('/static/images/panel/13.png')"></el-image>
+      <div class="image-parent-span">
       <span>{{ systemName[3] }}</span>
-      <!--      <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
+      </div>
     </div>
-    <div class="image-parent">
-      <el-image @click="$router.push({path: '/StateMonitorAndWarning'})" fit="fill" class="panel-image"
+    <div class="image-parent" @click="$router.push({path: '/StateMonitorAndWarning'})">
+      <el-image fit="fill" class="panel-image"
                 :src="require('/static/images/panel/8.png')"></el-image>
+      <div class="image-parent-span">
       <span>{{ systemName[4] }}</span>
-      <!--      <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
+      </div>
     </div>
-    <div class="image-parent">
-      <el-image @click="$router.push({path: '/VLBI'})" fit="fill" class="panel-image"
+    <div class="image-parent" @click="$router.push({path: '/VLBI'})">
+      <el-image fit="fill" class="panel-image"
                 :src="require('/static/images/panel/3.png')"></el-image>
+      <div class="image-parent-span">
       <span>{{ systemName[5] }}</span>
-      <!--      <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
+      </div>
     </div>
   </div>
 </template>
@@ -74,7 +80,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .panel-image {
   width: 40px;
   height: 40px;
@@ -82,7 +88,7 @@ export default {
 }
 
 .image-parent {
-  padding-bottom: 10px;
+  //margin: 0 40px;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -91,10 +97,17 @@ export default {
   /*display: block;*/
   width: 80px;
   height: 80px;
+
+  .image-parent-span {
+    display: flex;
+    height: 50%;
+    overflow: hidden;
+  }
+
+  span {
+    color: whitesmoke;
+    margin-right: 10px;
+  }
 }
 
-.image-parent span {
-  color: whitesmoke;
-  margin-right: 10px;
-}
 </style>

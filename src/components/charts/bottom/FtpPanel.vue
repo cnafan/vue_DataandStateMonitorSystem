@@ -2,14 +2,19 @@
   <!--  <dv-border-box-7>-->
   <div style="display:flex;flex-direction:column;height: 100%;width: 100%">
     <ChartHeader :icon="'el-icon-s-platform'" :title="'FTP运行状态'"></ChartHeader>
-<!--    <dv-charts id="ftpChart" style="flex: 1;height: 100%;" :option="option1"/>-->
-    <echart-gauge-ftp :usage-data="propData"></echart-gauge-ftp>
+    <!--    <dv-charts id="ftpChart" style="flex: 1;height: 100%;" :option="option1"/>-->
+
+    <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
+      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <echart-gauge-ftp :usage-data="propData"></echart-gauge-ftp>
+    </div>
   </div>
   <!--  </dv-border-box-7>-->
 </template>
 <script>
-import ChartHeader from './PanelHeader'
-import EchartGaugeFtp from "@/components/charts/echarts/FtpGauge";
+import ChartHeader from '../top/PanelHeader'
+import EchartGaugeFtp from "@/components/charts/bottom/FtpGauge";
+
 export default {
   name: 'FtpPanel',
   components: {EchartGaugeFtp, ChartHeader},
@@ -27,7 +32,7 @@ export default {
   //     this.option1 = {...this.option1}
   //   }
   // },
-  data () {
+  data() {
     return {
       chart: null,
       option1: {

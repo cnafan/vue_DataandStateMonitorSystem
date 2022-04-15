@@ -111,6 +111,7 @@ body {
 }
 #el-main{
   padding: 0;
+  flex: 1;
 }
 #el_row_header {
   padding: 18px 0;
@@ -314,11 +315,8 @@ canvas {
   color: white;
 }
 
-#detail-info::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
 
-#el-main.el-main::-webkit-scrollbar {
+#el-main::-webkit-scrollbar {
   display: none; /* Chrome Safari */
 }
 </style>

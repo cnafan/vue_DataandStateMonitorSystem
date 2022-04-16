@@ -8,11 +8,11 @@
       <div class="dailyInfoBoard">
         <div>
           <span style="color: whitesmoke;font-size: 20px">今日接收数据</span>
-          <dv-digital-flop :config="configDailyReceivedTimes" style="width:200px;height:50px;"/>
+          <MyDvDigitalFlop :config="configDailyReceivedTimes" style="width:200px;height:50px;"/>
         </div>
         <div>
           <span style="color: whitesmoke;font-size: 20px">今日告警数据</span>
-          <dv-digital-flop :config="configDailyWarningTimes" style="width:200px;height:50px;"/>
+          <MyDvDigitalFlop :config="configDailyWarningTimes" style="width:200px;height:50px;"/>
         </div>
       </div>
       <!--        <dv-charts style="height: 100%;width: 100%;" :option="configAllSystemInfo"/>-->
@@ -24,10 +24,11 @@
 <script>
 import ChartHeader from '../top/PanelHeader'
 import NightingaleChart from "@/components/charts/mid/NightingaleChart";
+import MyDvDigitalFlop from "@/components/datav/digitalFlop/src/main";
 
 export default {
   name: 'DailyInfoPanel',
-  components: {NightingaleChart, ChartHeader},
+  components: {NightingaleChart, ChartHeader,MyDvDigitalFlop},
   props: {
     dailyReceivedTimes: {
       type: Number

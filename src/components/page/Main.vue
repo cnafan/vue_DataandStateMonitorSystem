@@ -10,8 +10,9 @@
       <!--      </el-scrollbar>-->
       <el-main id="el-main" ref="elMain">
         <keep-alive>
-          <router-view></router-view>
+          <router-view v-if="$route.meta.keepAlive"></router-view>
         </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
         <!--        <el-row id="el-row-main">-->
         <!--        </el-row>-->
         <!--        <el-backtop></el-backtop>-->

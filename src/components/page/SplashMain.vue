@@ -1,5 +1,5 @@
 <template>
-  <div id="splash" ref="splash">
+  <div id="splash" ref="splash" :key="splashKey">
     <Header style="height: fit-content"></Header>
     <SystemPanel style="height: fit-content"></SystemPanel>
     <div id="splash-main-content">
@@ -54,6 +54,7 @@ export default {
   name: 'SplashMain',
   data() {
     return {
+      splashKey: document.body.clientWidth,
       FtpPropData: 20,
       cpuPropData: [],
       MemoryUsage: [0.5, 1],
@@ -84,6 +85,8 @@ export default {
     this.cpuQueryTimer = setInterval(this.updateCpu, 2000)
     this.mysqlQueryTimer = setInterval(this.updateMysql, 10000)
 
+    console.log('mount')
+    this.$refs.splash.key = this.splashKey + 1;
   },
   beforeDestroy() {
     clearInterval(this.queryTimer)
@@ -151,6 +154,9 @@ export default {
     changeArray(array) {
       let newarray = []
       let indexI = array.length
+      if (indexI === 0 || indexI === undefined) {
+        return newarray
+      }
       let indexJ = array[0].length
       for (let i = 0; i < indexJ; i++) {
         let array1 = []

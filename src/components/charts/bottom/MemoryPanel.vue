@@ -5,7 +5,7 @@
     <!--    <dv-charts id="ftpChart" style="flex: 1;height: 100%;" :option="option1"/>-->
 
     <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
-      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <MyDvDecoration4 style="width:5px;height:80%;"/>
       <EchartGaugeMemory class="echart-gauge-memory" :usage-data="this.memoryUsage"></EchartGaugeMemory>
     </div>
   </div>
@@ -14,10 +14,10 @@
 <script>
 import ChartHeader from '../top/PanelHeader'
 import EchartGaugeMemory from "@/components/charts/bottom/MemoryGauge";
-
+import MyDvDecoration4 from "@/components/datav/decoration4/src/main";
 export default {
   name: 'MemoryPanel',
-  components: {EchartGaugeMemory, ChartHeader},
+  components: {EchartGaugeMemory, ChartHeader,MyDvDecoration4},
   props: {
     propData: {
       type: Number

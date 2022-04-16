@@ -3,21 +3,21 @@
       <ChartHeader :title="'实时接收数据'" :icon="'el-icon-s-flag'"></ChartHeader>
 
     <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
-      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <MyDvDecoration4 style="width:5px;height:80%;"/>
       <dv-scroll-board style="height:100%;overflow: hidden" :config="getScrollBoardConfig" :key=keySet
                        ref="scrollBoard"/>
-      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <MyDvDecoration4 style="width:5px;height:80%;"/>
     </div>
   </div>
 </template>
 <script>
-import store from '/src/vuex/store'
-import {RUNTIME_SCROLL_BOARD_LIST_COUNT} from '/src/config/display'
+import store from '../../../../src/vuex/store'
+import {RUNTIME_SCROLL_BOARD_LIST_COUNT} from '@/config/display'
 import ChartHeader from '../top/PanelHeader'
-
+import MyDvDecoration4 from "@/components/datav/decoration4/src/main";
 export default {
   name: 'ScrollBoard',
-  components: {ChartHeader},
+  components: {ChartHeader,MyDvDecoration4},
   props: {
     scrollData: {
       type: Array

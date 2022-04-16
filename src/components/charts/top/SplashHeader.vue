@@ -1,8 +1,8 @@
 <template>
   <div style="display: flex;justify-content: space-between;">
     <div class="header-aside-decoration">
-      <dv-decoration-10 class="decoration10"/>
-      <dv-decoration-8 class="decoration8" :color="['#568aea', '#000000']"/>
+      <MyDvDecoration10 class="decoration10"/>
+      <MyDvDecoration8 class="decoration8" :color="['#568aea', '#000000']"/>
     </div>
 
     <div class="header-center">
@@ -15,16 +15,19 @@
     </div>
 
     <div class="header-aside-decoration">
-      <dv-decoration-8 class="decoration8" :reverse="true" :color="['#568aea', '#000000']"/>
-      <dv-decoration-10 class="decoration10" :reverse="true"/>
+      <MyDvDecoration8 class="decoration8" :reverse="true" :color="['#568aea', '#000000']"/>
+      <MyDvDecoration10 class="decoration10" :reverse="true"/>
     </div>
   </div>
 </template>
 
 <script>
 
+import MyDvDecoration8 from "@/components/datav/decoration8/src/main";
+import MyDvDecoration10 from "@/components/datav/decoration10/src/main";
 export default {
   name: 'Header',
+  components:{MyDvDecoration8,MyDvDecoration10},
   data() {
     return {
       now: 1605018704240

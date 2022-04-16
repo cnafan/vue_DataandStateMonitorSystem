@@ -3,7 +3,7 @@
   <div style="display:flex;flex-direction:column;height: 100%;width: 100%">
     <ChartHeader :icon="'el-icon-coin'" :title="'数据库运行状态'"></ChartHeader>
     <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
-      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <MyDvDecoration4 style="width:5px;height:80%;"/>
       <div
           style="padding: 10px 20px 20px 20px;display: flex;flex-direction:column;justify-content: center;align-items: center;flex: 1">
         <div style="width:100%;flex: 1;display: flex;align-items:center;justify-content: space-between">
@@ -35,10 +35,11 @@
 
 <script>
 import ChartHeader from '../top/PanelHeader'
+import MyDvDecoration4 from "@/components/datav/decoration4/src/main";
 
 export default {
   name: 'DataBasePanel',
-  components: {ChartHeader},
+  components: {ChartHeader,MyDvDecoration4},
   props: {
     propData: {
       type: Object

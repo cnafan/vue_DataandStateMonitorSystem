@@ -5,7 +5,7 @@
     <!--    <dv-charts id="ftpChart" style="flex: 1;height: 100%;" :option="option1"/>-->
 
     <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
-      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <MyDvDecoration4 style="width:5px;height:80%;"/>
       <echart-gauge-ftp :usage-data="propData"></echart-gauge-ftp>
     </div>
   </div>
@@ -14,10 +14,10 @@
 <script>
 import ChartHeader from '../top/PanelHeader'
 import EchartGaugeFtp from "@/components/charts/bottom/FtpGauge";
-
+import MyDvDecoration4 from "@/components/datav/decoration4/src/main";
 export default {
   name: 'FtpPanel',
-  components: {EchartGaugeFtp, ChartHeader},
+  components: {EchartGaugeFtp, ChartHeader,MyDvDecoration4},
   props: {
     propData: {
       type: Number

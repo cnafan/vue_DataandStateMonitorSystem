@@ -5,7 +5,7 @@
     <div style="display: flex;flex: 1;height: 100%;flex-wrap:nowrap;">
       <!--        <dv-charts style="flex: 3;height: 100%" :option="option1"/>-->
       <!--      <dv-charts style="flex: 1;height: 100%" :option="option2"/>-->
-      <dv-decoration-4 style="width:5px;height:80%;"/>
+      <MyDvDecoration4 style="width:5px;height:80%;"/>
       <CpuCategory class="cpu-category" :usage-data="propCpuData"></CpuCategory>
     </div>
 
@@ -16,10 +16,11 @@
 <script>
 import ChartHeader from '../top/PanelHeader'
 import CpuCategory from "@/components/charts/bottom/CpuCategory";
+import MyDvDecoration4 from "@/components/datav/decoration4/src/main";
 
 export default {
   name: 'SystemInfoPanel',
-  components: {CpuCategory, ChartHeader},
+  components: {CpuCategory, ChartHeader,MyDvDecoration4},
   props: {
     propCpuData: {
       type: Array,

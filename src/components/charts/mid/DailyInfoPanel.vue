@@ -151,7 +151,7 @@ export default {
 }
 
 .nightingale-chart {
-  height: 10%;
+  height: 270px;
   width: 100%;
   flex: 3;
 }

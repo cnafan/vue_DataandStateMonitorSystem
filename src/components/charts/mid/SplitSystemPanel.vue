@@ -4,32 +4,39 @@
   <div id="SplitSystemPanel" :key="SplitSystemPanelKey" ref="SplitSystemPanel">
     <!--    <div>-->
     <ChartHeader :title="'各分系统软件数据占比'" :icon="'el-icon-s-flag'"></ChartHeader>
-    <div class="split-system-board">
-      <div class="each-system-graph">
-        <dv-active-ring-chart :config="option1" class="ring-chart"/>
-        <div class="each-system-info"> 系统管理控制</div>
-      </div>
-      <div class="each-system-graph">
-        <dv-active-ring-chart :config="option2" class="ring-chart"/>
-        <div class="each-system-info"> 卫星综合管理</div>
-      </div>
-      <div class="each-system-graph">
-        <dv-active-ring-chart :config="option3" class="ring-chart"/>
-        <div class="each-system-info"> 状态监测及告警</div>
-      </div>
-      <div class="each-system-graph">
-        <dv-active-ring-chart :config="option4" class="ring-chart"/>
-        <div class="each-system-info"> VLBI站控</div>
-      </div>
-      <div class="each-system-graph">
-        <dv-active-ring-chart :config="option5" class="ring-chart"/>
-        <div class="each-system-info"> 原子钟信号监测</div>
-      </div>
-      <div class="each-system-graph">
-        <dv-active-ring-chart :config="option6" class="ring-chart"/>
-        <div class="each-system-info"> GNSS时差数据处理</div>
-      </div>
-    </div>
+    <Test :prop-system-manage-and-control-system-info-data="propSystemManageAndControlSystemInfoData"
+          :propSatIntegratedDataSystemInfoData="propSatIntegratedDataSystemInfoData"
+          :propStateMonitorSystemInfoData="propStateMonitorSystemInfoData"
+          :propVLBISystemInfoData="propVLBISystemInfoData"
+          :propBDGNSSSystemInfoData="propBDGNSSSystemInfoData"
+          :propAtomicClockSystemInfoData="propAtomicClockSystemInfoData"
+    ></Test>
+    <!--    <div class="split-system-board">-->
+    <!--      <div class="each-system-graph">-->
+    <!--        <dv-active-ring-chart :config="option1" class="ring-chart"/>-->
+    <!--        <div class="each-system-info"> 系统管理控制</div>-->
+    <!--      </div>-->
+    <!--      <div class="each-system-graph">-->
+    <!--        <dv-active-ring-chart :config="option2" class="ring-chart"/>-->
+    <!--        <div class="each-system-info"> 卫星综合管理</div>-->
+    <!--      </div>-->
+    <!--      <div class="each-system-graph">-->
+    <!--        <dv-active-ring-chart :config="option3" class="ring-chart"/>-->
+    <!--        <div class="each-system-info"> 状态监测及告警</div>-->
+    <!--      </div>-->
+    <!--      <div class="each-system-graph">-->
+    <!--        <dv-active-ring-chart :config="option4" class="ring-chart"/>-->
+    <!--        <div class="each-system-info"> VLBI站控</div>-->
+    <!--      </div>-->
+    <!--      <div class="each-system-graph">-->
+    <!--        <dv-active-ring-chart :config="option5" class="ring-chart"/>-->
+    <!--        <div class="each-system-info"> 原子钟信号监测</div>-->
+    <!--      </div>-->
+    <!--      <div class="each-system-graph">-->
+    <!--        <dv-active-ring-chart :config="option6" class="ring-chart"/>-->
+    <!--        <div class="each-system-info"> GNSS时差数据处理</div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <!--    </div>-->
   </div>
 </template>
@@ -37,10 +44,11 @@
 <script>
 import {EACH_SYSTEM_INFO_PIE_FONT_SIZE} from '@/config/display'
 import ChartHeader from '../top/PanelHeader'
+import Test from "@/components/charts/mid/SplitSystem";
 
 export default {
   name: 'SplitSystemBoard',
-  components: {ChartHeader},
+  components: {Test, ChartHeader},
   props: {
     propSystemManageAndControlSystemInfoData: {
       type: Object
@@ -61,111 +69,111 @@ export default {
       type: Object
     }
   },
-  watch: {
-    propSystemManageAndControlSystemInfoData: function () {
-      if (this.propSystemManageAndControlSystemInfoData === null) {
-        return
-      }
-      this.option1.data[0].value = this.propSystemManageAndControlSystemInfoData['workingStateInfoRows']
-      this.option1.data[1].value = this.propSystemManageAndControlSystemInfoData['navSatSignalRows']
-      this.option1.data[2].value = this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows']
-      // 避免分母为0
-      if (this.propSystemManageAndControlSystemInfoData['workingStateInfoRows'] === 0 &&
-          this.propSystemManageAndControlSystemInfoData['navSatSignalRows'] === 0 &&
-          this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows'] === 0) {
-        this.option1.data[0].value = 1
-      }
-      this.option1 = {...this.option1}
-    },
-    propSatIntegratedDataSystemInfoData: function () {
-      if (this.propSatIntegratedDataSystemInfoData === null) {
-        return
-      }
-      // this.option2.data[0].value = this.propSatIntegratedDataSystemInfoData['broadcastEphemerisWarningInfoRows']
-      this.option2.data[0].value = this.propSatIntegratedDataSystemInfoData['spaceSatSignalRows']
-      this.option2.data[1].value = this.propSatIntegratedDataSystemInfoData['spaceSatSignalAllDirectionRows']
-      this.option2.data[2].value = this.propSatIntegratedDataSystemInfoData['bdsClockDifference']
-      this.option2.data[3].value = this.propSatIntegratedDataSystemInfoData['bdsClockCorrection']
-      this.option2.data[4].value = this.propSatIntegratedDataSystemInfoData['bdsBroadcastClockDifference']
-      this.option2.data[5].value = this.propSatIntegratedDataSystemInfoData['bdtClockDifference']
-      // 避免分母为0
-      if (this.propSatIntegratedDataSystemInfoData['spaceSatSignalRows'] === 0 &&
-          this.propSatIntegratedDataSystemInfoData['spaceSatSignalAllDirectionRows'] === 0 &&
-          this.propSatIntegratedDataSystemInfoData['bdsClockDifference'] === 0 &&
-          this.propSatIntegratedDataSystemInfoData['bdsClockCorrection'] === 0 &&
-          this.propSatIntegratedDataSystemInfoData['bdsBroadcastClockDifference'] === 0 &&
-          this.propSatIntegratedDataSystemInfoData['bdtClockDifference'] === 0) {
-        this.option2.data[0].value = 1
-      }
-      this.option2 = {...this.option2}
-    },
-    propStateMonitorSystemInfoData: function () {
-      if (this.propStateMonitorSystemInfoData === null) {
-        return
-      }
-      this.option3.data[0].value = this.propStateMonitorSystemInfoData['groundStationWorkStateInfo']
-      // 避免分母为0
-      if (this.propStateMonitorSystemInfoData['groundStationWorkStateInfo'] === 0) {
-        this.option3.data[0].value = 1
-      }
-
-      this.option3 = {...this.option3}
-    },
-    propVLBISystemInfoData: function () {
-      if (this.propVLBISystemInfoData === null) {
-        return
-      }
-      this.option4.data[0].value = this.propVLBISystemInfoData['vlbiWorkState']
-      // 避免分母为0
-      if (this.propVLBISystemInfoData['vlbiWorkState'] === 0) {
-        this.option4.data[0].value = 1
-      }
-      this.option4 = {...this.option4}
-    },
-    propAtomicClockSystemInfoData: function () {
-      if (this.propAtomicClockSystemInfoData === null) {
-        return
-      }
-      this.option5.data[0].value = this.propAtomicClockSystemInfoData['ntscTimeDifferenceData']
-      this.option5.data[1].value = this.propAtomicClockSystemInfoData['ntscTimeDifferenceModelPara']
-      this.option5.data[2].value = this.propAtomicClockSystemInfoData['timeFrequencyWorkingState']
-      // 避免分母为0
-      if (this.propAtomicClockSystemInfoData['ntscTimeDifferenceData'] === 0 &&
-          this.propAtomicClockSystemInfoData['ntscTimeDifferenceModelPara'] === 0 &&
-          this.propAtomicClockSystemInfoData['timeFrequencyWorkingState'] === 0) {
-        this.option5.data[0].value = 1
-      }
-      this.option5 = {...this.option5}
-    },
-    propBDGNSSSystemInfoData: function () {
-      if (this.propBDGNSSSystemInfoData === null) {
-        return
-      }
-      this.option6.data[0].value = this.propBDGNSSSystemInfoData['GPST']
-      this.option6.data[1].value = this.propBDGNSSSystemInfoData['GLONASST']
-      this.option6.data[2].value = this.propBDGNSSSystemInfoData['GST']
-      this.option6.data[3].value = this.propBDGNSSSystemInfoData['BDT']
-      this.option6.data[4].value = this.propBDGNSSSystemInfoData['QZSST']
-      this.option6.data[5].value = this.propBDGNSSSystemInfoData['IRNSST']
-      this.option6.data[6].value = this.propBDGNSSSystemInfoData['SBAST']
-      this.option6.data[7].value = this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock']
-      // 避免分母为0
-      if (this.propBDGNSSSystemInfoData['GPST'] === 0 &&
-          this.propBDGNSSSystemInfoData['GLONASST'] === 0 &&
-          this.propBDGNSSSystemInfoData['GST'] === 0 &&
-          this.propBDGNSSSystemInfoData['BDT'] === 0 &&
-          this.propBDGNSSSystemInfoData['QZSST'] === 0 &&
-          this.propBDGNSSSystemInfoData['IRNSST'] === 0 &&
-          this.propBDGNSSSystemInfoData['SBAST'] === 0 &&
-          this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock'] === 0) {
-        this.option6.data[0].value = 1
-      }
-      this.option6 = {...this.option6}
-    }
-  },
+  // watch: {
+  //   propSystemManageAndControlSystemInfoData: function () {
+  //     if (this.propSystemManageAndControlSystemInfoData === null) {
+  //       return
+  //     }
+  //     this.option1.data[0].value = this.propSystemManageAndControlSystemInfoData['workingStateInfoRows']
+  //     this.option1.data[1].value = this.propSystemManageAndControlSystemInfoData['navSatSignalRows']
+  //     this.option1.data[2].value = this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows']
+  //     // 避免分母为0
+  //     if (this.propSystemManageAndControlSystemInfoData['workingStateInfoRows'] === 0 &&
+  //         this.propSystemManageAndControlSystemInfoData['navSatSignalRows'] === 0 &&
+  //         this.propSystemManageAndControlSystemInfoData['navSatSignalAllDirectionRows'] === 0) {
+  //       this.option1.data[0].value = 1
+  //     }
+  //     this.option1 = {...this.option1}
+  //   },
+  //   propSatIntegratedDataSystemInfoData: function () {
+  //     if (this.propSatIntegratedDataSystemInfoData === null) {
+  //       return
+  //     }
+  //     // this.option2.data[0].value = this.propSatIntegratedDataSystemInfoData['broadcastEphemerisWarningInfoRows']
+  //     this.option2.data[0].value = this.propSatIntegratedDataSystemInfoData['spaceSatSignalRows']
+  //     this.option2.data[1].value = this.propSatIntegratedDataSystemInfoData['spaceSatSignalAllDirectionRows']
+  //     this.option2.data[2].value = this.propSatIntegratedDataSystemInfoData['bdsClockDifference']
+  //     this.option2.data[3].value = this.propSatIntegratedDataSystemInfoData['bdsClockCorrection']
+  //     this.option2.data[4].value = this.propSatIntegratedDataSystemInfoData['bdsBroadcastClockDifference']
+  //     this.option2.data[5].value = this.propSatIntegratedDataSystemInfoData['bdtClockDifference']
+  //     // 避免分母为0
+  //     if (this.propSatIntegratedDataSystemInfoData['spaceSatSignalRows'] === 0 &&
+  //         this.propSatIntegratedDataSystemInfoData['spaceSatSignalAllDirectionRows'] === 0 &&
+  //         this.propSatIntegratedDataSystemInfoData['bdsClockDifference'] === 0 &&
+  //         this.propSatIntegratedDataSystemInfoData['bdsClockCorrection'] === 0 &&
+  //         this.propSatIntegratedDataSystemInfoData['bdsBroadcastClockDifference'] === 0 &&
+  //         this.propSatIntegratedDataSystemInfoData['bdtClockDifference'] === 0) {
+  //       this.option2.data[0].value = 1
+  //     }
+  //     this.option2 = {...this.option2}
+  //   },
+  //   propStateMonitorSystemInfoData: function () {
+  //     if (this.propStateMonitorSystemInfoData === null) {
+  //       return
+  //     }
+  //     this.option3.data[0].value = this.propStateMonitorSystemInfoData['groundStationWorkStateInfo']
+  //     // 避免分母为0
+  //     if (this.propStateMonitorSystemInfoData['groundStationWorkStateInfo'] === 0) {
+  //       this.option3.data[0].value = 1
+  //     }
+  //
+  //     this.option3 = {...this.option3}
+  //   },
+  //   propVLBISystemInfoData: function () {
+  //     if (this.propVLBISystemInfoData === null) {
+  //       return
+  //     }
+  //     this.option4.data[0].value = this.propVLBISystemInfoData['vlbiWorkState']
+  //     // 避免分母为0
+  //     if (this.propVLBISystemInfoData['vlbiWorkState'] === 0) {
+  //       this.option4.data[0].value = 1
+  //     }
+  //     this.option4 = {...this.option4}
+  //   },
+  //   propAtomicClockSystemInfoData: function () {
+  //     if (this.propAtomicClockSystemInfoData === null) {
+  //       return
+  //     }
+  //     this.option5.data[0].value = this.propAtomicClockSystemInfoData['ntscTimeDifferenceData']
+  //     this.option5.data[1].value = this.propAtomicClockSystemInfoData['ntscTimeDifferenceModelPara']
+  //     this.option5.data[2].value = this.propAtomicClockSystemInfoData['timeFrequencyWorkingState']
+  //     // 避免分母为0
+  //     if (this.propAtomicClockSystemInfoData['ntscTimeDifferenceData'] === 0 &&
+  //         this.propAtomicClockSystemInfoData['ntscTimeDifferenceModelPara'] === 0 &&
+  //         this.propAtomicClockSystemInfoData['timeFrequencyWorkingState'] === 0) {
+  //       this.option5.data[0].value = 1
+  //     }
+  //     this.option5 = {...this.option5}
+  //   },
+  //   propBDGNSSSystemInfoData: function () {
+  //     if (this.propBDGNSSSystemInfoData === null) {
+  //       return
+  //     }
+  //     this.option6.data[0].value = this.propBDGNSSSystemInfoData['GPST']
+  //     this.option6.data[1].value = this.propBDGNSSSystemInfoData['GLONASST']
+  //     this.option6.data[2].value = this.propBDGNSSSystemInfoData['GST']
+  //     this.option6.data[3].value = this.propBDGNSSSystemInfoData['BDT']
+  //     this.option6.data[4].value = this.propBDGNSSSystemInfoData['QZSST']
+  //     this.option6.data[5].value = this.propBDGNSSSystemInfoData['IRNSST']
+  //     this.option6.data[6].value = this.propBDGNSSSystemInfoData['SBAST']
+  //     this.option6.data[7].value = this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock']
+  //     // 避免分母为0
+  //     if (this.propBDGNSSSystemInfoData['GPST'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['GLONASST'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['GST'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['BDT'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['QZSST'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['IRNSST'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['SBAST'] === 0 &&
+  //         this.propBDGNSSSystemInfoData['workingStateInfoBDGNSSSystemClock'] === 0) {
+  //       this.option6.data[0].value = 1
+  //     }
+  //     this.option6 = {...this.option6}
+  //   }
+  // },
   data() {
     return {
-      SplitSystemPanelKey:document.body.clientWidth,
+      SplitSystemPanelKey: document.body.clientWidth,
       option1: {
         // radius: '80%',
         digitalFlopStyle: {

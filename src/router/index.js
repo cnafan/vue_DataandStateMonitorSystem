@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import SplitSystem from "@/components/charts/mid/SplitSystem";
 const AtomicClockSignal = () => import('../components/softwares/runtime/AtomicClockSignal')
 const BDGNSSSystemClockMonitor = () => import('../components/softwares/runtime/BDGNSSSystemClockMonitor')
 const SystemManageAndControl = () => import('../components/softwares/runtime/SystemManageAndControl')
@@ -24,22 +25,26 @@ export default new Router({
     {
       path: '/',
       // 数据与状态监控软件
-      redirect: '/splash'
+      redirect: '/splash',
+      meta: {keepAlive: false}
     },
     {
       path: '/splash',
       name: '总控与管理分系统',
-      component: Splash2
+      component: Splash2,
+      meta: {keepAlive: false}
     },
     {
       path: '/AtomicClockSignal',
       name: '原子钟信号监测与自主切换软件',
-      component: AtomicClockSignal
+      component: AtomicClockSignal,
+      meta: {keepAlive: true}
     },
     {
       path: '/BDGNSSSystemClockMonitor',
       name: 'GNSS时差数据综合处理软件',
-      component: BDGNSSSystemClockMonitor
+      component: BDGNSSSystemClockMonitor,
+      meta: {keepAlive: true}
     },
     // {
     //   path: '/StateMonitorAndWarning',
@@ -49,62 +54,80 @@ export default new Router({
     {
       path: '/SystemManageAndControl',
       name: '系统管理控制软件',
-      component: SystemManageAndControl
+      component: SystemManageAndControl,
+      meta: {keepAlive: true}
     },
     {
       path: '/SatIntegratedDataManagement',
       name: '卫星综合管理软件',
-      component: SatIntegratedDataManagement
+      component: SatIntegratedDataManagement,
+      meta: {keepAlive: true}
     },
     {
       path: '/VLBI',
       name: 'VLBI站控软件',
-      component: VLBI
+      component: VLBI,
+      meta: {keepAlive: true}
     },
     {
       path: '/log',
       name: '日志',
-      component: Log
+      component: Log,
+      meta: {keepAlive: true}
     },
     {
       path: '/SearchAtomicClockSignal',
       name: '查询 - 原子钟信号监测与自主切换软件',
-      component: SearchAtomicClockSignal
+      component: SearchAtomicClockSignal,
+      meta: {keepAlive: true}
     },
     {
       path: '/SearchBDGNSSSystemClockMonitor',
       name: '查询 - GNSS时差数据综合处理软件',
-      component: SearchBDGNSSSystemClockMonitor
+      component: SearchBDGNSSSystemClockMonitor,
+      meta: {keepAlive: true}
     },
     {
       path: '/SearchStateMonitorAndWarning',
       name: '查询 - 状态检测及告警软件',
-      component: SearchStateMonitorAndWarning
+      component: SearchStateMonitorAndWarning,
+      meta: {keepAlive: true}
     },
     {
       path: '/SearchSystemManageAndControl',
       name: '查询 - 系统管理控制软件',
-      component: SearchSystemManageAndControl
+      component: SearchSystemManageAndControl,
+      meta: {keepAlive: true}
     },
     {
       path: '/SearchSatIntegratedDataManagement',
       name: '查询 - 卫星综合管理软件',
-      component: SearchSatIntegratedDataManagement
+      component: SearchSatIntegratedDataManagement,
+      meta: {keepAlive: true}
     },
     {
       path: '/SearchVLBI',
       name: '查询 - VLBI站控软件',
-      component: SearchVLBI
+      component: SearchVLBI,
+      meta: {keepAlive: true}
     },
     {
       path: '/setting',
       name: '设置',
-      component: Setting
+      component: Setting,
+      meta: {keepAlive: true}
     },
     {
       path:'/login',
       name:'登录',
-      component:Login
+      component:Login,
+      meta: {keepAlive: true}
+    },
+    {
+      path:'/test',
+      name:'test',
+      component:SplitSystem,
+      meta: {keepAlive: true}
     }
   ]
 })

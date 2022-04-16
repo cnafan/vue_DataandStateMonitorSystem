@@ -11,7 +11,7 @@ import ElementUI from 'element-ui'
 import 'material-icons/iconfont/material-icons.css'
 import '../static/css/fontello-embedded.css'
 import {fetch, post, postStandard} from './utils/axios'
-import dataV from '@jiaminghi/data-view'
+// import dataV from '@jiaminghi/data-view'
 import Vuesax from 'vuesax'
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from 'echarts/core';
@@ -48,7 +48,7 @@ echarts.use([
   CanvasRenderer
 ]);
 Vue.use(Vuesax)
-Vue.use(dataV)
+// Vue.use(dataV)
 Vue.use(ElementUI)
 // Vue.prototype.$alert = MessageBox.alert
 // Vue.prototype.$notify = Notification

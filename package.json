@@ -9,7 +9,6 @@
     "analyzer": "use_analyzer=true npm run dev"
   },
   "dependencies": {
-    "@jiaminghi/data-view": "^2.10.0",
     "axios": ">=0.21.2",
     "core-js": "^3.22.0",
     "default-passive-events": "^2.0.0",

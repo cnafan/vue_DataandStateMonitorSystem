@@ -1,10 +1,10 @@
 <template>
   <div id="runtimeScrollBoard">
-      <ChartHeader :title="'实时接收数据'" :icon="'el-icon-s-flag'"></ChartHeader>
+    <ChartHeader :title="'实时接收数据'" :icon="'el-icon-s-flag'"></ChartHeader>
 
     <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
       <MyDvDecoration4 style="width:5px;height:80%;"/>
-      <dv-scroll-board style="height:100%;overflow: hidden" :config="getScrollBoardConfig" :key=keySet
+      <MyDvScrollBoard style="height:100%;overflow: hidden" :config="getScrollBoardConfig" :key=keySet
                        ref="scrollBoard"/>
       <MyDvDecoration4 style="width:5px;height:80%;"/>
     </div>
@@ -15,9 +15,11 @@ import store from '../../../../src/vuex/store'
 import {RUNTIME_SCROLL_BOARD_LIST_COUNT} from '@/config/display'
 import ChartHeader from '../top/PanelHeader'
 import MyDvDecoration4 from "@/components/datav/decoration4/src/main";
+import MyDvScrollBoard from "@/components/datav/scrollBoard/src/main";
+
 export default {
   name: 'ScrollBoard',
-  components: {ChartHeader,MyDvDecoration4},
+  components: {ChartHeader, MyDvDecoration4, MyDvScrollBoard},
   props: {
     scrollData: {
       type: Array
@@ -81,6 +83,7 @@ export default {
     height: 100%;
     overflow: hidden;
   }
+
   .rows {
     /*height: 500px !important;*/
   }

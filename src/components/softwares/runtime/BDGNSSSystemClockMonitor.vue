@@ -1,13 +1,13 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="GNSS系统时差数据" name="1">
+    <vs-tabs v-model="activeName" @tab-click="handleClick">
+      <vs-tab label="GNSS系统时差数据" name="1">
         <GnssSystemClockDifference :data="this.$store.state.GnssSystemClockDifference"></GnssSystemClockDifference>
-      </el-tab-pane>
-      <el-tab-pane label="工作状态" name="2">
+      </vs-tab>
+      <vs-tab label="工作状态" name="2">
         <WorkingStateInfoBDGNSSSystemClock :data="this.$store.state.WorkingStateInfoBDGNSSSystemClock"></WorkingStateInfoBDGNSSSystemClock>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

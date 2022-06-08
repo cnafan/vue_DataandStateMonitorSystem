@@ -1,10 +1,10 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="导航卫星信号质量监测结果" name="导航卫星信号质量监测结果">
+    <vs-tabs v-model="activeName" @tab-click="handleClick">
+      <vs-tab label="导航卫星信号质量监测结果" name="导航卫星信号质量监测结果">
         <keep-alive>
-          <el-tabs v-model="activeNameDirection" @tab-click="handleClick">
-            <el-tab-pane label="定向天线导航卫星信号质量监测结果" name="定向天线导航卫星信号质量监测结果">
+          <vs-tabs v-model="activeNameDirection" @tab-click="handleClick">
+            <vs-tab label="定向天线导航卫星信号质量监测结果" name="定向天线导航卫星信号质量监测结果">
               <!--            <p style="text-align: center">定向天线导航卫星信号质量监测结果</p>-->
               <keep-alive>
                 <SearchBar target="NavSatSignalQuality" @callSearch="search($event)"
@@ -26,9 +26,9 @@
                 <SignalComponent :father-data="getSignalComponentFatherData"
                                  :data="this.getSignalComponent"></SignalComponent>
               </keep-alive>
-            </el-tab-pane>
+            </vs-tab>
 
-            <el-tab-pane label="全向天线导航卫星信号质量监测结果" name="全向天线导航卫星信号质量监测结果">
+            <vs-tab label="全向天线导航卫星信号质量监测结果" name="全向天线导航卫星信号质量监测结果">
               <!--            <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>-->
               <keep-alive>
                 <SearchBar target="NavSatSignalQualityAllDirection" @callSearch="search($event)"
@@ -78,18 +78,18 @@
                 <SignalComponentAllDirection :father-data="getSignalComponentAllDirectionFatherData"
                                              :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
               </keep-alive>
-            </el-tab-pane>
-          </el-tabs>
+            </vs-tab>
+          </vs-tabs>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="工作状态信息" name="工作状态信息">
+      </vs-tab>
+      <vs-tab label="工作状态信息" name="工作状态信息">
         <keep-alive>
           <SearchBar target="WorkingStateInfo" @callSearch="search($event)"
                      :option="this.$store.state.LabelCommon"></SearchBar>
         </keep-alive>
         <WorkingStateInfo></WorkingStateInfo>
-      </el-tab-pane>
-      <el-tab-pane label="导航卫星异常监测结果" name="导航卫星异常监测结果">
+      </vs-tab>
+      <vs-tab label="导航卫星异常监测结果" name="导航卫星异常监测结果">
         <keep-alive>
           <SearchBar target="NavSatIrregularMonitor" @callSearch="search($event)"
                      :option="this.$store.state.LabelNavSatIrregularMonitor"></SearchBar>
@@ -97,8 +97,8 @@
         <keep-alive>
           <NavSatIrregularMonitor :data="this.NavSatIrregularMonitor"></NavSatIrregularMonitor>
         </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

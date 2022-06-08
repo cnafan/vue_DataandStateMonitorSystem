@@ -3,7 +3,7 @@
   <div style="display: flex;justify-content: space-between;">
     <div class="image-parent" @click="$router.push({path: '/SystemManageAndControl'})">
       <el-image fit="contain" class="panel-image"
-                :src="require('/static/images/panel/12.png')"></el-image>
+                :src="require('@/assets/images/panel/12.png')"></el-image>
       <div class="image-parent-span">
         <span>{{ systemName[0] }}</span>
         <!--        <el-button size="small" :type="getType('VLBI')" circle></el-button>-->
@@ -11,7 +11,7 @@
     </div>
     <div class="image-parent" @click="$router.push({path: '/BDGNSSSystemClockMonitor'})">
       <el-image fit="fill" class="panel-image"
-                :src="require('/static/images/panel/14.png')"></el-image>
+                :src="require('@/assets/images/panel/14.png')"></el-image>
       <div class="image-parent-span">
       <span>{{ systemName[1] }}</span>
       </div>
@@ -19,28 +19,28 @@
     </div>
     <div class="image-parent" @click="$router.push({path: '/SatIntegratedDataManagement'})">
       <el-image fit="fill" class="panel-image"
-                :src="require('/static/images/panel/15.png')"></el-image>
+                :src="require('@/assets/images/panel/15.png')"></el-image>
       <div class="image-parent-span">
       <span>{{ systemName[2] }}</span>
       </div>
     </div>
     <div class="image-parent" @click="$router.push({path: '/AtomicClockSignal'})">
       <el-image fit="fill" class="panel-image"
-                :src="require('/static/images/panel/13.png')"></el-image>
+                :src="require('@/assets/images/panel/13.png')"></el-image>
       <div class="image-parent-span">
       <span>{{ systemName[3] }}</span>
       </div>
     </div>
     <div class="image-parent" @click="$router.push({path: '/StateMonitorAndWarning'})">
       <el-image fit="fill" class="panel-image"
-                :src="require('/static/images/panel/8.png')"></el-image>
+                :src="require('@/assets/images/panel/8.png')"></el-image>
       <div class="image-parent-span">
       <span>{{ systemName[4] }}</span>
       </div>
     </div>
     <div class="image-parent" @click="$router.push({path: '/VLBI'})">
       <el-image fit="fill" class="panel-image"
-                :src="require('/static/images/panel/3.png')"></el-image>
+                :src="require('@/assets/images/panel/3.png')"></el-image>
       <div class="image-parent-span">
       <span>{{ systemName[5] }}</span>
       </div>

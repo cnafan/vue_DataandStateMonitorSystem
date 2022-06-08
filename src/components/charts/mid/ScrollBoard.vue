@@ -2,7 +2,7 @@
   <div id="runtimeScrollBoard">
     <ChartHeader :title="'实时接收数据'" :icon="'el-icon-s-flag'"></ChartHeader>
 
-    <div style="display:flex;flex-direction:row;height: 100%;width: 100%;">
+    <div style="display:flex;flex-direction:row;height: 100%;width: 100%;padding: 10px;">
       <MyDvDecoration4 style="width:5px;height:80%;"/>
       <MyDvScrollBoard style="height:100%;overflow: hidden" :config="getScrollBoardConfig" :key=keySet
                        ref="scrollBoard"/>

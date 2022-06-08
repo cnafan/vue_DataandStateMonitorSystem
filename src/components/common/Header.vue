@@ -1,7 +1,7 @@
 <template>
   <el-row id="el_row_header">
     <el-col :span="1">
-      <i :class="foldStatus()" style="font-size: 24px;" @click="navModify"></i>
+      <i :class="foldStatus()" style="font-size: 24px;margin-right: 10px" @click="navModify"></i>
     </el-col>
     <el-col :span="20">
       <span>{{ this.$route.name }}</span>
@@ -9,21 +9,21 @@
     <el-col :span="1">
       <el-link id="zabbix-link" href='' target="_blank"
                :underline="false" icon="el-icon-video-camera"
-               style="font-size: 25px;"></el-link>
+               style="font-size: 25px;margin-right: 10px"></el-link>
       <!--      <i class="el-icon-camera" style="font-size: 25px;" ></i>-->
     </el-col>
     <el-col :span="1">
       <el-popover
           placement="bottom"
-          width="400"
-          content="this is content, this is content, this is content"
+          width="200"
+          content="近期没有任何内容"
           trigger="click">
-        <i class="el-icon-bell" slot="reference" style="font-size: 25px;" @click="notificationOpen"></i>
+        <i class="el-icon-bell" slot="reference" style="font-size: 25px;margin-right: 10px" @click="notificationOpen"></i>
         <!--        <el-button slot="reference">Click to activate</el-button>-->
       </el-popover>
     </el-col>
     <el-col :span="1">
-      <i class="el-icon-setting" style="font-size: 25px;" @click="settingOpen"></i>
+      <i class="el-icon-setting" style="font-size: 25px;margin-right: 10px" @click="settingOpen"></i>
     </el-col>
   </el-row>
 </template>

@@ -81,9 +81,9 @@ export default {
   },
   mounted() {
     // 轮询定时器
-    this.queryTimer = setInterval(this.updateCharts, 5000)
+    this.queryTimer = setInterval(this.updateCharts, 11000)
     this.cpuQueryTimer = setInterval(this.updateCpu, 2000)
-    this.mysqlQueryTimer = setInterval(this.updateMysql, 10000)
+    this.mysqlQueryTimer = setInterval(this.updateMysql, 17000)
 
     console.log('mount')
     this.$refs.splash.key = this.splashKey + 1;
@@ -183,7 +183,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  background-image: url("../../../static/images/pageBgTiny.png");
+  background-image: url("../../assets/images/pageBgTiny.png");
   background-size: cover;
 
   #splash-main-content {
@@ -223,7 +223,9 @@ export default {
     }
 
     #server-info {
-      flex: 50%;;
+      flex: 50%;
+      min-width: 220px;
+      width:50%;
       max-height: 40%;
       min-height: 200px;
       //min-width: 600px
@@ -238,7 +240,7 @@ export default {
     }
 
     #database-info {
-      min-width: 400px;
+      min-width: 350px;
       max-width: 20%;
       max-height: 40%;
       flex: 20%;

@@ -1,23 +1,23 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="CAPST-UTC（NTSC）溯源时差数据" name="1">
+    <vs-tabs v-model="activeName" @tab-click="handleClick">
+      <vs-tab label="CAPST-UTC（NTSC）溯源时差数据" name="1">
         <keep-alive>
           <NTSCTimeDifferenceData :data="this.$store.state.NTSCTimeDifferenceData"></NTSCTimeDifferenceData>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="CAPST-UTC（NTSC）溯源时差模型参数" name="2">
+      </vs-tab>
+      <vs-tab label="CAPST-UTC（NTSC）溯源时差模型参数" name="2">
         <keep-alive>
           <NTSCTimeDifferenceModelPara
             :data="this.$store.state.NTSCTimeDifferenceModelPara"></NTSCTimeDifferenceModelPara>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="时频工作状态" name="3">
+      </vs-tab>
+      <vs-tab label="时频工作状态" name="3">
         <keep-alive>
           <TimeFrequencyWorkingState :data="this.$store.state.TimeFrequencyWorkingState"></TimeFrequencyWorkingState>
         </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

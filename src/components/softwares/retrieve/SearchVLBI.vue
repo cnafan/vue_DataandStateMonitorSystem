@@ -1,7 +1,7 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="工作状态" name="1">
+    <vs-tabs v-model="activeName" @tab-click="handleClick">
+      <vs-tab label="工作状态" name="1">
         <keep-alive>
           <SearchBar target="VLBIWorkState" @callSearch="search($event)"
                      :option="this.$store.state.LabelCommon"></SearchBar>
@@ -9,8 +9,8 @@
         <keep-alive>
           <VLBIWorkState :data="VLBIWorkState"></VLBIWorkState>
         </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

@@ -1,9 +1,9 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeNameOuter" @tab-click="handleClickOuter">
-      <el-tab-pane label="BDS-3空间信号质量监测结果数据" name="1">
-        <el-tabs v-model="activeNameInner" @tab-click="handleClickInner">
-          <el-tab-pane label="定向天线导航卫星信号质量监测结果" name="1">
+    <vs-tabs v-model="activeNameOuter" @tab-click="handleClickOuter">
+      <vs-tab label="BDS-3空间信号质量监测结果数据" name="1">
+        <vs-tabs v-model="activeNameInner" @tab-click="handleClickInner">
+          <vs-tab label="定向天线导航卫星信号质量监测结果" name="1">
             <keep-alive>
               <NavSatSignalQuality :data="this.$store.state.BDNavSatSignalQuality"></NavSatSignalQuality>
             </keep-alive>
@@ -20,9 +20,9 @@
               <SignalComponent :data="this.getSignalComponent"
                                :father-data="getSignalComponentFatherData"></SignalComponent>
             </keep-alive>
-          </el-tab-pane>
+          </vs-tab>
 
-          <el-tab-pane label="全向天线导航卫星信号质量监测结果" name="2">
+          <vs-tab label="全向天线导航卫星信号质量监测结果" name="2">
             <keep-alive>
               <NavSatSignalQualityAllDirection
                 :data="this.$store.state.BDNavSatSignalQualityAllDirection"></NavSatSignalQualityAllDirection>
@@ -66,10 +66,10 @@
               <SignalComponentAllDirection :father-data="getSignalComponentAllDirectionFatherData"
                                            :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
             </keep-alive>
-          </el-tab-pane>
-        </el-tabs>
-      </el-tab-pane>
-      <el-tab-pane label="UTC(NTSC)与BDS3每颗卫星时间的钟差" name="2">
+          </vs-tab>
+        </vs-tabs>
+      </vs-tab>
+      <vs-tab label="UTC(NTSC)与BDS3每颗卫星时间的钟差" name="2">
         <keep-alive>
           <BDSSatTimeClockDifference
             :data="this.$store.state.BDSSatTimeClockDifference"></BDSSatTimeClockDifference>
@@ -77,29 +77,29 @@
         <keep-alive>
           <BDSClockDifference :data="this.$store.state.BDSClockDifference"></BDSClockDifference>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="BDS3每颗卫星的星钟改正数" name="3">
+      </vs-tab>
+      <vs-tab label="BDS3每颗卫星的星钟改正数" name="3">
         <keep-alive>
           <BDSClockCorrection :data="this.$store.state.BDSClockCorrection"></BDSClockCorrection>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="UTC(NTSC)与BDS3每颗卫星广播北斗时间的钟差" name="4">
+      </vs-tab>
+      <vs-tab label="UTC(NTSC)与BDS3每颗卫星广播北斗时间的钟差" name="4">
         <keep-alive>
           <BDSBroadcastClockDifference
             :data="this.$store.state.BDSBroadcastClockDifference"></BDSBroadcastClockDifference>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="UTC(NTSC)与BDT的钟差" name="5">
+      </vs-tab>
+      <vs-tab label="UTC(NTSC)与BDT的钟差" name="5">
         <keep-alive>
           <BDTClockDifference :data="this.$store.state.BDTClockDifference"></BDTClockDifference>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="工作状态" name="6">
+      </vs-tab>
+      <vs-tab label="工作状态" name="6">
         <keep-alive>
           <WorkingStateInfos></WorkingStateInfos>
         </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

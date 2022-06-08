@@ -1,11 +1,11 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="BDS3空间信号质量监测" name="BDS3空间信号质量监测结果数据">
+    <vs-tabs v-model="activeName" @tab-click="handleClick">
+      <vs-tab label="BDS3空间信号质量监测" name="BDS3空间信号质量监测结果数据">
         <!--        <p style="text-align: center">定向天线导航卫星信号质量监测结果</p>-->
 
-        <el-tabs v-model="activeNameDirection" @tab-click="handleClick">
-          <el-tab-pane label="定向天线导航卫星信号质量监测结果" name="定向天线导航卫星信号质量监测结果">
+        <vs-tabs v-model="activeNameDirection" @tab-click="handleClick">
+          <vs-tab label="定向天线导航卫星信号质量监测结果" name="定向天线导航卫星信号质量监测结果">
             <keep-alive>
               <SearchBar target="BDNavSatSignalQuality" @callSearch="search($event)"
                          :option="this.$store.state.LabelCommon"></SearchBar>
@@ -24,8 +24,8 @@
             <keep-alive>
               <SignalComponent :data="getSignalComponent" :father-data="getSignalComponentFatherData"></SignalComponent>
             </keep-alive>
-          </el-tab-pane>
-          <el-tab-pane label="全向天线导航卫星信号质量监测结果" name="全向天线导航卫星信号质量监测结果">
+          </vs-tab>
+          <vs-tab label="全向天线导航卫星信号质量监测结果" name="全向天线导航卫星信号质量监测结果">
             <keep-alive>
               <SearchBar target="BDNavSatSignalQualityAllDirection" @callSearch="search($event)"
                          :option="this.$store.state.LabelCommon"></SearchBar>
@@ -72,15 +72,15 @@
               <SignalComponentAllDirection :father-data="getSignalComponentAllDirectionFatherData"
                                            :data="getSignalComponentAllDirection"></SignalComponentAllDirection>
             </keep-alive>
-          </el-tab-pane>
-        </el-tabs>
-      </el-tab-pane>
-      <!--      <el-tab-pane label="广播星历告警信息" name="广播星历告警信息">-->
+          </vs-tab>
+        </vs-tabs>
+      </vs-tab>
+      <!--      <vs-tab label="广播星历告警信息" name="广播星历告警信息">-->
       <!--        <keep-alive>-->
       <!--          <BroadcastEphemerisWarningInfo></BroadcastEphemerisWarningInfo>-->
       <!--        </keep-alive>-->
-      <!--      </el-tab-pane>-->
-      <el-tab-pane label="UTC与BDS3卫星时间钟差" name="UTC(NTSC)与BDS3每颗卫星时间的钟差">
+      <!--      </vs-tab>-->
+      <vs-tab label="UTC与BDS3卫星时间钟差" name="UTC(NTSC)与BDS3每颗卫星时间的钟差">
         <keep-alive>
           <SearchBar target="BDSClockDifference" @callSearch="search($event)"
                      :option="this.$store.state.LabelBDSSatTimeClockDifference"></SearchBar>
@@ -91,8 +91,8 @@
         <keep-alive>
           <BDSClockDifference :data="BDSClockDifference"></BDSClockDifference>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="BDS3卫星星钟改正数" name="BDS3每颗卫星的星钟改正数">
+      </vs-tab>
+      <vs-tab label="BDS3卫星星钟改正数" name="BDS3每颗卫星的星钟改正数">
         <keep-alive>
           <SearchBar target="BDSClockCorrection" @callSearch="search($event)"
                      :option="this.$store.state.LabelBDSClockCorrection"></SearchBar>
@@ -100,8 +100,8 @@
         <keep-alive>
           <BDSClockCorrection :data="BDSClockCorrection"></BDSClockCorrection>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="UTC与BDS3卫星广播北斗钟差" name="UTC(NTSC)与BDS3每颗卫星广播北斗时间的钟差">
+      </vs-tab>
+      <vs-tab label="UTC与BDS3卫星广播北斗钟差" name="UTC(NTSC)与BDS3每颗卫星广播北斗时间的钟差">
         <keep-alive>
           <SearchBar target="BDSBroadcastClockDifference" @callSearch="search($event)"
                      :option="this.$store.state.LabelBDSBroadcastClockDifference"></SearchBar>
@@ -109,8 +109,8 @@
         <keep-alive>
           <BDSBroadcastClockDifference :data="BDSBroadcastClockDifference"></BDSBroadcastClockDifference>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="UTC与BDT钟差" name="UTC(NTSC)与BDT的钟差">
+      </vs-tab>
+      <vs-tab label="UTC与BDT钟差" name="UTC(NTSC)与BDT的钟差">
         <keep-alive>
           <SearchBar target="BDTClockDifference" @callSearch="search($event)"
                      :option="this.$store.state.LabelBDTClockDifference"></SearchBar>
@@ -118,8 +118,8 @@
         <keep-alive>
           <BDTClockDifference :data="BDTClockDifference"></BDTClockDifference>
         </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

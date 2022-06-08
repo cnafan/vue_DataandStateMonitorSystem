@@ -1,9 +1,9 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeNameOuter" @tab-click="handleClickOuter">
-      <el-tab-pane label="导航卫星信号质量监测结果" name="1">
-        <el-tabs v-model="activeNameInner" @tab-click="handleClickInner">
-          <el-tab-pane label="定向天线导航卫星信号质量监测结果" name="1">
+    <vs-tabs v-model="activeNameOuter" @tab-click="handleClickOuter">
+      <vs-tab label="导航卫星信号质量监测结果" name="1">
+        <vs-tabs v-model="activeNameInner" @tab-click="handleClickInner">
+          <vs-tab label="定向天线导航卫星信号质量监测结果" name="1">
             <keep-alive>
               <NavSatSignalQuality :data="this.$store.state.NavSatSignalQuality"></NavSatSignalQuality>
             </keep-alive>
@@ -20,8 +20,8 @@
               <SignalComponent :father-data="getSignalComponentFatherData"
                                :data="this.getSignalComponent"></SignalComponent>
             </keep-alive>
-          </el-tab-pane>
-          <el-tab-pane label="全向天线导航卫星信号质量监测结果" name="2">
+          </vs-tab>
+          <vs-tab label="全向天线导航卫星信号质量监测结果" name="2">
             <!--            <p style="text-align: center">全向天线导航卫星信号质量监测结果</p>-->
             <keep-alive>
               <NavSatSignalQualityAllDirection
@@ -65,16 +65,16 @@
               <SignalComponentAllDirection :father-data="getSignalComponentAllDirectionFatherData"
                                            :data="this.getSignalComponentAllDirection"></SignalComponentAllDirection>
             </keep-alive>
-          </el-tab-pane>
-        </el-tabs>
-      </el-tab-pane>
-      <el-tab-pane label="工作状态信息" name="2">
+          </vs-tab>
+        </vs-tabs>
+      </vs-tab>
+      <vs-tab label="工作状态信息" name="2">
         <WorkingStateInfo></WorkingStateInfo>
-      </el-tab-pane>
-      <el-tab-pane label="导航卫星异常监测结果" name="3">
+      </vs-tab>
+      <vs-tab label="导航卫星异常监测结果" name="3">
         <NavSatIrregularMonitor :data="this.$store.state.NavSatIrregularMonitor"></NavSatIrregularMonitor>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 <script>

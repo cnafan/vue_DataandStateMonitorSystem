@@ -7,9 +7,9 @@
       <vs-tab label="通用设置" icon="settings">
         <General></General>
       </vs-tab>
-      <vs-tab label="阈值设置" icon="settings">
-        <Limit></Limit>
-      </vs-tab>
+<!--      <vs-tab label="阈值设置" icon="settings">-->
+<!--        <Limit></Limit>-->
+<!--      </vs-tab>-->
     </vs-tabs>
   </div>
 </template>
@@ -21,6 +21,7 @@ import Limit from "@/components/function/LimitConfig";
 
 export default {
   name: 'Setting',
+  // eslint-disable-next-line vue/no-unused-components
   components: {Limit, General, NetConfig}
 }
 </script>

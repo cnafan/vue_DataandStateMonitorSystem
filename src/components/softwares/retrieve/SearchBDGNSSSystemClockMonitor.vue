@@ -1,7 +1,7 @@
 <template>
   <div class="main-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="GNSS系统时差数据" name="1">
+    <vs-tabs v-model="activeName" @tab-click="handleClick">
+      <vs-tab label="GNSS系统时差数据" name="1">
         <keep-alive>
           <MultipleSearchBar :search-rules="searchRulesGnssSystemClockDifference" :limit="2"
                              target="GnssSystemClockDifference" @callSearch="search($event)"
@@ -10,8 +10,8 @@
         <keep-alive>
           <GnssSystemClockDifference :data="GnssSystemClockDifference"></GnssSystemClockDifference>
         </keep-alive>
-      </el-tab-pane>
-      <el-tab-pane label="工作状态" name="2">
+      </vs-tab>
+      <vs-tab label="工作状态" name="2">
         <keep-alive>
           <SearchBar target="WorkingStateInfoBDGNSSSystemClock" @callSearch="search($event)"
                      :option="this.$store.state.LabelWorkingStateInfoBDGNSSSystemClock"></SearchBar>
@@ -20,8 +20,8 @@
           <WorkingStateInfoBDGNSSSystemClock
               :data="WorkingStateInfoBDGNSSSystemClock"></WorkingStateInfoBDGNSSSystemClock>
         </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+      </vs-tab>
+    </vs-tabs>
   </div>
 </template>
 

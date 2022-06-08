@@ -1,6 +1,7 @@
 <template>
   <div>
 <!--    <p style="text-align: center">GNSS系统时差数据</p>-->
+    <!--      :row-class-name="tableRowClassName"-->
     <el-table
       class="table"
       :data="this.data"
@@ -38,10 +39,25 @@ export default {
       type: Array
     }
   },
+  // methods:{
+  //   // eslint-disable-next-line no-unused-vars
+  //   tableRowClassName({row, rowIndex}) {
+  //     if (row.measValue === 9999999) {
+  //       return 'success-row';
+  //     }
+  //     return '';
+  //   }
+  // },
   mixins: [SatMixin]
 }
 </script>
 
-<style scoped>
+<style>
+.el-table .warning-row {
+  background: oldlace;
+}
 
+.el-table .success-row {
+  background: #ff9090;
+}
 </style>

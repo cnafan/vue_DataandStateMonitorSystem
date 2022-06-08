@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import SplitSystem from "@/components/charts/mid/SplitSystem";
+const StateMonitorAndWarning = () => import("@/components/softwares/runtime/StateMonitorAndWarning")
 const AtomicClockSignal = () => import('../components/softwares/runtime/AtomicClockSignal')
 const BDGNSSSystemClockMonitor = () => import('../components/softwares/runtime/BDGNSSSystemClockMonitor')
 const SystemManageAndControl = () => import('../components/softwares/runtime/SystemManageAndControl')
@@ -46,11 +47,12 @@ export default new Router({
       component: BDGNSSSystemClockMonitor,
       meta: {keepAlive: true}
     },
-    // {
-    //   path: '/StateMonitorAndWarning',
-    //   name: '状态检测及告警软件',
-    //   component: StateMonitorAndWarning
-    // },
+    {
+      path: '/StateMonitorAndWarning',
+      name: '状态检测及告警软件',
+      component: StateMonitorAndWarning,
+      meta: {keepAlive: true}
+    },
     {
       path: '/SystemManageAndControl',
       name: '系统管理控制软件',

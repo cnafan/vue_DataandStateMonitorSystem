@@ -56,8 +56,20 @@ export default {
         window.localStorage.setItem('tabActive', JSON.stringify(tabActive))
     },
     getTabActive(software) {
-        let tabActive = JSON.parse(window.localStorage.getItem('tabActive') || {})
-
+        let a = window.localStorage.getItem('tabActive')
+        if(!a && typeof(a) !== 'undefined' && a !== 0) {
+            let tab = {
+                AtomicClockSignal: "1",
+                BDGNSSSystemClockMonitor: "1",
+                SatIntegratedDataManagementInner: "1",
+                SatIntegratedDataManagementOuter: "1",
+                SystemManageAndControlInner: "1",
+                SystemManageAndControlOuter: "1",
+                VLBI: "1"
+            }
+            a=JSON.stringify(tab)
+        }
+        let tabActive = JSON.parse(a)
         // if (tabActive.hasOwnProperty(software) === false)
         if (Object.prototype.hasOwnProperty.call(tabActive, software) === false) {
             return '1'

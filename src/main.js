@@ -57,7 +57,8 @@ Vue.prototype.$post = post
 Vue.prototype.$postStandard = postStandard
 Vue.prototype.$get = fetch
 Vue.config.productionTip = false
-Vue.config.performance = true
+const isDev = process.env.NODE_ENV !== "production";
+Vue.config.performance = isDev;
 new Vue({
   render: h => h(App),
   store,

@@ -325,16 +325,16 @@ const store = new Vuex.Store({
         NotifyComponentVLBI: [],
 
         runtimeScrollBoard: [
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' '],
-            [' ', ' ']
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' ']
         ]
     },
     mutations: {
@@ -347,7 +347,7 @@ const store = new Vuex.Store({
             // }
             // console.log(state.runtimeScrollBoard)
             state.runtimeScrollBoard.shift()
-            state.runtimeScrollBoard.push([payload.time + '   ' + payload.name, payload.info])
+            state.runtimeScrollBoard.push([payload.time , payload.name, payload.info])
             // state.runtimeScrollBoard = [payload.time, payload.name]
             // state.runtimeScrollBoard.push({'time': payload.time, 'name': payload.name, 'timestamp': new Date().valueOf()})
             // console.log('after ', state.runtimeScrollBoard)

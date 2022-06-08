@@ -15,7 +15,7 @@
 import axios from 'axios'
 import {NOTIFICATION_OFFSET} from '@/config/display'
 
-axios.defaults.timeout = 8000
+axios.defaults.timeout = 2000
 axios.defaults.retry = 0
 axios.defaults.retryDelay = 1000 // 重试延时
 axios.defaults.baseURL = process.env.VUE_APP_BASEURL
